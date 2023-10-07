@@ -1,0 +1,82 @@
+---
+const links = [
+  {
+    title: "Twitter",
+    url: "https://twitter.com/@bagusmertasntn",
+  },
+  {
+    title: "GitHub",
+    url: "https://github.com/gusentanan",
+  },
+  {
+    title: "LinkedIn",
+    url: "https://linkedin.com/in/bagusmerta",
+  },
+];
+
+---
+
+<footer>
+  <hr />
+  <div>
+    <div class="copyright">
+      {new Date().getFullYear()} &copy; I Putu Bagus Merta Sentana. Made with🩸 Product of Indonesia.
+    </div>
+    <div class="links">
+      <h4>Links</h4>
+      {links.map(({ title, url }) => <a href={url} class="link">{title}</a>)}
+    </div>
+  </div>
+</footer>
+
+<style>
+  footer {
+    padding: 1rem 0;
+  }
+  footer > div {
+    display: flex;
+    flex-wrap: wrap-reverse;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1rem 0;
+  }
+  .copyright {
+    flex-grow: 2;
+    min-width: min(100%, 25rem);
+  }
+  .links {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    text-align: center;
+    align-items: center;
+    min-width: min(100%, 10rem);
+    margin-bottom: 1rem;
+  }
+  .links > h4 {
+    margin-top: 0rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .link {
+    text-decoration: none;
+    position: relative;
+  }
+
+  .link::after {
+    content: ''; 
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px; 
+    background-color: #2c2c2c;
+  }
+
+  .link:hover::after {
+    width: 100%;
+    transition: all 0.5s ease;
+  }
+
+</style>

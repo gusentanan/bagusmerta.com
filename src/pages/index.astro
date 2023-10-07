@@ -1,0 +1,69 @@
+---
+import BaseLayout from "@layouts/BaseLayout.astro";
+// import LatestPosts from "@components/LatestPosts.astro";
+import { getTitle } from "utils/title";
+---
+
+<BaseLayout title={getTitle("Home")}>
+  <main>
+    <div>
+      <div class="intro">
+        <h3>👋🏻 Hi! I'm a software engineer from Indonesia who's passionate about 
+          <span class="italic">Mobile</span>
+          and 
+          <span class="italic">Front-end</span>
+          development.
+        </h3>
+          <p>
+            ✍🏻I'm here to write and share my thoughts and personal growth journey as a person and a software engineer.
+          </p>
+        <a href={"/about"}>More about me →</a>
+      </div>
+    </div>
+
+    <!-- <LatestPosts /> -->
+  </main>
+</BaseLayout>
+
+<style>
+  main > div:first-of-type {
+    width: 100%;
+    min-height: calc(var(--screen-height) * 0.5);
+    display: flex;
+    gap: 3rem;
+    flex-wrap: wrap-reverse;
+
+    /* center the row */
+    justify-content: center;
+    align-items: center;
+
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .intro {
+    flex: 1;
+    min-width: min(400px, 100%);
+  }
+
+  img {
+    width: 250px;
+    object-fit: contain;
+    border-radius: 50%;
+    margin: 0 auto;
+  }
+  p {
+    font-size: 1.25rem;
+  }
+  a {
+    color: var(--color-primary);
+    font-weight: 600;
+  }
+  .italic {
+    padding: 0.25rem; 
+    border-radius: 0.5rem; 
+    background-color: #f0f0f0;
+    font-style: italic;
+    font-weight: normal;
+  }
+</style>

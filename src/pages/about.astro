@@ -1,0 +1,124 @@
+---
+import BaseLayout from "@layouts/BaseLayout.astro";
+import { getTitle } from "utils/title";
+
+const techs = [
+    {
+        img: "icons/ic-kotlin.jpg"
+    },
+    {
+        img: "icons/ic-flutter.png"
+    },
+    {
+        img: "icons/ic-android.png"
+    },
+    {
+        img: "icons/ic-javascript.png"
+    },
+    {
+        img: "icons/ic-react.svg"
+    },
+    {
+        img: "icons/ic-python.png"
+    },
+    {
+        img: "icons/ic-astro.svg"
+    },
+    {
+        img: "icons/ic-java.png"
+    },
+]
+
+let currentIndex = 0;
+function nextSlide() {
+    currentIndex = (currentIndex + 1) % techs.length;
+  }
+
+  setInterval(nextSlide, 1000);
+
+---
+
+<BaseLayout title={getTitle("About")}>
+  <main>
+    <img
+      src="/images/avatar.png"
+      alt="I Putu Bagus Merta Sentana"
+      width="128px"
+      height="128px"
+    />
+    <h1>About Me</h1>
+
+    <p>
+      Hello there! My name is Bagus. I work as a Software Engineer and have a passion for 
+      experimenting with user interfaces and creating products that deliver exceptional user 
+      experiences. While my expertise lies in mobile development and front-end work, 
+      I also find joy in integrating various software components together.
+    </p>
+    <p>
+      Currently, I'm working as Software Engineer (Mobile) at a Software Consultant based on Singapore after graduating,
+      building new and cool apps.
+    </p>
+    <p>
+      Before that, I worked at a software house company in Bali for about a year.
+      I started as a part-time employee for the first nine months and then got a contract for the next six months. 
+      I spent majority of my time there on enhancing existing legacy code and developing new features, 
+      particularly those associated with government projects.
+    </p>
+
+    <h2>Beginnings of my journey</h2>
+    <hr />
+    <p>
+      I bron and grew up in Bali, Indonesia and I'm very grateful to have taken a very traditional route into the fields
+      of Software Engineering and Computer Science.
+    </p>
+    <p>
+      My journey with programming started at university. Although I faced some challenges and uncertainties during 
+      my first year, the onset of COVID-19 and the quarantine give me quite a lot of time to code.
+      This, greatly contributed to my improvement over the next few years.
+    </p>
+    <p>
+      During my college years, I was actively involved in the Coding Club called SIC, 
+      where I led a team of 8 people. We organized sharing sessions to discuss various 
+      technology and software engineering topics. I also took part in an immersive project where we 
+      collaborated to create a project from scratch. 
+    </p>
+    <p>
+      Additionally, I joined a startup called Inspix Technologies, working as a Product Manager to help launch their first MVP 
+      product, which was supported by the Ministry of Industry in Indonesia and based in Denpasar, Bali.
+    </p>
+    <p>
+      In my later years, I also joined the Kampus Merdeka program, which sparked my passion for coding. I continued to
+      thrive and developed a strong love for coding, especially when it involves creating user interfaces
+    </p>
+
+    <h2>Technology I've Used</h2>
+    <hr />
+    <>
+      Throughout my 3.5 years of studies in Udayana University, I've had the
+      privilege to implemented various tech stack.
+      <hr />
+      {techs.map(({ img }) => <img src={img} class="icons"/> )}
+    </p>
+    
+    <h2>Random stuffs ✨</h2>
+    <hr />
+    <p>
+      I'm a bit of a nerd—I mean, I love watching anime while also writing code in weekend.  <hr/>
+      Most of my time is spent thinking ways to level up in life, whether it's building better habits, learning new stuff, 
+      hitting the gym, or just taking care of my mental well-being. Also sleep a lot.🌝
+    </p>
+  </main>
+</BaseLayout>
+
+<style>
+  img {
+    border-radius: 10%;
+    margin-top: 1rem;
+  }
+
+  .icons {
+    padding: 1rem;
+    max-width: 100px;
+    height: 80px;
+  }
+</style>

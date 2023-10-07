@@ -1,0 +1,98 @@
+---
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+import "../styles/global.css";
+
+import { SEO } from "astro-seo";
+
+import Header from "@components/Header.astro";
+import Footer from "@components/Footer.astro";
+
+let { title, description } = Astro.props;
+
+title = title || "I Putu Bagus Merta Sentana - bagusmerta.dev";
+description = description || "Bagus Merta's personal website";
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+
+    <title>{title}</title>
+    <link rel="stylesheet" href="/fonts/Lora/Lora.css" />
+    <link rel="stylesheet" href="/fonts/AlbertSans/AlbertSans.css" />
+
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="/favicon/light/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="/favicon/light/favicon-16x16.png"
+    />
+    <link rel="manifest" href="/favicon/light/site.webmanifest" />
+    
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="/favicon/dark/favicon-32x32.png"
+      media="(prefers-color-scheme: dark)"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="/favicon/dark/favicon-16x16.png"
+      media="(prefers-color-scheme: dark)"
+    />
+    <link
+      rel="manifest"
+      href="/favicon/dark/site.webmanifest"
+      media="(prefers-color-scheme: dark)"
+    />
+
+    <SEO
+      title={title}
+      description={description}
+      canonical="https://bagusmerta.dev"
+      openGraph={{
+        basic: {
+        type: "website",
+        url: "https://bagusmerta.dev",
+        title,
+        image: "https://user-images.githubusercontent.com/5182256/131216951-8f74f425-f775-463d-a11b-0e01ad9fce8d.png"
+        }
+      }}
+      twitter={{
+        creator: "@bagusmertasntn",
+      }}
+    />
+  </head>
+  <body>
+    <Header />
+    <slot />
+    <Footer />
+    <script is:inline>
+      // Set the height of the screen to a CSS variable due to viewport height bug on mobile devices
+      const setScreenHeight = () => {
+        document.documentElement.style.setProperty(
+          "--screen-height",
+          `${window.innerHeight}px`
+        );
+      };
+      // setScreenHeight();
+      // window.addEventListener("resize", setScreenHeight);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,157 @@
+/* supports variable fonts */
+@supports (font-variation-settings: normal) {
+    @font-face {
+      font-family: "Lora";
+      src: url("./Lora-VariableFont_wght.ttf") format("truetype");
+      font-weight: 100 900;
+      font-style: swap;
+    }
+  }
+  
+  /* static files as fallback */
+  @supports not (font-variation-settings: normal) {
+    @font-face {
+      font-family: "Lora";
+      src: url("./static/Lora-Thin.ttf") format("truetype");
+      font-weight: 100;
+      font-style: normal;
+      font-display: swap;
+    }
+  
+    @font-face {
+      font-family: "Lora";
+      src: url("./static/Lora-ExtraLight.ttf") format("truetype");
+      font-weight: 200;
+      font-style: normal;
+      font-display: swap;
+    }
+  
+    @font-face {
+      font-family: "Lora";
+      src: url("./static/Lora-Light.ttf") format("truetype");
+      font-weight: 300;
+      font-style: normal;
+      font-display: swap;
+    }
+  
+    @font-face {
+      font-family: "Lora";
+      src: url("./static/Lora-Regular.ttf") format("truetype");
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+    }
+  
+    @font-face {
+      font-family: "Lora";
+      src: url("./static/Lora-Medium.ttf") format("truetype");
+      font-weight: 500;
+      font-style: normal;
+      font-display: swap;
+    }
+  
+    @font-face {
+      font-family: "Lora";
+      src: url("./static/Lora-SemiBold.ttf") format("truetype");
+      font-weight: 600;
+      font-style: normal;
+      font-display: swap;
+    }
+  
+    @font-face {
+      font-family: "Lora";
+      src: url("./static/Lora-Bold.ttf") format("truetype");
+      font-weight: 700;
+      font-style: normal;
+      font-display: swap;
+    }
+  
+    @font-face {
+      font-family: "Lora";
+      src: url("./static/Lora-ExtraBold.ttf") format("truetype");
+      font-weight: 800;
+      font-style: normal;
+      font-display: swap;
+    }
+  
+    @font-face {
+      font-family: "Lora";
+      src: url("./static/Lora-Black.ttf") format("truetype");
+      font-weight: 900;
+      font-style: normal;
+      font-display: swap;
+    }
+  
+    @font-face {
+      font-family: "Lora";
+      src: url("./static/Lora-ThinItalic.ttf") format("truetype");
+      font-weight: 100;
+      font-style: italic;
+      font-display: swap;
+    }
+  
+    @font-face {
+      font-family: "Lora";
+      src: url("./static/Lora-ExtraLightItalic.ttf") format("truetype");
+      font-weight: 200;
+      font-style: italic;
+      font-display: swap;
+    }
+  
+    @font-face {
+      font-family: "Lora";
+      src: url("./static/Lora-LightItalic.ttf") format("truetype");
+      font-weight: 300;
+      font-style: italic;
+      font-display: swap;
+    }
+  
+    @font-face {
+      font-family: "Lora";
+      src: url("./static/Lora-RegularItalic.ttf") format("truetype");
+      font-weight: 400;
+      font-style: italic;
+      font-display: swap;
+    }
+  
+    @font-face {
+      font-family: "Lora";
+      src: url("./static/Lora-MediumItalic.ttf") format("truetype");
+      font-weight: 500;
+      font-style: italic;
+      font-display: swap;
+    }
+  
+    @font-face {
+      font-family: "Lora";
+      src: url("./static/Lora-SemiBoldItalic.ttf") format("truetype");
+      font-weight: 600;
+      font-style: italic;
+      font-display: swap;
+    }
+  
+    @font-face {
+      font-family: "Lora";
+      src: url("./static/Lora-BoldItalic.ttf") format("truetype");
+      font-weight: 700;
+      font-style: italic;
+      font-display: swap;
+    }
+  
+    @font-face {
+      font-family: "Lora";
+      src: url("./static/Lora-ExtraBoldItalic.ttf") format("truetype");
+      font-weight: 800;
+      font-style: italic;
+      font-display: swap;
+    }
+  
+    @font-face {
+      font-family: "Lora";
+      src: url("./static/Lora-BlackItalic.ttf") format("truetype");
+      font-weight: 900;
+      font-style: italic;
+      font-display: swap;
+    }
+  }
+  

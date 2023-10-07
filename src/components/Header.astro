@@ -1,0 +1,97 @@
+---
+import { getPathnameWithoutLocale } from "utils/url";
+
+type NavLink = {
+  href: string;
+  label: string;
+};
+
+const LINKS: NavLink[] = [
+  { href: "/", label: "Home" },
+  { href: "/about", label: "About" },
+  { href: "/projects", label: "Project" },
+  { href: "/blog", label: "Blog" },
+  { href: "/experience", label: "Experience" },
+];
+
+// omit the locale prefix if exists
+const pathname = getPathnameWithoutLocale(Astro.request.url);
+---
+
+<header>
+  <nav>
+    <a href="/">
+      <picture>
+        <img
+          src="/images/logo.svg"
+          alt="bagusmerta.dev logo"
+          width="122"
+          height="122"
+        />
+      </picture>
+    </a>
+    <div>
+      {
+        LINKS.map(({ href, label }) => (
+          <a href={href} aria-current={href === pathname ? "page" : undefined}
+          class="navigation">
+            {label}
+          </a>
+        ))
+      }
+    </div>
+  </nav>
+  <hr />
+</header>
+
+<style>
+  header {
+    padding-top: 1rem;
+  }
+  header > div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  h1 {
+    margin-bottom: 0;
+  }
+  nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  nav > div {
+    display: flex;
+    gap: 0.75rem;
+  }
+  img {
+    width: 142px;
+    height: 82px;
+    object-fit: contain;
+  }
+  nav > a[aria-current="page"] {
+    font-weight: bold;
+  }
+
+  .navigation {
+  text-decoration: none; 
+  position: relative;
+  }
+
+  .navigation::after {
+  content: ''; 
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px; 
+  background-color: #2c2c2c;
+}
+
+.navigation:hover::after {
+  width: 100%;
+  transition: all 0.5s ease;
+}
+
+</style>
