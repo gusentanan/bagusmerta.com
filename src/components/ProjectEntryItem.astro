@@ -1,0 +1,92 @@
+---
+import type { ProjectEntry } from "utils/content";
+import { formatDate } from "utils/time";
+import { getProjectPathName } from "utils/url";
+
+export type Props = ProjectEntry;
+
+const props = Astro.props;
+---
+
+<article>
+  <div>
+    <a href={getProjectPathName(props)}>
+      <h3>{props.data.title}</h3>
+      <time>{formatDate(props.data.createdDate)}</time>
+      <hr>
+      {props.data.tags.map((tag) => ( <p class="tags">{tag}, </p> ))}
+      <p>{props.data.description}</p>
+    </a>
+    <a href={(props.data.link)} class="link">See more</a>
+  </div>
+  <hr>
+  <picture>
+    <img 
+    src={props.data.image.src}
+    alt="bagusmerta.dev logo"
+    width="400"
+    height="220"
+    />
+  </picture>
+</article>  
+
+<style>
+  article {
+    display: flex;
+    padding: 1rem;
+  }
+  h3 {
+    margin-bottom: 0.25rem;
+  }
+  a {
+    color: var(--color-text) !important;
+    text-decoration: none;
+  }
+  time {
+    font-weight: 200;
+    font-size: 0.8rem;
+  }
+  p {
+    margin-top: 1rem;
+  }
+  img {
+    margin-left: 4rem;
+    border-radius: 8%;
+  }
+  hr {
+    width: 0%;
+  }
+  a > div {
+    margin-top: 1rem;
+    font-size: 0.8rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-text);
+    transition: color 0.2s ease;
+  }
+  .link {
+    text-decoration: none;
+    position: relative;
+  }
+
+  .tags {
+    display: inline;
+    font-weight: 200;
+  }
+
+  .link::after {
+    content: ''; 
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px; 
+    background-color: #2c2c2c;
+  }
+
+  .link:hover::after {
+    width: 100%;
+    transition: all 0.5s ease;
+  }
+</style>

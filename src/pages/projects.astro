@@ -1,0 +1,23 @@
+---
+import PostEntryItem from "@components/ProjectEntryItem.astro";
+import BaseLayout from "@layouts/BaseLayout.astro";
+import { getProjectCollection } from "utils/content";
+import { getTitle } from "utils/title";
+
+const allProject = await getProjectCollection();
+---
+
+<BaseLayout title={getTitle("Projects")}>
+  <main>
+    <div>
+      <h1>Stuff I've Created.</h1>
+      {allProject.map((projects) => <PostEntryItem {...projects} />)}
+    </div>
+  </main>
+</BaseLayout>
+
+<style>
+  main {
+    width: 100%;
+  }
+</style>

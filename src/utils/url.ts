@@ -1,7 +1,7 @@
 import { SUPPORTED_LOCALES } from "../locales";
-// import type { BlogEntry } from "./content";
+import type { ProjectEntry } from "./content";
 
-export const getPathnameWithoutLocale = (url: string) => {
+export const getPathNameWithoutLocale = (url: string) => {
   const { pathname } = new URL(url);
 
   const pathnameWithoutLocale = SUPPORTED_LOCALES.reduce((acc, locale) => {
@@ -14,6 +14,6 @@ export const getPathnameWithoutLocale = (url: string) => {
   return pathnameWithoutLocale || "/";
 };
 
-// export const getBlogPathname = ({ slug }: BlogEntry) => {
-//   return `/posts/${slug}`;
-// };
+export const getProjectPathName = ({ slug }: ProjectEntry) => {
+  return `/projects/${slug}`;
+};
