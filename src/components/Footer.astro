@@ -17,7 +17,7 @@ const links = [
 ---
 
 <footer>
-  <hr />
+  <hr class="divider-dashed" />
   <div>
     <div class="copyright">
       {new Date().getFullYear()} &copy; I Putu Bagus Merta Sentana. Made with🩸 Product of Indonesia.
@@ -40,6 +40,9 @@ const links = [
     gap: 1rem;
     padding: 1rem 0;
   }
+  .divider-dashed {
+    border-top: 2px dashed #bbb;
+  }
   .copyright {
     flex-grow: 2;
     min-width: min(100%, 25rem);
@@ -57,26 +60,6 @@ const links = [
   .links > h4 {
     margin-top: 0rem;
     margin-bottom: 0.75rem;
-  }
-
-  .link {
-    text-decoration: none;
-    position: relative;
-  }
-
-  .link::after {
-    content: ''; 
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 0;
-    height: 2px; 
-    background-color: #2c2c2c;
-  }
-
-  .link:hover::after {
-    width: 100%;
-    transition: all 0.5s ease;
   }
 
 </style>

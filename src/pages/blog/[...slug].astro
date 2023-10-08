@@ -1,0 +1,55 @@
+---
+import LatestPosts from "@components/LatestPosts.astro";
+import BaseLayout from "@layouts/BaseLayout.astro";
+import { Image } from "astro:assets";
+import { getCollection } from "astro:content";
+import { formatDate } from "utils/time";
+
+export async function getStaticPaths() {
+  const blogEntries = await getCollection("blog");
+  const paths = blogEntries.map((entry) => ({
+    params: { slug: entry.slug },
+    props: { entry },
+  }));
+  return paths;
+}
+
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+---
+
+<BaseLayout
+  title={`${entry.data.title} | I Putu Bagus Merta Sentana`}
+  description={entry.data.description} >
+  <main>
+    <Image 
+      src={entry.data.banner} 
+      alt="Image Banner Blog"
+      width=1020
+      height=480 />
+    <h1>{entry.data.title}</h1>
+    <p class="date">{formatDate(entry.data.date)} <span> - </span> {entry.data.readCount}</p>
+    <hr class="divider" />
+    <article>
+      <Content />
+    </article>
+    <hr />
+    <LatestPosts />
+  </main>
+</BaseLayout>
+
+<style is:global>
+  /* select direct hr after article */
+  article + hr {
+    margin-bottom: 4rem;
+  }
+  .divider {
+    border-top: 1px solid #d2d2d2;
+  }
+  .date {
+    font-weight: 200;
+  }
+  span {
+    font-weight: normal;
+  }
+</style>

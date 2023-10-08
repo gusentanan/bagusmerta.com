@@ -15,9 +15,23 @@ const projectCollection = defineCollection({
 		tags: z.array(z.string()),
 		createdDate: z.string().transform((string) => new Date(string))
 	})
-})
+});
+
+const blogCollection = defineCollection({
+	schema: ({ image }) => z.object({
+	  title: z.string(),
+	  description: z.string(),
+	  date: z.date(),
+	  banner: image().refine((img) => img.width >= 1080, {
+		message: "Cover image must be at least 1080 pixels wide!"
+	  }),
+	  readCount: z.string(),
+	  tags: z.array(z.string()),
+	})
+  });
 
 // 3. Export a single `collections` object to register your collection(s)
 export const collections = {
-	project: projectCollection,
+	blog: blogCollection,
+	project: projectCollection
   };

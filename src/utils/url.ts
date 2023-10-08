@@ -1,5 +1,5 @@
-import { SUPPORTED_LOCALES } from "../locales";
-import type { ProjectEntry } from "./content";
+import { SUPPORTED_LOCALES } from "./locales";
+import type { BlogEntry } from "./content";
 
 export const getPathNameWithoutLocale = (url: string) => {
   const { pathname } = new URL(url);
@@ -14,6 +14,6 @@ export const getPathNameWithoutLocale = (url: string) => {
   return pathnameWithoutLocale || "/";
 };
 
-export const getProjectPathName = ({ slug }: ProjectEntry) => {
-  return `/projects/${slug}`;
+export const getBlogPathName = ({ slug }: BlogEntry) => {
+  return `/blog/${slug}`;
 };

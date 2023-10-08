@@ -1,7 +1,6 @@
 ---
 import type { ProjectEntry } from "utils/content";
 import { formatDate } from "utils/time";
-import { getProjectPathName } from "utils/url";
 
 export type Props = ProjectEntry;
 
@@ -10,22 +9,21 @@ const props = Astro.props;
 
 <article>
   <div>
-    <a href={getProjectPathName(props)}>
+    <a>
       <h3>{props.data.title}</h3>
       <time>{formatDate(props.data.createdDate)}</time>
-      <hr>
+      <hr />
       {props.data.tags.map((tag) => ( <p class="tags">{tag}, </p> ))}
       <p>{props.data.description}</p>
     </a>
-    <a href={(props.data.link)} class="link">See more</a>
+    <a href={(props.data.link)} class="project-link">Source</a>
   </div>
-  <hr>
   <picture>
     <img 
-    src={props.data.image.src}
-    alt="bagusmerta.dev logo"
-    width="400"
-    height="220"
+      src={props.data.image.src}
+      alt="project image"
+      width="400"
+      height="220"
     />
   </picture>
 </article>  
@@ -33,6 +31,8 @@ const props = Astro.props;
 <style>
   article {
     display: flex;
+    justify-content: space-between; 
+    align-items: center;
     padding: 1rem;
   }
   h3 {
@@ -51,42 +51,22 @@ const props = Astro.props;
   }
   img {
     margin-left: 4rem;
-    border-radius: 8%;
+    border-radius: 2%;
   }
-  hr {
-    width: 0%;
-  }
-  a > div {
-    margin-top: 1rem;
-    font-size: 0.8rem;
-    font-weight: bold;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: var(--color-text);
-    transition: color 0.2s ease;
-  }
-  .link {
+  .project-link {
     text-decoration: none;
     position: relative;
+    padding: 0.5rem; 
+    border-radius: 0.5rem; 
+    background-color: #f0f0f0;
+    font-style: bold;
   }
-
   .tags {
     display: inline;
     font-weight: 200;
   }
-
-  .link::after {
-    content: ''; 
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 0;
-    height: 2px; 
-    background-color: #2c2c2c;
-  }
-
-  .link:hover::after {
-    width: 100%;
+  .project-link:hover {
+    background-color: #a4a4a4;
     transition: all 0.5s ease;
   }
 </style>

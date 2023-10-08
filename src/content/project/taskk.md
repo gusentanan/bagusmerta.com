@@ -1,7 +1,7 @@
 ---
 
 draft: false
-title: "taskk"
+title: "Taskk"
 description: "To do's app to demonstrate Jetpack Compose in building UI"
 image: {
 src: "src/assets/img/Taskk.jpg",
