@@ -48,11 +48,6 @@ const pathname = getPathNameWithoutLocale(Astro.request.url);
   header {
     padding-top: 1rem;
   }
-  header > div {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
   h1 {
     margin-bottom: 0;
   }
@@ -73,6 +68,14 @@ const pathname = getPathNameWithoutLocale(Astro.request.url);
   
   a[aria-current="page"] {
     font-weight: bold;
+  }
+
+  @media (max-width: 600px){
+    nav {
+      display: flex;
+      flex-direction: column;
+      align-items: start;
+    }
   }
 
 </style>

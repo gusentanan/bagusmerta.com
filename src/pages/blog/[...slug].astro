@@ -22,11 +22,10 @@ const { Content } = await entry.render();
   title={`${entry.data.title} | I Putu Bagus Merta Sentana`}
   description={entry.data.description} >
   <main>
-    <Image 
+    <hr />
+    <Image
       src={entry.data.banner} 
-      alt="Image Banner Blog"
-      width=1020
-      height=480 />
+      alt="Image Banner Blog" />
     <h1>{entry.data.title}</h1>
     <p class="date">{formatDate(entry.data.date)} <span> - </span> {entry.data.readCount}</p>
     <hr class="divider" />
@@ -38,8 +37,11 @@ const { Content } = await entry.render();
   </main>
 </BaseLayout>
 
-<style is:global>
+<style>
   /* select direct hr after article */
+  main {
+    padding: 0 1rem 1rem 0;
+  }
   article + hr {
     margin-bottom: 4rem;
   }
@@ -48,6 +50,10 @@ const { Content } = await entry.render();
   }
   .date {
     font-weight: 200;
+  }
+  img {
+    width: 100%;
+    height: auto;
   }
   span {
     font-weight: normal;

@@ -28,14 +28,6 @@ const techs = [
         img: "icons/ic-java.png"
     },
 ]
-
-let currentIndex = 0;
-function nextSlide() {
-    currentIndex = (currentIndex + 1) % techs.length;
-  }
-
-  setInterval(nextSlide, 1000);
-
 ---
 
 <BaseLayout title={getTitle("About")}>
@@ -65,7 +57,7 @@ function nextSlide() {
       particularly those associated with government projects.
     </p>
 
-    <h2>Beginnings of my journey</h2>
+    <h2>Beginnings of my journey🌏</h2>
     <hr />
     <p>
       I'm born and grew up in Bali, Indonesia and I'm very grateful to have taken a very traditional route into the fields
@@ -91,7 +83,7 @@ function nextSlide() {
       thrive and developed a strong love for coding, especially when it involves creating user interfaces
     </p>
 
-    <h2>Technology I've Used</h2>
+    <h2>Technology I've Used 💻</h2>
     <hr />
     <>
       Throughout my 3.5 years of studies in Udayana University, I've had the
@@ -115,7 +107,9 @@ function nextSlide() {
     border-radius: 10%;
     margin-top: 1rem;
   }
-
+  main {
+    padding: 0 1rem 1rem 0;
+  }
   .icons {
     padding: 1rem;
     max-width: 100px;
