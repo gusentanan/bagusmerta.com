@@ -9,12 +9,12 @@ const props = Astro.props;
 ---
 
 <article>
-  <a class="link" href={getBlogPathName(props)}>
+  <a class="link" href={`/gusentanan.github.io/${getBlogPathName(props)}`}>
     <h3>{props.data.title}</h3>
   </a>
     <time>{formatDate(props.data.date)}</time>
     <p>{props.data.description}</p>
-  <a class="link" href={getBlogPathName(props)}>
+  <a class="link" href={`/gusentanan.github.io/${getBlogPathName(props)}`}>
     Read more
   </a>
 </article>

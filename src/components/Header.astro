@@ -7,11 +7,11 @@ type NavLink = {
 };
 
 const LINKS: NavLink[] = [
-  { href: "/", label: "Home" },
-  { href: "/about", label: "About" },
-  { href: "/projects", label: "Project" },
-  { href: "/blog", label: "Blog" },
-  { href: "/experience", label: "Experience" },
+  { href: "/gusentanan.github.io", label: "Home" },
+  { href: "/gusentanan.github.io/about", label: "About" },
+  { href: "/gusentanan.github.io/projects", label: "Project" },
+  { href: "/gusentanan.github.io/blog", label: "Blog" },
+  { href: "/gusentanan.github.io/experience", label: "Experience" },
 ];
 
 // omit the locale prefix if exists
@@ -20,7 +20,7 @@ const pathname = getPathNameWithoutLocale(Astro.request.url);
 
 <header>
   <nav>
-    <a href="/">
+    <a href="/gusentanan.github.io">
       <picture>
         <img
           src="/images/logo.svg"

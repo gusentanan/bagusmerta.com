@@ -13,7 +13,7 @@ const blogEntries = (await getBlogCollection()).slice(0, 5);
       blogEntries.map((blogPostEntry) => (
         <li>
           <div>
-            <a class="link" href={getBlogPathName(blogPostEntry)}>
+            <a class="link" href={`/gusentanan.github.io/${getBlogPathName(blogPostEntry)}`}>
               {blogPostEntry.data.title}
             </a>
             <time datetime={blogPostEntry.data.date.toISOString()}>
