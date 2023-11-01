@@ -1,33 +1,16 @@
 ---
 import BaseLayout from "@layouts/BaseLayout.astro";
 import { getTitle } from "utils/title";
-
-const techs = [
-    {
-        img: "icons/ic-kotlin.jpg"
-    },
-    {
-        img: "icons/ic-flutter.png"
-    },
-    {
-        img: "icons/ic-android.png"
-    },
-    {
-        img: "icons/ic-javascript.png"
-    },
-    {
-        img: "icons/ic-react.svg"
-    },
-    {
-        img: "icons/ic-python.png"
-    },
-    {
-        img: "icons/ic-astro.svg"
-    },
-    {
-        img: "icons/ic-java.png"
-    },
-]
+const techImages = [
+  "ic-kotlin.jpg",
+  "ic-flutter.png",
+  "ic-android.png",
+  "ic-javascript.png",
+  "ic-react.svg",
+  "ic-python.png",
+  "ic-astro.svg",
+  "ic-java.png",
+];
 ---
 
 <BaseLayout title={getTitle("About")}>
@@ -47,7 +30,7 @@ const techs = [
       I also find joy in integrating various software components together.
     </p>
     <p>
-      Currently, I'm working as a Software Engineer (Mobile) at a software consulting company based in Singapore,
+      Currently, I'm working as a Software Engineer (Flutter) at a private software consulting company based in Singapore,
       where I'm focused on building new and exciting apps after graduating.
     </p>
     <p>
@@ -89,7 +72,7 @@ const techs = [
       Throughout my 3.5 years of studies in Udayana University, I've had the
       privilege to implemented various tech stack.
       <hr />
-      {techs.map(({ img }) => <img src={img} class="icons"/> )}
+      {techImages.map((img) => <img src={`icons/${img}`} class="icons"/> )}
     </p>
     
     <h2>Random stuffs ✨</h2>
