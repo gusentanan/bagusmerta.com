@@ -4,7 +4,7 @@ draft: false
 title: "Moviee"
 description: "Movie Browsing platform built using modern Kotlin with modularization strategy and MVVM + Clean Architecture"
 image: {
-src: "/src/assets/img/Moviee.jpg",
+src: "/projects/Moviee.jpg",
 alt: "Android Native App"
 }
 link: "https://github.com/gusentanan/moviee"

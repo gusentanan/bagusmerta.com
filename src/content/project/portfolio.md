@@ -4,7 +4,7 @@ draft: false
 title: "Portfolio Web"
 description: "You're looking at it"
 image: {
-src: "/src/assets/img/Portfolio.jpg",
+src: "/projects/Portfolio.jpg",
 alt: "Astro Static Web"
 }
 link: "https://github.com/gusentanan/gusentanan.github.io"

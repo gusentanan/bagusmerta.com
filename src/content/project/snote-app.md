@@ -4,7 +4,7 @@ draft: false
 title: "Simple Note App"
 description: "Simple note app with priority pickers"
 image: {
-src: "/src/assets/img/SnoteApp.jpg",
+src: "/projects/SnoteApp.jpg",
 alt: "Android App"
 }
 link: "https://github.com/gusentanan/snote-app"
