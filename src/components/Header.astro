@@ -9,7 +9,7 @@ type NavLink = {
 const LINKS: NavLink[] = [
   { href: "/gusentanan.github.io", label: "Home" },
   { href: "/gusentanan.github.io/about", label: "About" },
-  { href: "/gusentanan.github.io/projects", label: "Project" },
+  { href: "/gusentanan.github.io//projects", label: "Project" },
   { href: "/gusentanan.github.io/blog", label: "Blog" },
   { href: "/gusentanan.github.io/experience", label: "Experience" },
 ];
@@ -20,7 +20,7 @@ const pathname = getPathNameWithoutLocale(Astro.request.url);
 
 <header>
   <nav>
-    <a href="/gusentanan.github.io">
+    <a href="/">
       <picture>
         <img
           src="/images/logo.svg"
@@ -33,7 +33,7 @@ const pathname = getPathNameWithoutLocale(Astro.request.url);
     <div>
       {
         LINKS.map(({ href, label }) => (
-          <a href={href} aria-current={href === pathname ? "page" : undefined}
+          <a href={`/gusentanan.github.io/${href}`} aria-current={href === pathname ? "page" : undefined}
           class="link">
             {label}
           </a>
