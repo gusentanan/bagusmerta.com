@@ -4,7 +4,7 @@ draft: false
 title: "Taskk"
 description: "To do's app to demonstrate Jetpack Compose in building UI"
 image: {
-src: "src/assets/img/Taskk.jpg",
+src: "/src/assets/img/Taskk.jpg",
 alt: "Android Native App"
 }
 link: "https://github.com/gusentanan/taskk.git"
