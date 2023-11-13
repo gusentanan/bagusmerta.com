@@ -32,6 +32,10 @@
   footer {
     margin-top: auto;
   }
+
+  p {
+    font-size: large;
+  }
   
   /* Align header, main, footer on center */
   header,
@@ -65,6 +69,14 @@
     width: 100%;
     transition: all 0.5s ease;
   }
+
+  .inverted {
+    padding: 0.25rem; 
+    border-radius: 0.5rem; 
+    background-color: #f0f0f0;
+    font-style: italic;
+    font-weight: normal;
+  }
   
   main {
     margin: 0 auto;
@@ -90,4 +102,18 @@
     color: var(--color-primary);
     text-decoration: none;
   }
-  
+
+  blockquote {
+    margin: 0;
+    padding: 1em;
+    border-left: 4px solid rgb(75, 147, 248);
+  }
+
+  blockquote p {
+    font-family: Georgia, serif;
+    font-size: 26px;
+    font-style: italic;
+    display: inline;
+    color: #000;
+    line-height: 30px;
+  }

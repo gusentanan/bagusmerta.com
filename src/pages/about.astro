@@ -1,6 +1,8 @@
 ---
 import BaseLayout from "@layouts/BaseLayout.astro";
 import { getTitle } from "utils/title";
+import { Image } from "astro:assets";
+
 const techImages = [
   "ic-kotlin.jpg",
   "ic-flutter.png",
@@ -15,11 +17,11 @@ const techImages = [
 
 <BaseLayout title={getTitle("About")}>
   <main>
-    <img
+    <Image
       src="/images/avatar.png"
       alt="I Putu Bagus Merta Sentana"
-      width="128px"
-      height="128px"
+      width=128
+      height=128
     />
     <h1>About Me.</h1>
 
@@ -30,7 +32,7 @@ const techImages = [
       I also find joy in integrating various software components together.
     </p>
     <p>
-      Currently, I'm working as a Software Engineer (Flutter) at a private software consulting company based in Singapore,
+      Currently, I'm working as a Software Engineer (Flutter) at software consulting company based in Singapore,
       where I'm focused on building new and exciting apps after graduating.
     </p>
     <p>
@@ -68,12 +70,22 @@ const techImages = [
 
     <h2>Technology I've Used 💻</h2>
     <hr />
-    <>
-      Throughout my 3.5 years of studies in Udayana University, I've had the
-      privilege to implemented various tech stack.
+    <p>
+      Throughout my entire lifetime, I've had the
+      privilege to implemented various tech stack. </p>
       <hr />
-      {techImages.map((img) => <img src={`/icons/${img}`} class="icons"/> )}
-    </p>
+  
+          { techImages.map((img) => 
+          <Image 
+          src={`/icons/${img}`}
+          class="icons" 
+          alt="Tech Icons"
+          width="80"
+          height="80"
+          /> 
+          
+          )}
+
     
     <h2>Random stuffs ✨</h2>
     <hr />
@@ -91,11 +103,12 @@ const techImages = [
     margin-top: 1rem;
   }
   main {
+    margin: 0;
     padding: 0 1rem 1rem 0;
   }
-  .icons {
-    padding: 1rem;
-    max-width: 100px;
-    height: 80px;
-  }
+
+.icons {
+  padding: 1rem;
+}
+
 </style>

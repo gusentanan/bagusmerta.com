@@ -3,10 +3,7 @@
 draft: false
 title: "Portfolio Web"
 description: "You're looking at it"
-image: {
-src: "/projects/Portfolio.jpg",
-alt: "Astro Static Web"
-}
+image: "./images/Portfolio.jpg"
 link: "https://github.com/gusentanan/gusentanan.github.io"
 tags: [Astro, Vite, Markdoc, CSS, TypeScript]
 createdDate: "2023-03-12"
