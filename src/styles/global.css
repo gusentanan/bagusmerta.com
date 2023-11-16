@@ -3,6 +3,7 @@
     --screen-height: 82vh;
     --font-family-display: "Lora", sans-serif;
     --font-family-primary: "Albert Sans", sans-serif;
+    --font-family-code: "JetBrains Mono", monospace;
   }
   
   @media (prefers-color-scheme: light) {
@@ -103,6 +104,18 @@
     text-decoration: none;
   }
 
+  pre {
+    padding: 1.5rem;
+    border-radius: 8px;
+  }
+
+  code {
+    font-size: .875rem;
+    font-family: var(--font-family-code);
+    line-height: 1.25rem;
+  }
+
+
   blockquote {
     margin: 0;
     padding: 1em;
@@ -110,9 +123,9 @@
   }
 
   blockquote p {
-    font-family: Georgia, serif;
-    font-size: 26px;
-    font-style: italic;
+    font-family: var(--font-family-display);
+    font-size: 20px;
+    font-style: bold;
     display: inline;
     color: #000;
     line-height: 30px;
