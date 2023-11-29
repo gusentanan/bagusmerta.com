@@ -13,6 +13,7 @@
   "dependencies": {
     "@astrojs/markdoc": "^0.7.1",
     "@astrojs/react": "^3.0.4",
+    "@astrojs/rss": "^3.0.0",
     "@types/react": "^18.2.37",
     "astro": "^3.5.2",
     "astro-icon": "^0.8.1",
