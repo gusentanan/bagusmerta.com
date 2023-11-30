@@ -22,10 +22,6 @@ const { Content } = await entry.render();
   title={`${entry.data.title} | I Putu Bagus Merta Sentana`}
   description={entry.data.description} >
   <main>
-    <div class="progress-bar__container">
-      <div class="progress-bar"></div>
-    </div>
-    <hr />
     <Image
       src={entry.data.banner} 
       alt="Image Banner Blog" />
@@ -35,7 +31,6 @@ const { Content } = await entry.render();
     <article>
       <Content />
     </article>
-    <hr />
     <LatestPosts />
   </main>
 </BaseLayout>
@@ -45,7 +40,7 @@ const { Content } = await entry.render();
   main {
     padding: 0 1rem 1rem 0;
   }
-  article + hr {
+  article {
     margin-bottom: 4rem;
   }
   .divider {
@@ -55,6 +50,7 @@ const { Content } = await entry.render();
     font-weight: 200;
   }
   img {
+    border-radius: 14px;
     width: 100%;
     height: auto;
   }

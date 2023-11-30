@@ -2,9 +2,9 @@
 
 draft: false
 title: "Reuzable"
-description: "Library with reusable component that I usually used in my personal projects"
+description: "Library with reusable component for my personal projects"
 image: "./images/code.jpg"
 link: "https://github.com/gusentanan/reuzable"
-tags: [Android, Kotlin, Library]
-createdDate: "2023-03-13"
+tags: [Kotlin, Library]
+createdDate: "2023-05-02"
 ---

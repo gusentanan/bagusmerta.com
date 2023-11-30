@@ -22,10 +22,9 @@ const props = Astro.props;
   </div>
   <picture>
     <Image 
+      class="project__image"
       src={props.data.image}
       alt="project image"
-      width="400"
-      height="220"
     />
   </picture>
 </article>  
@@ -52,13 +51,24 @@ const props = Astro.props;
   p {
     margin-top: 1rem;
   }
-  img {
-    border-radius: 2%;
+
+  .project__image {
+    position: relative;
+    top: 0;
+    transition: top ease 0.5s;
+    border-radius: 14px;
+    max-width: 400px;
+    max-height: 220px;
   }
- 
+
+  .project__image:hover {
+    top: -6px;
+  }
+  
   .tags {
     font-weight: 200;
     font-size: medium;
+    line-height: 32px;
   }
 
   .inverted {
@@ -70,7 +80,7 @@ const props = Astro.props;
       display: block;
       grid-column: 1 / 2;
     }
-    img {
+    .project__image {
       margin-top: 1rem;
       width:100%;
       height: auto;

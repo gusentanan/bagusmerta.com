@@ -24,7 +24,6 @@ const techImages = [
       height=128
     />
     <h1>About Me.</h1>
-
     <p>
       Hello there! My name is Bagus. I work as a Software Engineer and have a passion for 
       experimenting with user interfaces and creating products that deliver exceptional user 
@@ -32,7 +31,7 @@ const techImages = [
       I also find joy in integrating various software components together.
     </p>
     <p>
-      Currently, I'm working as a Software Engineer (Flutter) at software consulting company based in Singapore,
+      Currently, I'm working as a Software Engineer (Flutter) at an early IT consulting company based in Singapore,
       where I'm focused on building new and exciting apps after graduating.
     </p>
     <p>
@@ -43,7 +42,6 @@ const techImages = [
     </p>
 
     <h2>Beginnings of my journey🌏</h2>
-    <hr />
     <p>
       I'm born and grew up in Bali, Indonesia and I'm very grateful to have taken a very traditional route into the fields
       of Software Engineering and Computer Science.
@@ -64,35 +62,45 @@ const techImages = [
       product, which was supported by the Ministry of Industry in Indonesia and based in Denpasar, Bali.
     </p>
     <p>
-      In my later years, I also joined the Kampus Merdeka program, which sparked my passion for coding. I continued to
+      In my later years, I also joined the Kampus Merdeka program (8 months intensives bootcamp held by Indonesian goverment), which sparked my passion for coding. I continued to
       thrive and developed a strong love for coding, especially when it involves creating user interfaces
     </p>
 
     <h2>Technology I've Used 💻</h2>
-    <hr />
     <p>
       Throughout my entire lifetime, I've had the
       privilege to implemented various tech stack. </p>
-      <hr />
-  
-          { techImages.map((img) => 
-          <Image 
-          src={`/icons/${img}`}
-          class="icons" 
-          alt="Tech Icons"
-          width="80"
-          height="80"
-          /> 
-          
-          )}
+      <div class="slider">
+        <div class="icons__slider">
+          { 
+            techImages.map((img) => 
+              <Image 
+                src={`/icons/${img}`}
+                alt="Tech Icons"
+                width="80"
+                height="80"
+              />           
+            )
+          }
+        </div>
+        <div class="icons__slider">
+          { 
+            techImages.map((img) => 
+              <Image 
+                src={`/icons/${img}`}
+                alt="Tech Icons"
+                width="80"
+                height="80"
+              />           
+            )
+          }
+        </div>
+      </div>
 
-    
     <h2>Random stuffs ✨</h2>
-    <hr />
     <p>
       I'm a bit of a nerd—I mean, I love watching anime while also writing code in weekend.
     </p>
-    <hr />
     <p>
       Most of my time is spent thinking ways to level up in life, whether it's building better habits, learning new stuff, 
       hitting the gym, or just taking care of my mental well-being. Also sleep a lot.🌝
@@ -101,17 +109,57 @@ const techImages = [
 </BaseLayout>
 
 <style>
-  img {
-    border-radius: 10%;
-    margin-top: 1rem;
+  .slider {
+    overflow: hidden;
+    padding: 40px 0;
+    white-space: nowrap;
+    position: relative;
   }
+  .icons__slider {
+    display: inline-block;
+    animation: 15s runSlider linear infinite;
+  }
+  .icons__slider img {
+    margin: 0 20px;
+  }
+  .slider:hover .icons__slider {
+    animation-play-state: paused;
+  }
+  .slider::before,
+  .slider::after {
+    position: absolute;
+    top: 0;
+    width: 120px;
+    height: 100%;
+    z-index: 2;
+    content: "";
+  }
+  
+  .slider::before {
+    left: 0;
+    background: linear-gradient(to left, rgba(255, 255, 255, 0), white);
+    
+  }
+  .slider::after {
+    right: 0;
+    background: linear-gradient(to right, rgba(255, 255, 255, 0), white);
+  }
+
+  @keyframes runSlider {
+    from{
+      transform: translateX(0);
+    } to{
+      transform: translateX(-100%);
+    }
+  }
+
+  img {
+    border-radius: 14px;
+  }
+
   main {
     margin: 0;
     padding: 0 1rem 1rem 0;
   }
-
-.icons {
-  padding: 1rem;
-}
 
 </style>
