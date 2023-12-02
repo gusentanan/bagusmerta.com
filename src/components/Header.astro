@@ -33,7 +33,7 @@ const pathname = getPathNameWithoutLocale(Astro.request.url);
     <div>
       {
         LINKS.map(({ href, label }) => (
-          <a href={href} aria-current={href === pathname ? "page" : undefined}
+          <a href={href} aria-current={href.toLowerCase() === pathname.toLowerCase() ? "page" : undefined}
           class="link">
             {label}
           </a>
