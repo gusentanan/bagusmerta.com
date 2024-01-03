@@ -1,45 +1,157 @@
 ---
+import BlogEntryItem from "@components/BlogEntryItem.astro";
+import ProjectEntryItem from "@components/ProjectEntryItem.astro";
 import BaseLayout from "@layouts/BaseLayout.astro";
+import type { Code } from "astro:components";
+import { getBlogCollection, getProjectCollection } from "utils/content";
 // import LatestPosts from "@components/LatestPosts.astro";
 import { getTitle } from "utils/title";
+import { Icon } from "astro-icon/components"
+
+
+const allBlogPosts = await getBlogCollection();
+const allProject = await getProjectCollection();
+
 ---
 
 <BaseLayout title={getTitle("Home")}>
   <main>
     <div>
       <div class="intro">
-        <h2>👋🏻 Hi! I'm a software engineer from Indonesia who's passionate about 
+        <h1>👋🏻 Hola! <br> you can call me <span class="inverted">Bagus</span></h1>
+        <h2>I'm a software engineer from Indonesia who's passionate about 
           <span class="inverted">Mobile</span>
           and 
           <span class="inverted">Front-end</span>
           development.
         </h2>
-        <a class="link" href={"/about"}>More about me →</a>
+        <div class="metadata">
+          <div class="metadata-item">
+              <Icon name="ri:github-fill"/>
+              <strong>gusentanan</strong>
+          </div>
+          <div class="metadata-item">
+            <Icon name="ri:linkedin-box-fill"/>
+            <strong>bagusmerta</strong>
+          </div>
+          <div class="metadata-item">
+            <Icon name="ri:twitter-x-fill"/>
+            <strong>@bagusmertasntn</strong>
+          </div>
+        </div>
+        <a class="link-button" href={"/about"}>More about me →</a>
       </div>
+      <div class="article-section">
+        <div class="article-intro">
+          <h1>
+            List of Blogs and Short Articles
+          </h1>
+          <p>
+            The things usually come from my personal notes.
+          </p>
+          <a class="link-button" href={"/blog"}>See More Articles →</a>
+        </div>
+       
+        <ul class="article-list">
+          {[allBlogPosts.slice(0, 1).map(blog => <BlogEntryItem {...blog} />)]}
+        </ul>
+        
+      </div>
+      <div class="project-section">
+        <h1>
+          Personal Projects
+        </h1>
+        <p>
+          Some projects that I've created & I'm proud of it
+        </p>
+        <ul class="project-list">
+          {[allProject.slice(0, 3).map(project => <ProjectEntryItem {...project} />)]}
+        </ul>
+        <div class="link-wrapper">
+          <a class="link-button" href={"/projects"}>See More Projects →</a>
+        </div>
+      </div>
+      
     </div>
 
   </main>
 </BaseLayout>
 
 <style>
-  main > div:first-of-type {
+  main  {
     width: 100%;
-    min-height: calc(var(--screen-height) * 0.5);
     display: flex;
-    gap: 3rem;
-    flex-wrap: wrap-reverse;
-
-    /* center the row */
-    justify-content: center;
-    align-items: center;
-
-    margin-top: 2rem;
-    margin-bottom: 2rem;
+    flex-direction: column;
+   
   }
 
   .intro {
-    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: start;
+    margin-top: 10vh;
+    margin-bottom: 10vh;
     min-width: min(400px, 100%);
+    min-height: 65vh;
+  }
+
+  .article-section {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: start;
+    margin-bottom: 10vh;
+  }
+
+  .article-list {
+    display: flex;
+    list-style: none;
+    width: 40em;
+  }
+
+  .project-section {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10vh;
+  }
+
+  .project-list {
+    display: grid;
+    padding: 0;
+    gap: 1em;
+    list-style: none;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  }
+
+  .metadata {
+    display: flex;
+    gap: 1rem;
+    font-size: 1.2rem;
+    font-weight: normal;
+    color: #6d7785;
+    margin-bottom: 4em;
+  }
+
+  .metadata-item {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+  }
+  
+  .link-button {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+    font-weight: bold;
+    border: 2px solid #6d7785;
+    border-radius: 4px;
+    transition: transform 0.3s, border-color 0.3s;
+  }
+
+  .link-button:hover {
+    transform: scale(1.1);
+    border-color: #6d7785;
   }
 
   img {
@@ -48,10 +160,24 @@ import { getTitle } from "utils/title";
     border-radius: 50%;
     margin: 0 auto;
   }
-  h2 {
-    line-height: 150%;
-  }
-  a {
-    font-weight: 600;
-  }
+
+  @media (max-width: 600px){
+    .article-section {
+      display: flex;
+      flex-direction: column;
+      align-items: start;
+    }
+
+    .article-list {
+      padding: 0;
+      width: 100%;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+
+    }
+
+    .metadata {
+      flex-direction: column;
+    }
+
 </style>

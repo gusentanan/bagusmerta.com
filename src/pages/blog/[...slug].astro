@@ -4,6 +4,7 @@ import BaseLayout from "@layouts/BaseLayout.astro";
 import { Image } from "astro:assets";
 import { getCollection } from "astro:content";
 import { formatDate } from "utils/time";
+import { Icon } from "astro-icon/components"
 
 export async function getStaticPaths() {
   const blogEntries = await getCollection("blog");
@@ -26,7 +27,16 @@ const { Content } = await entry.render();
       src={entry.data.banner} 
       alt="Image Banner Blog" />
     <h1>{entry.data.title}</h1>
-    <p class="date">{formatDate(entry.data.date)} <span> - </span> {entry.data.readCount}</p>
+    <div class="metadata">
+      <div class="metadata-item">
+          <Icon name="ri:alarm-line"/>
+          <strong>{entry.data.readCount}</strong>
+      </div>
+      <div class="metadata-item">
+        <Icon name="ri:calendar-2-fill"/>
+        <strong>{formatDate(entry.data.date)}</strong>
+      </div>
+    </div>
     <hr class="divider" />
     <article>
       <Content />
@@ -36,7 +46,6 @@ const { Content } = await entry.render();
 </BaseLayout>
 
 <style>
-  /* select direct hr after article */
   main {
     padding: 0 1rem 1rem 0;
   }
@@ -57,4 +66,18 @@ const { Content } = await entry.render();
   span {
     font-weight: normal;
   }
+
+  .metadata {
+        display: flex;
+        gap: 1rem;
+        font-size: 1.2rem;
+        font-weight: normal;
+        color: #6d7785;
+    }
+
+    .metadata-item {
+        display: flex;
+        align-items: center;
+        gap: 0.25rem;
+    }
 </style>

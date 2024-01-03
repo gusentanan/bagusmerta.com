@@ -11,7 +11,10 @@ const allBlogPosts = await getBlogCollection();
   <main>
     <div>
       <h1>My Thoughts.</h1>
-      {allBlogPosts.map((blog) => <BlogEntryItem {...blog} />)}
+      <ul class="blog-grid">
+        {allBlogPosts.map((blog) => <BlogEntryItem {...blog} />)}
+      </ul>
+
     </div>
   </main>
 </BaseLayout>
@@ -20,4 +23,12 @@ const allBlogPosts = await getBlogCollection();
   main {
     width: 100%;
   }
+  .blog-grid {
+    list-style: none;
+    display: grid;
+    gap: 1rem;
+    padding: 0;
+    margin-bottom: 20vh;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); 
+  } 
 </style>
