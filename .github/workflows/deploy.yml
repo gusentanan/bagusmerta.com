@@ -1,5 +1,5 @@
 name: Deploy to GitHub Pages
-# cc: https://docs.astro.build/en/guides/deploy/github/
+
 on:
   # Trigger the workflow every time you push to the `main` branch
   # Using a different branch name? Replace `main` with your branch’s name
@@ -20,7 +20,7 @@ jobs:
     steps:
       - name: Checkout your repository using git
         uses: actions/checkout@v4
-      - name: Install, build, and upload your site
+      - name: Install, build, and upload your site output
         uses: withastro/action@v1
         # with:
         # path: . # The root location of your Astro project inside the repository. (optional)
