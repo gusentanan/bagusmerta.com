@@ -18,7 +18,7 @@ const allProject = await getProjectCollection();
   <main>
     <div>
       <div class="intro">
-        <h1>👋🏻 Hola! <br> you can call me <span class="inverted">Bagus</span></h1>
+        <h1>👋🏻 Hello! you can call me <span class="inverted">Bagus</span></h1>
         <h2>I'm a software engineer from Indonesia who's passionate about 
           <span class="inverted">Mobile</span>
           and 
@@ -58,12 +58,14 @@ const allProject = await getProjectCollection();
         
       </div>
       <div class="project-section">
-        <h1>
-          Personal Projects
-        </h1>
-        <p>
-          Some projects that I've created & I'm proud of it
-        </p>
+        <div class="project-intro">
+          <h1>
+            Personal Projects
+          </h1>
+          <p>
+            Some projects that I've created & I'm proud of it
+          </p>
+        </div>
         <ul class="project-list">
           {[allProject.slice(0, 3).map(project => <ProjectEntryItem {...project} />)]}
         </ul>
