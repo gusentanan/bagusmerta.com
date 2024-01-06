@@ -10,7 +10,10 @@ const allBlogPosts = await getBlogCollection();
 <BaseLayout title={getTitle("Blog")}>
   <main>
     <div>
-      <h1>My Thoughts.</h1>
+      <h1>Blog</h1>
+      <p>
+        A collection of articles that includes tutorials, tips, and my thoughts.
+      </p>
       <ul class="blog-grid">
         {allBlogPosts.map((blog) => <BlogEntryItem {...blog} />)}
       </ul>
@@ -28,6 +31,7 @@ const allBlogPosts = await getBlogCollection();
     display: grid;
     gap: 1rem;
     padding: 0;
+    margin-top: 6vh;
     margin-bottom: 20vh;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); 
   } 

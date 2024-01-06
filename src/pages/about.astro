@@ -2,16 +2,17 @@
 import BaseLayout from "@layouts/BaseLayout.astro";
 import { getTitle } from "utils/title";
 import { Image } from "astro:assets";
+import { Icon } from "astro-icon/components"
 
-const techImages = [
-  "ic-kotlin.jpg",
-  "ic-flutter.png",
-  "ic-android.png",
-  "ic-javascript.png",
-  "ic-react.svg",
-  "ic-python.png",
-  "ic-astro.svg",
-  "ic-java.png",
+
+const techIcons = [
+  "skill-icons:kotlin-light",
+  "skill-icons:flutter-light",
+  "skill-icons:androidstudio-light",
+  "skill-icons:typescript",
+  "skill-icons:react-light",
+  "skill-icons:github-dark",
+  "skill-icons:python-light",
 ];
 ---
 
@@ -40,7 +41,7 @@ const techImages = [
       particularly those associated with government projects.
     </p>
 
-    <h2>Beginnings of my journey🌏</h2>
+    <h2>Beginnings of my journey</h2>
     <p>
       I'm born and grew up in Bali, Indonesia and I'm very grateful to have taken a very traditional route into the fields
       of Software Engineering and Computer Science.
@@ -65,36 +66,17 @@ const techImages = [
       thrive and developed a strong love for coding, especially when it involves creating user interfaces
     </p>
 
-    <h2>Technology I've Used 💻</h2>
-    <p>
-      Throughout my entire lifetime, I've had the
-      privilege to implemented various tech stack. </p>
-      <div class="slider">
-        <div class="icons__slider">
-          { 
-            techImages.map((img) => 
-              <Image 
-                src={`/icons/${img}`}
-                alt="Tech Icons"
-                width="80"
-                height="80"
-              />           
-            )
-          }
-        </div>
-        <div class="icons__slider">
-          { 
-            techImages.map((img) => 
-              <Image 
-                src={`/icons/${img}`}
-                alt="Tech Icons"
-                width="80"
-                height="80"
-              />           
-            )
-          }
-        </div>
-      </div>
+    <h2>Tech Stack</h2>
+    <ul class="list-icons">
+      {techIcons.map((icon) => {
+        return (
+          <li class="tech-icons">
+            <Icon name={icon} />
+          </li>
+        );
+      })}
+    </ul>
+     
 
     <h2>Random stuffs ✨</h2>
     <p>
@@ -109,57 +91,31 @@ const techImages = [
 </BaseLayout>
 
 <style>
-  .slider {
-    overflow: hidden;
-    margin: 40px 0;
-    white-space: nowrap;
-    position: relative;
-  }
-  .icons__slider {
-    display: inline-block;
-    animation: 15s runSlider linear infinite;
-  }
-  .icons__slider img {
-    margin: 0 20px;
-  }
-  .slider:hover .icons__slider {
-    animation-play-state: paused;
-  }
-  .slider::before,
-  .slider::after {
-    position: absolute;
-    top: 0;
-    width: 120px;
-    height: 100%;
-    z-index: 2;
-    content: "";
-  }
-  
-  .slider::before {
-    left: 0;
-    background: linear-gradient(to left, rgba(255, 255, 255, 0), white);
-    
-  }
-  .slider::after {
-    right: 0;
-    background: linear-gradient(to right, rgba(255, 255, 255, 0), white);
-  }
-
-  @keyframes runSlider {
-    from{
-      transform: translateX(0);
-    } to{
-      transform: translateX(-100%);
-    }
-  }
-
-  img {
-    border-radius: 14px;
-  }
 
   main {
     margin: 0;
     padding: 0 1rem 1rem 0;
   }
+
+  .list-icons {
+      padding: 0;
+      list-style: none;
+      display: flex;
+  }
+  .tech-icons {
+      margin-left: 0.5em;
+  }
+
+  [data-icon] {
+      font-size: 4em;
+      color: var(--brand-color);
+  }
+
+  @media (max-width: 600px){
+    [data-icon] {
+      font-size: 2em;
+    }
+  }
+
 
 </style>

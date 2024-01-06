@@ -10,7 +10,8 @@ const allProject = await getProjectCollection();
 <BaseLayout title={getTitle("Projects")}>
   <main>
     <div>
-      <h1>Stuff I've Created.</h1>
+      <h1>Projects.</h1>
+      <p>Things I've created in my spare time, often built out of curiosity or while trying something new.</p>
       <ul class="project-grid">
         {allProject.map((projects) => <PostEntryItem {...projects} />)}
       </ul>
@@ -26,6 +27,7 @@ const allProject = await getProjectCollection();
     display: grid;
     gap: 1rem;
     padding: 0;
+    margin-top: 6vh;
     margin-bottom: 10vh;
     list-style: none;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));

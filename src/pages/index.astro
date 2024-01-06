@@ -4,7 +4,6 @@ import ProjectEntryItem from "@components/ProjectEntryItem.astro";
 import BaseLayout from "@layouts/BaseLayout.astro";
 import type { Code } from "astro:components";
 import { getBlogCollection, getProjectCollection } from "utils/content";
-// import LatestPosts from "@components/LatestPosts.astro";
 import { getTitle } from "utils/title";
 import { Icon } from "astro-icon/components"
 
@@ -44,10 +43,10 @@ const allProject = await getProjectCollection();
       <div class="article-section">
         <div class="article-intro">
           <h1>
-            List of Blogs and Short Articles
+            List of Blog and Short Articles
           </h1>
           <p>
-            The things usually come from my personal notes.
+            A compilation of my writings inspired by many other writers. It usually comes from my personal notes.
           </p>
           <a class="link-button" href={"/blog"}>See More Articles →</a>
         </div>
