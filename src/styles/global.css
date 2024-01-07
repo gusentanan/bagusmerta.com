@@ -72,7 +72,7 @@
   }
 
   .inverted {
-    border-radius: 0.5rem; 
+    border-radius: 0.5em; 
     background-color: #f0f0f0;
     font-style: italic;
     font-size: normal;
@@ -104,16 +104,15 @@
   }
 
   pre {
-    padding: 1.5rem;
+    padding: 1.5em;
     border-radius: 8px;
   }
 
   code {
     font-size: .875rem;
     font-family: var(--font-family-code);
-    line-height: 1.25rem;
+    line-height: 1.25em;
   }
-
 
   blockquote {
     margin: 0;
@@ -123,9 +122,9 @@
 
   blockquote p {
     font-family: var(--font-family-display);
-    font-size: 20px;
+    font-size: 1.25rem;
     font-style: bold;
     display: inline;
     color: #000;
-    line-height: 30px;
+    line-height: 1em;
   }

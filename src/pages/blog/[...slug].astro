@@ -47,16 +47,10 @@ const { Content } = await entry.render();
 
 <style>
   main {
-    padding: 0 1rem 1rem 0;
+    padding: 0 1em 1em 0;
   }
   article {
-    margin-bottom: 4rem;
-  }
-  .divider {
-    border-top: 1px solid #d2d2d2;
-  }
-  .date {
-    font-weight: 200;
+    margin-bottom: 4em;
   }
   img {
     border-radius: 14px;
@@ -67,23 +61,30 @@ const { Content } = await entry.render();
     font-weight: normal;
   }
 
+  .divider {
+    border-top: 1px solid #d2d2d2;
+  }
+  .date {
+    font-weight: 200;
+  }
+
   .metadata {
-        display: flex;
-        gap: 1rem;
-        font-size: 1.2rem;
-        font-weight: normal;
-        color: #6d7785;
-    }
+    display: flex;
+    gap: 1em;
+    font-size: 1.2em;
+    font-weight: normal;
+    color: #6d7785;
+  }
 
   .metadata-item {
-        display: flex;
-        align-items: center;
-        gap: 0.25rem;
-    }
+    display: flex;
+    align-items: center;
+    gap: 0.25em;
+  }
   
   @media (max-width: 600px){
     .metadata {
-      font-size: 1rem;
+      font-size: 1em;
     }
   }
 </style>
