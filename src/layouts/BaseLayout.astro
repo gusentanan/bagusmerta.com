@@ -8,6 +8,7 @@ import "../styles/global.css";
 
 import { SEO } from "astro-seo";
 import { ViewTransitions } from "astro:transitions";
+import { Tooltips } from 'astro-tooltips';
 
 import Header from "@components/Header.astro";
 import Footer from "@components/Footer.astro";
@@ -30,6 +31,8 @@ description = description || "Bagus Merta's personal website";
     <link rel="stylesheet" href="/fonts/Lora/Lora.css" />
     <link rel="stylesheet" href="/fonts/AlbertSans/AlbertSans.css"/>
     <link rel="stylesheet" href="/fonts/JetBrains_Mono/JetBrainsMono.css" />
+    
+    <Tooltips interactive={false} delay={[15, 40]} />
 
     <SEO
       title={title}

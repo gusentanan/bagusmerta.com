@@ -6,14 +6,40 @@ import { Icon } from "astro-icon/components"
 
 
 const techIcons = [
-  "skill-icons:kotlin-light",
-  "skill-icons:flutter-light",
-  "skill-icons:androidstudio-light",
-  "skill-icons:typescript",
-  "skill-icons:react-light",
-  "skill-icons:github-dark",
-  "skill-icons:python-light",
-];
+  {
+    icon: "skill-icons:kotlin-light",
+    description: "Kotlin, more readable and concise version of Java"
+  },
+  {
+    icon: "skill-icons:flutter-light",
+    description: "Flutter, the development is just way faster."
+  },
+  {
+    icon: "skill-icons:androidstudio-light",
+    description: "Android Studio, best IDE to build Android apps."
+  },
+  {
+    icon: "skill-icons:vscode-light",
+    description: "VSCode, I love it for the many custom things we can do"
+  },
+  {
+    icon: "skill-icons:typescript",
+    description: "TypeScript, just learned it & need to dive more into it"
+  },
+  {
+    icon: "skill-icons:react-light",
+    description: "React, my first-picked framework when learning web development"
+  },
+  {
+    icon: "skill-icons:github-dark",
+    description: "Github, just love the environment"
+  },
+  {
+    icon: "skill-icons:python-light",
+    description: "Python, mainly used by me to solve data structures problems and to learn machine learning"
+  }
+
+]
 ---
 
 <BaseLayout title={getTitle("About")}>
@@ -68,10 +94,16 @@ const techIcons = [
 
     <h2>Tech Stack</h2>
     <ul class="list-icons">
-      {techIcons.map((icon) => {
+      {techIcons.map((icons) => {
         return (
-          <li class="tech-icons">
-            <Icon name={icon} />
+          <li 
+            class="tech-icons"
+            data-tooltip-interactive="false"
+            data-tooltip-placement="bottom"
+            title={icons.description}>
+            <Icon 
+              name={icons.icon} 
+            />
           </li>
         );
       })}
@@ -106,6 +138,11 @@ const techIcons = [
   }
   .tech-icons {
     margin-left: 0.5em;
+    transition: transform 0.3s;
+  }
+
+  .tech-icons:hover {
+    transform: scale(1.1);
   }
 
   [data-icon] {

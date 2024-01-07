@@ -24,20 +24,33 @@ const allProject = await getProjectCollection();
           development.
         </h2>
         <div class="socials-section">
-          <div class="social-item">
+          <div 
+            class="social-item"
+            data-tooltip-interactive="false"
+            data-tooltip-placement="bottom"
+            title="My Github username">
               <Icon name="ri:github-fill"/>
               <strong>gusentanan</strong>
           </div>
-          <div class="social-item">
-            <Icon name="ri:linkedin-box-fill"/>
-            <strong>bagusmerta</strong>
+          <div 
+            class="social-item"   
+            data-tooltip-interactive="false"
+            data-tooltip-placement="bottom"
+            title="My LinkedIn user ID">
+              <Icon name="ri:linkedin-box-fill"/>
+              <strong>bagusmerta</strong>
+
           </div>
-          <div class="social-item">
-            <Icon name="ri:twitter-x-fill"/>
-            <strong>@bagusmertasntn</strong>
+          <div 
+            class="social-item"
+            data-tooltip-interactive="false"
+            data-tooltip-placement="bottom"
+            title="My X (formerly Twitter) username">
+              <Icon name="ri:twitter-x-fill"/>
+              <strong>@bagusmertasntn</strong>
           </div>
         </div>
-        <a class="link-button" href={"/about"}>More about me →</a>
+        <a class="link-button" href={"/about/"}>More about me →</a>
       </div>
       <div class="article-section">
         <div class="article-intro">
@@ -47,7 +60,7 @@ const allProject = await getProjectCollection();
           <p>
             A compilation of my writings inspired by many other writers. It usually comes from my personal notes.
           </p>
-          <a class="link-button" href={"/blog"}>See More Articles →</a>
+          <a class="link-button" href={"/blog/"}>See More Articles →</a>
         </div>
        
         <ul class="article-list">
@@ -68,7 +81,7 @@ const allProject = await getProjectCollection();
           {[allProject.slice(0, 3).map(project => <ProjectEntryItem {...project} />)]}
         </ul>
         <div class="link-wrapper">
-          <a class="link-button" href={"/projects"}>See More Projects →</a>
+          <a class="link-button" href={"/projects/"}>See More Projects →</a>
         </div>
       </div>
       
@@ -137,6 +150,12 @@ const allProject = await getProjectCollection();
     display: flex;
     align-items: center;
     gap: 0.25rem;
+    transition: transform 0.3s;
+  }
+
+  .social-item:hover {
+    color: black;
+    transform: scale(1.1);
   }
   
   .link-button {
