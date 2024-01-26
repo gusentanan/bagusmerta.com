@@ -24,6 +24,7 @@ const { Content } = await entry.render();
   description={entry.data.description} >
   <main>
     <Image
+      class="blog-banner"
       src={entry.data.banner} 
       alt="Image Banner Blog" />
     <h1>{entry.data.title}</h1>
@@ -52,11 +53,13 @@ const { Content } = await entry.render();
   article {
     margin-bottom: 4em;
   }
-  img {
+  
+  .blog-banner {
     border-radius: 14px;
     width: 100%;
     height: auto;
   }
+  
   span {
     font-weight: normal;
   }

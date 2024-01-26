@@ -128,3 +128,29 @@
     color: #000;
     line-height: 1em;
   }
+
+  img[alt="blog-content"] {
+    max-width: 52em;
+    max-height: 20em;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+
+  }
+  @media (max-width: 800px) {
+    pre {
+        max-width: calc(100% - 20px); 
+    }
+}
+
+@media (max-width: 1024px) {
+    pre {
+        max-width: calc(100% - 40px);
+    }
+}
+
+@media (max-width: 1366px) {
+    pre {
+        max-width: calc(100% - 60px); 
+    }
+}
