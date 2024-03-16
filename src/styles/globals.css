@@ -1,0 +1,191 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Customize these variables */
+  /* Purple: #9600FF */
+  --tw-clr-primary-200: 150 0 255;
+
+  /* Pink: #FFC0CB */
+  --tw-clr-primary-300: 255 192 203;
+
+  /* Orange: #FFA500 */
+  --tw-clr-primary-400: 255 165 0;
+
+  /* Yellow: #FFFF00 */
+  --tw-clr-primary-500: 255 255 0;
+
+  /* Conversion to RGB for use in CSS */
+  --clr-primary-200: rgb(var(--tw-clr-primary-200)); /* Purple color */
+  --clr-primary-300: rgb(var(--tw-clr-primary-300)); /* Red color */
+  --clr-primary-400: rgb(var(--tw-clr-primary-400)); /* Orange color */
+  --clr-primary-500: rgb(var(--tw-clr-primary-500)); /* Yellow color */
+}
+
+@layer base {
+  /* inter var - latin */
+  @font-face {
+    font-family: "AlbertSans";
+    font-style: normal;
+    font-weight: 100 900;
+    font-display: optional;
+    src: url("/fonts/AlbertSans-Regular.woff2") format("woff2");
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+      U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212,
+      U+2215, U+FEFF, U+FFFD;
+  }
+  @font-face {
+    font-family: "Lora";
+    font-style: normal;
+    font-weight: 100 900;
+    font-display: optional;
+    src: url("/fonts/Lora-Regular.woff2") format("woff2");
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+      U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212,
+      U+2215, U+FEFF, U+FFFD;
+  }
+  @font-face {
+    font-family: "JetBrainsMono";
+    font-style: normal;
+    font-weight: 100 900;
+    font-display: optional;
+    src: url("/fonts/JetBrainsMono-Regular.woff2") format("woff2");
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+      U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212,
+      U+2215, U+FEFF, U+FFFD;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 80px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+
+  ::selection {
+    background: rgba(var(--tw-clr-primary-300) / 0.3);
+  }
+
+  .cursor-newtab {
+    cursor:
+      url("/images/new-tab.png") 10 10,
+      pointer;
+  }
+
+  h1,
+  .h1 {
+    @apply font-display text-2xl font-extrabold md:text-4xl;
+  }
+
+  h2,
+  .h2 {
+    @apply font-display text-xl font-extrabold md:text-3xl;
+  }
+
+  h3,
+  .h3 {
+    @apply font-primary text-lg font-bold md:text-2xl;
+  }
+
+  h4,
+  .h4 {
+    @apply font-primary text-base font-bold md:text-lg;
+  }
+
+  img {
+    border-radius: 4px;
+  }
+
+  /* workaround for image inside mdx */
+  img[alt="blog-content"] {
+    padding: 1em 0;
+  }
+
+  pre {
+    margin: 1em 0;
+    padding: 1.5em;
+    border-radius: 4px;
+  }
+
+  code {
+    font-family: "JetBrainsMono", monospace;
+    line-height: 1.25em;
+    font-size: 0.875rem;
+  }
+
+  blockquote {
+    margin: 0;
+    padding: 1em;
+    border-left: 4px solid rgb(75, 147, 248);
+  }
+
+  blockquote p {
+    font-size: 1.25rem;
+    font-style: bold;
+    display: inline;
+    color: #000;
+    line-height: 1em;
+  }
+
+  body,
+  .body {
+    @apply font-primary text-sm md:text-base;
+  }
+
+  .layout {
+    max-width: 68rem;
+    @apply mx-auto w-11/12;
+  }
+
+  .min-h-main {
+    @apply min-h-[calc(100vh-82px)];
+  }
+
+  .accent-highlight {
+    @apply bg-primary-300/50;
+  }
+}
+
+@layer utilities {
+  .animated-underline {
+    background-image: linear-gradient(#33333300, #33333300),
+      linear-gradient(to right, var(--clr-primary-300), var(--clr-primary-400));
+    background-size:
+      100% 2px,
+      0 2px;
+    background-position:
+      100% 100%,
+      0 100%;
+    background-repeat: no-repeat;
+    transition: 0.3s ease;
+    transition-property: background-size, color, background-color, border-color;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .animated-underline {
+      transition: none;
+    }
+  }
+  .animated-underline:hover,
+  .animated-underline:focus-visible,
+  .project-card:hover .animated-underline,
+  .project-card:focus-visible .animated-underline {
+    background-size:
+      0 2px,
+      100% 2px;
+  }
+}
+/* Tippy */
+.tippy-box[data-theme="default"] {
+  background-color: white;
+  color: gray;
+  border: 1px solid rgba(128, 128, 128, 0.5);
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+  word-wrap: break-word;
+  max-width: 400px !important;
+}

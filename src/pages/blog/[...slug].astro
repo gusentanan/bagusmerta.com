@@ -7,7 +7,7 @@ import { formatDate } from "utils/time";
 import { Icon } from "astro-icon/components"
 
 export async function getStaticPaths() {
-  const blogEntries = await getCollection("blog");
+  const blogEntries = await getCollection('blog');
   const paths = blogEntries.map((entry) => ({
     params: { slug: entry.slug },
     props: { entry },
@@ -23,71 +23,33 @@ const { Content } = await entry.render();
   title={`${entry.data.title} | I Putu Bagus Merta Sentana`}
   description={entry.data.description} >
   <main>
-    <Image
-      class="blog-banner"
-      src={entry.data.banner} 
-      alt="Image Banner Blog" />
-    <h1>{entry.data.title}</h1>
-    <div class="metadata">
-      <div class="metadata-item">
-          <Icon name="ri:alarm-line"/>
-          <strong>{entry.data.readCount}</strong>
+    <section class='layout'>
+      <div class='pb-4'>
+        <Image
+          class='mt-4 mb-4 rounded'
+          src={entry.data.banner} 
+          width={1200}
+          height={(1200 * 2) / 5}
+          alt='Image Banner Blog' 
+        />
+        <h1 class='mt-1'>{entry.data.title}</h1>
+        <div class='mt-2 flex items-center justify-start gap-8 text-lg font-medium text-gray-600'>
+          <div class='flex items-center gap-1'>
+              <Icon name='ri:alarm-line'/>
+              <strong>{entry.data.readCount}</strong>
+          </div>
+          <div class='flex items-center gap-1'>
+            <Icon name='ri:calendar-2-fill'/>
+            <strong>{formatDate(entry.data.date)}</strong>
+          </div>
+        </div>
+        <hr class='mt-4 divider' />
+        <article class='mt-4'>
+          <Content />
+        </article>
+        <LatestPosts id={entry.data.id} />
+
       </div>
-      <div class="metadata-item">
-        <Icon name="ri:calendar-2-fill"/>
-        <strong>{formatDate(entry.data.date)}</strong>
-      </div>
-    </div>
-    <hr class="divider" />
-    <article>
-      <Content />
-    </article>
-    <LatestPosts />
+    </section>
   </main>
 </BaseLayout>
-
-<style>
-  main {
-    padding: 0 1em 1em 0;
-  }
-  article {
-    margin-bottom: 4em;
-  }
-  
-  .blog-banner {
-    border-radius: 14px;
-    width: 100%;
-    height: auto;
-  }
-  
-  span {
-    font-weight: normal;
-  }
-
-  .divider {
-    border-top: 1px solid #d2d2d2;
-  }
-  .date {
-    font-weight: 200;
-  }
-
-  .metadata {
-    display: flex;
-    gap: 1em;
-    font-size: 1.2em;
-    font-weight: normal;
-    color: #6d7785;
-  }
-
-  .metadata-item {
-    display: flex;
-    align-items: center;
-    gap: 0.25em;
-  }
-  
-  @media (max-width: 600px){
-    .metadata {
-      font-size: 1em;
-    }
-  }
-</style>

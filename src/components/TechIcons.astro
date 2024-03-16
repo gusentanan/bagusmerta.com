@@ -1,7 +1,6 @@
 ---
 import { Icon } from "astro-icon/components"
 import type { ProjectEntry } from "utils/content";
-import { Tooltips } from 'astro-tooltips';
 
 const techList = {
   kotlin: {
@@ -33,35 +32,16 @@ const techList = {
 export type Props = ProjectEntry;
 const props = Astro.props;
 ---
-<ul class="list-icons">
+<ul class='mt-2 flex flex-wrap gap-2'>
     {props.data.tags.map((tag, _) => {
         if (!techList[tag]) return null;
-    
         const current = techList[tag];
         return (
-          <li class="tech-icons">
-            <Icon name={current.icon} />
+          <li>
+            <Icon class='text-3xl' name={current.icon} />
           </li>
         );
       })
     }
 </ul>
 
-
-<style>
-
-    .list-icons {
-        padding: 0;
-        list-style: none;
-        display: flex;
-    }
-    .tech-icons {
-        margin-left: 0.25em;
-        margin-bottom: 0.25em;
-    }
-
-    [data-icon] {
-        font-size: 2rem;
-        color: var(--brand-color);
-    }
-</style>

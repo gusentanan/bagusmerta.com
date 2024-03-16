@@ -1,4 +1,5 @@
 ---
+import Accent from "@components/Accent.astro";
 import BlogEntryItem from "@components/BlogEntryItem.astro";
 import BaseLayout from "@layouts/BaseLayout.astro";
 import { getBlogCollection } from "utils/content";
@@ -7,29 +8,20 @@ import { getTitle } from "utils/title";
 const allBlogPosts = await getBlogCollection();
 ---
 
-<BaseLayout title={getTitle("Blog")}>
+<BaseLayout title={getTitle('Blog')}>
   <main>
-    <div>
-      <h1>Blog.</h1>
-      <p>
-        A collection of articles that includes tutorials, tips, and my thoughts.
-      </p>
-      <ul class="blog-grid">
-        {allBlogPosts.map((blog) => <BlogEntryItem {...blog} />)}
-      </ul>
-
-    </div>
+    <section>
+      <div class='layout py-12'>
+        <h2 class='text-3xl md:text-4xl'>
+          <Accent text='Blog.'/>
+        </h2>
+        <p class='mt-2 text-black-600'>
+          A collection of articles that includes tutorials, tips, and my thoughts.
+        </p>
+        <ul class='mt-4 grid gap-4 sm:grid-cols-2 xl:grid-cols-3'>
+          {allBlogPosts.map((blog) => <BlogEntryItem {...blog} />)}
+        </ul>
+      </div>
+    </section>
   </main>
 </BaseLayout>
-
-<style>
-  .blog-grid {
-    padding: 0;
-    list-style: none;
-    display: grid;
-    gap: 1em;
-    margin-top: 3em;
-    margin-bottom: 10em;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); 
-  } 
-</style>

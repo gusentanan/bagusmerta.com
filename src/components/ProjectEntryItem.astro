@@ -1,6 +1,5 @@
 ---
 import type { ProjectEntry } from "utils/content";
-import { formatDate } from "utils/time";
 import { Image } from "astro:assets";
 import TechIcons from "./TechIcons.astro";
 
@@ -10,74 +9,32 @@ const props = Astro.props;
 
 ---
 
-<li class="project-card">
-  <a href={(props.data.link)} class="project-link" target="_blank">
+<li class:list={[
+    'project-card rounded-md md:w-full border',
+    'scale-100 hover:scale-[1.02] active:scale-[0.97] motion-safe:transform-gpu',
+    'transition duration-100',
+    'motion-reduce:hover:scale-100'
+]}>
+  <a href={(props.data.link)} class:list={[
+    'flex h-full flex-col items-start rounded-md p-4 focus:outline-none focus-visible:ring focus-visible:ring-primary-300',
+    'cursor-newtab',
+  ]} target='_blank'>
     <h3>{props.data.title}</h3>
-    <p class="project-description">
+    <p class='mb-auto text-sm text-black-700'>
         {props.data.description}
     </p>
       <TechIcons {...props}/>
-  
       <picture>
         <Image 
-            class="image-project"
+            class='mt-2 rounded'
             src={props.data.image}
-            alt="project image"
+            alt='project image'
           />
       </picture> 
-        
-    <p class="project-link-text">
+    <p class='animated-underline mt-2 inline-block font-medium'>
         Sources →
     </p>
   </a>
 </li>
 
-
-<style>
-
-  .project-card {
-      width: 100%;
-      border: 1px solid darkgray;
-      border-radius: 0.375em;
-      transition: transform 0.1s;
-  }
-
-  .project-card:hover {
-      transform: scale(1.02);
-  }
-
-  .project-card:active {
-      transform: scale(0.97);
-  }
-
-  .project-link {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      margin: 1em;
-  }
-
-  .project-description {
-      font-size: 0.875rem;
-      color: #4b5563;
-      margin-bottom: 1em;
-  }
-
-  .image-project {
-      pointer-events: none;
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-  }
-
-  .project-link-text {
-      display: inline-block;
-      font-weight: 500;
-      text-decoration: underline;
-  }
-  h3 {
-      margin: 0;
-  }
-
-</style>
 

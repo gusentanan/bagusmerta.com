@@ -1,54 +1,21 @@
 ---
 import { getBlogCollection } from "utils/content";
-import { formatDate } from "utils/time";
-import { getBlogPathName } from "utils/url";
+import BlogEntryItem from "./BlogEntryItem.astro";
+import Accent from "./Accent.astro";
 
 const blogEntries = (await getBlogCollection()).slice(0, 5);
+const { id  } = Astro.props;
 ---
-
-<div>
-  <h2>Latest content</h2>
-  <ul>
+<div class='mt-10'>
+  <h2><Accent text='Latest content'/></h2>
+  <ul class='mt-4 grid gap-4 sm:grid-cols-2 xl:grid-cols-3'>
     {
-      blogEntries.map((blogPostEntry) => (
-        <li>
-          <div>
-            <a class="link" href={getBlogPathName(blogPostEntry)}>
-              {blogPostEntry.data.title}
-            </a>
-            <time datetime={blogPostEntry.data.date.toISOString()}>
-              {formatDate(blogPostEntry.data.date)}
-            </time>
-          </div>
-        </li>
-      ))
+      blogEntries
+        .filter(blogPostEntry => blogPostEntry.data.id !== id)
+        .map(blogPostEntry => (
+          <BlogEntryItem {...blogPostEntry} />
+        ))
     }
   </ul>
 </div>
 
-<style>
-  a {
-    font-weight: 400;
-  }
-  time {
-    color: #666;
-  }
-  ul {
-    margin-block-start: 0.5em;
-    padding-left: 1em;
-  }
-  li {
-    padding: 0.1em 0;
-  }
-
-  li > div {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5em;
-  }
-
-  h2 {
-    margin-bottom: 0em;
-    padding-bottom: 0em;
-  }
-</style>

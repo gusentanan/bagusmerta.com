@@ -1,0 +1,115 @@
+---
+id: 4
+title: "Flutter pre-commit linter hooks"
+description: "Use this to make your code look cleaner and more organized!"
+date: 2024-03-12
+slug: "flutter-pre-commit-linter-hooks"
+banner: "./images/blog-4/flutter-pre-commit-linter-hooks.jpg"
+readCount: "5 min read"
+tags:
+  - tech
+---
+
+working in a team can be quite challenging, especially when you're part of a startup engaged in fast-paced development, where there's a good chance of writing not-so-great code in such a rush. 
+But if we ignore it, we're just storing up problems for later. It will become a technical debt that going to slow down the development of our team,  and might even cause bugs and other headaches.
+
+One way to tackle this problem is to set a pre-commit hooks on our Repository. Luckily `Flutter.dev` comes up with the official `flutter_lints` package that contains a recommended set of lints for Flutter apps to leverage good coding practices. 
+This package is actually built on top of the Dart analyzer, which statically checks Dart code. So alternatively, we can analyze our code manually using the `flutter analyze` command. 
+But that means we have to manually write the command every time we make changes, right? Rest assured, in this blog, I will show you a way to make it easier.
+
+## Pre-requisites
+#### 1. You'll need a Flutter project with the latest versions of Flutter and Dart
+#### 2. Make sure you have `pip` installed if you're using windows otherwise you can use `brew`
+
+> `pip` is a package manager similar to `npm` for Python environment.
+
+## Installation
+If you haven't already installed pre-commit, you can do so by following the instructions on the Pre-commit website. For most users, installing via Homebrew or pip is recommended.
+```bash
+brew install pre-commit  # For macOS
+# or
+pip install pre-commit  # For other platforms
+```
+After that, you can initialize the pre-commit hooks inside your repository by creating `.pre-commit-config.yaml` at the root of your project. This file specifies the hooks that should be run and any additional parameters needed for the linting process. 
+This will enforce code quality standards before each commit is made to our repository. Below is an example of my pre-commit config file, which will handle formatting and analyzing in our code.
+```yaml
+repos:
+  - repo: local   # Specifies that the repository is local (not remote).
+    hooks:
+      - id: flutter-format
+        name: Flutter Format
+        entry: dart format .   # Command to execute for formatting Dart files.
+        language: system     # Specifies the language environment for executing the hook.
+        types: [dart]       # Specifies the file types to which this hook applies.
+        pass_filenames: false   # Indicates whether filenames should be passed to the hook
+      - id: flutter-analyze
+        name: Flutter Analyze
+        entry: flutter analyze  # Command to execute for analyzing Flutter code.
+        language: system  
+        types: [dart]
+        pass_filenames: false
+```
+
+Then, add the `analysis_options.yaml` to your root project and customize it for your own benefit.
+This file is used to configure static analysis settings for Dart code, allowing you to specify various rules and settings that the Dart analyzer should follow when analyzing your codebase.
+```yaml
+include: package:flutter_lints/flutter.yaml
+
+# This section specifies the linting rules 
+linter:
+  rules:
+    # Define your custom rules here
+    avoid_empty_else: true
+    avoid_print: true
+    avoid_relative_lib_imports: true
+    avoid_returning_null_for_void: true
+    avoid_unused_constructor_parameters: true
+    avoid_void_async: true
+    await_only_futures: true
+    camel_case_types: true
+    constant_identifier_names: true
+    curly_braces_in_flow_control_structures: true
+    file_names: true
+    no_logic_in_create_state: true
+    non_constant_identifier_names: false
+    prefer_const_constructors: true
+    prefer_const_literals_to_create_immutables: true
+    prefer_final_fields: true
+    unnecessary_null_checks: true
+    unnecessary_this: true
+    use_key_in_widget_constructors: true
+
+# This section specifies the analyzer settings
+analyzer:
+  exclude: # Exclude certain files and directories from analysis.
+    - lib/generated/**  
+    - test/**           
+    - "**/*.g.dart"     
+    - "**/*.freezed.dart" 
+  errors: # Specify how to handle certain types of analyzer errors.
+    annotate_overrides: ignore
+    avoid_print: ignore
+    avoid_unnecessary_containers: ignore
+    avoid_void_async: ignore
+    camel_case_types: ignore
+    constant_identifier_names: ignore
+    dead_null_aware_expression: ignore
+```
+> You can see the whole example of `analysis_options.yaml` from the official Flutter project repository itself.
+
+## Trigger the pre-commit linter hooks
+Now that everything is set up, try making changes to your Flutter project, especially inside the `lib` directory, and then commit your changes.
+```bash
+  git add .
+  git commit -m "test precommit linter"
+```
+Then, let the pre-commit linter work. It will give a green label if our commit is successful, as shown in the picture below. If not, the linter
+will attempt to change our code based on the rules set in the `analysis_options.yaml` file. After that, we need to re-commit our changes.
+![blog-content](./images/blog-4/img-content/result.png)
+
+## Conclusion
+Setting up pre-commit hooks can be a real game-changer for your team. 
+It's like having a helpful assistant that keeps your code clean and your development process smooth, even in the midst of fast-paced development. 
+Thanks for reading, happy coding :)
+
+

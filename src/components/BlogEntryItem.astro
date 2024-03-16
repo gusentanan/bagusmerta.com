@@ -9,109 +9,35 @@ export type Props = BlogEntry;
 
 const props = Astro.props;
 ---
-
-<article>
-  <li class="custom-list-item">
-    <a class="custom-link" href={getBlogPathName(props)}>
-        <div class="image-container">
+  <li class:list={[
+    'w-full rounded-md border border-gray-300 bg-white',
+    'scale-100 hover:scale-[1.02] active:scale-[0.97] motion-safe:transform-gpu',
+    'transition duration-100',
+    'motion-reduce:hover:scale-100',
+    'animate-shadow',
+  ]}>
+    <a class='block h-full rounded-md focus:outline-none focus-visible:ring focus-visible:ring-primary-300' href={getBlogPathName(props)}>
+        <div class='relative'>
           <Image 
-            class="image-banner"
             src={props.data.banner} 
-            alt="blog banner"             
+            alt='blog banner'             
            />
         </div>
-        <div class="content-container">
-            <h3 class="post-title">{props.data.title}</h3>
-            <div class="metadata">
-                <div class="metadata-item">
-                    <Icon name="ri:alarm-line"/>
+        <div class='p-4'>
+            <h4 class='text-black-800'>{props.data.title}</h4>
+            <div class='mt-2 flex items-center justify-start gap-2 text-sm font-medium text-gray-600'>
+                <div class='flex items-center gap-1'>
+                    <Icon name='ri:alarm-line'/>
                     <strong>{props.data.readCount}</strong>
                 </div>
-                <div class="metadata-item">
-                  <Icon name="ri:calendar-2-fill"/>
+                <div class='flex items-center gap-1'>
+                  <Icon name='ri:calendar-2-fill'/>
                   <strong>{formatDate(props.data.date)}</strong>
               </div>
             </div>
-            <p class="description">{props.data.description}</p>
+            <p class='text-md text-black-700'>{props.data.description}</p>
         </div>
     </a>
 </li>
-</article>
 
-<style>
 
-    .custom-list-item {
-        height: 100%;
-        width: 100%;
-        border: 1px solid #ccc;
-        background-color: #fff;
-        border-radius: 0.375em;
-        transition: transform 0.1s;
-    }
-
-    .custom-list-item:hover {
-        transform: scale(1.02);
-    }
-
-    .custom-list-item:active {
-        transform: scale(0.97);
-    }
-
-    .custom-link {
-        display: block;
-        height: 100%;
-        border-radius: 0.375em;
-        outline: none;
-        transition: box-shadow 0.3s;
-    }
-
-    .custom-link:focus-visible {
-        box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.5);
-    }
-
-    .image-container {
-        position: relative;
-    }
-
-    .image-banner {
-        border-top-left-radius: 0.375em;
-        border-top-right-radius: 0.375em;
-        pointer-events: none;
-        width: 100%;
-        height: 100%;
-        overflow: hidden;
-    }
-    .content-container {
-        margin: 1em;
-    }
-
-    .metadata {
-        margin-top: 0.5em;
-        display: flex;
-        gap: 1em;
-        font-size: 0.875rem;
-        font-weight: normal;
-        color: #6d7785;
-    }
-
-    .metadata-item {
-        display: flex;
-        align-items: center;
-        gap: 0.25em;
-    }
-
-    [data-icon] {
-        font-size: 1.5rem;
-    }
-
-    .date {
-        font-size: 0.875rem;
-        color: #4b5563;
-    }
-
-    .description {
-        font-size: 1rem;
-        color: #4b5563;
-    }
-
-</style>

@@ -3,6 +3,8 @@ import BaseLayout from "@layouts/BaseLayout.astro";
 import { getTitle } from "utils/title";
 import { Image } from "astro:assets";
 import { Icon } from "astro-icon/components"
+import Accent from "@components/Accent.astro";
+import CustomLink from "@components/CustomLink.astro";
 
 
 const techIcons = [
@@ -12,27 +14,27 @@ const techIcons = [
   },
   {
     icon: "skill-icons:flutter-light",
-    description: "Flutter, the development is just way faster."
+    description: "Flutter, the development is just way faster compared to Java/Kotlin"
   },
   {
-    icon: "skill-icons:androidstudio-light",
-    description: "Android Studio, best IDE to build Android apps."
-  },
-  {
-    icon: "skill-icons:vscode-light",
-    description: "VSCode, I love it for the many custom things we can do"
+    icon: "skill-icons:figma-light",
+    description: "I sometimes use Figma to visualize design ideas, and ensure a shared understanding of the user interface."
   },
   {
     icon: "skill-icons:typescript",
-    description: "TypeScript, just learned it & need to dive more into it"
+    description: "TypeScript, definitely a valuable choice beyond traditional JavaScript"
   },
   {
     icon: "skill-icons:react-light",
-    description: "React, my first-picked framework when learning web development"
+    description: "React, loved for its declarative approach and the abundance of resources available for learning"
   },
   {
-    icon: "skill-icons:github-dark",
-    description: "Github, just love the environment"
+    icon: "skill-icons:tailwindcss-light",
+    description: "Tailwind is a great css framework. Styling has never been easier, and there is so much flexibility we can achieve"
+  },
+  {
+    icon: "skill-icons:bash-light",
+    description: "I used Bash to create shortcut command"
   },
   {
     icon: "skill-icons:python-light",
@@ -42,117 +44,94 @@ const techIcons = [
 ]
 ---
 
-<BaseLayout title={getTitle("About")}>
-  <main>
-    <Image
-      src="/images/avatar.png"
-      alt="I Putu Bagus Merta Sentana"
-      width=128
-      height=128
-    />
-    <h1>About Me.</h1>
-    <p>
-      Hello there! My name is Bagus. I work as a Software Engineer and have a passion for 
-      experimenting with user interfaces and creating products that deliver exceptional user 
-      experiences. While my expertise lies in mobile development and front-end work, 
-      I also find joy in integrating various software components together.
-    </p>
-    <p>
-      Currently, I'm working as a Software Engineer (Flutter) at an early IT consulting company based in Singapore,
-      where I'm focused on building new and exciting apps after graduating.
-    </p>
-    <p>
-      Before that, I worked at a software house company in Bali for about a year.
-      I spent majority of my time there on enhancing existing legacy code and developing new features, 
-      particularly those associated with government projects.
-    </p>
+<BaseLayout title={getTitle('About')}>
+  <main class='layout'>
+    <section class='py-20'>
+      <Image
+        class='float-right rounded ml-6 w-40 md:w-72'
+        src='/images/avatar.png'
+        alt='I Putu Bagus Merta Sentana'
+        width=128
+        height=128
+      />
+      <h2 class='mt-1'><Accent text='About Me.'/></h2>
+      <p class='mt-4'>
+        Hello there! My name is Bagus. I work as a Software Engineer and have a passion for 
+        experimenting with user interfaces and creating products that deliver exceptional user 
+        experiences. While my expertise lies in mobile development and front-end work, 
+        I also find joy in integrating various software components together.
+      </p>
+      <p>
+        Currently, I'm working as a Software Engineer (Flutter) at a startup based in Singapore,
+        where I'm focused on building new and exciting apps after graduating.
+      </p>
+      <p>
+        Before that, I worked at a software consultant company in Bali for about a year.
+        I spent majority of my time there on enhancing existing legacy code and developing new features, 
+        particularly those associated with local businesses projects.
+      </p>
+    </section>
+   
+    <section>
+      <h2 class='mt-1'>Beginnings of my <Accent text='journey'/></h2>
+      <p class='mt-4'>
+        I'm born and grew up in Bali, Indonesia and I'm very grateful to have taken a very traditional route into the fields
+        of Software Engineering and Computer Science.
+      </p>
+      <p>
+        My journey with programming started at university. Although I faced some challenges and uncertainties during 
+        my first year, the onset of COVID-19 and the quarantine give me quite a lot of time to code.
+        This, greatly contributed to my improvement over the next few years.
+      </p>
+      <p>
+        During my college years, I was actively involved in the highly ambitious software engineering club called
+        <a href="https://sicudayana.com" target='_blank', class='cursor-newtab'>
+          <CustomLink text="SIC (Student Inovation Centre)" />
+        </a> 
+        , where I led a team of 8 people. We organized sharing sessions to discuss various 
+        technology and software engineering topics. I also took part in an immersive project where we 
+        collaborated to create a project from scratch. 
+      </p>
+      <p>
+        Additionally, I joined a startup called Inspix Technologies, working as a Product Manager to help launch their first MVP 
+        product, which was supported by the Ministry of Industry in Indonesia and based in Denpasar, Bali.
+      </p>
+      <p>
+        In my later years, I also joined the 
+        <a href="https://kampusmerdeka.kemdikbud.go.id/" target='_blank', class='cursor-newtab'>
+          <CustomLink text="Kampus Merdeka" />
+        </a> 
+        program (8 months intensives bootcamp held by Indonesian goverment), which sparked my passion for coding. I continued to
+        thrive and developed a strong love for coding, especially when it involves creating user interfaces
+      </p>
+    </section>
 
-    <h2>Beginnings of my journey</h2>
-    <p>
-      I'm born and grew up in Bali, Indonesia and I'm very grateful to have taken a very traditional route into the fields
-      of Software Engineering and Computer Science.
-    </p>
-    <p>
-      My journey with programming started at university. Although I faced some challenges and uncertainties during 
-      my first year, the onset of COVID-19 and the quarantine give me quite a lot of time to code.
-      This, greatly contributed to my improvement over the next few years.
-    </p>
-    <p>
-      During my college years, I was actively involved in the Coding Club called SIC, 
-      where I led a team of 8 people. We organized sharing sessions to discuss various 
-      technology and software engineering topics. I also took part in an immersive project where we 
-      collaborated to create a project from scratch. 
-    </p>
-    <p>
-      Additionally, I joined a startup called Inspix Technologies, working as a Product Manager to help launch their first MVP 
-      product, which was supported by the Ministry of Industry in Indonesia and based in Denpasar, Bali.
-    </p>
-    <p>
-      In my later years, I also joined the Kampus Merdeka program (8 months intensives bootcamp held by Indonesian goverment), which sparked my passion for coding. I continued to
-      thrive and developed a strong love for coding, especially when it involves creating user interfaces
-    </p>
-
-    <h2>Tech Stack</h2>
-    <ul class="list-icons">
-      {techIcons.map((icons) => {
-        return (
-          <li 
-            class="tech-icons"
-            data-tooltip-interactive="false"
-            data-tooltip-placement="bottom"
-            title={icons.description}>
-            <Icon 
-              name={icons.icon} 
-            />
-          </li>
-        );
-      })}
+    <section>
+    <h2 class='mt-4'><Accent text='Tech'/> Stack</h2>
+      <ul class='mt-4 flex flex-wrap gap-2'>
+        {techIcons.map((icons) => {
+          return (
+            <li 
+              data-tooltip-interactive='false'
+              data-tooltip-placement='bottom'
+              title={icons.description}>
+              <Icon 
+                class='text-6xl'
+                name={icons.icon} 
+              />
+            </li>
+          );
+        })}
     </ul>
-     
+    </section>
 
-    <h2>Random stuffs ✨</h2>
-    <p>
-      I'm a bit of a nerd—I mean, I love watching anime while also writing code in weekend.
-      I'm also a big fan of Roman Ancient and Greek history.
-    </p>
-    <p>
-      Most of my time is spent thinking ways to level up in life, whether it's building better habits, learning new stuff, 
-      hitting the gym, or just taking care of my mental well-being. Also sleep a lot.🌝
-    </p>
+    <section>
+      <h2 class='mt-10'>Contact ✨</h2>
+      <p class='mt-4'>
+        Feel free to reach out if you require insights on web & app development, 
+        particularly frontend projects. I'll be happy to help. 
+        You can locate my contact information in the footer.
+      </p>
+    </section>
   </main>
 </BaseLayout>
-
-<style>
-  main {
-    margin: 0;
-    padding: 0 1rem 1rem 0;
-  }
-  img {
-    border-radius: 14px;
-  }
-
-  .list-icons {
-    padding: 0;
-    list-style: none;
-    display: flex;
-  }
-  .tech-icons {
-    margin-left: 0.5em;
-    transition: transform 0.3s;
-  }
-
-  .tech-icons:hover {
-    transform: scale(1.1);
-  }
-
-  [data-icon] {
-    font-size: 4em;
-    color: var(--brand-color);
-  }
-
-  @media (max-width: 600px){
-    [data-icon] {
-      font-size: 2em;
-    }
-  }
-</style>

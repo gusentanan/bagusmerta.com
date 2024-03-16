@@ -1,4 +1,5 @@
 ---
+import Accent from "@components/Accent.astro";
 import PostEntryItem from "@components/ProjectEntryItem.astro";
 import BaseLayout from "@layouts/BaseLayout.astro";
 import { getProjectCollection } from "utils/content";
@@ -7,27 +8,16 @@ import { getTitle } from "utils/title";
 const allProject = await getProjectCollection();
 ---
 
-<BaseLayout title={getTitle("Projects")}>
+<BaseLayout title={getTitle('Projects')}>
   <main>
-    <div>
-      <h1>Projects.</h1>
-      <p>Things I've created in my spare time, often built out of curiosity or while trying something new.</p>
-      <ul class="project-grid">
+    <div class='layout py-12'>
+      <h2 class='text-3xl md:text-4xl'>
+          <Accent text='Projects.'/>
+      </h2>
+      <p class='mt-2 text-black-600'>Things I've created in my spare time, often built out of curiosity or while trying something new.</p>
+      <ul class='mt-6 grid gap-4 sm:grid-cols-2 xl:grid-cols-3'>
         {allProject.map((projects) => <PostEntryItem {...projects} />)}
       </ul>
     </div>
   </main>
 </BaseLayout>
-
-<style>
-  .project-grid {
-    padding: 0;
-    list-style: none;
-    display: grid;
-    gap: 1em;
-    margin-top: 3em;
-    margin-bottom: 10em;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  }
-
-</style>

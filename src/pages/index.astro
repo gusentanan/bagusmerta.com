@@ -1,6 +1,9 @@
 ---
 import BlogEntryItem from "@components/BlogEntryItem.astro";
 import ProjectEntryItem from "@components/ProjectEntryItem.astro";
+import Accent from "@components/Accent.astro";
+import CustomLink from "@components/CustomLink.astro";
+import Button from "@components/Button.astro";
 import BaseLayout from "@layouts/BaseLayout.astro";
 import { getBlogCollection, getProjectCollection } from "utils/content";
 import { getTitle } from "utils/title";
@@ -12,185 +15,109 @@ const allProject = await getProjectCollection();
 
 ---
 
-<BaseLayout title={getTitle("Home")}>
+<BaseLayout title={getTitle('Home')}>
   <main>
-    <div>
-      <div class="intro">
-        <h1>👋🏻 Hello! you can call me <span class="inverted">Bagus</span></h1>
-        <h2>I'm a software engineer from Indonesia who's passionate about 
-          <span class="inverted">Mobile</span>
-          and 
-          <span class="inverted">Front-end</span>
-          development.
-        </h2>
-        <div class="socials-section">
-          <div 
-            class="social-item"
-            data-tooltip-interactive="false"
-            data-tooltip-placement="bottom"
-            title="My Github username">
-              <Icon name="ri:github-fill"/>
-              <strong>gusentanan</strong>
+    <section class='min-h-main -mt-20 mb-20 flex flex-col justify-center'>
+      <article class='layout'>
+          <h2 class='mt-4 text-xl md:text-4xl 2xl:text-5xl'>
+            👋🏻 Hello! you can call me 
+            <Accent text='Bagus'/> 
+          </h2>
+          <h4 class='mt-4 text-l md:text-3xl 2xl:text-4xl'>I'm a software engineer from Indonesia who's passionate about 
+            <Accent text='Mobile'/>
+            and 
+            <Accent text='Front-end'/>
+            development.
+          </h4>
+          <div class='mt-4 flex flex-wrap gap-4 gap-y-2 md:mt-4'>
+            <a 
+              class:list={[
+                'inline-flex items-center gap-1 text-md font-medium md:text-base',
+                'cursor-newtab'
+              ]}
+              target='_blank'
+              href='https://github.com/gusentanan'>
+                <Icon name='ri:github-fill'/>
+                <h4>
+                  <CustomLink text='gusentanan' />
+                </h4>
+            </a>
+            <a 
+              class:list={[
+                'inline-flex items-center gap-1 text-md font-medium md:text-base',
+                'cursor-newtab'
+              ]}
+              target='_blank'
+              href='https://linkedin.com/in/bagusmerta'>
+                <Icon name='ri:linkedin-box-fill'/>
+                <h4>
+                  <CustomLink text='bagusmerta' />
+                </h4>
+            </a>
+            <a 
+              class:list={[
+                'inline-flex items-center gap-1 text-md font-medium md:text-base',
+                'cursor-newtab'
+              ]}
+              target='_blank'
+              href='https://twitter.com/@bagusmertasntn'>
+                <Icon name='ri:twitter-x-fill'/>
+                <h4>
+                  <CustomLink text='@bagusmertasntn' />
+                </h4>
+            </a>
           </div>
-          <div 
-            class="social-item"   
-            data-tooltip-interactive="false"
-            data-tooltip-placement="bottom"
-            title="My LinkedIn user ID">
-              <Icon name="ri:linkedin-box-fill"/>
-              <strong>bagusmerta</strong>
+          <div class='mt-8 flex flex-wrap gap-4 md:!text-lg'>
+              <Button textButton='More about me →' link={"/about/"} />
+              <Button textButton='Read blog →' link={"/blog/"} />
+          </div>
 
-          </div>
-          <div 
-            class="social-item"
-            data-tooltip-interactive="false"
-            data-tooltip-placement="bottom"
-            title="My X (formerly Twitter) username">
-              <Icon name="ri:twitter-x-fill"/>
-              <strong>@bagusmertasntn</strong>
-          </div>
+      </article>   
+    </section>
+
+    <section class='py-20'>
+      <article class='layout flex flex-col-reverse items-center md:flex-row md:justify-start'>
+        <div class='mt-8 h-full w-full md:mt-0'>
+            <h2 class='text-2xl md:text-4xl'>
+              List of <Accent text='Blog'/> and Short Articles
+            </h2>
+            <p class='mt-2 text-base text-gray-800 md:text-lg'>
+              A compilation of my writings inspired by many other writers. It usually comes from my personal notes.
+            </p>
+
+            <Button textButton='See More Articles →' link={"/blog/"} />
+
+        </div>  
+        <div class='h-full w-full'>
+          <ul class='relative h-full'>
+            {[allBlogPosts.slice(0, 1).map(blog => <BlogEntryItem {...blog} />)]}
+          </ul>
         </div>
-        <a class="link-button" href={"/about/"}>More about me →</a>
-      </div>
-      <div class="article-section">
-        <div class="article-intro">
-          <h1>
-            List of Blog and Short Articles
-          </h1>
-          <p>
-            A compilation of my writings inspired by many other writers. It usually comes from my personal notes.
-          </p>
-          <a class="link-button" href={"/blog/"}>See More Articles →</a>
-        </div>
-       
-        <ul class="article-list">
-          {[allBlogPosts.slice(0, 1).map(blog => <BlogEntryItem {...blog} />)]}
-        </ul>
-        
-      </div>
-      <div class="project-section">
-        <div class="project-intro">
-          <h1>
-            Personal Projects
-          </h1>
-          <p>
+      </article>
+    </section>
+    
+    <section class='py-20'>
+      <article class='layout'>
+          <h2 class='text-2xl md:text-4xl'>
+            Personal <Accent text='Projects'/>
+          </h2>
+          <p class='mt-2 text-base text-gray-800 md:text-lg'>
             Some projects that I've created & I'm proud of it
           </p>
-        </div>
-        <ul class="project-list">
+        
+        <ul class='mt-4 grid gap-4 sm:grid-cols-2 xl:grid-cols-3'>
           {[allProject.slice(0, 3).map(project => <ProjectEntryItem {...project} />)]}
         </ul>
-        <div class="link-wrapper">
-          <a class="link-button" href={"/projects/"}>See More Projects →</a>
-        </div>
-      </div>
+        
+        <Button textButton='See More Projects →' link={"/projects/"} />
+       
+      </article>
+    </section>
+
+        
+      </article>
       
-    </div>
+    </section>
 
   </main>
 </BaseLayout>
-
-<style>
-  main  {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-   
-  }
-
-  .intro {
-    display: flex;
-    flex-direction: column;
-    align-items: start;
-    justify-content: start;
-    margin-top: 10vh;
-    margin-bottom: 10vh;
-    min-width: min(400px, 100%);
-    min-height: 65vh;
-  }
-
-  .article-section {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: start;
-    margin-bottom: 10vh;
-  }
-
-  .article-list {
-    display: flex;
-    list-style: none;
-    width: 40em;
-  }
-
-  .project-section {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 10vh;
-  }
-
-  .project-list {
-    display: grid;
-    padding: 0;
-    gap: 1em;
-    list-style: none;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  }
-
-  .socials-section {
-    display: flex;
-    gap: 1rem;
-    font-size: 1.2rem;
-    font-weight: normal;
-    color: #6d7785;
-    margin-bottom: 4em;
-  }
-
-  .social-item {
-    display: flex;
-    align-items: center;
-    gap: 0.25rem;
-    transition: transform 0.3s;
-  }
-
-  .social-item:hover {
-    color: black;
-    transform: scale(1.1);
-  }
-  
-  .link-button {
-    display: inline-block;
-    padding: 0.5rem 1rem;
-    text-decoration: none;
-    font-weight: bold;
-    border: 2px solid #6d7785;
-    border-radius: 4px;
-    transition: transform 0.3s, border-color 0.3s;
-  }
-
-  .link-button:hover {
-    transform: scale(1.1);
-    border-color: #6d7785;
-  }
-
-  @media (max-width: 600px){
-    .article-section {
-      display: flex;
-      flex-direction: column;
-      align-items: start;
-    }
-
-    .article-list {
-      padding: 0;
-      width: 100%;
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-
-    }
-
-    .socials-section {
-      flex-direction: column;
-    }
-  }
-
-</style>

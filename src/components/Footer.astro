@@ -3,74 +3,48 @@ const links = [
   {
     title: "Twitter",
     url: "https://twitter.com/@bagusmertasntn",
+    tippy: "I sometimes repost or like tech-related posts ✍️"
   },
   {
     title: "GitHub",
     url: "https://github.com/gusentanan",
+    tippy: "See my projects on Github 📝"
   },
   {
     title: "LinkedIn",
     url: "https://linkedin.com/in/bagusmerta",
+    tippy: "You can find me on LinkedIn 🔍"
   },
   {
     title: "RSS",
     url: "https://gusentanan.github.io/rss.xml",
+    tippy: "Add me to your feeds 🙏"
   }
 ];
 
 ---
-
-<footer>
-  <hr class="divider-dashed" />
-  <div>
-    <div class="copyright">
-      {new Date().getFullYear()} &copy; I Putu Bagus Merta Sentana. Made with🩸 Product of Indonesia.
-    </div>
-    <div class="links">
-      <h4>Links</h4>
-      {links.map(({ title, url }) => <a href={url}  target="_blank" class="link">{title}</a>)}
+<footer class='bottom-0 transition-shadow'>
+  <div class='mt-4 pb-2'>
+    <div class='layout flex flex-col items-center border-t pt-6'>
+      <div class='flex flex-wrap justify-center gap-x-8 gap-y-4'>
+        {links.map(({ title, url, tippy }) => 
+          <a 
+            href={url}  
+            target='_blank' 
+            data-tooltip-interactive='false'
+            data-tooltip-placement='top'
+            title={tippy}
+            class:list={[
+              'animated-underline rounded-sm text-md font-medium focus:outline-none focus-visible:ring focus-visible:ring-primary-300',
+              'cursor-newtab'
+            ]}>
+            {title}
+          </a>
+        )}
+      </div>
+      <p class='mt-4 text-md text-black-600'>
+        {new Date().getFullYear()} &copy; I Putu Bagus Merta Sentana •  Made with🩸Product of Indonesia.
+      </p>
     </div>
   </div>
 </footer>
-
-<style>
-  footer {
-    padding: 1em 0;
-  }
-  footer > div {
-    display: flex;
-    flex-wrap: wrap-reverse;
-    align-items: flex-start;
-    gap: 1em;
-    padding: 1em 0;
-  }
-  .divider-dashed {
-    border-top: 2px dashed #bbb;
-  }
-  .copyright {
-    flex-grow: 2;
-    min-width: min(100%, 25em);
-  }
-  .links {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 0.5em;
-    text-align: center;
-    align-items: center;
-    min-width: min(100%, 10em);
-    margin-bottom: 1em;
-  }
-  .links > h4 {
-    margin-top: 0em;
-    margin-bottom: 0.75em;
-  }
-  @media (max-width: 600px){
-    .links {
-      display: flex;
-      flex-direction: column;
-      align-items: start;
-    }
-  }
-
-</style>
