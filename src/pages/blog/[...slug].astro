@@ -5,6 +5,8 @@ import { Image } from "astro:assets";
 import { getCollection } from "astro:content";
 import { formatDate } from "utils/time";
 import { Icon } from "astro-icon/components"
+import Comments from "@components/Comments.astro";
+
 
 export async function getStaticPaths() {
   const blogEntries = await getCollection('blog');
@@ -47,6 +49,7 @@ const { Content } = await entry.render();
         <article class='mt-4'>
           <Content />
         </article>
+        <Comments />
         <LatestPosts id={entry.data.id} />
 
       </div>

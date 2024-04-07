@@ -10,7 +10,6 @@ export default {
 		extend: {
 			fontFamily: {
 				primary: ['AlbertSans', ...fontFamily.sans],
-				display: ['Lora', ...fontFamily.sans],
 				code: ['JetBrainsMono', ...fontFamily.sans],
 			  },
 			  colors: {

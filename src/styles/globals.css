@@ -24,23 +24,12 @@
 }
 
 @layer base {
-  /* inter var - latin */
   @font-face {
     font-family: "AlbertSans";
     font-style: normal;
     font-weight: 100 900;
     font-display: optional;
     src: url("/fonts/AlbertSans-Regular.woff2") format("woff2");
-    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
-      U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212,
-      U+2215, U+FEFF, U+FFFD;
-  }
-  @font-face {
-    font-family: "Lora";
-    font-style: normal;
-    font-weight: 100 900;
-    font-display: optional;
-    src: url("/fonts/Lora-Regular.woff2") format("woff2");
     unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
       U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212,
       U+2215, U+FEFF, U+FFFD;
@@ -79,12 +68,12 @@
 
   h1,
   .h1 {
-    @apply font-display text-2xl font-extrabold md:text-4xl;
+    @apply font-primary text-2xl font-extrabold md:text-4xl;
   }
 
   h2,
   .h2 {
-    @apply font-display text-xl font-extrabold md:text-3xl;
+    @apply font-primary text-xl font-extrabold md:text-3xl;
   }
 
   h3,
@@ -97,6 +86,26 @@
     @apply font-primary text-base font-bold md:text-lg;
   }
 
+  code,
+  .code {
+    @apply font-code text-sm font-normal;
+  }
+
+  blockquote,
+  .blockquote {
+    @apply m-0 p-4 border-l-4 border-blue-500;
+  }
+
+  blockquote,
+  .p {
+    @apply font-primary text-lg font-bold text-black leading-normal;
+  }
+
+  pre,
+  .pre {
+    @apply my-4 p-6 rounded-lg;
+  }
+
   img {
     border-radius: 4px;
   }
@@ -104,32 +113,6 @@
   /* workaround for image inside mdx */
   img[alt="blog-content"] {
     padding: 1em 0;
-  }
-
-  pre {
-    margin: 1em 0;
-    padding: 1.5em;
-    border-radius: 4px;
-  }
-
-  code {
-    font-family: "JetBrainsMono", monospace;
-    line-height: 1.25em;
-    font-size: 0.875rem;
-  }
-
-  blockquote {
-    margin: 0;
-    padding: 1em;
-    border-left: 4px solid rgb(75, 147, 248);
-  }
-
-  blockquote p {
-    font-size: 1.25rem;
-    font-style: bold;
-    display: inline;
-    color: #000;
-    line-height: 1em;
   }
 
   body,
