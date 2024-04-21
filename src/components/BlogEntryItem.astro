@@ -22,6 +22,13 @@ const props = Astro.props;
             src={props.data.banner} 
             alt='blog banner'             
            />
+           <div class="absolute top-2 left-2 z-10">
+            <div class="flex gap-2">
+                {props.data.tags.map((type) => (
+                    <div class="rounded-md bg-white text-gray-800 px-2 py-1 text-sm">{type}</div>
+                ))}
+            </div>
+        </div>
         </div>
         <div class='p-4'>
             <h4 class='text-black-800'>{props.data.title}</h4>
