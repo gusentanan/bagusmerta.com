@@ -9,7 +9,7 @@ import tailwind from "@astrojs/tailwind";
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://gusentanan.github.io',
+  site: 'http://bagusmerta.com',
   output: "static",
   // cc: https://docs.astro.build/en/reference/configuration-reference/#output
   integrations: [markdoc(), react(), icon(), tailwind()]
