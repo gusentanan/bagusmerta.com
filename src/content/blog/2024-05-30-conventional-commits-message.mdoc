@@ -1,0 +1,72 @@
+---
+id: 5
+title: "Better way to write Commit Messages"
+description: "Git conventional commit messages"
+date: 2024-05-30
+slug: "better-way-to-write-git-commit-messages"
+banner: "./images/blog-5/better-way-to-write-git-commit-messages.jpg"
+readCount: "5 min read"
+tags: [ "Tech" ]
+---
+
+When working with a team, or even if you expect others to read your code, it's important to ensure that what you deliver is easy to understand. Often, when working alone on our repository, we might commit messages that seem appropriate at the moment. And that's fine. However, imagine needing to revisit a specific commit to find the exact cause of a bug or other important issues. If your commit message is clear, you won't need to spend so much time searching for it, right?
+
+This way of communicating through commit messages helps convey the intention behind the code changes. Everyone has their own style of writing commit messages; there's no one-size-fits-all solution. However, understanding what makes a good commit message can make you a better developer in the future.
+
+## Conventional Commit 
+The solution is to follow Conventional Commits.
+
+Conventional Commits provide a set of rules or guidelines to help us write semantic messages better.
+
+Based on Conventional Commits, your message should be structured as follows:
+
+```bash
+<type>[optional-scope]: <description>
+
+# `type` is the type of change you made in your commit.
+# `optional-scope` is the scope that your changes affect.
+# `description` describes what was done.
+```
+
+
+If you have more to say:
+
+```bash
+<type>[optional-scope]: <description>
+[optional-body]
+[optional-footer]
+```
+
+For example:
+
+```bash
+feat(shop): add product card
+```
+
+A longer example:
+
+```bash
+feat(payment): notify user upon successful purchase
+Implement functionality to send a push notification to users when a product is successfully purchased. 
+Includes unit tests and acceptance tests to ensure proper functionality.
+Refs: #123
+```
+
+---
+### Types
+There are various types to differentiate the changes you make in your code:
+```markdown
+- feat → Changes related to adding or removing a feature.
+- fix → Bug fixes (state the issue that you solved).
+- docs → Documentation updates (e.g., README.md).
+- style → Code style updates that don't change logic (e.g., optimizing imports, fixing whitespace).
+- chore → Dependency management (e.g., installing or updating dependencies).
+- refactor → Code changes that don't alter the external behavior but improve the internal structure.
+- ci → Changes to CI configuration or scripts.
+- test → Adding or updating tests.
+- revert → Reverting a previous commit.
+- codemagic → Blank commit to trigger deployment (e.g., `codemagic: trigger deployment`).
+```
+
+## Conclusion
+What's important here is how you write the description. Make sure you fully explain what is being done. Use imperative and present tense—"change" not "changes" or "changed." Also, don't use capitals at the beginning of the sentence and don't add a full stop (.) at the end.
