@@ -39,16 +39,15 @@ If you have more to say:
 
 For example:
 
-```bash
+```markdown
 feat(shop): add product card
 ```
 
 A longer example:
 
-```bash
+```markdown
 feat(payment): notify user upon successful purchase
 Implement functionality to send a push notification to users when a product is successfully purchased. 
-Includes unit tests and acceptance tests to ensure proper functionality.
 Refs: #123
 ```
 
@@ -57,16 +56,26 @@ Refs: #123
 There are various types to differentiate the changes you make in your code:
 ```markdown
 - feat → Changes related to adding or removing a feature.
+
 - fix → Bug fixes (state the issue that you solved).
+
 - docs → Documentation updates (e.g., README.md).
+
 - style → Code style updates that don't change logic (e.g., optimizing imports, fixing whitespace).
+
 - chore → Dependency management (e.g., installing or updating dependencies).
+
 - refactor → Code changes that don't alter the external behavior but improve the internal structure.
+
 - ci → Changes to CI configuration or scripts.
+
 - test → Adding or updating tests.
+
 - revert → Reverting a previous commit.
+
 - codemagic → Blank commit to trigger deployment (e.g., `codemagic: trigger deployment`).
 ```
 
 ## Conclusion
-What's important here is how you write the description. Make sure you fully explain what is being done. Use imperative and present tense—"change" not "changes" or "changed." Also, don't use capitals at the beginning of the sentence and don't add a full stop (.) at the end.
+What's important here is how you write the description. 
+Make sure you fully explain what is being done. Use imperative and present tense. Also, don't use capitals at the beginning of the sentence and don't add a full stop (.) at the end.
