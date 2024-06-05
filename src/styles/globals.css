@@ -86,23 +86,19 @@
     @apply font-primary text-base font-normal md:text-lg;
   }
 
-  code,
-  .code {
+  code {
     @apply font-code text-sm font-normal;
   }
 
-  blockquote,
-  .blockquote {
+  blockquote {
     @apply m-0 p-4 border-l-4 border-blue-500;
   }
 
-  blockquote,
-  .p {
+  blockquote {
     @apply font-primary text-lg font-normal text-black leading-normal;
   }
 
-  pre,
-  .pre {
+  pre {
     @apply my-4 p-6 rounded-lg;
   }
 
