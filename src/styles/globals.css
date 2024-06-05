@@ -86,15 +86,12 @@
     @apply font-primary text-base font-normal md:text-lg;
   }
 
-  code {
-    @apply font-code text-sm font-normal;
-  }
-
   blockquote {
     @apply m-0 p-4 border-l-4 border-blue-500;
   }
 
-  p {
+  blockquote,
+  .p {
     @apply font-primary text-lg font-normal text-black leading-normal;
   }
 
