@@ -94,7 +94,7 @@
     @apply m-0 p-4 border-l-4 border-blue-500;
   }
 
-  blockquote {
+  p {
     @apply font-primary text-lg font-normal text-black leading-normal;
   }
 
