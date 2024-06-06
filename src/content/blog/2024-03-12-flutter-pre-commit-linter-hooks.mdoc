@@ -16,13 +16,13 @@ One way to tackle this problem is to set a pre-commit hooks on our Repository. L
 This package is actually built on top of the Dart analyzer, which statically checks Dart code. So alternatively, we can analyze our code manually using the `flutter analyze` command. 
 But that means we have to manually write the command every time we make changes, right? Rest assured, in this blog, I will show you a way to make it easier.
 
-## Pre-requisites
+### Pre-requisites
 #### 1. You'll need a Flutter project with the latest versions of Flutter and Dart
 #### 2. Make sure you have `pip` installed if you're using windows otherwise you can use `brew`
 
 > `pip` is a package manager similar to `npm` for Python environment.
 
-## Installation
+### Installation
 If you haven't already installed pre-commit, you can do so by following the instructions on the Pre-commit website. For most users, installing via Homebrew or pip is recommended.
 ```bash
 brew install pre-commit  # For macOS
@@ -96,7 +96,8 @@ analyzer:
 ```
 > You can see the whole example of `analysis_options.yaml` from the official Flutter project repository itself.
 
-## Trigger the pre-commit linter hooks
+### Trigger the pre-commit linter hooks
+
 Now that everything is set up, try making changes to your Flutter project, especially inside the `lib` directory, and then commit your changes.
 ```bash
   git add .
@@ -106,7 +107,7 @@ Then, let the pre-commit linter work. It will give a green label if our commit i
 will show you the code that needs to be changed based on the rules set in the `analysis_options.yaml` file. After that, we need to re-commit our changes.
 ![blog-content](./images/blog-4/img-content/result.png)
 
-## Conclusion
+### Conclusion
 Setting up pre-commit hooks can be a real game-changer for your team. 
 It's like having a helpful assistant that keeps your code clean and your development process smooth, even in the midst of fast-paced development. 
 Thanks for reading, happy coding :)

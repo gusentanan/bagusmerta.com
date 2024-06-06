@@ -3,7 +3,7 @@ import { getBlogCollection } from "utils/content";
 import BlogEntryItem from "./BlogEntryItem.astro";
 import Accent from "./Accent.astro";
 
-const blogEntries = (await getBlogCollection()).slice(0, 5);
+const blogEntries = (await getBlogCollection()).slice(0, 3);
 const { id  } = Astro.props;
 ---
 <div class='mt-10'>

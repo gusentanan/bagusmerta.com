@@ -76,14 +76,17 @@
     @apply font-primary text-xl font-normal md:text-3xl;
   }
 
-  h3,
-  .h3 {
-    @apply font-primary text-lg font-normal md:text-2xl;
+  h3 {
+    @apply font-primary text-lg font-bold md:text-2xl;
   }
 
   h4,
   .h4 {
     @apply font-primary text-base font-normal md:text-lg;
+  }
+
+  code {
+    @apply font-code text-sm;
   }
 
   blockquote {
