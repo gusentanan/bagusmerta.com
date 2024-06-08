@@ -48,7 +48,7 @@ const techIcons = [
   <main class='layout'>
     <section class='py-20'>
       <Image
-        class='float-right rounded ml-2 mb-2 w-40 md:w-72'
+        class='float-right rounded-lg ml-4 mb-2 w-40 md:w-72'
         src='/images/avatar.png'
         alt='I Putu Bagus Merta Sentana'
         width=128
@@ -56,31 +56,30 @@ const techIcons = [
       />
       <h2 class='mt-1'><Accent text='About Me.'/></h2>
       <p class='mt-4'>
-        Hello there! My name is Bagus. I work as a Software Engineer and have a passion for 
+        Hello there! welcome to my website.
+      </p>
+      <p class='mt-4'>
+        My name is Bagus.
+        I work as a Software Engineer and have a passion for 
         experimenting with user interfaces and creating products that deliver exceptional user 
         experiences. While my expertise lies in mobile development and front-end work, 
         I also find joy in integrating various software components together.
       </p>
-      <p>
+      <p class='mt-4'>
         Currently, I'm working as a Software Engineer for mobile platform at a startup based in Singapore.
       </p>
-      <p>
-        Before that, I worked at a software development company in Bali for about a year.
-        I spent majority of my time there on enhancing existing legacy code and developing new features, 
-        particularly those associated with local businesses projects.
-      </p>
+
     </section>
    
     <section>
-      <h2 class='mt-1'>Beginnings of my <Accent text='journey'/></h2>
+      <h2 class='mt-1'>My <Accent text='Background'/></h2>
       <p class='mt-4'>
         I'm born and grew up in Bali, Indonesia and I'm very grateful to have taken a very traditional route into the fields
         of Software Engineering and Computer Science.
       </p>
       <p>
-        My journey with programming started at university. Although I faced some challenges and uncertainties during 
-        my first year, the onset of COVID-19 and the quarantine give me quite a lot of time to code.
-        This, greatly contributed to my improvement over the next few years.
+        My journey with programming started at Udayana University. Although I faced some challenges and uncertainties during 
+        my first year, the onset of COVID-19 and the quarantine give me quite a lot of time to learn software engineering.
       </p>
       <p>
         During my college years, I was actively involved in the highly ambitious informatics club called
@@ -100,13 +99,23 @@ const techIcons = [
         <a href="https://kampusmerdeka.kemdikbud.go.id/" target='_blank', class='cursor-newtab'>
           <CustomLink text="Kampus Merdeka" />
         </a> 
-        program (8 months intensives bootcamp held by Indonesian goverment), which sparked my passion for coding. I continued to
-        thrive and developed a strong love for coding, especially when it involves creating user interfaces
+        program (8 months intensives bootcamp), This experience set a strong foundation in software engineering for me, which helped me a lot in the next several years. 
       </p>
     </section>
 
     <section>
-    <h2 class='mt-4'><Accent text='Tech'/> Stack</h2>
+      <h2 class='mt-8'><Accent text='Education'/></h2>
+      <div class='flex items-center space-x-4'>
+        <h3 class='mt-2'>Bachelor of Comp. Science</h3>
+        <h3 class='mt-2'>2019—2023</h3>
+      </div>
+      <h4 class='mt-4'>Universitas Udayana</h4>
+      <h4>Bachelor Degree of Computer Science,</h4>
+
+    </section>
+
+    <section>
+    <h2 class='mt-8'><Accent text='Tech'/> Stack</h2>
       <ul class='mt-4 flex flex-wrap gap-2'>
         {techIcons.map((icons) => {
           return (

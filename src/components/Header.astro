@@ -34,15 +34,20 @@ const pathname = getPathNameWithoutLocale(Astro.request.url);
         </a>
         <ul class='flex items-center justify-between space-x-3 text-xs md:space-x-4 md:text-base'>
           {
-            LINKS.map(({ href, label }) => (    
-              <a href={href} aria-current={href.toLowerCase() === pathname.toLowerCase() ? 'page' : undefined}
-              class:list={[
-                'rounded-sm py-2 transition-colors',
-                'font-medium text-black',
-                'focus:outline-none focus-visible:ring focus-visible:ring-primary-300'
-              ]}>
-                {label}
-              </a>
+            LINKS.map(({ href, label }) => (
+              <li>
+                <a href={href}>
+                  <span
+                  class:list={[
+                    'animated-underline custom-link inline-flex items-center font-medium',
+                    'focus:outline-none focus-visible:ring focus-visible:ring-primary-300',
+                    {'!bg-primary-300/50': href.toLowerCase() === pathname.toLowerCase()}
+                  ]}
+                  >
+                    {label}
+                  </span>
+                </a>
+              </li>
             ))
           }
         </ul>
@@ -50,4 +55,3 @@ const pathname = getPathNameWithoutLocale(Astro.request.url);
     </div>
   </div>
 </header>
-

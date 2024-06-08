@@ -16,7 +16,7 @@ const allBlogPosts = await getBlogCollection();
           <Accent text='Blog.'/>
         </h2>
         <p class='mt-2 text-black-600'>
-          A collection of articles that includes tutorials, tips, and my thoughts.
+          A collection of blog that includes my thoughtful reflections on programming, personal development, and my thoughts.
         </p>
         <ul class='mt-4 grid gap-4 sm:grid-cols-2 xl:grid-cols-3'>
           {allBlogPosts.map((blog) => <BlogEntryItem {...blog} />)}
