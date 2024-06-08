@@ -14,44 +14,40 @@ const LINKS: NavLink[] = [
   // { href: "/experience", label: "Experience" },
 ];
 
-// omit the locale prefix if exists
+// Omit the locale prefix if it exists
 const pathname = getPathNameWithoutLocale(Astro.request.url);
 ---
 
 <header class='sticky top-0 z-50 transition-shadow'>
   <div class='h-1 bg-gradient-to-r from-primary-200 via-primary-300 to-primary-500' />
-    <div class='bg-white transition-colors'>
-      <nav class='layout flex items-center justify-between py-4'>
-        <a href='/'>
-          <picture>
-            <img
-              src='/images/logo.svg'
-              alt='bagusmerta.com logo'
-              width='122'
-              height='122'
-            />
-          </picture>
-        </a>
-        <ul class='flex items-center justify-between space-x-3 text-xs md:space-x-4 md:text-base'>
-          {
-            LINKS.map(({ href, label }) => (
-              <li>
-                <a href={href}>
-                  <span
-                  class:list={[
-                    'animated-underline custom-link inline-flex items-center font-medium',
-                    'focus:outline-none focus-visible:ring focus-visible:ring-primary-300',
-                    {'!bg-primary-300/50': href.toLowerCase() === pathname.toLowerCase()}
-                  ]}
-                  >
-                    {label}
-                  </span>
-                </a>
-              </li>
-            ))
-          }
-        </ul>
-      </nav>
-    </div>
+  <div class='bg-white transition-colors'>
+    <nav class='layout flex items-center justify-between py-4'>
+      <a href='/'>
+        <picture>
+          <img
+            src='/images/logo.svg'
+            alt='bagusmerta.com logo'
+            width='122'
+            height='122'
+          />
+        </picture>
+      </a>
+      <ul class='flex items-center justify-between space-x-3 text-xs md:space-x-4 md:text-base'>
+        {LINKS.map(({ href, label }) => {
+          const isActive = href.toLowerCase() === pathname.toLowerCase();
+          return (
+            <li>
+              <a href={href}>
+                <span
+                  class={`animated-underline custom-link inline-flex items-center font-medium focus:outline-none focus-visible:ring focus-visible:ring-primary-300 ${isActive ? '!bg-primary-300/50' : ''}`}
+                >
+                  {label}
+                </span>
+              </a>
+            </li>
+          );
+        })}
+      </ul>
+    </nav>
   </div>
 </header>
