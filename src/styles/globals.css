@@ -77,7 +77,7 @@
   }
 
   h3 {
-    @apply font-primary text-lg font-bold md:text-2xl;
+    @apply font-primary text-lg font-normal md:text-2xl;
   }
 
   h4,
