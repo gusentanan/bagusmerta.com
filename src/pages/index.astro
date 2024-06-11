@@ -19,10 +19,25 @@ const allProject = await getProjectCollection();
   <main>
     <section class='relative isolate min-h-main -mt-20 mb-20 flex flex-col justify-center'>
       <article class='layout'>
-          <h1 class='mt-4 text-xl md:text-4xl 2xl:text-5xl'>
-            👋🏻 Hello! you can call me 
-            <Accent text='Bagus'/> 
+          <h1 class='mt-4 text-2xl md:text-4xl 2xl:text-5xl'>
+            👋🏻 
+            <span class="inline-flex flex-col h-[calc(theme(fontSize.3xl)*theme(lineHeight.tight))] md:h-[calc(theme(fontSize.4xl)*theme(lineHeight.tight))] overflow-hidden">
+              <ul class="block animate-text-slide text-left [&_li]:block">
+                <li>Hello!</li>
+                <li>Halo</li>
+                <li>Ciao</li>
+                <li>Namaste</li>
+                <li>こんにちは</li>
+                <li>Γειά σου</li>
+                <li aria-hidden="true">Hello!</li>
+              </ul>
+            </span>
           </h1>
+          
+          <h2 class='mt-4 text-xl md:text-4xl 2xl:text-5xl'>  
+            you can call me 
+            <Accent text='Bagus'/> 
+          </h2>
           <h4 class='mt-4 text-l md:text-3xl 2xl:text-4xl'>I'm a software engineer from Indonesia who's passionate about 
             <Accent text='Mobile'/>
             and 

@@ -77,7 +77,7 @@
   }
 
   h3 {
-    @apply font-primary text-lg font-normal md:text-2xl;
+    @apply font-primary text-lg font-normal mt-2 mb-2 bg-gradient-to-tr from-primary-300/40 via-primary-300/40 to-primary-400/40 md:text-2xl inline-block;
   }
 
   h4,
@@ -85,12 +85,20 @@
     @apply font-primary text-base font-normal md:text-lg;
   }
 
+  p {
+    @apply font-primary text-base font-normal mt-4 mb-4;
+  }
+
   code {
     @apply font-code text-sm;
   }
 
   blockquote {
-    @apply m-0 p-4 border-l-4 border-blue-500;
+    @apply m-0 p-2 border-l-4 border-black;
+  }
+
+  .mdoc-container a {
+    @apply text-blue-500 underline italic;
   }
 
   blockquote,

@@ -25,6 +25,29 @@ export default {
 				dark: '#0e1111',
 			  },
 			  keyframes: {
+				slide: {
+					'0%, 13.33%': {
+						transform: 'translateY(0%)',
+					},
+					'16.66%, 30%': {
+						transform: 'translateY(-14.28%)',
+					},
+					'33.33%, 46.66%': {
+						transform: 'translateY(-28.57%)',
+					},
+					'50%, 63.33%': {
+						transform: 'translateY(-42.85%)',
+					},
+					'66.66%, 80%': {
+						transform: 'translateY(-57.14%)',
+					},
+					'83.33%, 96.66%': {
+						transform: 'translateY(-71.42%)',
+					},
+					'100%': {
+						transform: 'translateY(-85.71%)',
+					},
+				},                
 				flicker: {
 				  '0%, 19.999%, 22%, 62.999%, 64%, 64.999%, 70%, 100%': {
 					opacity: 0.99,
@@ -51,6 +74,7 @@ export default {
 			  animation: {
 				flicker: 'flicker 3s linear infinite',
 				tilt: 'tilt 10s infinite linear',
+				'text-slide': 'slide 20.5s cubic-bezier(0.83, 0, 0.17, 1) infinite',
 			  },
 		},
 	},

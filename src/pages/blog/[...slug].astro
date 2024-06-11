@@ -47,7 +47,9 @@ const { Content } = await entry.render();
         </div>
         <hr class='mt-4 divider' />
         <article class='mt-4'>
-          <Content />
+          <div class='mdoc-container'>
+            <Content />
+          </div>
         </article>
         <Comments />
         <LatestPosts id={entry.data.id} />
