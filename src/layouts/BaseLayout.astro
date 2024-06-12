@@ -2,6 +2,7 @@
 interface Props {
   title?: string;
   description?: string;
+  banner?: string;
 }
 
 import "../styles/globals.css";
@@ -12,10 +13,11 @@ import { Tooltips } from 'astro-tooltips';
 import Header from "@components/Header.astro";
 import Footer from "@components/Footer.astro";
 
-let { title, description } = Astro.props;
+let { title, description, banner } = Astro.props;
 
 title = title || "I Putu Bagus Merta Sentana - Software Engineer";
 description = description || "Bagus Merta's personal website";
+banner = banner || "https://user-images.githubusercontent.com/5182256/131216951-8f74f425-f775-463d-a11b-0e01ad9fce8d.png"
 ---
 
 <html lang="en">
@@ -26,9 +28,6 @@ description = description || "Bagus Merta's personal website";
     <meta name="generator" content={Astro.generator} />
 
     <title>{title}</title>
-    <link rel="stylesheet" href="/fonts/Lora/Lora.css" />
-    <link rel="stylesheet" href="/fonts/AlbertSans/AlbertSans.css"/>
-    <link rel="stylesheet" href="/fonts/JetBrains_Mono/JetBrainsMono.css" />
     
     <Tooltips interactive={false} delay={[15, 40]} />
 
@@ -41,7 +40,7 @@ description = description || "Bagus Merta's personal website";
         type: "website",
         url: "https://bagusmerta.com",
         title,
-        image: "https://user-images.githubusercontent.com/5182256/131216951-8f74f425-f775-463d-a11b-0e01ad9fce8d.png"
+        image: banner
         }
       }}
       twitter={{
