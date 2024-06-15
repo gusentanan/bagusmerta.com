@@ -17,7 +17,12 @@ let { title, description, banner } = Astro.props;
 
 title = title || "I Putu Bagus Merta Sentana - Software Engineer";
 description = description || "Bagus Merta's personal website";
-banner = banner || "https://user-images.githubusercontent.com/5182256/131216951-8f74f425-f775-463d-a11b-0e01ad9fce8d.png"
+banner = banner || "meta/opengraph.jpg"
+
+const resolvedImageWithDomain = new URL(
+	banner,
+	Astro.site,
+).toString();
 ---
 
 <html lang="en">
@@ -40,7 +45,7 @@ banner = banner || "https://user-images.githubusercontent.com/5182256/131216951-
         type: "website",
         url: "https://bagusmerta.com",
         title,
-        image: banner
+        image: resolvedImageWithDomain
         }
       }}
       twitter={{
