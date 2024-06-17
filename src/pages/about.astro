@@ -9,35 +9,35 @@ import CustomLink from "@components/CustomLink.astro";
 
 const techIcons = [
   {
-    icon: "skill-icons:kotlin-light",
+    icon: "simple-icons:kotlin",
     description: "Kotlin, more readable and concise version of Java"
   },
   {
-    icon: "skill-icons:flutter-light",
+    icon: "simple-icons:flutter",
     description: "Flutter, the development is just way faster compared to Java/Kotlin"
   },
   {
-    icon: "skill-icons:figma-light",
+    icon: "simple-icons:figma",
     description: "I sometimes use Figma to visualize design ideas, and ensure a shared understanding of the user interface."
   },
   {
-    icon: "skill-icons:typescript",
+    icon: "simple-icons:typescript",
     description: "TypeScript, definitely a valuable choice beyond traditional JavaScript"
   },
   {
-    icon: "skill-icons:react-light",
+    icon: "simple-icons:react",
     description: "React, loved for its declarative approach and the abundance of resources available for learning"
   },
   {
-    icon: "skill-icons:tailwindcss-light",
+    icon: "simple-icons:tailwindcss",
     description: "Tailwind is a great css framework. Styling has never been easier, and there is so much flexibility we can achieve"
   },
   {
-    icon: "skill-icons:bash-light",
+    icon: "simple-icons:gnubash",
     description: "I used Bash to create shortcut command"
   },
   {
-    icon: "skill-icons:python-light",
+    icon: "simple-icons:python",
     description: "Python, mainly used by me to solve data structures problems and to learn machine learning"
   }
 
@@ -105,7 +105,7 @@ const techIcons = [
 
     <section>
     <h2 class='mt-8'><Accent text='Tech Stack'/></h2>
-      <ul class='mt-4 flex flex-wrap gap-2'>
+      <ul class='mt-8 flex flex-wrap gap-4'>
         {techIcons.map((icons) => {
           return (
             <li 
@@ -113,7 +113,7 @@ const techIcons = [
               data-tooltip-placement='bottom'
               title={icons.description}>
               <Icon 
-                class='text-6xl'
+                class='text-6xl hover:text-primary-400'
                 name={icons.icon} 
               />
             </li>
