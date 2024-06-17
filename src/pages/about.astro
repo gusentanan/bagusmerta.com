@@ -1,7 +1,7 @@
 ---
 import BaseLayout from "@layouts/BaseLayout.astro";
 import { getTitle } from "utils/title";
-import { Image } from "astro:assets";
+import { Image } from "@unpic/astro";
 import { Icon } from "astro-icon/components"
 import Accent from "@components/Accent.astro";
 import CustomLink from "@components/CustomLink.astro";
@@ -48,11 +48,14 @@ const techIcons = [
   <main class='layout'>
     <section class='py-20'>
       <Image
-        class='float-right rounded-lg ml-4 mb-2 w-40 md:w-72'
+        class='float-right rounded-lg mt-8 ml-4 mb-2 w-40 md:w-72'
         src='/images/avatar.png'
         alt='I Putu Bagus Merta Sentana'
-        width=128
-        height=128
+        decoding='async'
+        loading='lazy'
+        background='blurhash'
+        width={182}
+        height={182}
       />
       <h2 class='mt-1'><Accent text='About Me.'/></h2>
       <p class='mt-4'>
@@ -69,6 +72,7 @@ const techIcons = [
         Currently, I'm working as a Software Engineer for mobile platform at a startup based in Singapore.
       </p>
 
+    </section>
     </section>
    
     <section>
@@ -103,6 +107,18 @@ const techIcons = [
       </p>
     </section>
 
+    
+    <section>
+      <h2 class='mt-8'><Accent text='Education'/></h2>
+      <div class='flex items-center space-x-4'>
+        <h4 class='mt-2'>Bachelor of Comp. Science</h4>
+        <h4 class='mt-2'>2019—2023</h2>
+      </div>
+      <h4 class='mt-4'>Universitas Udayana</h4>
+      <h4>Bachelor Degree of Computer Science,</h4>
+
+    </section>
+
     <section>
     <h2 class='mt-8'><Accent text='Tech Stack'/></h2>
       <ul class='mt-8 flex flex-wrap gap-4'>
@@ -120,17 +136,6 @@ const techIcons = [
           );
         })}
     </ul>
-    </section>
-
-    <section>
-      <h2 class='mt-8'><Accent text='Education'/></h2>
-      <div class='flex items-center space-x-4'>
-        <h4 class='mt-2'>Bachelor of Comp. Science</h4>
-        <h4 class='mt-2'>2019—2023</h2>
-      </div>
-      <h4 class='mt-4'>Universitas Udayana</h4>
-      <h4>Bachelor Degree of Computer Science,</h4>
-
     </section>
 
     <section>

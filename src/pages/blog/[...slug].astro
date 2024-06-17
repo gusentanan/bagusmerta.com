@@ -1,7 +1,7 @@
 ---
 import LatestPosts from "@components/LatestPosts.astro";
 import BaseLayout from "@layouts/BaseLayout.astro";
-import { Image } from "astro:assets";
+import { Image } from "@unpic/astro";
 import { getCollection } from "astro:content";
 import { formatDate } from "utils/time";
 import { Icon } from "astro-icon/components"
@@ -36,6 +36,9 @@ const { Content } = await entry.render();
           width={1200}
           height={(1200 * 2) / 5}
           alt='Image Banner Blog' 
+          decoding='async'
+          loading='lazy'
+          background="blurhash"
         />
         <h1 class='mt-1'>{entry.data.title}</h1>
         <div class='mt-2 flex items-center justify-start gap-8 text-lg font-normal text-gray-600'>

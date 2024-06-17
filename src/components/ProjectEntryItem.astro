@@ -1,6 +1,6 @@
 ---
 import type { ProjectEntry } from "utils/content";
-import { Image } from "astro:assets";
+import { Image } from "@unpic/astro";
 import TechIcons from "./TechIcons.astro";
 
 export type Props = ProjectEntry;
@@ -28,6 +28,9 @@ const props = Astro.props;
         <Image 
             class='mt-2 rounded'
             src={props.data.image}
+            decoding='async'
+            loading='lazy'
+            background="blurhash"
             alt='project image'
           />
       </picture> 

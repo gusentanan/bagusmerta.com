@@ -1,4 +1,6 @@
 ---
+import { Icon } from "astro-icon/components";
+import { getCurrentTimestamp, getLatestCommitHash } from "utils/header";
 import { getPathNameWithoutLocale } from "utils/url";
 
 type NavLink = {
@@ -14,11 +16,22 @@ const LINKS: NavLink[] = [
 ];
 
 // Omit the locale prefix if it exists
-const pathname = getPathNameWithoutLocale(Astro.request.url);
+const pathName = getPathNameWithoutLocale(Astro.request.url);
+const timeStamp = getCurrentTimestamp();
+const commitHash = getLatestCommitHash();
 ---
 
 <header class='sticky top-0 z-50'>
-  <div class='h-1 bg-gradient-to-r from-primary-200 via-primary-300 to-primary-500' />
+
+  <div class='h-10 bg-gray-100'>
+    <div class='layout flex items-center py-2 gap-2'>
+      <Icon name='ri:alarm-line'/>
+      <h5 >{timeStamp}  Bali, Indonesia</h5>
+      <Icon name='ri:github-line'/>
+      <h5>{commitHash}</h5>
+    </div>
+  </div>
+    
   <div class='bg-white transition-colors'>
     <nav class='layout flex items-center justify-between py-4'>
       <a href='/'>
@@ -33,7 +46,7 @@ const pathname = getPathNameWithoutLocale(Astro.request.url);
       </a>
       <ul class='flex items-center justify-between space-x-3 text-xs md:space-x-4 md:text-base'>
         {LINKS.map(({ href, label }) => {
-          const isActive = href.toLowerCase() === pathname.toLowerCase() || href.toLocaleLowerCase() === pathname.toLocaleLowerCase() + '/';
+          const isActive = href.toLowerCase() === pathName.toLowerCase() || href.toLocaleLowerCase() === pathName.toLocaleLowerCase() + '/';
           return (
             <li>
               <a href={href}>
