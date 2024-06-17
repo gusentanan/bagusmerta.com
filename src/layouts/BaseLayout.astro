@@ -3,6 +3,7 @@ interface Props {
   title?: string;
   description?: string;
   banner?: string;
+  isBlog?: boolean;
 }
 
 import "../styles/globals.css";
@@ -13,16 +14,32 @@ import { Tooltips } from 'astro-tooltips';
 import Header from "@components/Header.astro";
 import Footer from "@components/Footer.astro";
 
-let { title, description, banner } = Astro.props;
+let { title, description, banner, isBlog } = Astro.props;
 
 title = title || "I Putu Bagus Merta Sentana - Software Engineer";
 description = description || "Bagus Merta's personal website";
-banner = banner || "meta/opengraph.jpg"
+banner = banner || "meta/opengraph.jpg";
+isBlog = isBlog || false;
 
 const resolvedImageWithDomain = new URL(
 	banner,
 	Astro.site,
 ).toString();
+
+const structuredData = isBlog ? {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  headline: title,
+  description: description,
+  author: [
+    {
+      '@type': 'Person',
+      name: 'I Putu Bagus Merta Sentana',
+    },
+  ],
+  image: resolvedImageWithDomain,
+} : null;
+
 ---
 
 <html lang="en">
@@ -49,12 +66,22 @@ const resolvedImageWithDomain = new URL(
         },
         image: {
           url: resolvedImageWithDomain
-        },
+        }
       }}
       twitter={{
         creator: "@bagusmertasntn",
       }}
     />
+    
+    {isBlog && (
+      <script
+        key="structured-data"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(structuredData),
+        }}
+      />
+    )}
   </head>
   <body>
     <Header />
