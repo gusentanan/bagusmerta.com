@@ -8,12 +8,6 @@ import { Icon } from "astro-icon/components"
 export type Props = BlogEntry;
 
 const props = Astro.props;
-
-const resolvedImageWithDomain = new URL(
-  props.data.banner.src,
-  Astro.site
-).toString();
-
 ---
   <li class:list={[
     'w-full rounded-md border border-gray-300 bg-white',
@@ -25,7 +19,7 @@ const resolvedImageWithDomain = new URL(
     <a class='block h-full rounded-md focus:outline-none focus-visible:ring focus-visible:ring-primary-300' href={getBlogPathName(props)}>
         <div class='relative'>
           <Image 
-            src={resolvedImageWithDomain} 
+            src={props.data.banner} 
             decoding='async'
             loading='lazy'
             alt='blog banner'  
