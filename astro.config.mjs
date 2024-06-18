@@ -12,7 +12,9 @@ export default defineConfig({
   site: 'https://bagusmerta.com',
   output: "static",
   image: {
-    service: imageService(),
+    service: imageService({
+      placeholder: "blurhash",
+    }),
   },
   // cc: https://docs.astro.build/en/reference/configuration-reference/#output
   integrations: [markdoc(), react(), icon(), tailwind()]

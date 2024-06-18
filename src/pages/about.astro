@@ -1,7 +1,7 @@
 ---
 import BaseLayout from "@layouts/BaseLayout.astro";
 import { getTitle } from "utils/title";
-import { Image } from "@unpic/astro";
+import { Image } from "astro:assets";
 import { Icon } from "astro-icon/components"
 import Accent from "@components/Accent.astro";
 import CustomLink from "@components/CustomLink.astro";
@@ -53,7 +53,6 @@ const techIcons = [
         alt='I Putu Bagus Merta Sentana'
         decoding='async'
         loading='lazy'
-        background='blurhash'
         width={182}
         height={182}
       />
