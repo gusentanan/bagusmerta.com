@@ -4,10 +4,13 @@ import { formatDate } from "utils/time";
 import { getBlogPathName } from "utils/url";
 import { Image } from "@unpic/astro";
 import { Icon } from "astro-icon/components"
+import { getImage } from 'astro:assets';
 
 export type Props = BlogEntry;
 
 const props = Astro.props;
+const imageUrl = await getImage(props.data.banner);
+const resolvedImageWithDomain = new URL(imageUrl.src, Astro.site).toString();
 ---
   <li class:list={[
     'w-full rounded-md border border-gray-300 bg-white',
@@ -19,7 +22,7 @@ const props = Astro.props;
     <a class='block h-full rounded-md focus:outline-none focus-visible:ring focus-visible:ring-primary-300' href={getBlogPathName(props)}>
         <div class='relative'>
           <Image 
-            src={props.data.banner} 
+            src={resolvedImageWithDomain} 
             decoding='async'
             loading='lazy'
             alt='blog banner'  
