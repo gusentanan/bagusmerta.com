@@ -30,8 +30,20 @@ const blogCollection = defineCollection({
 	})
   });
 
+
+const bookmarkCollection = defineCollection({
+	schema: ({}) => z.object({
+		id: z.number(),
+		title: z.string(),
+		description: z.string(),
+		link: z.string(),
+		tags: z.array(z.string()),
+	})
+});
+
 // 3. Export a single `collections` object to register your collection(s)
 export const collections = {
 	blog: blogCollection,
-	project: projectCollection
+	project: projectCollection,
+	bookmark: bookmarkCollection
   };

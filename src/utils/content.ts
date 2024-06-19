@@ -6,6 +6,9 @@ export type ProjectEntries = ProjectEntry[];
 export type BlogEntry = CollectionEntry<"blog">;
 export type BlogEntries = BlogEntry[];
 
+export type BookmarkEntry = CollectionEntry<"bookmark">;
+export type BookmarkEntries = BookmarkEntry[];
+
 // Return the project entries sorted by date, newest first
 export const getProjectCollection = async (): Promise<ProjectEntries> => {
   const projectEntries = await getCollection("project");
@@ -17,4 +20,9 @@ export const getBlogCollection = async (): Promise<BlogEntries> => {
     const blogEntries = await getCollection("blog");
     blogEntries.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
     return blogEntries;
+};
+
+export const getBookMarkCollection = async (): Promise<BookmarkEntries> => {
+  const bookmarkEntries = await getCollection("bookmark");
+  return bookmarkEntries;
 };

@@ -1,0 +1,39 @@
+---
+import type { BookmarkEntry } from 'utils/content';
+import CustomLink from './CustomLink.astro';
+
+
+
+export type Props = BookmarkEntry;
+const props = Astro.props;
+---
+
+<li class:list={[
+    'project-card rounded-md md:w-full border',
+    'scale-100 hover:scale-[1.02] active:scale-[0.97] motion-safe:transform-gpu',
+    'transition duration-100',
+    'motion-reduce:hover:scale-100'
+]}>
+    <a href={(props.data.link)} class:list={[
+        'flex h-full flex-col items-start rounded-md p-4 focus:outline-none focus-visible:ring focus-visible:ring-primary-300',
+        'cursor-newtab'
+    ]} target="_blank">
+        <h4 class='underline'>{props.data.title}</h4>
+        <h5 class='text-gray-500'>{props.data.description}</h5>
+        <ul class='flex flex-wrap gap-2 mt-4 mb-4'>
+            {props.data.tags.map((tag, _) => {
+              return ( 
+                <li>
+                    <p class='mt-0 mb-0 h-8 px-3 w-max flex gap-2 items-center rounded-full border bg-black text-white text-md md:text-lg'>
+                        #{tag}
+                    </p>
+                </li> 
+                );
+            })}
+            
+        </ul>
+      
+        <CustomLink text={(props.data.link)}'/>   
+    </a>
+</li>
+
