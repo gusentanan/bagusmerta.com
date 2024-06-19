@@ -5,13 +5,15 @@ import Accent from "@components/Accent.astro";
 import CustomLink from "@components/CustomLink.astro";
 import Button from "@components/Button.astro";
 import BaseLayout from "@layouts/BaseLayout.astro";
-import { getBlogCollection, getProjectCollection } from "utils/content";
+import { getBlogCollection, getBookMarkCollection, getProjectCollection } from "utils/content";
 import { getTitle } from "utils/title";
 import { Icon } from "astro-icon/components"
+import BookmarkEntryItem from "@components/BookmarkEntryItem.astro";
 
 
 const allBlogPosts = await getBlogCollection();
 const allProject = await getProjectCollection();
+const allBookmark = await getBookMarkCollection();
 
 ---
 
@@ -215,6 +217,55 @@ const allProject = await getProjectCollection();
         <Button textButton='See More Projects →' link={"/projects/"} />
        
       </article>
+    </section>
+
+    
+
+    <section class='relative isolate py-20'>
+      <article class='layout flex flex-col-reverse items-center md:flex-row md:justify-start'>
+        <div class='py-4 px-2 h-full w-full'>
+          <h2 class='text-2xl md:text-3xl 2xl:text-3xl'>
+            My
+            <Accent text='Bookmarks'/>
+          </h2>
+          <p class='mt-2 text-base text-gray-800 md:text-lg'>
+            A collection of what I've been reading, gathered from various articles and blogs.          </p>
+          <Button textButton='See More Bookmark →' link={"/bookmark/"} />
+        </div>
+        <div class='w-full h-full'>
+          <ul class='relative w-full h-full'>
+            {[allBookmark.slice(0, 1).map(item => <BookmarkEntryItem {...item} />)]}
+          </ul>
+        </div>
+      </article>
+       <div class="absolute inset-x-0 top-[calc(100%-13rem)] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[calc(100%-30rem)]">
+        <svg
+          class="relative left-[calc(50%+3rem)] h-[21.1875rem] max-w-none -translate-x-1/2 sm:left-[calc(50%+36rem)] sm:h-[42.375rem] animate-slide"
+          viewBox="0 0 1155 678">
+          <path
+            fill="url(#b9e4a85f-ccd5-4151-8e84-ab55c66e5aa1)"
+            fill-opacity=".3"
+            d="M317.219 518.975L203.852 678 0 438.341l317.219 80.634 204.172-286.402c1.307 132.337 45.083 346.658 209.733 145.248C936.936 126.058 882.053-94.234 1031.02 41.331c119.18 108.451 130.68 295.337 121.53 375.223L855 299l21.173 362.054-558.954-142.079z">
+          </path>
+          <defs>
+            <linearGradient
+              id="b9e4a85f-ccd5-4151-8e84-ab55c66e5aa1"
+              x1="1155.49"
+              x2="-78.208"
+              y1=".177"
+              y2="474.645"
+              gradientUnits="userSpaceOnUse">
+              <stop stop-color="#9089FC">
+                <animate attributeName="stop-color" values="#9089FC; #FF80B5; #9089FC" dur="5s" repeatCount="indefinite"></animate>
+              </stop>
+              <stop offset="1" stop-color="#ffb6c1">
+                <animate attributeName="stop-color" values="#ffb6c1; #9089FC; #ffb6c1" dur="5s" repeatCount="indefinite"></animate>
+              </stop>
+            </linearGradient>
+          </defs>
+        </svg>
+      </div>
+      
     </section>
 
     <section class='relative isolate py-20'>

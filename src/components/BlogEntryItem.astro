@@ -16,7 +16,7 @@ const props = Astro.props;
     'motion-reduce:hover:scale-100',
     'animate-shadow',
   ]}>
-    <a class='block h-full rounded-md focus:outline-none focus-visible:ring focus-visible:ring-primary-300' href={getBlogPathName(props)}>
+    <a class='block h-full rounded-md focus:outline-none focus-visible:ring focus-visible:ring-primary-300 hover:shadow-lg' href={getBlogPathName(props)}>
         <div class='relative'>
           <Image 
             src={props.data.banner}
