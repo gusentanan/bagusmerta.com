@@ -20,21 +20,21 @@ const LINKS: NavLink[] = [
 const pathName = getPathNameWithoutLocale(Astro.request.url);
 const timeStamp = getCurrentTimestamp();
 const commitHash = getLatestCommitHash();
+
 ---
 
 <header class='sticky top-0 z-50'>
-
-  <div class='h-10 bg-gray-100'>
-    <div class='layout flex items-center py-2 gap-2'>
-      <Icon name='ri:alarm-line'/>
-      <h5 >{timeStamp}  Bali, Indonesia</h5>
-      <Icon name='ri:github-line'/>
-      <h5>{commitHash}</h5>
-    </div>
-  </div>
     
-  <div class='bg-white transition-colors'>
-    <nav class='layout flex items-center justify-between py-4'>
+  <div class='bg-white'>
+    <!-- <div class='bg-gray-100'>
+      <div class='layout flex items-center py-2 gap-2'>
+        <Icon name='ri:alarm-line'/>
+        <h5 >{timeStamp}  Bali, Indonesia</h5>
+        <Icon name='ri:github-line'/>
+        <h5>{commitHash}</h5>
+      </div>
+    </div> -->
+    <nav class='layout flex items-center justify-between py-4 border-b border-gray-200'>
       <a href='/'>
         <picture>
           <img
