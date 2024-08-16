@@ -1,11 +1,16 @@
 ---
 import Accent from "@components/Accent.astro";
 import BlogEntryItem from "@components/BlogEntryItem.astro";
+import TagFilter from '@components/BlogTagFilter.astro';
 import BaseLayout from "@layouts/BaseLayout.astro";
 import { getBlogCollection } from "utils/content";
 import { getTitle } from "utils/title";
 
 const allBlogPosts = await getBlogCollection();
+// Get all unique tags
+const allTags = [...new Set(allBlogPosts.flatMap(post => post.data.tags))];
+
+const currentTag = 'All';
 ---
 
 <BaseLayout title={getTitle('Blog')}>
@@ -18,6 +23,9 @@ const allBlogPosts = await getBlogCollection();
         <p class='mt-2 text-black-600'>
           A collection of blog that includes my thoughtful reflections on programming, personal development, and my thoughts.
         </p>
+        
+        <TagFilter tags={allTags} selectedTag={currentTag} />
+        
         <ul class='mt-4 grid gap-4 sm:grid-cols-2 xl:grid-cols-3'>
           {allBlogPosts.map((blog) => <BlogEntryItem {...blog} />)}
         </ul>

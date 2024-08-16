@@ -23,7 +23,7 @@ export default defineMarkdocConfig({
       // Choose from Shiki's built-in themes (or add your own)
       // Default: 'github-dark'
       // https://github.com/shikijs/shiki/blob/main/docs/themes.md
-      theme: 'dracula',
+      theme: 'dracula-soft',
       // Enable word wrap to prevent horizontal scrolling
       // Default: false
       wrap: false,

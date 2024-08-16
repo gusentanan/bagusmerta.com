@@ -9,6 +9,7 @@ interface Props {
 import "../styles/globals.css";
 
 import { SEO } from "astro-seo";
+import { ViewTransitions } from 'astro:transitions'
 
 import { Tooltips } from 'astro-tooltips';
 import Header from "@components/Header.astro";
@@ -34,8 +35,11 @@ const resolvedImageWithDomain = new URL(
     <meta name="generator" content={Astro.generator} />
 
     <title>{title}</title>
-    
+
     <Tooltips interactive={false} delay={[15, 40]} />
+    <!-- ViewTransitions  -->
+    <ViewTransitions />
+
 
     <SEO
       title={title}

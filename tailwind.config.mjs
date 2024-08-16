@@ -12,7 +12,7 @@ export default {
 		extend: {
 			fontFamily: {
 				primary: ['AlbertSans', ...fontFamily.sans],
-				code: ['JetBrainsMono', ...fontFamily.sans],
+				code: ['DMMono', ...fontFamily.sans],
 			  },
 			  colors: {
 				primary: {

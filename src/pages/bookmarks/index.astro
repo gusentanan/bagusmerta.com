@@ -1,0 +1,38 @@
+---
+import Accent from "@components/Accent.astro";
+import BookmarkEntryItem from "@components/BookmarkEntryItem.astro";
+import BaseLayout from "@layouts/BaseLayout.astro";
+import { getBookMarkCollection } from "utils/content";
+import { getTitle } from "utils/title";
+import BookmarkTagFilter from '@components/BookmarkTagFilter.astro';
+
+
+const allBookmark = await getBookMarkCollection();
+// Get all unique tags
+const allTags = [...new Set(allBookmark.flatMap(post => post.data.tags))];
+
+const currentTag = 'All';
+---
+
+<BaseLayout title={getTitle('Bookmarks')}>
+    <main>
+        <div class='layout py-12'>
+            <h2 class='text-3xl md:text-4xl'>
+                <Accent text='Bookmarks.'/>
+            </h2>
+            <p class='mt-2 text-black-600'>
+                Since mid-2023, I’ve been reading articles almost every day. I didn't realize at first, but it's really helped me at work and expanded my knowledge. I created this page to keep track of everything I’ve read. Maybe it’ll help you too!
+            </p>
+
+            <BookmarkTagFilter tags={allTags} selectedTag={currentTag} />
+
+            <ul class='mt-6 flex flex-wrap gap-4'>
+                {
+                    allBookmark.map((item) => <BookmarkEntryItem {...item} />)
+                }
+            </ul>
+        </div>
+    </main>
+
+</BaseLayout>
+

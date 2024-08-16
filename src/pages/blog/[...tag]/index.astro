@@ -1,0 +1,44 @@
+---
+import Accent from "@components/Accent.astro";
+import BlogEntryItem from "@components/BlogEntryItem.astro";
+import TagFilter from '@components/BlogTagFilter.astro';
+import BaseLayout from "@layouts/BaseLayout.astro";
+import { getBlogPostByTag, getBlogTags } from "utils/posts";
+import { getTitle } from "utils/title";
+
+
+const allTags = await getBlogTags();
+
+export async function getStaticPaths() {
+	const tags = await getBlogTags()
+
+	return tags.map((tag) => ({
+		params: { tag },
+		props: { tag }
+	}))
+}
+
+const { tag } = Astro.props;
+const posts = await getBlogPostByTag(tag);
+---
+
+<BaseLayout title={getTitle('Blog')}>
+  <main>
+    <section>
+      <div class='layout py-12'>
+        <h2 class='text-3xl md:text-4xl'>
+          <Accent text='Blog.'/>
+        </h2>
+        <p class='mt-2 text-black-600'>
+          A collection of blog that includes my thoughtful reflections on programming, personal development, and my thoughts.
+        </p>
+        
+        <TagFilter tags={allTags} selectedTag={tag} />
+        
+        <ul class='mt-4 grid gap-4 sm:grid-cols-2 xl:grid-cols-3'>
+          {posts.map((blog) => <BlogEntryItem {...blog} />)}
+        </ul>
+      </div>
+    </section>
+  </main>
+</BaseLayout>
