@@ -9,6 +9,8 @@ import { getBlogCollection, getBookMarkCollection, getProjectCollection } from "
 import { getTitle } from "utils/title";
 import { Icon } from "astro-icon/components"
 import BookmarkEntryItem from "@components/BookmarkEntryItem.astro";
+import TopLeftGradient from "@components/gradient/TopLeftGradient.astro";
+import BottomRightGradient from "@components/gradient/BottomRightGradient.astro";
 
 
 const allBlogPosts = await getBlogCollection();
@@ -103,29 +105,7 @@ const allBookmark = await getBookMarkCollection();
           </div>
       </article>
 
-      <div class="absolute inset-x-0 -bottom-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-bottom-80">
-        <svg
-          class="relative left-[calc(50%-11rem)] -z-10 h-[21.1875rem] max-w-none -translate-x-1/2 rotate-[30deg] sm:left-[calc(50%-30rem)] sm:h-[42.375rem] animate-slide"
-          viewBox="0 0 1155 678">
-          <path
-            fill="url(#9b2541ea-d39d-499b-bd42-aeea3e93f5ff)"
-            fill-opacity=".3"
-            d="M317.219 518.975L203.852 678 0 438.341l317.219 80.634 204.172-286.402c1.307 132.337 45.083 346.658 209.733 145.248C936.936 126.058 882.053-94.234 1031.02 41.331c119.18 108.451 130.68 295.337 121.53 375.223L855 299l21.173 362.054-558.954-142.079z">
-          </path>
-          <defs>
-            <linearGradient
-              id="9b2541ea-d39d-499b-bd42-aeea3e93f5ff"
-              x1="1155.49"
-              x2="-78.208"
-              y1=".177"
-              y2="474.645"
-              gradientUnits="userSpaceOnUse">
-              <stop stop-color="#9089FC"></stop>
-              <stop offset="1" stop-color="#FFD580"></stop>
-            </linearGradient>
-          </defs>
-        </svg>
-      </div>
+     <TopLeftGradient />
 
       <a 
         href='#intro' 
@@ -171,33 +151,7 @@ const allBookmark = await getBookMarkCollection();
         </div>
       </article>
 
-      <div class="absolute inset-x-0 top-[calc(100%-13rem)] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[calc(100%-30rem)]">
-        <svg
-          class="relative left-[calc(50%+3rem)] h-[21.1875rem] max-w-none -translate-x-1/2 sm:left-[calc(50%+36rem)] sm:h-[42.375rem] animate-slide"
-          viewBox="0 0 1155 678">
-          <path
-            fill="url(#b9e4a85f-ccd5-4151-8e84-ab55c66e5aa1)"
-            fill-opacity=".3"
-            d="M317.219 518.975L203.852 678 0 438.341l317.219 80.634 204.172-286.402c1.307 132.337 45.083 346.658 209.733 145.248C936.936 126.058 882.053-94.234 1031.02 41.331c119.18 108.451 130.68 295.337 121.53 375.223L855 299l21.173 362.054-558.954-142.079z">
-          </path>
-          <defs>
-            <linearGradient
-              id="b9e4a85f-ccd5-4151-8e84-ab55c66e5aa1"
-              x1="1155.49"
-              x2="-78.208"
-              y1=".177"
-              y2="474.645"
-              gradientUnits="userSpaceOnUse">
-              <stop stop-color="#9089FC">
-                <animate attributeName="stop-color" values="#9089FC; #FF80B5; #9089FC" dur="5s" repeatCount="indefinite"></animate>
-              </stop>
-              <stop offset="1" stop-color="#ffb6c1">
-                <animate attributeName="stop-color" values="#ffb6c1; #9089FC; #ffb6c1" dur="5s" repeatCount="indefinite"></animate>
-              </stop>
-            </linearGradient>
-          </defs>
-        </svg>
-      </div>
+     <BottomRightGradient />
       
     </section>
     
@@ -230,7 +184,7 @@ const allBookmark = await getBookMarkCollection();
           </h2>
           <p class='mt-2 text-base text-gray-800 md:text-lg'>
             A collection of what I've been reading, gathered from various articles and blogs.          </p>
-          <Button textButton='See More Bookmark →' link={"/bookmark/"} />
+          <Button textButton='See More Bookmark →' link={"/bookmarks/"} />
         </div>
         <div class='w-full h-full'>
           <ul class='relative w-full h-full'>
@@ -238,33 +192,8 @@ const allBookmark = await getBookMarkCollection();
           </ul>
         </div>
       </article>
-       <div class="absolute inset-x-0 top-[calc(100%-13rem)] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[calc(100%-30rem)]">
-        <svg
-          class="relative left-[calc(50%+3rem)] h-[21.1875rem] max-w-none -translate-x-1/2 sm:left-[calc(50%+36rem)] sm:h-[42.375rem] animate-slide"
-          viewBox="0 0 1155 678">
-          <path
-            fill="url(#b9e4a85f-ccd5-4151-8e84-ab55c66e5aa1)"
-            fill-opacity=".3"
-            d="M317.219 518.975L203.852 678 0 438.341l317.219 80.634 204.172-286.402c1.307 132.337 45.083 346.658 209.733 145.248C936.936 126.058 882.053-94.234 1031.02 41.331c119.18 108.451 130.68 295.337 121.53 375.223L855 299l21.173 362.054-558.954-142.079z">
-          </path>
-          <defs>
-            <linearGradient
-              id="b9e4a85f-ccd5-4151-8e84-ab55c66e5aa1"
-              x1="1155.49"
-              x2="-78.208"
-              y1=".177"
-              y2="474.645"
-              gradientUnits="userSpaceOnUse">
-              <stop stop-color="#9089FC">
-                <animate attributeName="stop-color" values="#9089FC; #FF80B5; #9089FC" dur="5s" repeatCount="indefinite"></animate>
-              </stop>
-              <stop offset="1" stop-color="#ffb6c1">
-                <animate attributeName="stop-color" values="#ffb6c1; #9089FC; #ffb6c1" dur="5s" repeatCount="indefinite"></animate>
-              </stop>
-            </linearGradient>
-          </defs>
-        </svg>
-      </div>
+
+       <BottomRightGradient />
       
     </section>
 

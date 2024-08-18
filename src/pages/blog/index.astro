@@ -1,7 +1,7 @@
 ---
 import Accent from "@components/Accent.astro";
 import BlogEntryItem from "@components/BlogEntryItem.astro";
-import TagFilter from '@components/BlogTagFilter.astro';
+import TagFilter from "@components/TagFilter.astro";
 import BaseLayout from "@layouts/BaseLayout.astro";
 import { getBlogCollection } from "utils/content";
 import { getTitle } from "utils/title";
@@ -24,7 +24,7 @@ const currentTag = 'All';
           A collection of blog that includes my thoughtful reflections on programming, personal development, and my thoughts.
         </p>
         
-        <TagFilter tags={allTags} selectedTag={currentTag} />
+        <TagFilter tags={allTags} selectedTag={currentTag} baseUrl="blog" />
         
         <ul class='mt-4 grid gap-4 sm:grid-cols-2 xl:grid-cols-3'>
           {allBlogPosts.map((blog) => <BlogEntryItem {...blog} />)}

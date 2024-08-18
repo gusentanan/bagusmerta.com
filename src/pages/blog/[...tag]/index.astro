@@ -1,7 +1,7 @@
 ---
 import Accent from "@components/Accent.astro";
 import BlogEntryItem from "@components/BlogEntryItem.astro";
-import TagFilter from '@components/BlogTagFilter.astro';
+import TagFilter from "@components/TagFilter.astro";
 import BaseLayout from "@layouts/BaseLayout.astro";
 import { getBlogPostByTag, getBlogTags } from "utils/posts";
 import { getTitle } from "utils/title";
@@ -33,7 +33,7 @@ const posts = await getBlogPostByTag(tag);
           A collection of blog that includes my thoughtful reflections on programming, personal development, and my thoughts.
         </p>
         
-        <TagFilter tags={allTags} selectedTag={tag} />
+        <TagFilter tags={allTags} selectedTag={tag} baseUrl="blog" />
         
         <ul class='mt-4 grid gap-4 sm:grid-cols-2 xl:grid-cols-3'>
           {posts.map((blog) => <BlogEntryItem {...blog} />)}

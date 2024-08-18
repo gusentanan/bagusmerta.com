@@ -3,8 +3,8 @@ import Accent from "@components/Accent.astro";
 import BookmarkEntryItem from "@components/BookmarkEntryItem.astro";
 import BaseLayout from "@layouts/BaseLayout.astro";
 import { getTitle } from "utils/title";
-import BookmarkTagFilter from '@components/BookmarkTagFilter.astro';
 import { getBookmarkByTag, getBookmarkTags } from "utils/posts";
+import TagFilter from "@components/TagFilter.astro";
 
 
 const allTags = await getBookmarkTags();
@@ -32,7 +32,7 @@ const posts = await getBookmarkByTag(tag);
                 Since mid-2023, I’ve been reading articles almost every day. I didn't realize at first, but it's really helped me at work and expanded my knowledge. I created this page to keep track of everything I’ve read. Maybe it’ll help you too!
             </p>
 
-            <BookmarkTagFilter tags={allTags} selectedTag={tag} />
+            <TagFilter tags={allTags} selectedTag={tag} baseUrl="bookmarks" />
 
             <ul class='mt-6 flex flex-wrap gap-4'>
                 {
