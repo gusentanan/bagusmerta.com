@@ -27,13 +27,10 @@ const links = [
   <div class='mt-4 pb-2'>
     <div class='layout flex flex-col items-center border-t pt-6'>
       <div class='flex flex-wrap justify-center gap-x-8 gap-y-4'>
-        {links.map(({ title, url, tippy }) => 
+        {links.map(({ title, url }) => 
           <a 
             href={url}  
             target='_blank' 
-            data-tooltip-interactive='false'
-            data-tooltip-placement='top'
-            title={tippy}
             class:list={[
               'animated-underline rounded-sm text-md font-normal focus:outline-none focus-visible:ring focus-visible:ring-primary-300',
               'cursor-newtab'
