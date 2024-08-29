@@ -3,12 +3,12 @@ import { getBlogCollection } from "utils/content";
 import BlogEntryItem from "./BlogEntryItem.astro";
 import Accent from "./Accent.astro";
 
-const blogEntries = (await getBlogCollection()).slice(0, 3);
+const blogEntries = (await getBlogCollection()).slice(0, 2);
 const { id  } = Astro.props;
 ---
 <div class='mt-10'>
-  <h2><Accent text='Latest content'/></h2>
-  <ul class='mt-4 grid gap-4 sm:grid-cols-2 xl:grid-cols-3'>
+  <h2 class="font-display text-3xl">Latest content</h2>
+  <ul class='mt-4 grid gap-4 sm:grid-cols-2 xl:grid-cols-2'>
     {
       blogEntries
         .filter(blogPostEntry => blogPostEntry.data.id !== id)

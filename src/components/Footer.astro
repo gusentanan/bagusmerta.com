@@ -1,46 +1,45 @@
 ---
+import { Icon } from "astro-icon/components"
+
+
 const links = [
   {
-    title: "Twitter",
+    iconify: "ri:twitter-x-fill",
     url: "https://twitter.com/@bagusmertasntn",
-    tippy: "I sometimes repost or like tech-related posts ✍️"
   },
   {
-    title: "GitHub",
+    iconify: "ri:github-fill",
     url: "https://github.com/gusentanan",
-    tippy: "See my projects on Github 📝"
   },
   {
-    title: "LinkedIn",
+    iconify: "ri:linkedin-box-fill",
     url: "https://linkedin.com/in/bagusmerta",
-    tippy: "You can find me on LinkedIn 🔍"
   },
   {
-    title: "RSS",
+    iconify: "ri:rss-fill",
     url: "https://gusentanan.github.io/rss.xml",
-    tippy: "Add me to your feeds 🙏"
   }
 ];
 
 ---
 <footer class='bottom-0 transition-shadow'>
   <div class='mt-4 pb-2'>
-    <div class='layout flex flex-col items-center border-t pt-6'>
+    <div class='layout flex flex-col items-center'>
       <div class='flex flex-wrap justify-center gap-x-8 gap-y-4'>
-        {links.map(({ title, url }) => 
+        {links.map(({ iconify, url }) => 
           <a 
             href={url}  
             target='_blank' 
             class:list={[
-              'animated-underline rounded-sm text-md font-normal focus:outline-none focus-visible:ring focus-visible:ring-primary-300',
+              'text-lg',
               'cursor-newtab'
             ]}>
-            {title}
+            <Icon name={iconify} />
           </a>
         )}
       </div>
-      <p class='mt-4 text-md text-black-600'>
-        {new Date().getFullYear()} &copy; I Putu Bagus Merta Sentana •  Made with🩸Product of Indonesia.
+      <p class='mt-4 text-sm text-black-600'>
+        {new Date().getFullYear()} &copy; I Putu Bagus Merta Sentana
       </p>
     </div>
   </div>

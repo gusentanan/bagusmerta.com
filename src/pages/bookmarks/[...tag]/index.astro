@@ -5,6 +5,7 @@ import BaseLayout from "@layouts/BaseLayout.astro";
 import { getTitle } from "utils/title";
 import { getBookmarkByTag, getBookmarkTags } from "utils/posts";
 import TagFilter from "@components/TagFilter.astro";
+import { Spotlight } from "@components/Spotlight";
 
 
 const allTags = await getBookmarkTags();
@@ -24,15 +25,22 @@ const posts = await getBookmarkByTag(tag);
 
 <BaseLayout title={getTitle('Bookmarks')}>
     <main>
-        <div class='layout py-12'>
-            <h2 class='text-3xl md:text-4xl'>
-                <Accent text='Bookmarks.'/>
-            </h2>
-            <p class='mt-2 text-black-600'>
-                Since mid-2023, I’ve been reading articles almost every day. I didn't realize at first, but it's really helped me at work and expanded my knowledge. I created this page to keep track of everything I’ve read. Maybe it’ll help you too!
-            </p>
-
-            <TagFilter tags={allTags} selectedTag={tag} baseUrl="bookmarks" />
+        <div class='layout py-32'>
+            <Spotlight
+                className="-top-20 left-0 md:left-60 md:-top-60"
+                fill="white"
+                client:load
+            />
+            <div class="flex flex-col justify-center items-center">
+                <h2 class='text-3xl md:text-4xl'>
+                    Welcome to my <span class="font-display text-5xl">Bookmarks</span>
+                </h2>
+                <p class='text-center px-32 py-6 text-gray-400'>
+                    Since mid-2023, I’ve been reading articles almost every day. I didn't realize at first, but it's really helped me at work and expanded my knowledge. I created this page to keep track of everything I’ve read. Maybe it’ll help you too!
+                </p>
+    
+                <TagFilter tags={allTags} selectedTag={tag} baseUrl="bookmarks" />
+            </div>
 
             <ul class='mt-6 flex flex-wrap gap-4'>
                 {

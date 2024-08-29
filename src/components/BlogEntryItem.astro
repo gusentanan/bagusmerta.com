@@ -9,46 +9,46 @@ export type Props = BlogEntry;
 
 const props = Astro.props;
 ---
-  <li class:list={[
-    'w-full rounded-md border border-gray-300 bg-white',
-    'scale-100 hover:scale-[1.02] active:scale-[0.97] motion-safe:transform-gpu',
-    'transition duration-100',
-    'motion-reduce:hover:scale-100',
-    'animate-shadow',
-  ]}>
-    <a class='block h-full rounded-md focus:outline-none focus-visible:ring focus-visible:ring-primary-300 hover:shadow-lg' href={getBlogPathName(props)}>
-        <div class='relative'>
-          <Image 
-            src={props.data.banner}
-            decoding='async'
-            loading='lazy'
-            alt='blog banner'            
-           />
-           <div class="absolute top-2 left-2 z-10">
-            <div class="flex gap-2">
-                {props.data.tags.map((type) => (
-                    <p class='mt-0 mb-0 h-8 px-3 w-max flex gap-2 items-center rounded-full bg-black text-white text-sm md:text-md'>
-                       # {type}
-                    </p>
-                ))}
-            </div>
+<li class:list={[
+  'p-2 w-full rounded-lg border border-gray-900',
+  'bg-gradient-to-br from-[rgba(255,255,255,0.05)]',
+  'scale-500 hover:scale-[1.02] active:scale-[0.97] motion-safe:transform-gpu',
+  'transition duration-500',
+  'motion-reduce:hover:scale-500',
+  'animate-shadow',
+  'hover:border-[rgba(255,255,255,0.26)] hover:shadow-[0_0_12px_rgba(255,255,255,0.1)]',
+]}>
+  <a class='block h-full rounded-lg focus:outline-none focus-visible:ring focus-visible:ring-primary-300 hover:shadow-lg' href={getBlogPathName(props)}>
+    <div class='relative'>
+      <Image 
+        src={props.data.banner}
+        decoding='async'
+        loading='lazy'
+        alt='blog banner'            
+      />
+      <div class="absolute top-2 left-2 z-10">
+        <div class="flex gap-2">
+          {props.data.tags.map((type) => (
+            <p class='mt-0 mb-0 h-8 px-3 w-max flex gap-2 items-center rounded-full bg-black text-white text-sm md:text-md'>
+              # {type}
+            </p>
+          ))}
         </div>
+      </div>
+    </div>
+    <div class='p-2'>
+      <div class='py-2 flex items-center justify-start gap-2 text-sm font-normal text-gray-400'>
+        <div class='flex items-center gap-1'>
+          <Icon name='ri:alarm-line'/>
+          <h5>{props.data.readCount}</h5>
         </div>
-        <div class='p-4'>
-            <h4 class='text-black-800'>{props.data.title}</h4>
-            <div class='py-2 flex items-center justify-start gap-2 text-sm font-normal text-gray-600'>
-                <div class='flex items-center gap-1'>
-                    <Icon name='ri:alarm-line'/>
-                    <h5>{props.data.readCount}</h5>
-                </div>
-                <div class='flex items-center gap-1'>
-                  <Icon name='ri:calendar-2-fill'/>
-                  <h5>{formatDate(props.data.date)}</h5>
-              </div>
-            </div>
-            <p class='m-0 text-md text-black-700'>{props.data.description}</p>
+        <div class='flex items-center gap-1'>
+          <Icon name='ri:calendar-2-fill'/>
+          <h5>{formatDate(props.data.date)}</h5>
         </div>
-    </a>
+      </div>
+      <h4 class='text-white'>{props.data.title}</h4>
+      <p class='pt-6 m-0 text-sm text-gray-400'>{props.data.description}</p>
+    </div>
+  </a>
 </li>
-
-

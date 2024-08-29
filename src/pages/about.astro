@@ -5,6 +5,7 @@ import { Image } from "astro:assets";
 import { Icon } from "astro-icon/components"
 import Accent from "@components/Accent.astro";
 import CustomLink from "@components/CustomLink.astro";
+import { Spotlight } from "@components/Spotlight";
 
 
 const techIcons = [
@@ -45,102 +46,63 @@ const techIcons = [
 ---
 
 <BaseLayout title={getTitle('About')}>
-  <main class='layout'>
-    <section class='py-20'>
+  <main class='layout py-32'>
+    <Spotlight
+      className="-top-20 left-0 md:left-60 md:-top-60"
+      fill="white"
+      client:load
+    />
+    <section class='flex flex-col justify-center items-center'>
       <Image
-        class='float-right rounded-lg ml-4 mb-2 w-40 h-40 md:w-72 md:h-72 object-cover'
-        src='/images/avatar.png'
+        class='ml-4 rounded-lg w-20 h-20 md:w-20 md:h-20 object-cover'
+        src='/images/avatar-1.png'
         alt='Photo of me, hopefully can impress your boss'
         decoding='async'
         loading='lazy'
-        width={1500}
-        height={1695}
+        width={500}
+        height={500}
       />
-      <h2 class='mt-1'><Accent text='About Me.'/></h2>
-      <p class='mt-4'>
-        Hello there! welcome to my website.
-      </p>
-      <p class='mt-4'>
-        My name is Bagus.
+
+      <h2 class='mt-10 text-3xl md:text-4xl'>Get to know <span class="font-display text-5xl">Me</span></h2>
+    
+      <p class='mt-4 text-center text-gray-400'>
+        Call me Bagus.
         I work as a Software Engineer and have a passion for 
         experimenting with user interfaces and creating products that deliver exceptional user 
         experiences. While my expertise lies in mobile development and front-end work, 
         I also find joy in integrating various software components together.
       </p>
-      <p class='mt-4'>
+      <p class='mt-4 text-center text-gray-400'>
         Currently, I'm working as a Software Engineer for mobile platform at a startup based in Singapore.
       </p>
 
     </section>
-    </section>
-   
-    <section>
-      <h2 class='mt-1'><Accent text='My Background'/></h2>
-      <p class='mt-4'>
-        I'm born and grew up in Bali, Indonesia and I'm very grateful to have taken a very traditional route into the fields
-        of Software Engineering and Computer Science.
-      </p>
-      <p>
-        My journey with programming started at Udayana University. Although I faced some challenges and uncertainties during 
-        my first year, the onset of COVID-19 and the quarantine give me quite a lot of time to learn software engineering.
-      </p>
-      <p>
-        During my college years, I was actively involved in the highly ambitious informatics club called
-        <a href="https://sicudayana.com" target='_blank', class='cursor-newtab'>
-          <CustomLink text="SIC (Student Innovation Centre)" />
-        </a> 
-        , where I led a team of 8 people. We organized sharing sessions to discuss various 
-        technology and software engineering topics. I also took part in an immersive project where we 
-        collaborated to create a project from scratch. 
-      </p>
-      <p>
-        Additionally, I joined a startup called Inspix Technologies, working as a Product Manager to help launch their first MVP 
-        product, which was supported by the Ministry of Industry in Indonesia and based in Denpasar, Bali.
-      </p>
-      <p>
-        In my later years, I also joined the 
-        <a href="https://kampusmerdeka.kemdikbud.go.id/" target='_blank', class='cursor-newtab'>
-          <CustomLink text="Kampus Merdeka" />
-        </a> 
-        program (8 months intensives bootcamp), This experience set a strong foundation in software engineering for me, which helped me a lot in the next several years. 
-      </p>
-    </section>
-
     
-    <section>
-      <h2 class='mt-8'><Accent text='Education'/></h2>
-      <div class='flex items-center space-x-4'>
+    <section class="flex flex-col justify-center items-center">
+      <h2 class='mt-8 font-display text-3xl'>Education</h2>
+      <div class='flex items-center space-x-4 text-gray-400'>
         <h4 class='mt-2'>Bachelor of Comp. Science</h4>
         <h4 class='mt-2'>2019—2023</h2>
       </div>
-      <h4 class='mt-4'>Universitas Udayana</h4>
-      <h4>Bachelor Degree of Computer Science,</h4>
+      <h4 class='mt-4 text-gray-400'>Universitas Udayana</h4>
+      <h4 class="text-gray-400">Bachelor Degree of Computer Science,</h4>
 
     </section>
 
-    <section>
-    <h2 class='mt-8'><Accent text='Tech Stack'/></h2>
-      <ul class='mt-8 flex flex-wrap gap-4'>
-        {techIcons.map((icons) => {
-          return (
-            <li>
-              <Icon 
-                class='text-6xl hover:text-primary-400'
-                name={icons.icon} 
-              />
-            </li>
-          );
-        })}
-    </ul>
-    </section>
-
-    <section>
-      <h2 class='mt-10'><Accent text='Contact'/></h2>
-      <p class='mt-4'>
-        Feel free to reach out if you require insights on web & app development, 
-        particularly frontend projects. I'll be happy to help. 
-        You can locate my contact information in the footer ✨
-      </p>
+    <section class="flex flex-col justify-center items-center">
+      <h2 class='mt-8 text-3xl font-display'>Tech</h2>
+        <ul class='mt-8 flex flex-wrap gap-4 justify-center items-center'>
+          {techIcons.map((icons) => {
+            return (
+              <li>
+                <Icon 
+                  class='text-6xl text-gray-300 hover:text-primary-400'
+                  name={icons.icon} 
+                />
+              </li>
+            );
+          })}
+      </ul>
     </section>
   </main>
 </BaseLayout>

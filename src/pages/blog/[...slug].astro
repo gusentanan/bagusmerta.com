@@ -6,6 +6,7 @@ import { getCollection } from "astro:content";
 import { formatDate } from "utils/time";
 import { Icon } from "astro-icon/components"
 import Comments from "@components/Comments.astro";
+import { TracingBeam } from "@components/TracingBeam";
 
 
 export async function getStaticPaths() {
@@ -27,38 +28,40 @@ const { Content } = await entry.render();
   banner={entry.data.banner.src}
   >
   <main>
+    <TracingBeam client:load>
     <section class='blog-layout'>
-      <div class='pb-4'>
-        <Image
-          class='mt-4 mb-4 rounded'
-          src={entry.data.banner} 
-          width={1200}
-          height={(1200 * 2) / 5}
-          alt='Image Banner Blog' 
-          decoding='async'
-          loading='lazy'
-        />
-        <h1 class='mt-1'>{entry.data.title}</h1>
-        <div class='mt-2 flex items-center justify-start gap-8 text-lg font-normal text-gray-600'>
-          <div class='flex items-center gap-1'>
-              <Icon name='ri:alarm-line'/>
-              <strong>{entry.data.readCount}</strong>
+        <div class='pl-10 pr-10 py-20 md:px-28'>
+          <div class="py-20 flex flex-col justify-center items-center">
+            <h1 class='font-display text-4xl text-center'>{entry.data.title}</h1>
+            <div class='mt-4 flex items-center justify-start gap-8 text-sm text-gray-400'>
+              <div class='flex items-center gap-1'>
+                  {entry.data.readCount} - Published: {formatDate(entry.data.date)}
+              </div>
+            </div>
+            
+            <Image
+              class='mt-10 mb-4 rounded-lg'
+              src={entry.data.banner} 
+              width={1200}
+              height={(1200 * 2) / 5}
+              alt='Image Banner Blog' 
+              decoding='async'
+              loading='lazy'
+            />
           </div>
-          <div class='flex items-center gap-1'>
-            <Icon name='ri:calendar-2-fill'/>
-            <strong>{formatDate(entry.data.date)}</strong>
-          </div>
+  
+          <article class='mt-4'>
+            <div class='mdoc-container'>
+              <Content />
+            </div>
+          </article>
+          <Comments />
+          <LatestPosts id={entry.data.id} />
+  
         </div>
-        <hr class='mt-4 divider' />
-        <article class='mt-4'>
-          <div class='mdoc-container'>
-            <Content />
-          </div>
-        </article>
-        <Comments />
-        <LatestPosts id={entry.data.id} />
 
-      </div>
+      </TracingBeam>
+      
     </section>
   </main>
 </BaseLayout>

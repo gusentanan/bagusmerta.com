@@ -35,13 +35,13 @@ const techList = {
 export type Props = ProjectEntry;
 const props = Astro.props;
 ---
-<ul class='mt-2 flex flex-wrap gap-2'>
+<ul class='py-2 flex flex-wrap gap-2'>
     {props.data.tags.map((tag, _) => {
         if (!techList[tag]) return null;
         const current = techList[tag];
         return (
           <li>
-            <Icon class='text-2xl' name={current.icon} />
+            <Icon class='text-2xl text-gray-400' name={current.icon} />
           </li>
         );
       })

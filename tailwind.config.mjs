@@ -1,6 +1,10 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const { fontFamily } = require('tailwindcss/defaultTheme');
 const colors = require('tailwindcss/colors');
+const {
+	default: flattenColorPalette,
+  } = require("tailwindcss/lib/util/flattenColorPalette");
+   
 
 
 /** @type {import('tailwindcss').Config} */
@@ -12,6 +16,7 @@ export default {
 		extend: {
 			fontFamily: {
 				primary: ['AlbertSans', ...fontFamily.sans],
+				display: ['PlayfairBold', ...fontFamily.sans],
 				code: ['DMMono', ...fontFamily.sans],
 			  },
 			  colors: {
@@ -70,13 +75,49 @@ export default {
 					transform: 'rotate(-0.5deg)',
 				  },
 				},
+				flip: {
+					to: {
+					  transform: "rotate(360deg)",
+					},
+				  },
+				rotate: {
+					to: {
+					  transform: "rotate(90deg)",
+					},
+				  },
+				spotlight: {
+				"0%": {
+					opacity: 0,
+					transform: "translate(-72%, -62%) scale(0.5)",
+				},
+				"100%": {
+					opacity: 1,
+					transform: "translate(-50%,-40%) scale(1)",
+				},
+				},
+			  
 			  },
 			  animation: {
 				flicker: 'flicker 3s linear infinite',
 				tilt: 'tilt 10s infinite linear',
-				'text-slide': 'slide 20.5s cubic-bezier(0.83, 0, 0.17, 1) infinite',
+				flip: "flip 6s infinite steps(2, end)",
+				rotate: "rotate 3s linear infinite both",
+				spotlight: "spotlight 2s ease .75s 1 forwards",
 			  },
 		},
 	},
-	plugins: [require('@tailwindcss/forms'), require('@tailwindcss/typography')],
+	plugins: [require('@tailwindcss/forms'), require('@tailwindcss/typography'), addVariablesForColors,],
 }
+
+
+// This plugin adds each Tailwind color as a global CSS variable, e.g. var(--gray-200).
+function addVariablesForColors({ addBase, theme }) {
+	let allColors = flattenColorPalette(theme("colors"));
+	let newVars = Object.fromEntries(
+	  Object.entries(allColors).map(([key, val]) => [`--${key}`, val])
+	);
+   
+	addBase({
+	  ":root": newVars,
+	});
+  }

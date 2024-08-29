@@ -1,6 +1,7 @@
 ---
 import Accent from "@components/Accent.astro";
 import PostEntryItem from "@components/ProjectEntryItem.astro";
+import { Spotlight } from "@components/Spotlight";
 import BaseLayout from "@layouts/BaseLayout.astro";
 import { getProjectCollection } from "utils/content";
 import { getTitle } from "utils/title";
@@ -10,16 +11,22 @@ const allProject = await getProjectCollection();
 
 <BaseLayout title={getTitle('Projects')}>
   <main>
-    <div class='layout py-12'>
-      <h2 class='text-3xl md:text-4xl'>
-          <Accent text='Projects.'/>
-      </h2>
-      <p class='mt-2 text-black-600'>
-        Things I've created.
-        These projects reflect my curiosity and eagerness to explore new things. 
-        Please note that some projects from my professional work cannot be shared due to confidentiality reasons. 
-      </p>
-      <ul class='mt-6 grid gap-4 sm:grid-cols-2 xl:grid-cols-3'>
+    <div class='layout py-32'>
+      <Spotlight
+          className="-top-20 left-0 md:left-60 md:-top-60"
+          fill="white"
+          client:load
+        />
+      <div class="flex flex-col justify-center items-center">
+        <h2 class='text-3xl md:text-4xl'>
+            Check out my <span class="font-display text-5xl">projects</span>
+        </h2>
+        <p class='px-12 md:px-32 py-2 md:py-6 text-center text-gray-400'>
+          Things I've created.
+          Please note that some projects from my professional work cannot be shared due to confidentiality reasons. 
+        </p>
+      </div>
+      <ul class='mt-6 px-6 grid gap-4 sm:grid-cols-1 xl:grid-cols-2'>
         {allProject.map((projects) => <PostEntryItem {...projects} />)}
       </ul>
     </div>
