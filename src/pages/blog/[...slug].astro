@@ -1,12 +1,11 @@
 ---
-import LatestPosts from "@components/LatestPosts.astro";
+import LatestPosts from "@components/blog/LatestPosts.astro";
 import BaseLayout from "@layouts/BaseLayout.astro";
 import { Image } from "astro:assets";
 import { getCollection } from "astro:content";
 import { formatDate } from "utils/time";
 import { Icon } from "astro-icon/components"
 import Comments from "@components/Comments.astro";
-import { TracingBeam } from "@components/TracingBeam";
 
 
 export async function getStaticPaths() {
@@ -28,9 +27,8 @@ const { Content } = await entry.render();
   banner={entry.data.banner.src}
   >
   <main>
-    <TracingBeam client:load>
     <section class='blog-layout'>
-        <div class='pl-10 pr-10 py-20 md:px-28'>
+        <div class='px-6 py-20 md:px-28'>
           <div class="py-20 flex flex-col justify-center items-center">
             <h1 class='font-display text-4xl text-center'>{entry.data.title}</h1>
             <div class='mt-4 flex items-center justify-start gap-8 text-sm text-gray-400'>

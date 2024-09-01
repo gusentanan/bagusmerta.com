@@ -1,6 +1,5 @@
 ---
-import Accent from "@components/Accent.astro";
-import BookmarkEntryItem from "@components/BookmarkEntryItem.astro";
+import BookmarkEntryItem from "@components/bookmark/BookmarkEntryItem.astro";
 import { Spotlight } from "@components/Spotlight";
 import TagFilter from "@components/TagFilter.astro";
 import BaseLayout from "@layouts/BaseLayout.astro";
@@ -34,7 +33,7 @@ const currentTag = 'All';
                 <TagFilter tags={allTags} selectedTag={currentTag} baseUrl="bookmarks" />
             </div>
 
-            <ul class='mt-6 px-6 flex flex-wrap gap-4'>
+            <ul class='mt-4 px-6 grid gap-4 sm:grid-cols-2 xl:grid-cols-2'>
                 {
                     allBookmark.map((item) => <BookmarkEntryItem {...item} />)
                 }

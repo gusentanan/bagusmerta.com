@@ -2,7 +2,7 @@
 import { Icon } from "astro-icon/components";
 import { getCurrentTimestamp, getLatestCommitHash } from "utils/header";
 import { getPathNameWithoutLocale } from "utils/url";
-import { FloatingNav } from "./FloatingNavbar";
+import { Navbar } from "./navbar";
 
 type NavLink = {
   link: string;
@@ -25,44 +25,5 @@ const commitHash = getLatestCommitHash();
 ---
 
 <header class='relative w-full'>
-  <FloatingNav navItems={LINKS} client:load/>
-    
-  <!-- <div class='bg-black'> -->
-    <!-- <div class='bg-gray-100'>
-      <div class='layout flex items-center py-2 gap-2'>
-        <Icon name='ri:alarm-line'/>
-        <h5 >{timeStamp}  Bali, Indonesia</h5>
-        <Icon name='ri:github-line'/>
-        <h5>{commitHash}</h5>
-      </div>
-    </div> -->
-    <!-- <nav class='layout flex items-center justify-between py-4'>
-      <a href='/'>
-        <picture>
-          <img
-            src='/images/logo.svg'
-            alt='bagusmerta.com logo'
-            width='122'
-            height='122'
-          />
-        </picture>
-      </a>
-      <ul class='flex items-center justify-between space-x-3 text-xs md:space-x-4 md:text-base'>
-        {LINKS.map(({ href, label }) => {
-          const isActive = href.toLowerCase() === pathName.toLowerCase() || href.toLocaleLowerCase() === pathName.toLocaleLowerCase() + '/';
-          return (
-            <li>
-              <a href={href}>
-                <span
-                  class={`animated-underline custom-link inline-flex items-center font-normal focus:outline-none focus-visible:ring focus-visible:ring-primary-300 ${isActive ? '!bg-primary-300/50' : ''}`}
-                >
-                  {label}
-                </span>
-              </a>
-            </li>
-          );
-        })}
-      </ul>
-    </nav>
-  </div> -->
+  <Navbar client:load client:only/>
 </header>

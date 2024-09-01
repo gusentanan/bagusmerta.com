@@ -7,7 +7,7 @@ const { tags, selectedTag, baseUrl } = Astro.props;
     href={`/${baseUrl}`}
     class:list={[
       'mt-0 mb-2 h-8 px-3 w-max flex gap-2 items-center rounded-full text-sm md:text-md',
-      selectedTag == 'All' ? 'bg-black text-white' : 'bg-gray-200 text-black hover:bg-gray-300'
+      selectedTag == 'All' ? 'bg-black text-white' : 'bg-gray-800 text-white hover:bg-gray-900'
     ]}
   >
     All
@@ -17,7 +17,7 @@ const { tags, selectedTag, baseUrl } = Astro.props;
       href={`/${baseUrl}/${tag}`}
       class:list={[
         'mt-0 mb-2 h-8 px-3 w-max flex gap-2 items-center rounded-full text-sm md:text-md',
-        selectedTag === tag ? 'bg-black text-white' : 'bg-gray-200 text-black hover:bg-gray-300'
+        selectedTag === tag ? 'bg-black text-white' : 'bg-gray-800 text-white hover:bg-gray-900'
       ]}
     >
       # {tag}

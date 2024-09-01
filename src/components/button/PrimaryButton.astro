@@ -1,0 +1,18 @@
+---
+export interface Props {
+  href: string;  
+  text: string;  
+}
+
+const { href = '/blog', text = 'See more articles →' } = Astro.props;
+---
+
+<a href={href}>
+  <button class="group relative grid overflow-hidden rounded-full">
+    <span>
+      <span class="spark mask-gradient absolute" />
+    </span>
+    <span class="backdrop absolute inset-[1px] rounded-full bg-neutral-950 group-hover:bg-neutral-800" />
+    <span class="z-10 py-0.5 text-sm text-neutral-100">{text}</span>
+  </button>
+</a>

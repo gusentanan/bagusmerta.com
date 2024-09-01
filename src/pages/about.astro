@@ -3,9 +3,8 @@ import BaseLayout from "@layouts/BaseLayout.astro";
 import { getTitle } from "utils/title";
 import { Image } from "astro:assets";
 import { Icon } from "astro-icon/components"
-import Accent from "@components/Accent.astro";
-import CustomLink from "@components/CustomLink.astro";
 import { Spotlight } from "@components/Spotlight";
+import Footer from "@components/Footer.astro";
 
 
 const techIcons = [
@@ -103,6 +102,9 @@ const techIcons = [
             );
           })}
       </ul>
+    </section>
+    <section class="flex flex-col justify-center item-center mt-20">
+      <Footer />
     </section>
   </main>
 </BaseLayout>

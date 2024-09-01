@@ -1,6 +1,5 @@
 ---
-import Accent from "@components/Accent.astro";
-import BookmarkEntryItem from "@components/BookmarkEntryItem.astro";
+import BookmarkEntryItem from "@components/bookmark/BookmarkEntryItem.astro";
 import BaseLayout from "@layouts/BaseLayout.astro";
 import { getTitle } from "utils/title";
 import { getBookmarkByTag, getBookmarkTags } from "utils/posts";
@@ -33,10 +32,10 @@ const posts = await getBookmarkByTag(tag);
             />
             <div class="flex flex-col justify-center items-center">
                 <h2 class='text-3xl md:text-4xl'>
-                    Welcome to my <span class="font-display text-5xl">Bookmarks</span>
+                    My <span class="font-display text-5xl">Bookmarks</span>
                 </h2>
                 <p class='text-center px-32 py-6 text-gray-400'>
-                    Since mid-2023, I’ve been reading articles almost every day. I didn't realize at first, but it's really helped me at work and expanded my knowledge. I created this page to keep track of everything I’ve read. Maybe it’ll help you too!
+                    Since mid-2023, I’ve been reading articles almost every day. It's really helped me at work and expanded my knowledge. I created this page to keep track of everything I’ve read.
                 </p>
     
                 <TagFilter tags={allTags} selectedTag={tag} baseUrl="bookmarks" />

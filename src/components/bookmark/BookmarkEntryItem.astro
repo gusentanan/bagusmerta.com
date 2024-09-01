@@ -1,0 +1,47 @@
+---
+import { Icon } from "astro-icon/components";
+import type { BookmarkEntry } from 'utils/content';
+
+
+const categoryIcon = {
+  "software-engineering": {
+    icon: "ri:aliens-line",
+  },
+  "design-system": {
+    icon: "ri:heart-2-line",
+  },
+  tips: {
+    icon: "ri:earth-line",
+  },
+};
+
+export type Props = BookmarkEntry;
+const props = Astro.props;
+---
+
+
+<li class:list={[
+    'p-2 w-80 rounded-lg border border-gray-900',
+    'bg-gradient-to-br from-[rgba(255,255,255,0.05)]',
+    'scale-500 hover:scale-[1.02] active:scale-[0.97] motion-safe:transform-gpu',
+    'transition duration-500',
+    'motion-reduce:hover:scale-500',
+    'animate-shadow',
+    'hover:border-[rgba(255,255,255,0.26)] hover:shadow-[0_0_12px_rgba(255,255,255,0.1)]',
+]}>
+  <a href={(props.data.link)} class:list={[
+      'flex h-full flex-col items-start rounded-md p-2 focus:outline-none focus-visible:ring focus-visible:ring-primary-300',
+      'cursor-newtab'
+  ]} target="_blank">
+    <div class="flex items-center justify-between w-full gap-2 mb-2"> 
+      <h4>{props.data.title}</h4>
+      {props.data.tags.length > 0 && (
+        <div class="p-1 rounded-full bg-gray-800 flex items-center justify-center">
+            <Icon name={categoryIcon[props.data.tags[0]]?.icon} class="h-8 w-8 text-gray-400" /> 
+        </div>
+      )}
+    </div>
+    
+    <h5 class='mt-auto text-gray-500 line-clamp-3'>{props.data.description}</h5>
+  </a>
+</li>
