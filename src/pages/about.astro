@@ -47,9 +47,9 @@ const techIcons = [
 <BaseLayout title={getTitle('About')}>
   <main class='layout py-32'>
     <Spotlight
-      className="-top-20 left-0 md:left-60 md:-top-60"
+      className="hidden md:block -top-20 left-0 md:left-60 md:-top-60"
       fill="white"
-      client:load
+      client:visible
     />
     <section class='flex flex-col justify-center items-center'>
       <Image

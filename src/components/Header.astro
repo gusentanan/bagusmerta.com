@@ -1,29 +1,9 @@
 ---
-import { Icon } from "astro-icon/components";
-import { getCurrentTimestamp, getLatestCommitHash } from "utils/header";
-import { getPathNameWithoutLocale } from "utils/url";
 import { Navbar } from "./navbar";
-
-type NavLink = {
-  link: string;
-  name: string;
-};
-
-const LINKS: NavLink[] = [
-  { link: "/about", name: "About" },
-  { link: "/projects", name: "Projects" },
-  { link: "/blog", name: "Blog" },
-  { link: "/bookmarks", name: "Bookmarks" },
-  // { href: "/experience", label: "Experience" },
-];
-
-// Omit the locale prefix if it exists
-const pathName = getPathNameWithoutLocale(Astro.request.url);
-const timeStamp = getCurrentTimestamp();
-const commitHash = getLatestCommitHash();
-
 ---
 
 <header class='relative w-full'>
-  <Navbar client:load client:only/>
+  <Navbar 
+    client:only="react"
+  />
 </header>
