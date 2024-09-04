@@ -41,11 +41,13 @@ const posts = await getBookmarkByTag(tag);
                 <TagFilter tags={allTags} selectedTag={tag} baseUrl="bookmarks" />
             </div>
 
-            <ul class='mt-6 flex flex-wrap gap-4'>
-                {
-                    posts.map((item) => <BookmarkEntryItem {...item} />)
-                }
-            </ul>
+            <div class="flex justify-center">
+                <ul class='mt-4 grid gap-4 sm:grid-cols-2 xl:grid-cols-2'>
+                    {
+                        posts.map((item) => <BookmarkEntryItem {...item} />)
+                    }
+                </ul>
+            </div>
         </div>
     </main>
 

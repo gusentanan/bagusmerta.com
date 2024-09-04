@@ -32,12 +32,14 @@ const currentTag = 'All';
     
                 <TagFilter tags={allTags} selectedTag={currentTag} baseUrl="bookmarks" />
             </div>
-
-            <ul class='mt-4 px-6 grid gap-4 sm:grid-cols-2 xl:grid-cols-2'>
-                {
-                    allBookmark.map((item) => <BookmarkEntryItem {...item} />)
-                }
-            </ul>
+            
+            <div class="flex justify-center">
+                <ul class='mt-4 grid gap-4 sm:grid-cols-2 xl:grid-cols-2'>
+                    {
+                        allBookmark.map((item) => <BookmarkEntryItem {...item} />)
+                    }
+                </ul>
+            </div>
         </div>
     </main>
 
