@@ -16,8 +16,8 @@ import Footer from "@components/Footer.astro";
 
 let { title, description, banner } = Astro.props;
 
-title = title || "I Putu Bagus Merta Sentana - Software Engineer";
-description = description || "Bagus Merta's personal website";
+title = title || "Bagus Merta";
+description = description || "Explore the portfolio and blog of Bagus Merta, featuring a collection of my projects and curated reading bookmarks";
 banner = banner || "meta/opengraph.jpg";
 
 const resolvedImageWithDomain = new URL(
@@ -42,7 +42,6 @@ const resolvedImageWithDomain = new URL(
     <SEO
       title={title}
       description={description}
-      canonical="https://bagusmerta.com"
       openGraph={{
         basic: {
         type: "website",
@@ -56,6 +55,18 @@ const resolvedImageWithDomain = new URL(
       }}
       twitter={{
         creator: "@bagusmertasntn",
+      }}
+      extend={{
+        meta: [
+          {
+              name: "twitter:image",
+              content: resolvedImageWithDomain,
+          },
+          { name: "twitter:title", content: title } ,
+          { name: "twitter:description", content: description },
+          { name: "twitter:site", content: "@bagusmertasntn" },
+          { name: "twitter:card", content: "summary_large_image" },
+        ]
       }}
     />
   </head>
