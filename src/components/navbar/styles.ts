@@ -11,7 +11,7 @@ export const navbarInner = cn(
 
 export const navbarRoutesWrapper = cn(
   "flex h-9 items-stretch justify-center space-x-2 px-4 max-sm:px-2",
-  "bg-zinc-100/90 shadow-md backdrop-blur-sm bg-zinc-900/90",
+  "bg-background shadow-md backdrop-blur-sm bg-primary-foreground",
   "rounded-full border border-zinc-500/25 transition-colors",
 );
 

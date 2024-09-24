@@ -2,28 +2,28 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  /* Customize these variables */
-  /* Purple: #9600FF */
-  --tw-clr-primary-200: 150 0 255;
-
-  /* Pink: #FFC0CB */
-  --tw-clr-primary-300: 255 192 203;
-
-  /* Orange: #FFA500 */
-  --tw-clr-primary-400: 255 165 0;
-
-  /* Yellow: #FFFF00 */
-  --tw-clr-primary-500: 255 255 0;
-
-  /* Conversion to RGB for use in CSS */
-  --clr-primary-200: rgb(var(--tw-clr-primary-200)); /* Purple color */
-  --clr-primary-300: rgb(var(--tw-clr-primary-300)); /* Red color */
-  --clr-primary-400: rgb(var(--tw-clr-primary-400)); /* Orange color */
-  --clr-primary-500: rgb(var(--tw-clr-primary-500)); /* Yellow color */
-}
-
 @layer base {
+  :root {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217.2 32.6% 17.5%;
+    --radius: 0.5rem;
+  }
+
   @font-face {
     font-family: "AlbertSans";
     font-style: normal;
@@ -66,10 +66,6 @@
     }
   }
 
-  ::selection {
-    background: rgba(var(--tw-clr-primary-300) / 0.3);
-  }
-
   .cursor-newtab {
     cursor:
       url("/images/new-tab.png") 10 10,
@@ -87,7 +83,7 @@
   }
 
   h3 {
-    @apply text-lg font-display  md:text-2xl inline-block;
+    @apply font-primary text-lg md:text-2xl inline-block;
   }
 
   h4,
@@ -104,7 +100,7 @@
   }
 
   blockquote {
-    @apply m-0 p-4 border-l-4 border-blue-300;
+    @apply m-0 p-2 border-l-4 border-blue-500;
   }
 
   .mdoc-container a {
@@ -131,9 +127,7 @@
 
   body,
   .body {
-    @apply font-primary text-sm md:text-base;
-    background-color: #000000; /* Dark background color */
-    color: #ffffff; /* Light text color for contrast */
+    @apply bg-background text-foreground font-primary text-sm md:text-base;
     min-height: 100vh;
   }
 
@@ -164,9 +158,7 @@ button {
   font-size: 1rem;
 
   padding: 0.5rem 2rem;
-  background: rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(2px);
-  color: white;
   border-radius: 50px;
 }
 
@@ -193,45 +185,6 @@ button::before {
     linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
   mask-composite: exclude;
-}
-
-@layer utilities {
-  .animated-underline {
-    background-image: linear-gradient(#33333300, #33333300),
-      linear-gradient(to right, var(--clr-primary-300), var(--clr-primary-400));
-    background-size:
-      100% 2px,
-      0 2px;
-    background-position:
-      100% 100%,
-      0 100%;
-    background-repeat: no-repeat;
-    transition: 0.3s ease;
-    transition-property: background-size, color, background-color, border-color;
-  }
-  @media (prefers-reduced-motion: reduce) {
-    .animated-underline {
-      transition: none;
-    }
-  }
-  .animated-underline:hover,
-  .animated-underline:focus-visible,
-  .project-card:hover .animated-underline,
-  .project-card:focus-visible .animated-underline {
-    background-size:
-      0 2px,
-      100% 2px;
-  }
-}
-/* Tippy */
-.tippy-box[data-theme="default"] {
-  background-color: white;
-  color: gray;
-  border: 1px solid rgba(128, 128, 128, 0.5);
-  border-radius: 0.5rem;
-  padding: 0.5rem;
-  word-wrap: break-word;
-  max-width: 400px !important;
 }
 
 .bg-grid-white {

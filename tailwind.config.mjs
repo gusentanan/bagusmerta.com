@@ -19,15 +19,35 @@ export default {
 				display: ['PlayfairBold', ...fontFamily.sans],
 				code: ['DMMono', ...fontFamily.sans],
 			  },
+			  borderRadius: {
+				lg: 'var(--radius)',
+				md: 'calc(var(--radius) - 2px)',
+				sm: 'calc(var(--radius) - 4px)',
+			  },
 			  colors: {
+				background: 'hsl(var(--background))',
+        		foreground: 'hsl(var(--foreground))',
 				primary: {
-				  // Customize it on globals.css :root
-				  200: 'rgb(var(--tw-clr-primary-200) / <alpha-value>)',
-				  300: 'rgb(var(--tw-clr-primary-300) / <alpha-value>)',
-				  400: 'rgb(var(--tw-clr-primary-400) / <alpha-value>)',
-				  500: 'rgb(var(--tw-clr-primary-500) / <alpha-value>)',
+					DEFAULT: 'hsl(var(--primary))',
+					foreground: 'hsl(var(--primary-foreground))',
 				},
-				dark: '#0e1111',
+				secondary: {
+					DEFAULT: 'hsl(var(--secondary))',
+					foreground: 'hsl(var(--secondary-foreground))',
+				},
+				muted: {
+					DEFAULT: 'hsl(var(--muted))',
+					foreground: 'hsl(var(--muted-foreground))',
+				},
+				accent: {
+					DEFAULT: 'hsl(var(--accent))',
+					foreground: 'hsl(var(--accent-foreground))',
+				},
+				destructive: {
+					DEFAULT: 'hsl(var(--destructive))',
+					foreground: 'hsl(var(--destructive-foreground))',
+				},
+				border: 'hsl(var(--border))',
 			  },
 			  keyframes: {
 				slide: {

@@ -12,5 +12,10 @@ export default defineConfig({
   site: 'https://bagusmerta.com',
   output: "static",
   // cc: https://docs.astro.build/en/reference/configuration-reference/#output
-  integrations: [markdoc(), react(), icon(), tailwind()],
+  integrations: [
+    markdoc(), react(), icon(), 
+    tailwind({
+      applyBaseStyles: false,
+    })
+  ],
 });

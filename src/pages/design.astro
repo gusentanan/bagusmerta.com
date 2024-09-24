@@ -1,0 +1,184 @@
+---
+import BaseLayout from "@layouts/BaseLayout.astro";
+import { Icon } from "astro-icon/components";
+import { getTitle } from "utils/title";
+import PrimaryButton from "@components/button/PrimaryButton.astro";
+import SecondaryButton from "@components/button/SecondaryButton.astro";
+import GlowingButton from "@components/button/GlowingButton.astro";
+import BlogEntryItem from "@components/blog/BlogEntryItem.astro";
+import ProjectEntryItem from "@components/project/ProjectEntryItem.astro";
+import { getBlogCollection, getBookMarkCollection, getProjectCollection } from "utils/content";
+import BookmarkEntryItem from "@components/bookmark/BookmarkEntryItem.astro";
+import TagFilter from "@components/TagFilter.astro";
+import Alert from "@components/Alert.astro";
+
+const allBlogPosts = await getBlogCollection();
+const allProject = await getProjectCollection();
+const allBookmark = await getBookMarkCollection();
+const allTags = [...new Set(allBlogPosts.flatMap(post => post.data.tags))];
+
+const currentTag = 'All';
+---
+
+<BaseLayout title={getTitle('Design')}>
+    <main class="layout py-32">
+        <section class='flex flex-col justify-center items-center'>
+            <h2 class="mt-10 text-3xl md:text-4xl">My site  <span class="font-display text-5xl">Design tokens</span> </h2>
+        </section>
+        <section class="px-20 py-20 flex flex-col gap-4">
+            <h1>TypeFace</h1>
+            <div class="flex flex-row justify-between">
+                <h1 class="font-display text-5xl">Display</h1>
+                <h1 class="font-display text-5xl">Hello</h1>
+            </div>
+            <div class="flex flex-row justify-between">
+                <h1>H1</h1>
+                <h1>Hello</h1>
+            </div>
+            <div class="flex flex-row justify-between">
+                <h2>H2</h2>
+                <h2>Hello</h2>
+            </div>
+            <div class="flex flex-row justify-between">
+                <h3>H3</h3>
+                <h3>Hello</h3>
+            </div>
+            <div class="flex flex-row justify-between">
+                <h4>H4</h4>
+                <h4>Hello</h4>
+            </div>
+            <div class="flex flex-row justify-between">
+                <h5>H5</h5>
+                <h5>Hello</h5>
+            </div>
+            <div class="flex flex-row justify-between">
+                <h6>H6</h6>
+                <h6>Hello</h6>
+            </div>
+            <div class="flex flex-row justify-between">
+                <p>paragraph</p>
+                <p>Hello</p>
+            </div>
+            <div class="flex flex-row justify-between">
+                <code>code</code>
+                <code>Hello World</code>
+            </div>
+            <div class="flex flex-row justify-between">
+                <a>link</a>
+                <div class="mdoc-container">
+                    <a>Hello World</a>
+                </div>
+            </div>
+            <div class="py-10 flex flex-col gap-2">
+                <h4>Quotes</h4>
+                <blockquote>
+                    <p>Example 2024: CSS has evolved a lot in the past few years. Here are my latest thoughts.</p>
+                </blockquote>
+            </div>
+        </section>
+        <section class="px-20 py-20 flex flex-col">
+            <h1>Colors</h1>
+            <div class="py-4 grid gap-2 grid-cols-2 lg:grid-cols-3">
+                <div class="space-y-2">
+                    <div class="p-2 rounded bg-foreground border"></div>
+                </div>
+                <div>
+                    <div class="p-2 rounded-t bg-blue-50"></div>
+                    <div class="p-2 bg-blue-100"></div>
+                    <div class="p-2 bg-blue-200"></div>
+                    <div class="p-2 bg-blue-300"></div>
+                    <div class="p-2 bg-blue-400"></div>
+                    <div class="p-2 bg-blue-500"></div>
+                    <div class="p-2 bg-blue-600"></div>
+                    <div class="p-2 bg-blue-700"></div>
+                    <div class="p-2 bg-blue-800"></div>
+                    <div class="p-2 bg-blue-900"></div>
+                    <div class="p-2 rounded-b bg-blue-950"></div>
+                </div>
+                <div>
+                    <div class="p-2 rounded-t bg-zinc-50"></div>
+                    <div class="p-2 bg-zinc-100"></div>
+                    <div class="p-2 bg-zinc-200"></div>
+                    <div class="p-2 bg-zinc-300"></div>
+                    <div class="p-2 bg-zinc-400"></div>
+                    <div class="p-2 bg-zinc-500"></div>
+                    <div class="p-2 bg-zinc-600"></div>
+                    <div class="p-2 bg-zinc-700"></div>
+                    <div class="p-2 bg-zinc-800"></div>
+                    <div class="p-2 bg-zinc-900"></div>
+                    <div class="p-2 rounded-b bg-zinc-950"></div>
+                </div>
+                
+            </div>
+        </section>
+        <section class="px-20 py-22 flex flex-col">
+            <h1>Icon set</h1>
+            <div class="py-10 grid gap-4 grid-row-2">
+                <div class="flex flex-row justify-between">
+                    <h4>Base icons</h4>
+                    <div class="flex flex-cols gap-2">
+                        <Icon name="ri:earth-line" class="h-8 w-8 text-gray-400" /> 
+                        <Icon name="ri:aliens-line" class="h-8 w-8 text-gray-400" /> 
+                        <Icon name="ri:heart-line" class="h-8 w-8 text-gray-400" /> 
+                        <Icon name="ri:alarm-line" class="h-8 w-8 text-gray-400" /> 
+                        <Icon name="ri:calendar-line" class="h-8 w-8 text-gray-400" /> 
+                    </div>
+                </div>
+                <div class="flex flex-row justify-between">
+                    <h4>Tech icons</h4>
+                    <div class="flex flex-cols gap-2">
+                        <Icon name="simple-icons:github" class="h-8 w-8 text-gray-400" /> 
+                        <Icon name="simple-icons:flutter" class="h-8 w-8 text-gray-400" /> 
+                        <Icon name="simple-icons:typescript" class="h-8 w-8 text-gray-400" /> 
+                        <Icon name="simple-icons:astro" class="h-8 w-8 text-gray-400" /> 
+                        <Icon name="simple-icons:tailwindcss" class="h-8 w-8 text-gray-400" /> 
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="px-20 py-22 flex flex-col">
+            <h1>Component library</h1>
+            <div class="py-10 flex flex-row justify-between">
+                <h4>Button</h4>
+                <div class="flex gap-2 flex-row justify-around">
+                    <GlowingButton href="" text="Glowing" />
+                    <PrimaryButton href="" text="Primary" />
+                    <SecondaryButton href="" text="Secondary" />
+                </div>
+            </div>
+            <div class="py-10 flex flex-row justify-between">
+                <h4>Tags</h4>
+                <div class="flex gap-2 flex-row justify-around">
+                    <TagFilter tags={allTags} selectedTag={currentTag}  />
+                </div>
+            </div>
+            <div class="flex flex-row justify-between">
+                <h4>Blog Card</h4>
+                <br>
+                <ul class='relative h-80 w-80'>
+                    {[allBlogPosts.slice(0, 1).map(blog => <BlogEntryItem {...blog} />)]}
+                  </ul>
+            </div>
+            <div class="flex flex-row justify-between">
+                <h4>Project Card</h4>
+                <br>
+                <ul class='relative h-60 w-80'>
+                    {[allProject.slice(0, 1).map(project => <ProjectEntryItem {...project} />)]}
+                  </ul>
+            </div>
+            <div class="pt-40 flex flex-row justify-between">
+                <h4>Bookmark Card</h4>
+                <br>
+                <ul class='relative h-80 w-80'>
+                    {[allBookmark.slice(0, 1).map(book => <BookmarkEntryItem {...book} />)]}
+                  </ul>
+            </div>
+            <div class="flex flex-col gap-2">
+                <h4>Alert</h4>
+                <Alert />
+            </div>
+
+
+        </section>
+    </main>
+</BaseLayout>
