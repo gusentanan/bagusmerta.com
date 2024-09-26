@@ -93,7 +93,7 @@ const allBookmark = await getBookMarkCollection();
             />
 
         </div>  
-        <div class='h-full w-full sm:w-96'>
+        <div class='h-full w-full sm:w-96 lg:w-full'>
           <ul class='relative h-full'>
             {[allBlogPosts.slice(0, 1).map(blog => <BlogEntryItem {...blog} />)]}
           </ul>
