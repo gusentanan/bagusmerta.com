@@ -8,7 +8,6 @@ import { Icon } from "astro-icon/components"
 import BookmarkEntryItem from "@components/bookmark/BookmarkEntryItem.astro";
 import { Image } from "astro:assets";
 import { Spotlight } from "@components/Spotlight";
-import GlowingButton from "@components/button/GlowingButton.astro";
 import PrimaryButton from "@components/button/PrimaryButton.astro";
 import SecondaryButton from "@components/button/SecondaryButton.astro";
 
@@ -30,9 +29,10 @@ const allBookmark = await getBookMarkCollection();
         />
         <div class="flex flex-col items-center justify-center min-h-screen">
           <div class="flex flex-row mb-6 gap-4">
-            <GlowingButton 
+            <PrimaryButton 
                 href="/blog"
                 text="Read blog"
+                glowing={true}
             />
             
             <SecondaryButton 
@@ -131,9 +131,10 @@ const allBookmark = await getBookMarkCollection();
             I'm always open to new opportunities and collaborations. If you have any questions or need assistance with a project.
           </p>
           
-          <GlowingButton 
+          <PrimaryButton 
             href="mailto:merta.bagus24@gmail.com"
             text="Email me"
+            glowing={true}
           />
         </div>
       </article>

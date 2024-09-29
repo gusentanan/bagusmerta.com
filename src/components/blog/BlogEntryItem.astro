@@ -11,12 +11,12 @@ const props = Astro.props;
 ---
 <li class:list={[
   'p-2 w-full rounded-lg border border-gray-900',
-  'bg-gradient-to-br from-[rgba(255,255,255,0.05)]',
+  'bg-gradient-to-br from-[var(--card)]',
   'scale-500 hover:scale-[1.02] active:scale-[0.97] motion-safe:transform-gpu',
   'transition duration-500',
   'motion-reduce:hover:scale-500',
   'animate-shadow',
-  'hover:border-[rgba(255,255,255,0.26)] hover:shadow-[0_0_12px_rgba(255,255,255,0.1)]',
+  'hover:border-[var(--card-hover-border)] hover:shadow-[0_0_12px_var(--card-hover)]',
 ]}>
   <a class='block h-full rounded-lg focus:outline-none focus-visible:ring focus-visible:ring-primary-300 hover:shadow-lg' href={getBlogPathName(props)}>
     <div class='relative'>

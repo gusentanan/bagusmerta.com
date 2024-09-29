@@ -4,7 +4,6 @@ import { Icon } from "astro-icon/components";
 import { getTitle } from "utils/title";
 import PrimaryButton from "@components/button/PrimaryButton.astro";
 import SecondaryButton from "@components/button/SecondaryButton.astro";
-import GlowingButton from "@components/button/GlowingButton.astro";
 import BlogEntryItem from "@components/blog/BlogEntryItem.astro";
 import ProjectEntryItem from "@components/project/ProjectEntryItem.astro";
 import { getBlogCollection, getBookMarkCollection, getProjectCollection } from "utils/content";
@@ -23,7 +22,7 @@ const currentTag = 'All';
 <BaseLayout title={getTitle('Design')}>
     <main class="layout py-32">
         <section class='flex flex-col justify-center items-center'>
-            <h2 class="mt-10 text-3xl md:text-4xl">My site  <span class="font-display text-5xl">Design tokens</span> </h2>
+            <h2 class="mt-10 text-3xl md:text-4xl">My <span class="font-display text-5xl">Style Guide</span> </h2>
         </section>
         <section class="px-20 py-20 flex flex-col gap-4">
             <h1>TypeFace</h1>
@@ -141,7 +140,7 @@ const currentTag = 'All';
             <div class="py-10 flex flex-row justify-between">
                 <h4>Button</h4>
                 <div class="flex gap-2 flex-row justify-around">
-                    <GlowingButton href="" text="Glowing" />
+                    <PrimaryButton href="" text="Glowing" glowing={true} />
                     <PrimaryButton href="" text="Primary" />
                     <SecondaryButton href="" text="Secondary" />
                 </div>

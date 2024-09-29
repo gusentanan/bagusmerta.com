@@ -1,5 +1,5 @@
 ---
-import GlowingButton from "@components/button/GlowingButton.astro";
+import PrimaryButton from "@components/button/PrimaryButton.astro";
 import { Spotlight } from "@components/Spotlight";
 import BaseLayout from "@layouts/BaseLayout.astro";
 ---
@@ -16,8 +16,10 @@ import BaseLayout from "@layouts/BaseLayout.astro";
       </h1>
       <p class="py-4 font-normal text-base text-neutral-300 max-w-lg text-center mx-auto">
         An error has occurred. The page you are looking for may have been moved, deleted, or does not exist.      </p>
-     <GlowingButton 
-        href="/" text="Go back"
+     <PrimaryButton 
+        href="/" 
+        text="Go back"
+        glowing={true}
      />
     </div>
   </div>
