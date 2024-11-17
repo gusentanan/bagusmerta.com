@@ -2,6 +2,7 @@
 import BaseLayout from "@layouts/BaseLayout.astro";
 import { Image } from "astro:assets";
 import { getCollection } from "astro:content";
+import { Icon } from "astro-icon/components"
 import { formatDate } from "utils/time";
 
 export async function getStaticPaths() {
@@ -38,6 +39,11 @@ const { Content } = await entry.render();
             </div>
             <h1 class='font-display text-4xl text-start py-2'>{entry.data.title}</h1>
             <h6 class='text-xl text-start'>{entry.data.description}</h6>
+            <div class="flex items-center space-x-2 py-2">
+              <Icon class="text-2xl text-gray-400" name="ri:link" />
+              <a href={entry.data.link} class="text-l text-blue-500 hover:underline" target="_blank">Repository</a>
+            </div>
+            
   
           <article class='mt-4'>
             <div class='mdoc-container'>

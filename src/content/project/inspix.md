@@ -4,7 +4,7 @@ draft: false
 title: "Inspix Technologies"
 description: "Helped companies and government in face-mask regulation during Covid period."
 image: "./images/inspix/inspix.jpg"
-link: ""
+link: "https://github.com/Inspix-Technologies"
 tags: ['react']
 createdDate: "2021-08-16"
 ---
