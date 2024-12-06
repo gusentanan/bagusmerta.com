@@ -34,7 +34,7 @@ const currentTag = 'All';
             <TagFilter tags={allTags} selectedTag={currentTag} baseUrl="blog" />
           </div>
       
-          <ul class='mt-4 px-6 grid gap-4 sm:grid-cols-2 xl:grid-cols-2'>
+          <ul class='mt-4 grid gap-4 sm:grid-cols-2 xl:grid-cols-2'>
             {allBlogPosts.map((blog) => <BlogEntryItem {...blog} />)}
           </ul>
         </div>
