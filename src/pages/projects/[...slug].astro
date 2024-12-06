@@ -38,7 +38,7 @@ const { Content } = await entry.render();
               />
             </div>
             <h1 class='font-display text-4xl text-start py-2'>{entry.data.title}</h1>
-            <h6 class='text-xl text-start'>{entry.data.description}</h6>
+            <h6 class='text-xl text-start transition-colors bg-gradient-to-r from-neutral-300/[35%] via-neutral-300/90 to-neutral-300/[35%] bg-clip-text text-transparent'>{entry.data.description}</h6>
             <div class="flex items-center space-x-2 py-2">
               <Icon class="text-2xl text-gray-400" name="ri:link" />
               <a href={entry.data.link} class="text-l text-blue-500 hover:underline" target="_blank">Repository</a>

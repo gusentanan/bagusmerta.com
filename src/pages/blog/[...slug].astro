@@ -31,7 +31,7 @@ const { Content } = await entry.render();
         <div class='py-20 px-4 md:px-28'>
           <div class="py-8 flex flex-col justify-center items-center">
             <h1 class='font-display text-4xl text-center'>{entry.data.title}</h1>
-            <div class='mt-4 flex items-center justify-start gap-8 text-sm text-gray-400'>
+            <div class='mt-4 flex items-center justify-start gap-8 text-sm transition-colors bg-gradient-to-r from-neutral-300/[35%] via-neutral-300/90 to-neutral-300/[35%] bg-clip-text text-transparent'>
               <div class='flex items-center gap-1'>
                   {entry.data.readCount} - Published: {formatDate(entry.data.date)}
               </div>

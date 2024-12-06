@@ -36,9 +36,10 @@ const props = Astro.props;
     <div class="flex items-center justify-between w-full gap-2 mb-2"> 
       <h4>{props.data.title}</h4>
       {props.data.tags.length > 0 && (
-        <div class="p-1 rounded-full bg-gray-800 flex items-center justify-center">
-            <Icon name={categoryIcon[props.data.tags[0]]?.icon} class="h-8 w-8 text-gray-400" /> 
-        </div>
+       <div class="p-1 rounded-xl bg-gray-800/10 flex items-center justify-center border border-gray-700/30">
+  <Icon name={categoryIcon[props.data.tags[0]]?.icon} class="h-8 w-8 text-gray-400" />
+</div>
+
       )}
     </div>
     

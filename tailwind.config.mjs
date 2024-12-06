@@ -40,6 +40,7 @@ export default {
 					foreground: 'hsl(var(--destructive-foreground))',
 				},
 				border: 'hsl(var(--border))',
+				'accent-blue': 'hsl(210, 100%, 75%)',
 			  },
 			  keyframes: {
 				slide: {
@@ -118,7 +119,12 @@ export default {
 			  },
 		},
 	},
-	plugins: [require('@tailwindcss/forms'), require('@tailwindcss/typography'), addVariablesForColors,],
+	plugins: [
+		require('@tailwindcss/forms'), 
+		require('@tailwindcss/typography'), 
+		require('tailwindcss-text-fill-stroke'),
+		addVariablesForColors,
+	],
 }
 
 
