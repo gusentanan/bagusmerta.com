@@ -10,7 +10,7 @@ import { Image } from "astro:assets";
 import { Spotlight } from "@components/Spotlight";
 import PrimaryButton from "@components/button/PrimaryButton.astro";
 import SecondaryButton from "@components/button/SecondaryButton.astro";
-
+import Background from "@components/Background.astro";
 
 const allBlogPosts = await getBlogCollection();
 const allProject = await getProjectCollection();
@@ -20,55 +20,54 @@ const allBookmark = await getBookMarkCollection();
 
 <BaseLayout title={getTitle('Home')}>
   <main>
-    <section class='relative isolate min-h-main -mt-20 mb-20 flex flex-col justify-center'>
-      <article class='layout'>
-        <Spotlight
-          className="hidden md:block -top-0 left-00 md:left-60 md:-top-20"
-          fill="white"
-          client:visible
-        />
-        <div class="flex flex-col items-center justify-center min-h-screen">
-          <div class="flex flex-row mb-6 gap-4">
-            <PrimaryButton 
-                href="/blog"
-                text="Read blog"
-                glowing={true}
-            />
-            
-            <SecondaryButton 
-              href="/about"
-              text=" Hire me →"
-            />
-
-          </div>
-          <div class="flex flex-col md:flex-row items-start">
-            <div>
-              <div class="flex justify-center items-center">
-                <h2 class='text-2xl md:text-4xl 2xl:text-4xl'>  
-                  Hi, I'm Bagus,
-                </h2>
-                <Image
-                  class='ml-4 rounded-lg w-16 h-16 md:w-16 md:h-16 object-cover'
-                  src='/images/avatar-1.png'
-                  alt='Photo of me, hopefully can impress your boss'
-                  decoding='async'
-                  loading='lazy'
-                  width={500}
-                  height={500}
-                />
-              </div>
-              <h1 class='font-display text-4xl text-center md:text-6xl 2xl:text-5xl bg-clip-text text-transparent bg-gradient-to-b from-neutral-50 to-neutral-400 bg-opacity-50'>  
-                Software Engineer.
-              </h1>
+    <Background>
+      <section class='relative isolate min-h-main -mt-20 mb-20 flex flex-col justify-center'>
+        <article class='layout'>
+          <div class="flex flex-col items-center justify-center min-h-screen">
+            <div class="flex flex-row mb-6 gap-4">
+              <PrimaryButton 
+                  href="/blog"
+                  text="Read blog"
+                  glowing={true}
+              />
+              
+              <SecondaryButton 
+                href="/about"
+                text=" Hire me →"
+              />
+  
             </div>
+            <div class="flex flex-col md:flex-row items-start">
+              <div>
+                <div class="flex justify-center items-center">
+                  <h2 class='text-2xl md:text-4xl 2xl:text-4xl'>  
+                    Hi, I'm Bagus,
+                  </h2>
+                  <Image
+                    class='ml-4 rounded-lg w-16 h-16 md:w-16 md:h-16 object-cover'
+                    src='/images/avatar-1.png'
+                    alt='Photo of me, hopefully can impress your boss'
+                    decoding='async'
+                    loading='lazy'
+                    width={500}
+                    height={500}
+                  />
+                </div>
+                <h1 class='font-display text-4xl text-center md:text-6xl 2xl:text-5xl bg-clip-text text-transparent bg-gradient-to-b from-neutral-50 to-neutral-400 bg-opacity-50'>  
+                  Software Engineer.
+                </h1>
+              </div>
+            </div>
+            <h4 class="flex justify-center items-center text-center mt-4 px-20 transition-colors bg-gradient-to-r from-neutral-300/[35%] via-neutral-300/90 to-neutral-300/[35%] bg-clip-text text-transparent">
+              Crafting beautiful and intuitive mobile and web experiences 
+            </h4>
+  
           </div>
-          <h4 class="flex justify-center items-center text-center mt-4 px-20 transition-colors bg-gradient-to-r from-neutral-300/[35%] via-neutral-300/90 to-neutral-300/[35%] bg-clip-text text-transparent">
-            Crafting beautiful and intuitive mobile and web experiences 
-          </h4>
+        </article>
+      </section>
 
-        </div>
-      </article>
-    </section>
+    </Background>
+    
 
     <section class='relative isolate py-20 px-8' id='intro'>
       <article class='layout flex flex-col-reverse items-center md:flex-row md:justify-start gap-8'>

@@ -5,6 +5,8 @@ import TagFilter from "@components/TagFilter.astro";
 import BaseLayout from "@layouts/BaseLayout.astro";
 import { getBlogCollection } from "utils/content";
 import { getTitle } from "utils/title";
+import Background from "@components/Background.astro";
+
 
 const allBlogPosts = await getBlogCollection();
 // Get all unique tags
@@ -14,27 +16,29 @@ const currentTag = 'All';
 ---
 
 <BaseLayout title={getTitle('Blog')}>
-  <main>
-    <section>
-      <div class='layout py-32'>
-        <div class="flex flex-col justify-center items-center">
-          <h2 class='font-display text-4xl md:text-5xl'>
-            My
-            <span class="font-display text-5xl bg-gradient-to-br from-accent-blue/20 via-accent-blue/90 to-accent-blue/20 bg-clip-text text-transparent">
-              Blog
-            </span>
-          </h2>
-          <p class='px-12 md:px-32 py-2 md:py-6 text-center transition-colors bg-gradient-to-r from-neutral-300/[35%] via-neutral-300/90 to-neutral-300/[35%] bg-clip-text text-transparent'>
-            A collection of blog that includes my thoughtful reflections on programming, personal development, and my thoughts.
-          </p>          
-          
-          <TagFilter tags={allTags} selectedTag={currentTag} baseUrl="blog" />
+  <Background>
+    <main>
+      <section>
+        <div class='layout py-32'>
+          <div class="flex flex-col justify-center items-center">
+            <h2 class='font-display text-5xl md:text-5xl'>
+              My
+              <span class="bg-gradient-to-br from-accent-blue/20 via-accent-blue/90 to-accent-blue/20 bg-clip-text text-transparent">
+                Blog
+              </span>
+            </h2>
+            <p class='px-12 md:px-32 py-2 md:py-6 text-center transition-colors bg-gradient-to-r from-neutral-300/[35%] via-neutral-300/90 to-neutral-300/[35%] bg-clip-text text-transparent'>
+              A collection of blog that includes my thoughtful reflections on programming, personal development, and my thoughts.
+            </p>          
+            
+            <TagFilter tags={allTags} selectedTag={currentTag} baseUrl="blog" />
+          </div>
+      
+          <ul class='mt-4 px-6 grid gap-4 sm:grid-cols-2 xl:grid-cols-2'>
+            {allBlogPosts.map((blog) => <BlogEntryItem {...blog} />)}
+          </ul>
         </div>
-    
-        <ul class='mt-4 px-6 grid gap-4 sm:grid-cols-2 xl:grid-cols-2'>
-          {allBlogPosts.map((blog) => <BlogEntryItem {...blog} />)}
-        </ul>
-      </div>
-    </section>
-  </main>
+      </section>
+    </main>
+  </Background>
 </BaseLayout>

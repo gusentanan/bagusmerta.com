@@ -5,6 +5,7 @@ import { Image } from "astro:assets";
 import { Icon } from "astro-icon/components"
 import { Spotlight } from "@components/Spotlight";
 import Footer from "@components/Footer.astro";
+import Background from "@components/Background.astro";
 
 
 const techIcons = [
@@ -45,67 +46,70 @@ const techIcons = [
 ---
 
 <BaseLayout title={getTitle('About')}>
-  <main class='layout py-32 px-12'>
-    <section class='flex flex-col justify-center items-center'>
-      <Image
-        class='ml-4 rounded-lg w-20 h-20 md:w-20 md:h-20 object-cover'
-        src='/images/avatar-1.png'
-        alt='Photo of me, hopefully can impress your boss'
-        decoding='async'
-        loading='lazy'
-        width={500}
-        height={500}
-      />
-
-      <h2 class="font-display mt-10 text-5xl md:text-5xl">
-        About
-        <span class="bg-gradient-to-br from-accent-blue/20 via-accent-blue/90 to-accent-blue/20 bg-clip-text text-transparent">
-          Me
-        </span>
-      </h2>
+  <Background>
+    <main class='layout py-32 px-12'>
+      <section class='flex flex-col justify-center items-center'>
+        <Image
+          class='ml-4 rounded-lg w-20 h-20 md:w-20 md:h-20 object-cover'
+          src='/images/avatar-1.png'
+          alt='Photo of me, hopefully can impress your boss'
+          decoding='async'
+          loading='lazy'
+          width={500}
+          height={500}
+        />
+  
+        <h2 class="font-display mt-10 text-5xl md:text-5xl">
+          About
+          <span class="bg-gradient-to-br from-accent-blue/20 via-accent-blue/90 to-accent-blue/20 bg-clip-text text-transparent">
+            Me
+          </span>
+        </h2>
+        
       
-    
-      <p class='mt-4 text-center transition-colors bg-gradient-to-r from-neutral-300/[35%] via-neutral-300/90 to-neutral-300/[35%] bg-clip-text text-transparent'>
-        Call me Bagus.
-        I work as a Software Engineer and have a passion for 
-        experimenting with user interfaces and creating products that deliver exceptional user 
-        experiences. While my expertise lies in mobile development and front-end work, 
-        I also find joy in integrating various software components together.
-      </p>
-      <p class='mt-4 text-center transition-colors bg-gradient-to-r from-neutral-300/[35%] via-neutral-300/90 to-neutral-300/[35%] bg-clip-text text-transparent'>
-        Currently, I'm working as a Software Engineer for mobile platform at a startup based in Singapore.
-      </p>
-
-    </section>
-    
-    <section class="flex flex-col justify-center items-center">
-      <h2 class='mt-8 text-3xl'>Education</h2>
-      <div class='flex items-center space-x-4 text-gray-400'>
-        <h4 class='mt-2'>Bachelor of Comp. Science</h4>
-        <h4 class='mt-2'>2019—2023</h2>
-      </div>
-      <h4 class='mt-4 text-gray-400'>Universitas Udayana</h4>
-      <h4 class="text-gray-400">Bachelor Degree of Computer Science,</h4>
-
-    </section>
-
-    <section class="flex flex-col justify-center items-center">
-      <h2 class='mt-8 text-3xl'>Tech</h2>
-        <ul class='mt-8 flex flex-wrap gap-4 justify-center items-center'>
-          {techIcons.map((icons) => {
-            return (
-              <li>
-                <Icon 
-                  class='text-6xl text-gray-300 hover:text-primary-400'
-                  name={icons.icon} 
-                />
-              </li>
-            );
-          })}
-      </ul>
-    </section>
-    <section class="flex flex-col justify-center item-center mt-20">
-      <Footer />
-    </section>
-  </main>
+        <p class='mt-4 text-center transition-colors bg-gradient-to-r from-neutral-300/[35%] via-neutral-300/90 to-neutral-300/[35%] bg-clip-text text-transparent'>
+          Call me Bagus.
+          I work as a Software Engineer and have a passion for 
+          experimenting with user interfaces and creating products that deliver exceptional user 
+          experiences. While my expertise lies in mobile development and front-end work, 
+          I also find joy in integrating various software components together.
+        </p>
+        <p class='mt-4 text-center transition-colors bg-gradient-to-r from-neutral-300/[35%] via-neutral-300/90 to-neutral-300/[35%] bg-clip-text text-transparent'>
+          Currently, I'm working as a Software Engineer for mobile platform at a startup based in Singapore.
+        </p>
+  
+      </section>
+      
+      <section class="flex flex-col justify-center items-center">
+        <h2 class='mt-8 text-3xl'>Education</h2>
+        <div class='flex items-center space-x-4 text-gray-400'>
+          <h4 class='mt-2'>Bachelor of Comp. Science</h4>
+          <h4 class='mt-2'>2019—2023</h2>
+        </div>
+        <h4 class='mt-4 text-gray-400'>Universitas Udayana</h4>
+        <h4 class="text-gray-400">Bachelor Degree of Computer Science,</h4>
+  
+      </section>
+  
+      <section class="flex flex-col justify-center items-center">
+        <h2 class='mt-8 text-3xl'>Tech</h2>
+          <ul class='mt-8 flex flex-wrap gap-4 justify-center items-center'>
+            {techIcons.map((icons) => {
+              return (
+                <li>
+                  <Icon 
+                    class='text-6xl text-gray-300 hover:text-primary-400'
+                    name={icons.icon} 
+                  />
+                </li>
+              );
+            })}
+        </ul>
+      </section>
+      <section class="flex flex-col justify-center item-center mt-20">
+        <Footer />
+      </section>
+    </main>
+  </Background>
+  
 </BaseLayout>

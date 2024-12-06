@@ -5,6 +5,7 @@ import { getTitle } from "utils/title";
 import { getBookmarkByTag, getBookmarkTags } from "utils/posts";
 import TagFilter from "@components/TagFilter.astro";
 import { Spotlight } from "@components/Spotlight";
+import Background from "@components/Background.astro";
 
 
 const allTags = await getBookmarkTags();
@@ -23,33 +24,33 @@ const posts = await getBookmarkByTag(tag);
 ---
 
 <BaseLayout title={getTitle('Bookmarks')}>
-    <main>
-        <div class='layout py-32'>
-            <Spotlight
-                className="hidden md:block -top-20 left-0 md:left-60 md:-top-60"
-                fill="white"
-                client:visible
-            />
-            <div class="flex flex-col justify-center items-center">
-                <h2 class='text-3xl md:text-4xl'>
-                    My <span class="font-display text-5xl">Bookmarks</span>
-                </h2>
-                <p class='text-center px-32 py-6 text-gray-400'>
-                    Since mid-2023, I’ve been reading articles almost every day. It's really helped me at work and expanded my knowledge. I created this page to keep track of everything I’ve read.
-                </p>
+    <Background>
+        <main>
+            <div class='layout py-32'>
+              
+                <div class="flex flex-col justify-center items-center">
+                    <h2 class='font-display text-5xl md:text-5xl'>
+                        My
+                        <span class="bg-gradient-to-br from-accent-blue/20 via-accent-blue/90 to-accent-blue/20 bg-clip-text text-transparent">
+                          Bookmarks
+                        </span>
+                      </h2>
+                    <p class='px-12 md:px-32 py-2 md:py-6 text-center transition-colors bg-gradient-to-r from-neutral-300/[35%] via-neutral-300/90 to-neutral-300/[35%] bg-clip-text text-transparent'>
+                        Since mid-2023, I’ve been reading articles almost every day. It's really helped me at work and expanded my knowledge. I created this page to keep track of everything I’ve read.
+                    </p>
+        
+                    <TagFilter tags={allTags} selectedTag={tag} baseUrl="bookmarks" />
+                </div>
     
-                <TagFilter tags={allTags} selectedTag={tag} baseUrl="bookmarks" />
+                <div class="flex justify-center">
+                    <ul class='mt-4 grid gap-4 sm:grid-cols-2 xl:grid-cols-2'>
+                        {
+                            posts.map((item) => <BookmarkEntryItem {...item} />)
+                        }
+                    </ul>
+                </div>
             </div>
-
-            <div class="flex justify-center">
-                <ul class='mt-4 grid gap-4 sm:grid-cols-2 xl:grid-cols-2'>
-                    {
-                        posts.map((item) => <BookmarkEntryItem {...item} />)
-                    }
-                </ul>
-            </div>
-        </div>
-    </main>
-
+        </main>
+    </Background>
 </BaseLayout>
 

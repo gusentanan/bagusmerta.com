@@ -1,0 +1,35 @@
+---
+const { slot } = Astro.props;
+---
+<div class="relative h-full w-full flex items-center justify-center overflow-hidden">
+  <!-- Gradient Background Effect -->
+  <div
+    class="h-[400px] w-[650px] rounded-full bg-gradient-to-r from-[#3f9cff]/10 to-[#0F3324]/10 blur-[180px] absolute top-0 left-[15%] -translate-x-1/2 rotate-45 origin-center z-[3]"
+    aria-hidden="true"
+  ></div>
+
+  <!-- Crumpled Paper Background -->
+  <div
+    class="absolute inset-0 overflow-hidden"
+    style="
+      mask-image: linear-gradient(rgb(0, 0, 0) 80%, rgba(0, 0, 0, 0) 100%);
+      -webkit-mask-image: linear-gradient(rgb(0, 0, 0) 80%, rgba(0, 0, 0, 0) 100%);
+    "
+  >
+    <img
+      class="absolute w-full h-full object-cover z-[-1] opacity-90"
+      src="/images/crumpled-paper.png"
+      decoding="async"
+      loading="lazy"
+      alt="Crumpled Paper"
+    />
+  </div>
+
+  <!-- Semi-Transparent Overlay -->
+  <div class="absolute inset-0 bg-background/95 backdrop-brightness-75 z-[1]"></div>
+
+  <!-- Slot for main content -->
+  <div class="relative z-[4] w-full flex flex-col items-center justify-center px-4">
+    <slot />
+  </div>
+</div>
