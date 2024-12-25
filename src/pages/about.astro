@@ -6,6 +6,8 @@ import { Icon } from "astro-icon/components"
 import { Spotlight } from "@components/Spotlight";
 import Footer from "@components/Footer.astro";
 import Background from "@components/Background.astro";
+import GradientSubText from "@components/GradientSubText.astro";
+import GradientHeaderText from "@components/GradientHeaderText.astro";
 
 
 const techIcons = [
@@ -61,22 +63,22 @@ const techIcons = [
   
         <h2 class="font-display mt-10 text-5xl md:text-5xl">
           About
-          <span class="bg-gradient-to-br from-accent-blue/20 via-accent-blue/90 to-accent-blue/20 bg-clip-text text-transparent">
+          <GradientHeaderText>
             Me
-          </span>
+          </GradientHeaderText>
         </h2>
         
-      
-        <p class='mt-4 text-center transition-colors bg-gradient-to-r from-neutral-300/[35%] via-neutral-300/90 to-neutral-300/[35%] bg-clip-text text-transparent'>
+        <GradientSubText className="mt-4 text-center">
           Call me Bagus.
           I work as a Software Engineer and have a passion for 
           experimenting with user interfaces and creating products that deliver exceptional user 
           experiences. While my expertise lies in mobile development and front-end work, 
           I also find joy in integrating various software components together.
-        </p>
-        <p class='mt-4 text-center transition-colors bg-gradient-to-r from-neutral-300/[35%] via-neutral-300/90 to-neutral-300/[35%] bg-clip-text text-transparent'>
-          Currently, I'm working as a Software Engineer for mobile platform at a startup based in Singapore.
-        </p>
+        </GradientSubText>
+
+        <GradientSubText className="mt-4 text-center">
+          Currently, I'm working as a Software Engineer - mobile at a startup based in Singapore.
+        </GradientSubText>
   
       </section>
       

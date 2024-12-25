@@ -11,6 +11,8 @@ import { Spotlight } from "@components/Spotlight";
 import PrimaryButton from "@components/button/PrimaryButton.astro";
 import SecondaryButton from "@components/button/SecondaryButton.astro";
 import Background from "@components/Background.astro";
+import GradientSubText from "@components/GradientSubText.astro";
+import GradientHeaderText from "@components/GradientHeaderText.astro";
 
 const allBlogPosts = await getBlogCollection();
 const allProject = await getProjectCollection();
@@ -57,9 +59,10 @@ const allBookmark = await getBookMarkCollection();
                 </h1>
               </div>
             </div>
-            <h4 class="flex justify-center items-center text-center mt-4 px-20 transition-colors bg-gradient-to-r from-neutral-300/[35%] via-neutral-300/90 to-neutral-300/[35%] bg-clip-text text-transparent">
+
+            <GradientSubText className="flex justify-center items-center text-center md:text-lg mt-4 px-20">
               Crafting beautiful and intuitive mobile and web experiences 
-            </h4>
+            </GradientSubText>
   
           </div>
         </article>
@@ -74,17 +77,11 @@ const allBookmark = await getBookMarkCollection();
             <h2 class='font-display text-3xl md:text-5xl'>
               Blog and Short Articles
             </h2>
-            <p class='mt-2 text-base md:text-lg transition-colors bg-gradient-to-r from-neutral-300/[35%] via-neutral-300/90 to-neutral-300/[35%] bg-clip-text text-transparent'>
+            <GradientSubText className="text-base md:text-lg mt-2">
               A collection of my writings inspired by many different authors. 
-              It features my detailed reflections on 
-              <span class='inline-flex underline decoration-gray'>
-                programming
-              </span>
-              and 
-              <span class='inline-flex underline decoration-gray'>
-                personal growth.
-              </span>
-            </p>
+              It features my detailed reflections on programming and personal growth.
+            </GradientSubText>
+
             <PrimaryButton
               href="/blog"
               text="See more articles →"
@@ -123,13 +120,13 @@ const allBookmark = await getBookMarkCollection();
       <article class='layout'>
         <div class="flex flex-col justify-center items-center text-center gap-2 ">
           <h1 class='text-3xl md:text-4xl 2xl:text-4xl'>
-            <span class="font-display text-4xl md:text-5xl 2xl:text-5xl bg-gradient-to-br from-accent-blue/20 via-accent-blue/90 to-accent-blue/20 bg-clip-text text-transparent">Interested</span>
-            
+            <GradientHeaderText className="font-display text-4xl md:text-5xl 2xl:text-5xl" >Interested</GradientHeaderText>
             in what you see?
           </h1>
-          <p class='px-20 text-lmd:text-xl 2xl:text-2xl transition-colors bg-gradient-to-r from-neutral-300/[35%] via-neutral-300/90 to-neutral-300/[35%] bg-clip-text text-transparent'>
+
+          <GradientSubText className="px-20 text-l md:text-xl 2xl:text-2xl">
             I'm always open to new opportunities and collaborations. If you have any questions or need assistance with a project.
-          </p>
+          </GradientSubText>
           
           <PrimaryButton 
             href="mailto:merta.bagus24@gmail.com"

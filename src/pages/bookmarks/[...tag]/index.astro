@@ -6,6 +6,8 @@ import { getBookmarkByTag, getBookmarkTags } from "utils/posts";
 import TagFilter from "@components/TagFilter.astro";
 import { Spotlight } from "@components/Spotlight";
 import Background from "@components/Background.astro";
+import GradientSubText from "@components/GradientSubText.astro";
+import GradientHeaderText from "@components/GradientHeaderText.astro";
 
 
 const allTags = await getBookmarkTags();
@@ -31,13 +33,14 @@ const posts = await getBookmarkByTag(tag);
                 <div class="flex flex-col justify-center items-center">
                     <h2 class='font-display text-5xl md:text-5xl'>
                         My
-                        <span class="bg-gradient-to-br from-accent-blue/20 via-accent-blue/90 to-accent-blue/20 bg-clip-text text-transparent">
-                          Bookmarks
-                        </span>
+                        <GradientHeaderText>
+                            Bookmarks
+                        </GradientHeaderText>
                       </h2>
-                    <p class='px-12 md:px-32 py-2 md:py-6 text-center transition-colors bg-gradient-to-r from-neutral-300/[35%] via-neutral-300/90 to-neutral-300/[35%] bg-clip-text text-transparent'>
+                    
+                    <GradientSubText className="px-12 md:px-32 py-2 md:py-6 text-center">
                         Since mid-2023, I’ve been reading articles almost every day. It's really helped me at work and expanded my knowledge. I created this page to keep track of everything I’ve read.
-                    </p>
+                    </GradientSubText>
         
                     <TagFilter tags={allTags} selectedTag={tag} baseUrl="bookmarks" />
                 </div>
