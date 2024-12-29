@@ -4,10 +4,7 @@ import ProjectEntryItem from "@components/project/ProjectEntryItem.astro";
 import BaseLayout from "@layouts/BaseLayout.astro";
 import { getBlogCollection, getBookMarkCollection, getProjectCollection } from "utils/content";
 import { getTitle } from "utils/title";
-import { Icon } from "astro-icon/components"
-import BookmarkEntryItem from "@components/bookmark/BookmarkEntryItem.astro";
 import { Image } from "astro:assets";
-import { Spotlight } from "@components/Spotlight";
 import PrimaryButton from "@components/button/PrimaryButton.astro";
 import SecondaryButton from "@components/button/SecondaryButton.astro";
 import Background from "@components/Background.astro";
@@ -45,13 +42,13 @@ const allBookmark = await getBookMarkCollection();
                     Hi, I'm Bagus,
                   </h2>
                   <Image
-                    class='ml-4 rounded-lg w-16 h-16 md:w-16 md:h-16 object-cover'
+                    class='ml-4 rounded-lg object-cover'
                     src='/images/avatar-1.png'
                     alt='Photo of me, hopefully can impress your boss'
                     decoding='async'
                     loading='lazy'
-                    width={500}
-                    height={500}
+                    width={60}
+                    height={60}
                   />
                 </div>
                 <h1 class='font-display text-4xl text-center md:text-6xl 2xl:text-5xl bg-clip-text text-transparent bg-gradient-to-b from-neutral-50 to-neutral-400 bg-opacity-50'>  
