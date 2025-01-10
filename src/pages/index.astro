@@ -2,7 +2,7 @@
 import BlogEntryItem from "@components/blog/BlogEntryItem.astro";
 import ProjectEntryItem from "@components/project/ProjectEntryItem.astro";
 import BaseLayout from "@layouts/BaseLayout.astro";
-import { getBlogCollection, getBookMarkCollection, getProjectCollection } from "utils/content";
+import { getBlogCollection, getNicewordsCollection, getProjectCollection } from "utils/content";
 import { getTitle } from "utils/title";
 import { Image } from "astro:assets";
 import PrimaryButton from "@components/button/PrimaryButton.astro";
@@ -10,11 +10,12 @@ import SecondaryButton from "@components/button/SecondaryButton.astro";
 import Background from "@components/Background.astro";
 import GradientSubText from "@components/GradientSubText.astro";
 import GradientHeaderText from "@components/GradientHeaderText.astro";
+import NiceWordsCard from "@components/NiceWordsCard.astro";
+import type { Code } from "astro:components";
 
 const allBlogPosts = await getBlogCollection();
 const allProject = await getProjectCollection();
-const allBookmark = await getBookMarkCollection();
-
+const allNicewords = await getNicewordsCollection();
 ---
 
 <BaseLayout title={getTitle('Home')}>
@@ -74,10 +75,10 @@ const allBookmark = await getBookMarkCollection();
             <h2 class='font-display text-3xl md:text-5xl'>
               Blog and Short Articles
             </h2>
-            <GradientSubText className="text-base md:text-lg mt-2">
+            <p class="text-base md:text-lg mt-2">
               A collection of my writings inspired by many different authors. 
               It features my detailed reflections on programming and personal growth.
-            </GradientSubText>
+            </p>
 
             <PrimaryButton
               href="/blog"
@@ -111,6 +112,23 @@ const allBookmark = await getBookMarkCollection();
         </ul>
              
       </article>
+    </section>
+
+    <section class="py-20 mb-20">
+      <article class="layout">
+        <p class='font-display text-4xl text-center md:text-5xl 2xl:text-4xl bg-clip-text text-transparent bg-gradient-to-b from-neutral-50 to-neutral-400 bg-opacity-50'>
+          Some kind words
+        </p>
+        <GradientSubText className="px-20 text-l md:text-l 2xl:text-2xl text-center">
+          Some feedback from the people I've had the privilege of working with.
+        </GradientSubText>
+        
+        <ul class="mt-8 grid gap-4 sm:grid-cols-2 xl:grid-cols-2">
+          {[
+            allNicewords.map(nicewords => <NiceWordsCard {...nicewords} />)
+          ]}
+        </ul>
+      </article>  
     </section>
 
     <section class='relative isolate py-20 mb-20'>

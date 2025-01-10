@@ -9,6 +9,10 @@ export type BlogEntries = BlogEntry[];
 export type BookmarkEntry = CollectionEntry<"bookmark">;
 export type BookmarkEntries = BookmarkEntry[];
 
+export type NicewordsEntry = CollectionEntry<"nicewords">;
+export type NicewordsEntries = NicewordsEntry[];
+
+
 // Return the project entries sorted by date, newest first
 export const getProjectCollection = async (): Promise<ProjectEntries> => {
   const projectEntries = await getCollection("project");
@@ -25,4 +29,9 @@ export const getBlogCollection = async (): Promise<BlogEntries> => {
 export const getBookMarkCollection = async (): Promise<BookmarkEntries> => {
   const bookmarkEntries = await getCollection("bookmark");
   return bookmarkEntries;
+};
+
+export const getNicewordsCollection = async (): Promise<NicewordsEntries> => {
+  const nicewordsEntries = await getCollection("nicewords");
+  return nicewordsEntries;
 };
