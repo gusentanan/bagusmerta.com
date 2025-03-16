@@ -1,13 +1,12 @@
 ---
-import BookmarkEntryItem from "@components/bookmark/BookmarkEntryItem.astro";
+import BookmarkEntryItem from "@components/features/bookmark/BookmarkEntryItem.astro";
 import BaseLayout from "@layouts/BaseLayout.astro";
 import { getTitle } from "utils/title";
 import { getBookmarkByTag, getBookmarkTags } from "utils/posts";
-import TagFilter from "@components/TagFilter.astro";
-import { Spotlight } from "@components/Spotlight";
-import Background from "@components/Background.astro";
-import GradientSubText from "@components/GradientSubText.astro";
-import GradientHeaderText from "@components/GradientHeaderText.astro";
+import TagFilter from "@components/ui/TagFilter.astro";
+import Background from "@components/layout/Background.astro";
+import GradientSubText from "@components/ui/text/GradientSubText.astro";
+import GradientHeaderText from "@components/ui/text/GradientHeaderText.astro";
 
 
 const allTags = await getBookmarkTags();

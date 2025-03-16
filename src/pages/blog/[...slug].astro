@@ -1,12 +1,11 @@
 ---
-import LatestPosts from "@components/blog/LatestPosts.astro";
+import LatestPosts from "@components/features/blog/LatestPosts.astro";
 import BaseLayout from "@layouts/BaseLayout.astro";
 import { Image } from "astro:assets";
 import { getCollection } from "astro:content";
 import { formatDate } from "utils/time";
 import { Icon } from "astro-icon/components"
-import Comments from "@components/Comments.astro";
-
+import Comments from "@components/ui/Comments.astro";
 
 export async function getStaticPaths() {
   const blogEntries = await getCollection('blog');

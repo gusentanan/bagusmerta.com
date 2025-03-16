@@ -1,16 +1,16 @@
 ---
-import BlogEntryItem from "@components/blog/BlogEntryItem.astro";
-import ProjectEntryItem from "@components/project/ProjectEntryItem.astro";
+import BlogEntryItem from "@components/features/blog/BlogEntryItem.astro";
+import ProjectEntryItem from "@components/features/project/ProjectEntryItem.astro";
 import BaseLayout from "@layouts/BaseLayout.astro";
 import { getBlogCollection, getNicewordsCollection, getProjectCollection } from "utils/content";
 import { getTitle } from "utils/title";
 import { Image } from "astro:assets";
-import PrimaryButton from "@components/button/PrimaryButton.astro";
-import SecondaryButton from "@components/button/SecondaryButton.astro";
-import Background from "@components/Background.astro";
-import GradientSubText from "@components/GradientSubText.astro";
-import GradientHeaderText from "@components/GradientHeaderText.astro";
-import NiceWordsCard from "@components/NiceWordsCard.astro";
+import PrimaryButton from "@components/ui/button/PrimaryButton.astro";
+import SecondaryButton from "@components/ui/button/SecondaryButton.astro";
+import Background from "@components/layout/Background.astro";
+import GradientSubText from "@components/ui/text/GradientSubText.astro";
+import GradientHeaderText from "@components/ui/text/GradientHeaderText.astro";
+import NiceWordsCard from "@components/ui/NiceWordsCard.astro";
 import type { Code } from "astro:components";
 
 const allBlogPosts = await getBlogCollection();

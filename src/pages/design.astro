@@ -2,14 +2,14 @@
 import BaseLayout from "@layouts/BaseLayout.astro";
 import { Icon } from "astro-icon/components";
 import { getTitle } from "utils/title";
-import PrimaryButton from "@components/button/PrimaryButton.astro";
-import SecondaryButton from "@components/button/SecondaryButton.astro";
-import BlogEntryItem from "@components/blog/BlogEntryItem.astro";
-import ProjectEntryItem from "@components/project/ProjectEntryItem.astro";
+import PrimaryButton from "@components/ui/button/PrimaryButton.astro";
+import SecondaryButton from "@components/ui/button/SecondaryButton.astro";
+import BlogEntryItem from "@components/features/blog/BlogEntryItem.astro";
+import ProjectEntryItem from "@components/features/project/ProjectEntryItem.astro";
 import { getBlogCollection, getBookMarkCollection, getProjectCollection } from "utils/content";
-import BookmarkEntryItem from "@components/bookmark/BookmarkEntryItem.astro";
-import TagFilter from "@components/TagFilter.astro";
-import Alert from "@components/Alert.astro";
+import BookmarkEntryItem from "@components/features/bookmark/BookmarkEntryItem.astro";
+import TagFilter from "@components/ui/TagFilter.astro";
+import Alert from "@components/ui/Alert.astro";
 
 const allBlogPosts = await getBlogCollection();
 const allProject = await getProjectCollection();
