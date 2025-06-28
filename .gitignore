@@ -24,3 +24,5 @@ pnpm-debug.log*
 .astro
 .astro-i18n
 .husky
+
+commit-message.txt

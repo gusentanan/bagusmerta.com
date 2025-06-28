@@ -27,6 +27,12 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: github-pages
+          path: dist
+
       # Add .nojekyll file
       - name: Add .nojekyll to output
         run: touch dist/.nojekyll
