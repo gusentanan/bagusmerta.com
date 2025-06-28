@@ -27,6 +27,10 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
+      # Add .nojekyll file
+      - name: Add .nojekyll to output
+        run: touch dist/.nojekyll
+
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v3
