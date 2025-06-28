@@ -11,6 +11,7 @@ import tailwind from "@astrojs/tailwind";
 export default defineConfig({
   site: 'https://bagusmerta.com',
   output: "static",
+  // Trigger new deployment
   // image: {
   //   service: imageService({
   //     placeholder: "blurhash",
