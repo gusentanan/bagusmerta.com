@@ -11,15 +11,15 @@ export const navbarInner = cn(
 
 export const navbarRoutesWrapper = cn(
   "flex h-9 items-stretch justify-center space-x-2 px-4 max-sm:px-2",
-  "bg-background shadow-md backdrop-blur-sm bg-primary-foreground",
+  "shadow-md backdrop-blur-sm",
   "rounded-full border border-zinc-500/25 transition-colors",
 );
 
 export const navbarRouteItem = cn(
-  "relative flex h-full items-center px-2 transition-colors hover:text-blue-500",
+  "relative flex h-full items-center px-2 transition-colors hover:text-white",
   "before:absolute before:inset-x-0 before:h-px before:rounded-t-full before:-bottom-px",
   "hover:before:bottom-0 before:opacity-0 hover:before:opacity-100 before:transition-all before:duration-200 before:ease-out-quint",
-  "hover:before:bg-blue-900 before:shadow-[0_1px_4px] before:shadow-primary-500",
+  "hover:before:bg-white before:shadow-[0_1px_4px] before:shadow-primary-500",
   "after:absolute after:inset-0 hover:after:-inset-1",
 );
 

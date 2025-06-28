@@ -4,7 +4,6 @@ import BaseLayout from "@layouts/BaseLayout.astro";
 import { Image } from "astro:assets";
 import { getCollection } from "astro:content";
 import { formatDate } from "utils/time";
-import { Icon } from "astro-icon/components"
 import Comments from "@components/ui/Comments.astro";
 
 export async function getStaticPaths() {
@@ -24,38 +23,37 @@ const { Content } = await entry.render();
   title={`${entry.data.title} | I Putu Bagus Merta Sentana`}
   description={entry.data.description}
   banner={entry.data.banner.src}
-  >
+>
   <main>
-    <section class='blog-layout'>
-        <div class='py-20 px-4 md:px-28'>
-          <div class="py-8 flex flex-col justify-center items-center">
-            <h1 class='font-display text-4xl text-center'>{entry.data.title}</h1>
-            <div class='mt-4 flex items-center justify-start gap-8 text-sm transition-colors bg-gradient-to-r from-neutral-300/[35%] via-neutral-300/90 to-neutral-300/[35%] bg-clip-text text-transparent'>
-              <div class='flex items-center gap-1'>
-                  {entry.data.readCount} - Published: {formatDate(entry.data.date)}
-              </div>
+    <section class="max-w-4xl mx-auto">
+      <div class='py-20 px-4 md:px-28'>
+        <div class="py-8 flex flex-col justify-center items-center">
+          <h1 class='font-display text-4xl text-center'>{entry.data.title}</h1>
+          <div class='mt-4 flex items-center justify-start gap-8 text-sm transition-colors bg-gradient-to-r from-neutral-300/[35%] via-neutral-300/90 to-neutral-300/[35%] bg-clip-text text-transparent'>
+            <div class='flex items-center gap-1'>
+              {entry.data.readCount} - Published: {formatDate(entry.data.date)}
             </div>
-            
-            <Image
-              class='mt-10 mb-4 rounded-lg'
-              src={entry.data.banner} 
-              width={1200}
-              height={(1200 * 2) / 5}
-              alt='Image Banner Blog' 
-              decoding='async'
-              loading='lazy'
-            />
           </div>
-  
-          <article class='mt-4'>
-            <div class='mdoc-container'>
-              <Content />
-            </div>
-          </article>
-          <Comments />
-          <LatestPosts id={entry.data.id} />
-  
+          
+          <Image
+            class='mt-10 mb-4 rounded-lg'
+            src={entry.data.banner} 
+            width={1200}
+            height={(1200 * 2) / 5}
+            alt='Image Banner Blog' 
+            decoding='async'
+            loading='lazy'
+          />
         </div>
+
+        <article class='mt-4'>
+          <div class='prose prose-invert prose-lg max-w-none'>
+            <Content />
+          </div>
+        </article>
+        <Comments />
+        <LatestPosts id={entry.data.id} />
+      </div>
     </section>
   </main>
 </BaseLayout>
