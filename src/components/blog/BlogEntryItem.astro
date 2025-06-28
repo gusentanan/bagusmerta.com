@@ -1,0 +1,54 @@
+---
+import type { BlogEntry } from "utils/content";
+import { formatDate } from "utils/time";
+import { getBlogPathName } from "utils/url";
+import { Icon } from "astro-icon/components"
+import { Image } from "astro:assets";
+
+export type Props = BlogEntry;
+
+const props = Astro.props;
+---
+<li class:list={[
+  'p-2 w-full rounded-lg border border-gray-900',
+  'bg-gradient-to-br from-[var(--card)]',
+  'scale-500 hover:scale-[1.02] active:scale-[0.97] motion-safe:transform-gpu',
+  'transition duration-500',
+  'motion-reduce:hover:scale-500',
+  'animate-shadow',
+  'hover:border-[var(--card-hover-border)] hover:shadow-[0_0_12px_var(--card-hover)]',
+]}>
+  <a class='block h-full rounded-lg focus:outline-none focus-visible:ring focus-visible:ring-primary-300 hover:shadow-lg' href={getBlogPathName(props)}>
+    <div class='relative'>
+      <Image 
+        src={props.data.banner}
+        decoding='async'
+        loading='lazy'
+        alt='blog banner'          
+      />
+      <div class="absolute top-2 left-2 z-10">
+        <div class="flex gap-2">
+          {props.data.tags.map((type) => (
+            <p class='mt-0 mb-0 h-8 px-3 w-max flex gap-2 items-center rounded-full bg-background text-white text-sm md:text-md'>
+              # {type}
+            </p>
+          ))}
+        </div>
+      </div>
+    </div>
+    <div class='p-2'>
+      <div class='py-2 flex items-center justify-start gap-2 text-sm font-normal text-gray-400'>
+        <div class='flex items-center gap-1'>
+          <Icon name='ri:alarm-line'/>
+          <h5>{props.data.readCount}</h5>
+        </div>
+        <div class='flex items-center gap-1'>
+          <Icon name='ri:calendar-2-fill'/>
+          <h5>{formatDate(props.data.date)}</h5>
+        </div>
+      </div>
+      <h4 class='text-white'>{props.data.title}</h4>
+      <p class='pt-6 m-0 text-sm text-gray-400'>{props.data.description}</p>
+    </div>
+  </a>
+</li>
