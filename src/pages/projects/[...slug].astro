@@ -27,15 +27,19 @@ const { Content } = await entry.render();
     <section class='blog-layout'>
         <div class='py-20 px-4 md:px-28'>
           <div class="py-8 flex flex-col justify-center items-center">
-              <Image
-              class='mt-10 mb-4 rounded-lg'
+              <div class="relative mt-10 mb-4">
+            <div class="absolute inset-0 bg-gray-800/20 rounded-lg blur-sm"></div>
+            <Image
+              class='relative h-full w-full rounded-lg opacity-0 transition-opacity duration-300'
               src={entry.data.image} 
               width={1200}
               height={(1200 * 2) / 5}
               alt='Image Banner projects' 
               decoding='async'
               loading='lazy'
-              />
+              onload="this.style.opacity = 1"
+            />
+          </div>
             </div>
             <h1 class='font-display text-4xl text-start py-2'>{entry.data.title}</h1>
             <h6 class='text-xl text-start transition-colors bg-gradient-to-r from-neutral-300/[35%] via-neutral-300/90 to-neutral-300/[35%] bg-clip-text text-transparent'>{entry.data.description}</h6>

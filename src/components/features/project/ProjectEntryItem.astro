@@ -27,14 +27,17 @@ const props = Astro.props;
       {props.data.description}
     </p>
     <TechIcons {...props}/>
-    <picture class="mt-4">
+    <div class="relative mt-4">
+      <div class="absolute inset-0 bg-gray-800/20 rounded-sm blur-sm"></div>
       <Image 
         src={props.data.image}
         decoding='async'
         loading='lazy'
         alt='project image'
+        class="relative h-full w-full rounded-sm opacity-0 transition-opacity duration-300"
+        onload="this.style.opacity = 1"
       />
-    </picture> 
+    </div> 
   </a>
 </li>
 

@@ -25,8 +25,15 @@ const faviconUrl = `https://t2.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&
       <h4>{props.data.title}</h4>
       <h5 class='text-gray-500 line-clamp-3'>{props.data.description}</h5>
     </div>
-    <div class="p-1 rounded-xl bg-gray-800/10 flex items-center justify-center border border-gray-700/30 ml-auto flex-shrink-0">
-      <img src={faviconUrl} alt={`Favicon for ${props.data.title}`} class="h-8 w-8 rounded-sm" />
+    <div class="relative w-8 h-8 flex-shrink-0">
+      <div class="absolute inset-0 bg-gray-800/20 rounded-sm blur-sm"></div>
+      <img
+        src={faviconUrl}
+        alt={`Favicon for ${props.data.title}`}
+        class="relative h-full w-full rounded-sm opacity-0 transition-opacity duration-300"
+        onload="this.style.opacity = 1"
+        loading="lazy"
+      />
     </div>
   </a>
 </li>

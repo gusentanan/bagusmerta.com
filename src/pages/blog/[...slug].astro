@@ -35,15 +35,19 @@ const { Content } = await entry.render();
             </div>
           </div>
           
-          <Image
-            class='mt-10 mb-4 rounded-lg'
-            src={entry.data.banner} 
-            width={1200}
-            height={(1200 * 2) / 5}
-            alt='Image Banner Blog' 
-            decoding='async'
-            loading='lazy'
-          />
+          <div class="relative mt-10 mb-4">
+            <div class="absolute inset-0 bg-gray-800/20 rounded-lg blur-sm"></div>
+            <Image
+              class='relative h-full w-full rounded-lg opacity-0 transition-opacity duration-300'
+              src={entry.data.banner} 
+              width={1200}
+              height={(1200 * 2) / 5}
+              alt='Image Banner Blog' 
+              decoding='async'
+              loading='lazy'
+              onload="this.style.opacity = 1"
+            />
+          </div>
         </div>
 
         <article class='mt-4'>
