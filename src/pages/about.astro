@@ -66,16 +66,14 @@ const techIcons = [
       <section class="flex flex-col sm:flex-row gap-16 py-10">
         <div class="mt-16 mb-8 mx-auto ml-4-w-[300px] max-w-full rotate-3 sm:float-right sm:ml-4">
           <div class="relative rounded bg-zinc-50 p-4 pb-16" >
-            <div class="absolute inset-0 bg-gray-800/20 rounded blur-sm"></div>
                <Image
-                class='relative h-full w-full rounded object-contain object-center aspect-square opacity-0 transition-opacity duration-300'
+                class='rounded object-contain object-center aspect-square'
                 src='/images/avatar-1.jpg'
                 alt='Photo of me, hopefully can impress your boss'
                 decoding='async'
                 loading='lazy'
                 width={1559}
                 height={1559}
-                onload="this.style.opacity = 1"
               />
 
               <svg 
