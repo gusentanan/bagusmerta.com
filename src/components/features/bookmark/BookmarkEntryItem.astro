@@ -1,27 +1,15 @@
 ---
-import { Icon } from "astro-icon/components";
 import type { BookmarkEntry } from 'utils/content';
-
-
-const categoryIcon = {
-  "software-engineering": {
-    icon: "ri:aliens-line",
-  },
-  "design-system": {
-    icon: "ri:heart-2-line",
-  },
-  tips: {
-    icon: "ri:earth-line",
-  },
-};
 
 export type Props = BookmarkEntry;
 const props = Astro.props;
+const url = new URL(props.data.link);
+const faviconUrl = `https://t2.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=${url.origin}&size=32`;
 ---
 
 
 <li class:list={[
-    'p-2 w-80 rounded-lg border border-gray-900',
+    'p-2 w-full rounded-lg border border-gray-900',
     'bg-gradient-to-br from-[var(--card)]',
     'scale-500 hover:scale-[1.02] active:scale-[0.97] motion-safe:transform-gpu',
     'transition duration-500',
@@ -30,19 +18,15 @@ const props = Astro.props;
     'hover:border-[var(--card-hover-border)] hover:shadow-[0_0_12px_var(--card-hover)]',
 ]}>
   <a href={(props.data.link)} class:list={[
-      'flex h-full flex-col items-start rounded-md p-2 focus:outline-none focus-visible:ring focus-visible:ring-primary-300',
+      'flex w-full flex-row items-center justify-between rounded-md p-2 focus:outline-none focus-visible:ring focus-visible:ring-primary-300',
       'cursor-newtab'
   ]} target="_blank">
-    <div class="flex items-center justify-between w-full gap-2 mb-2"> 
+    <div class="flex flex-col mr-8">
       <h4>{props.data.title}</h4>
-      {props.data.tags.length > 0 && (
-       <div class="p-1 rounded-xl bg-gray-800/10 flex items-center justify-center border border-gray-700/30">
-  <Icon name={categoryIcon[props.data.tags[0]]?.icon} class="h-8 w-8 text-gray-400" />
-</div>
-
-      )}
+      <h5 class='text-gray-500 line-clamp-3'>{props.data.description}</h5>
     </div>
-    
-    <h5 class='mt-auto text-gray-500 line-clamp-3'>{props.data.description}</h5>
+    <div class="p-1 rounded-xl bg-gray-800/10 flex items-center justify-center border border-gray-700/30 ml-auto flex-shrink-0">
+      <img src={faviconUrl} alt={`Favicon for ${props.data.title}`} class="h-8 w-8 rounded-sm" />
+    </div>
   </a>
 </li>

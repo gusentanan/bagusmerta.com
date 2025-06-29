@@ -45,7 +45,7 @@ const posts = await getBookmarkByTag(tag);
                 </div>
     
                 <div class="flex justify-center">
-                    <ul class='mt-4 grid gap-4 sm:grid-cols-2 xl:grid-cols-2'>
+                    <ul class='mt-4 flex flex-col gap-4'>
                         {
                             posts.map((item) => <BookmarkEntryItem {...item} />)
                         }
