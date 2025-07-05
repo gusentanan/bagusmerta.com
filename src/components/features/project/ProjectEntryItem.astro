@@ -1,4 +1,5 @@
 ---
+import Card from "@components/ui/Card.astro";
 import type { ProjectEntry } from "utils/content";
 import { Image } from "astro:assets";
 import { getProjectPathName } from "utils/url";
@@ -10,15 +11,7 @@ const props = Astro.props;
 
 ---
 
-<li class:list={[
-    'p-2 w-full rounded-lg border border-gray-900',
-    'bg-gradient-to-br from-[var(--card)]',
-    'scale-500 hover:scale-[1.02] active:scale-[0.97] motion-safe:transform-gpu',
-    'transition duration-500',
-    'motion-reduce:hover:scale-500',
-    'animate-shadow',
-    'hover:border-[var(--card-hover-border)] hover:shadow-[0_0_12px_var(--card-hover)]',
-]}>
+<Card>
   <a href={getProjectPathName(props)} class:list={[
     'flex h-full flex-col items-start rounded-lg p-2 focus:outline-none focus-visible:ring focus-visible:ring-primary-300 hover:shadow-lg',
   ]}>
@@ -39,6 +32,6 @@ const props = Astro.props;
       />
     </div> 
   </a>
-</li>
+</Card>
 
 
