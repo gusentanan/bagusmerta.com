@@ -1,1 +1,0 @@
-revert: about page image sizing and blur effect

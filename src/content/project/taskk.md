@@ -113,18 +113,18 @@ fun CardWithHeader(
 
 ```
 
-In the example above,  the slotting pattern works by exposing header and content as parameters of type `@Composable () -> Unit`. This means the parent can inject any composable into those slots, giving full control over what the header and content look like—without needing to change the internal layout of `CardWithHeader`.
+In the example above, the slot pattern works by exposing header and content as parameters of type `@Composable () -> Unit`. This means the parent can inject any composable into those slots, giving full control over what the header and content look like—without needing to change the internal layout of `CardWithHeader`.
 
 This approach makes the component highly reusable. You can reuse the same card layout structure for many different use cases just by passing different composables into the slots.
 
 #### But Don’t Overdo It
 
-While the slotting pattern is flexible, adding too many slots to a single component can make it hard to read, maintain, which usually lead to too many open-ended inputs that can cause the component’s behavior unclear.
+While the slot pattern is flexible, adding too many slots to a single component can make it hard to read, maintain, which usually lead to too many open-ended inputs that can cause the component’s behavior unclear.
 
 In my example above, two slots (header and content) are enough and meaningful. 
 If you find yourself adding a footer, trailingActions, leadingIcon, etc. all in one go—it’s often better to split the layout into smaller composables.
 
-Dont to it like this.
+Dont do it like this.
 ```kotlin
 @Composable
 fun NightmareScreen(

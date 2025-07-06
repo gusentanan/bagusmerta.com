@@ -1,0 +1,28 @@
+---
+import { Image } from "astro:assets";
+const { logo = '/images/logo.png', company, location, title, period } = Astro.props;
+---
+
+<li class="flex items-center gap-6">
+    <div class="relative mt-1 flex items-center justify-center rounded-full border border-zinc-800 p-1">
+        <Image
+          class="rounded-full"
+          src={logo}
+          width={36}
+          height={36}
+          loading="lazy"
+          alt="Company logo"
+        />
+      </div>
+      
+      
+    <div class="flex flex-col gap-1 w-full">
+      <h5 class="font-medium text-sm md:text-md leading-tight">{company}</h5>
+      <p class="m-0 text-xs md:text-sm  text-gray-500 leading-tight">{location}</p>
+      <div class="flex w-full gap-2 md:gap-10 text-gray-600">
+        <p class="m-0 text-xs">{title}</p>
+        <p class="m-0 ml-auto text-xs">{period}</p>
+      </div>
+    </div>
+</li>
+  
