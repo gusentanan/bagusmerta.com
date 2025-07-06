@@ -36,6 +36,7 @@ export function MobileDrawerButton({ className, ...props }: Props) {
         <button
           className={navbarRouteItem + " " + className}
           {...props}
+          style={{ backgroundColor: 'transparent' }}
         >
           Open Menu
         </button>
