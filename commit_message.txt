@@ -1,1 +1,1 @@
-chore(cleanup): remove unused navbar component
+feat: add new bookmark and fix layout padding
