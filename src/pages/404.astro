@@ -31,11 +31,11 @@ import { Image } from "astro:assets";
     {/* Semi-Transparent Overlay */}
     <div class="absolute inset-0 bg-background/90 backdrop-brightness-75 z-[1]" />
     {/* Main Content */}
-    <div class="relative z-[4] w-full pt-20 md:pt-0 flex flex-col items-center justify-center px-4">
-      <h1 class="font-display text-4xl md:text-7xl font-bold text-center bg-clip-text text-transparent bg-gradient-to-b from-neutral-50 to-neutral-400 bg-opacity-50">
+    <div class="relative z-[4] w-full pt-20 md:pt-0 flex flex-col items-center justify-center layout">
+      <h1 class="font-display text-4xl md:text-7xl font-bold text-center text-gradient-primary">
         Ouch... <span>you've lost</span>
       </h1>
-      <p class="py-4 font-normal text-base max-w-lg text-center mx-auto transition-colors bg-gradient-to-r from-neutral-300/[35%] via-neutral-300/90 to-neutral-300/[35%] bg-clip-text text-transparent">
+      <p class="py-4 font-normal text-base max-w-lg text-center mx-auto transition-colors text-gradient-secondary">
         An error has occurred. The page you are looking for may have been moved, deleted, or does not exist.
       </p>
       <PrimaryButton href="/" text="Go back" glowing={true} />
