@@ -132,7 +132,7 @@
 
   .layout {
     max-width: 48rem;
-    @apply mx-auto w-11/12 px-4 sm:px-0;
+    @apply mx-auto w-11/12 px-0 sm:px-0;
   }
 
   .blog-layout {
