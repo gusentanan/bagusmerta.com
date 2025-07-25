@@ -13,6 +13,7 @@ import { ViewTransitions } from 'astro:transitions'
 
 import Header from "@components/layout/Header.astro";
 import Footer from "@components/layout/Footer.astro";
+import { MobileMenu } from "@components/layout/navigation/MobileMenu";
 
 let { title, description, banner } = Astro.props;
 
@@ -72,6 +73,7 @@ const resolvedImageWithDomain = new URL(
   </head>
   <body>
     <Header />
+    <MobileMenu client:only="react" />
     <slot />
     <script is:inline>
       // Set the height of the screen to a CSS variable due to viewport height bug on mobile devices

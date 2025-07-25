@@ -43,7 +43,6 @@
     "tailwindcss": "^3.4.1",
     "tailwindcss-animate": "^1.0.7",
     "tailwindcss-text-fill-stroke": "^1.1.2",
-    "vaul": "^0.9.1",
     "zustand": "^4.5.5"
   },
   "devDependencies": {

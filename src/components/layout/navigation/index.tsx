@@ -3,11 +3,16 @@ import { NavItem } from "./NavItem";
 import { routes } from "./routes";
 import * as styles from "./styles";
 import { navbarRouteItem } from "./styles";
-import { MobileDrawerButton } from "./MobileNavbar";
+import { useScrollDirection } from "./useScrollDirection";
 
 export function Navbar() {
+  const { isVisible } = useScrollDirection();
+
   return (
-    <div className={styles.navbarWrapper}>
+    <div className={cn(styles.navbarWrapper, {
+      'translate-y-full': !isVisible,
+      'translate-y-0': isVisible,
+    })}>
       {Array(10)
         .fill(1)
         .map((v, i) => {
@@ -42,9 +47,6 @@ export function Navbar() {
               <NavItem {...route} />
             </li>
           ))}
-          <li className="sm:hidden flex justify-center items-center pr-2">
-            <MobileDrawerButton />
-          </li>
         </ul>
       </nav>
     </div>

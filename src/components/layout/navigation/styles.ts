@@ -3,6 +3,7 @@ import { cn } from "utils/ui";
 
 export const navbarWrapper = cn(
   "fixed inset-x-0 bottom-0 z-10",
+  "transition-transform duration-300 ease-in-out",
 );
 
 export const navbarInner = cn(
