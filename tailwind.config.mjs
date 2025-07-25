@@ -16,7 +16,7 @@ export default {
 		extend: {
 			fontFamily: {
 				primary: ['AlbertSans', ...fontFamily.sans],
-				display: ['PlayfairBold', ...fontFamily.sans],
+				display: ['Garamond', ...fontFamily.serif],
 				code: ['DMMono', ...fontFamily.sans],
 			  },
 			  borderRadius: {

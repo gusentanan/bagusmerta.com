@@ -14,19 +14,16 @@ const allProject = await getProjectCollection();
     <main>
       <div class='layout py-32'>
         <div class="flex flex-col justify-center items-center">
-          <h2 class='font-display text-5xl md:text-5xl text-center'>
-            Personal
-            <GradientHeaderText>
-              Projects
-            </GradientHeaderText>
+          
+          <h2 class='font-display text-5xl md:text-5xl text-center text-gradient-primary'>
+            Personal Projects
           </h2>
 
-          <GradientSubText className="px-12 md:px-32 py-2 md:py-6 text-center">
-            Things I've created.
-            Please note that some projects from my professional work cannot be shared due to confidentiality reasons. 
+          <GradientSubText className="text-center">
+            Things I've created. Not include my profesional work. 
           </GradientSubText>
         </div>
-        <ul class='mt-6 grid gap-4 sm:grid-cols-2 xl:grid-cols-2'>
+        <ul class='mt-16 grid gap-4 sm:grid-cols-2 xl:grid-cols-2'>
           {allProject.map((projects) => <ProjectEntryItem {...projects} />)}
         </ul>
       </div>
