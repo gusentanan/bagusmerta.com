@@ -75,6 +75,7 @@ const resolvedImageWithDomain = new URL(
     <Header />
     <MobileMenu client:only="react" />
     <slot />
+    <Footer />
     <script is:inline>
       // Set the height of the screen to a CSS variable due to viewport height bug on mobile devices
       const setScreenHeight = () => {

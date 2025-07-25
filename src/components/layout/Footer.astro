@@ -1,46 +1,147 @@
 ---
 import { Icon } from "astro-icon/components"
 
+const navigationLinks = [
+  { label: "Home", href: "/" },
+  { label: "About", href: "/about" },
+  { label: "Blog", href: "/blog" },
+  { label: "Projects", href: "/projects" },
+  { label: "Bookmarks", href: "/bookmarks" },
+];
 
-const links = [
+const socialLinks = [
   {
+    label: "Twitter",
     iconify: "ri:twitter-x-fill",
     url: "https://twitter.com/@bagusmertasntn",
   },
   {
+    label: "GitHub",
     iconify: "ri:github-fill",
     url: "https://github.com/gusentanan",
   },
   {
+    label: "LinkedIn",
     iconify: "ri:linkedin-box-fill",
     url: "https://linkedin.com/in/bagusmerta",
   },
+];
+
+const resourceLinks = [
   {
+    label: "RSS Feed",
     iconify: "ri:rss-fill",
-    url: "https://gusentanan.github.io/rss.xml",
-  }
+    url: "/rss.xml",
+  },
+  {
+    label: "Email",
+    iconify: "ri:mail-line",
+    url: "mailto:merta.bagus24@gmail.com",
+  },
 ];
 
 ---
-<footer class='bottom-0 transition-shadow'>
-  <div class='mt-4 pb-2'>
-    <div class='layout flex flex-col items-center'>
-      <div class='flex flex-wrap justify-center gap-x-8 gap-y-4'>
-        {links.map(({ iconify, url }) => 
-          <a 
-            href={url}  
-            target='_blank' 
-            class:list={[
-              'text-lg',
-              'cursor-newtab'
-            ]}>
-            <Icon name={iconify} />
-          </a>
-        )}
+<footer class='border-t border-zinc-200/10 bg-zinc-900/5 backdrop-blur-sm'>
+  <div class='layout py-12'>
+    
+    <!-- Two Section Layout: Brand | Navigation Links -->
+    <div class='flex flex-col gap-8 md:flex-row md:justify-between md:items-start'>
+      
+      <!-- Brand Section -->
+      <div class='md:flex-shrink-0'>
+        <div class='flex items-center gap-3'>
+          <img 
+            src='/favicon.png' 
+            alt='Bagus Merta Logo'
+            class='h-8 w-8 rounded-lg'
+          />
+          <div>
+            <h2 class='text-lg font-bold text-zinc-900 dark:text-zinc-100'>
+              Bagus Merta
+            </h2>
+          
+          </div>
+        </div>
       </div>
-      <p class='mt-4 text-sm text-black-600 text-center w-full'>
-        {new Date().getFullYear()} &copy; I Putu Bagus Merta Sentana
-      </p>
+
+      <!-- Links Section -->
+      <div class='grid grid-cols-1 gap-8 sm:grid-cols-3 sm:gap-14'>
+        
+        <!-- Navigation -->
+        <div>
+          <h3 class='mb-4 text-sm font-semibold text-zinc-900 dark:text-zinc-100'>
+            Navigation
+          </h3>
+          <ul class='space-y-3'>
+            {navigationLinks.map(({ label, href }) => (
+              <li>
+                <a 
+                  href={href}
+                  class='text-sm text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors duration-200'
+                >
+                  {label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <!-- Social/Connect Section -->
+        <div>
+          <h3 class='mb-4 text-sm font-semibold text-zinc-900 dark:text-zinc-100'>
+            Connect
+          </h3>
+          <ul class='space-y-3'>
+            {socialLinks.map(({ label, iconify, url }) => (
+              <li>
+                <a 
+                  href={url}
+                  target='_blank'
+                  rel='noopener noreferrer'
+                  class='flex items-center gap-2 text-sm text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors duration-200'
+                >
+                  <Icon name={iconify} class="w-4 h-4" />
+                  {label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <!-- Resources Section -->
+        <div>
+          <h3 class='mb-4 text-sm font-semibold text-zinc-900 dark:text-zinc-100'>
+            Resources
+          </h3>
+          <ul class='space-y-3'>
+            {resourceLinks.map(({ label, iconify, url }) => (
+              <li>
+                <a 
+                  href={url}
+                  target='_blank'
+                  rel='noopener noreferrer'
+                  class='flex items-center gap-2 text-sm text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors duration-200'
+                >
+                  <Icon name={iconify} class="w-4 h-4" />
+                  {label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Copyright Section -->
+    <div class='mt-12 pt-8 border-t border-zinc-200/10'>
+      <div class='flex flex-col justify-between gap-2 sm:flex-row'>
+        <p class='text-sm text-zinc-600 dark:text-zinc-400'>
+          © {new Date().getFullYear()} I Putu Bagus Merta Sentana. All rights reserved.
+        </p>
+        <p class='text-sm text-zinc-600 dark:text-zinc-400'>
+          Made with 🩸
+        </p>
+      </div>
     </div>
   </div>
 </footer>
