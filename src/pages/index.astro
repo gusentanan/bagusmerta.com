@@ -10,7 +10,6 @@ import SecondaryButton from "@components/ui/button/SecondaryButton.astro";
 import Background from "@components/layout/Background.astro";
 import GradientSubText from "@components/ui/text/GradientSubText.astro";
 import GradientHeaderText from "@components/ui/text/GradientHeaderText.astro";
-import NiceWordsCard from "@components/ui/NiceWordsCard.astro";
 import type { Code } from "astro:components";
 
 const allBlogPosts = await getBlogCollection();
@@ -46,7 +45,7 @@ const allNicewords = await getNicewordsCollection();
                     <div class="absolute inset-0 bg-gray-800/20 rounded-lg blur-sm"></div>
                     <Image
                       class='relative h-full w-full rounded-lg object-cover opacity-0 transition-opacity duration-300'
-                      src='/images/avatar-1.jpg'
+                      src='/images/avatar.jpg'
                       alt='Photo of me, hopefully can impress your boss'
                       decoding='async'
                       loading='lazy'
@@ -56,7 +55,7 @@ const allNicewords = await getNicewordsCollection();
                     />
                   </div>
                 </div>
-                <h1 class='font-display text-4xl text-center md:text-6xl 2xl:text-5xl text-gradient-primary'>  
+                <h1 class='font-display text-4xl text-center md:text-6xl 2xl:text-5xl text-gradient-primary leading-tight pb-2'>  
                   Software Engineer.
                 </h1>
               </div>
@@ -106,7 +105,7 @@ const allNicewords = await getNicewordsCollection();
           </h2>
           <SecondaryButton 
               href="/projects"
-              text="see more project →"
+              text="see more →"
             />
         </div>
         
@@ -119,18 +118,27 @@ const allNicewords = await getNicewordsCollection();
 
     <section class="py-20 mb-20">
       <article class="layout">
-        <p class='font-display text-4xl text-center md:text-5xl 2xl:text-4xl text-gradient-primary'>
+        <p class='font-display text-4xl md:text-5xl 2xl:text-4xl text-gradient-primary'>
           Some kind words
         </p>
-        <GradientSubText className="text-l md:text-l 2xl:text-xl text-center">
+        <GradientSubText className="text-l md:text-l 2xl:text-xl">
           Some feedback from the people I've had the privilege of working with.
         </GradientSubText>
         
-        <ul class="mt-8 grid gap-4 sm:grid-cols-2 xl:grid-cols-2">
-          {[
-            allNicewords.map(nicewords => <NiceWordsCard {...nicewords} />)
-          ]}
-        </ul>
+        <div class="mt-12 flex flex-col gap-8">
+          {allNicewords.map(nicewords => (
+            <div class="text-lg italic text-left text-gray-300 relative pl-16">
+              <svg width="40" height="40" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" class="absolute left-0 top-0 opacity-60">
+                <path d="M42,60 C30,70 20,85 20,105 C20,125 35,140 55,140 C75,140 90,125 90,105 C90,85 75,70 55,70 C55,70 60,60 75,50 C60,45 50,50 42,60 Z" fill="#71717a"/>
+                <path d="M112,60 C100,70 90,85 90,105 C90,125 105,140 125,140 C145,140 160,125 160,105 C160,85 145,70 125,70 C125,70 130,60 145,50 C130,45 120,50 112,60 Z" fill="#71717a"/>
+              </svg>
+              {nicewords.data.words}
+              <footer class="mt-4 text-sm text-gray-400 not-italic">
+                — {nicewords.data.name}, {nicewords.data.workplace}
+              </footer>
+            </div>
+          ))}
+        </div>
       </article>  
     </section>
 

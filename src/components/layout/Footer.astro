@@ -1,5 +1,6 @@
 ---
 import { Icon } from "astro-icon/components"
+import SignWhite from "@components/ui/SignWhite.astro"
 
 const navigationLinks = [
   { label: "Home", href: "/" },
@@ -49,19 +50,7 @@ const resourceLinks = [
       
       <!-- Brand Section -->
       <div class='md:flex-shrink-0'>
-        <div class='flex items-center gap-3'>
-          <img 
-            src='/favicon.png' 
-            alt='Bagus Merta Logo'
-            class='h-8 w-8 rounded-lg'
-          />
-          <div>
-            <h2 class='text-lg font-bold text-zinc-900 dark:text-zinc-100'>
-              Bagus Merta
-            </h2>
-          
-          </div>
-        </div>
+        <SignWhite class="w-36 h-12 max-w-full fill-white stroke-white" />
       </div>
 
       <!-- Links Section -->

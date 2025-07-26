@@ -9,43 +9,47 @@ import GradientSubText from "@components/ui/text/GradientSubText.astro";
 import GradientHeaderText from "@components/ui/text/GradientHeaderText.astro";
 import Sign from "@components/ui/Sign.astro";
 import WorkplaceItem from "@components/ui/WorkplaceItem.astro";
+import { HoverImagePopup } from "@components/ui/HoverImagePopup";
 
 
-const techIcons = [
-  {
-    icon: "simple-icons:kotlin",
-    description: "Kotlin, more readable and concise version of Java"
-  },
-  {
-    icon: "simple-icons:flutter",
-    description: "Flutter, the development is just way faster compared to Java/Kotlin"
-  },
-  {
-    icon: "simple-icons:figma",
-    description: "I sometimes use Figma to visualize design ideas, and ensure a shared understanding of the user interface."
-  },
-  {
-    icon: "simple-icons:typescript",
-    description: "TypeScript, definitely a valuable choice beyond traditional JavaScript"
-  },
-  {
-    icon: "simple-icons:react",
-    description: "React, loved for its declarative approach and the abundance of resources available for learning"
-  },
-  {
-    icon: "simple-icons:tailwindcss",
-    description: "Tailwind is a great css framework. Styling has never been easier, and there is so much flexibility we can achieve"
-  },
-  {
-    icon: "simple-icons:gnubash",
-    description: "I used Bash to create shortcut command"
-  },
-  {
-    icon: "simple-icons:python",
-    description: "Python, mainly used by me to solve data structures problems and to learn machine learning"
-  }
-
-]
+const skillsAndTools = {
+  "Design": [
+    { name: "Figma", hoverable: true, memeImage: "/images/memes/figma.GIF" },
+    { name: "Design System", hoverable: false },
+    { name: "Tailwind", hoverable: false }
+  ],
+  "Front-end": [
+    { 
+      name: "JavaScript & TypeScript", 
+      hoverable: true, 
+      isCombo: true,
+      items: [
+        { name: "JavaScript", memeImage: "/images/memes/javascript.jpg" },
+        { name: "TypeScript", memeImage: "/images/memes/typescript.jpg" }
+      ]
+    },
+    { name: "Flutter", hoverable: true, memeImage: "/images/memes/flutter.JPG" },
+    { name: "Kotlin", hoverable: true, memeImage: "/images/memes/kotlin.JPG" },
+    { 
+      name: "React, Next & Astro", 
+      hoverable: true, 
+      isPartialHover: true,
+      hoverablePart: "React",
+      memeImage: "/images/memes/react.JPG"
+    },
+  ],
+  "Back-end": [
+    { name: "Python", hoverable: true, memeImage: "/images/memes/python.JPG" },
+    { name: "Node.js", hoverable: false },
+    { name: "MySQL & PostgreSQL", hoverable: false }
+  ],
+  "Others": [
+    { name: "Vercel & Github", hoverable: false },
+    { name: "Obsidian", hoverable: true, memeImage: "/images/memes/obsidian.GIF" },
+    { name: "Claude", hoverable: true, memeImage: "/images/memes/claude.GIF" },
+    { name: "Scrum & Kanban", hoverable: false }
+  ]
+}
 ---
 
 <BaseLayout title={getTitle('About')}>
@@ -63,24 +67,21 @@ const techIcons = [
       </section>
 
       <section class="flex flex-col sm:flex-row gap-16 py-10">
-        <div class="mt-16 mb-8 mx-auto ml-4-w-[300px] max-w-full rotate-3 sm:float-right sm:ml-4">
-          <div class="relative rounded bg-zinc-50 p-4 pb-16" >
-               <Image
-                class='rounded object-contain object-center aspect-square'
-                src='/images/avatar-1.jpg'
-                alt='Photo of me, hopefully can impress your boss'
-                decoding='async'
-                loading='lazy'
-                width={1559}
-                height={1559}
-              />
-
-              <Sign class="absolute bottom-2 right-6 w-36 h-12 max-w-full fill-zinc-800 stroke-zinc-800 -rotate-6"/>
+        <div class="flex justify-center items-center mb-8 sm:mb-0">
+          <div class="relative w-48 h-48">
+            <Image
+              class='relative rounded-2xl object-cover w-full h-full border-2 border-zinc-200/20 shadow-lg'
+              src='/images/avatar.jpg'
+              alt='Photo of me, hopefully can impress your boss'
+              decoding='async'
+              loading='lazy'
+              width={192}
+              height={192}
+            />
           </div>
-
         </div>
 
-        <div class="flex flex-col sm:mt-4 gap-5">
+        <div class="flex flex-col sm:mt-4 gap-5 justify-center">
           <h3>Bagus Merta</h3>
           <h5 class="text-gray-400">
             Call me Bagus.
@@ -93,19 +94,6 @@ const techIcons = [
   
           </h5>
 
-          <h5 class="text-gray-400">Here are my current tech stack:</h5>
-          <ul class="mt-2 flex flex-wrap gap-4">
-            {techIcons.map((icons) => {
-              return (
-                <li>
-                  <Icon 
-                    class="text-2xl text-gray-300 hover:text-primary-400"
-                    name={icons.icon} 
-                  />
-                </li>
-              );
-            })}
-        </ul>
 
         </div>
       </section>
@@ -142,12 +130,59 @@ const techIcons = [
         </div>
       </section>
 
+      <!-- Skills & Tools Section -->
+      <section class="mt-20">
+        <div class="flex items-center justify-center gap-4 mb-8">
+         
+          <h3 class="text-xl font-semibold">Skills & Tools</h3>
+        </div>
+        
+        <div class="mt-12 grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-8 justify-center">
+          {Object.entries(skillsAndTools).map(([category, skills]) => (
+            <div class="text-center">
+              <h4 class="text-sm font-medium text-gray-300 mb-4">{category}</h4>
+              <div class="space-y-3">
+                {skills.map((skill) => (
+                  <div class="text-sm text-gray-400 transition-colors duration-200">
+                    {skill.isCombo ? (
+                      <span>
+                        <HoverImagePopup client:load imageSrc={skill.items[0].memeImage} imageAlt={`${skill.items[0].name} meme`}>
+                          {skill.items[0].name}
+                        </HoverImagePopup>
+                        {" & "}
+                        <HoverImagePopup client:load imageSrc={skill.items[1].memeImage} imageAlt={`${skill.items[1].name} meme`}>
+                          {skill.items[1].name}
+                        </HoverImagePopup>
+                      </span>
+                    ) : skill.isPartialHover ? (
+                      <span>
+                        <HoverImagePopup client:load imageSrc={skill.memeImage} imageAlt={`${skill.hoverablePart} meme`}>
+                          {skill.hoverablePart}
+                        </HoverImagePopup>
+                        {skill.name.replace(skill.hoverablePart, '')}
+                      </span>
+                    ) : skill.hoverable ? (
+                      <HoverImagePopup client:load imageSrc={skill.memeImage} imageAlt={`${skill.name} meme`}>
+                        {skill.name}
+                      </HoverImagePopup>
+                    ) : (
+                      <span>{skill.name}</span>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <!-- 
       <section class="flex flex-none justify-center mt-20">
         <blockquote>
           The impediment to action advances action, what stands in the way becomes the way — Marcus Aurelius
         </blockquote>
 
-      </section>
+      </section> -->
       
     </main>
   </Background>

@@ -9,7 +9,7 @@ export function Navbar() {
   const { isVisible } = useScrollDirection();
 
   return (
-    <div className={cn(styles.navbarWrapper, {
+    <div className={cn(styles.navbarWrapper, "max-sm:hidden", {
       'translate-y-full': !isVisible,
       'translate-y-0': isVisible,
     })}>
