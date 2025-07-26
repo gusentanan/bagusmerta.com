@@ -21,12 +21,9 @@ The reason behind this post is I’ve developed and iterated on it numerous time
 
 ## Three things you need
 There are three key elements needed to develop a UI for an app, based on [Leerob](https://leerob.io/blog/style-guides-component-libraries-design-systems) post.
-#### 1. Style guides
-A set of rules that we follow, including constants like hex colors, padding sizes, fonts, and typefaces that represent the brand. This ensures components are built consistently. If we make changes, they stay within these guidelines, reducing the risk of breaking the design.
-#### 2. Design system
-The implementation of the style guides. For example, when creating a button, it must adhere to the style guide’s rules (e.g., correct fonts and colors). This approach makes components more robust and easier to maintain, even with multiple developers working on them. It also encourages building reusable, less duplicated code
-#### 3. Component library
-It combines everything mentioned above—style guides and component libraries—into one complete system, along with detailed documentation and principles to ensure everything stays consistent. It’s like a blueprint that guides the design and development of your app.
+1. **Style guides** : A set of rules that we follow, including constants like hex colors, padding sizes, fonts, and typefaces that represent the brand. This ensures components are built consistently. If we make changes, they stay within these guidelines, reducing the risk of breaking the design.
+2. **Design system** : The implementation of the style guides. For example, when creating a button, it must adhere to the style guide’s rules (e.g., correct fonts and colors). This approach makes components more robust and easier to maintain, even with multiple developers working on them. It also encourages building reusable, less duplicated code
+3. **Component library** : It combines everything mentioned above—style guides and component libraries—into one complete system, along with detailed documentation and principles to ensure everything stays consistent. It’s like a blueprint that guides the design and development of your app.
 
 
 ## Define design principles and our design token as a style guides
@@ -34,32 +31,24 @@ To begin, we need to define design principles and a style guide. This time, I’
 The focus is on Scalability, Clarity, Efficiency, and Simplicity.
 
 ### Scalability
-`Purpose` : Design systems should be able to grow as the product or team evolves.
+- **Purpose** : Design systems should be able to grow as the product or team evolves.
+- **How** : Create flexible components that can handle multiple use cases (e.g., button variations, responsive grids). Ensure new elements can be added without breaking existing styles.
+- **Example** : A grid system that adapts to different screen sizes, or a button that supports various sizes and states (hover, disabled, etc.).
 
-`How` : Create flexible components that can handle multiple use cases (e.g., button variations, responsive grids). Ensure new elements can be added without breaking existing styles.
+### Clarity
+- **Purpose** : Prioritize readability and ease of understanding for users.
+- **How** : Use clear visual hierarchy (through typography, color, and spacing), legible fonts, and high-contrast color schemes to make important elements stand out.
+- **Example** : Clear headings, consistent icon usage, and defined spacing between sections to guide users through the content.
 
-`Example` : A grid system that adapts to different screen sizes, or a button that supports various sizes and states (hover, disabled, etc.).
+### Efficiency
+- **Purpose** : Reduce complexity for both users and developers.
+- **How** : Create a streamlined workflow for the design and development process. Make sure that components are easy to use and adapt to various situations without too much customization.
+- **Example** : Predefined color and spacing tokens that developers can easily apply without guessing or writing extra CSS.
 
-### **Clarity**
-`Purpose` : Prioritize readability and ease of understanding for users.
-
-`How` : Use clear visual hierarchy (through typography, color, and spacing), legible fonts, and high-contrast color schemes to make important elements stand out.
-
-`Example` : Clear headings, consistent icon usage, and defined spacing between sections to guide users through the content.
-
-### **Efficiency**
-`Purpose` : Reduce complexity for both users and developers.
-
-`How` : Create a streamlined workflow for the design and development process. Make sure that components are easy to use and adapt to various situations without too much customization.
-
-`Example `: Predefined color and spacing tokens that developers can easily apply without guessing or writing extra CSS.
-
-### **Simplicity**
-`Purpose` : Keep designs straightforward to minimize cognitive load on users.
-
-`How` : Avoid unnecessary elements, reduce visual clutter, and use intuitive patterns.
-
-`Example` : Minimalistic interface with clear call-to-action buttons, rather than overly decorative styles.
+### Simplicity
+- **Purpose** : Keep designs straightforward to minimize cognitive load on users.
+- **How** : Avoid unnecessary elements, reduce visual clutter, and use intuitive patterns.
+- **Example** : Minimalistic interface with clear call-to-action buttons, rather than overly decorative styles.
 
 ## Creating design tokens
 Design tokens represent a shared language for design attributes, allowing them to be written in code. Typically, we convert designs created by the design team into hardcoded values to maintain consistent and scalable UI components

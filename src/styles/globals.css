@@ -94,6 +94,39 @@
     @apply font-primary text-base font-normal mt-4 mb-4 text-gray-400;
   }
 
+  .prose h1 {
+    @apply text-3xl md:text-4xl font-semibold text-white mb-8 mt-12;
+  }
+
+  .prose h2 {
+    @apply text-2xl md:text-3xl font-semibold text-white mb-6 mt-10;
+  }
+
+  .prose h3 {
+    @apply text-xl md:text-2xl font-medium text-white mb-4 mt-8 block;
+  }
+
+  .prose h4 {
+    @apply text-lg md:text-xl font-medium text-gray-200 mb-3 mt-6;
+  }
+
+  .prose p {
+    @apply text-sm md:text-base leading-relaxed text-gray-400 mb-6 mt-0;
+    line-height: 1.7;
+  }
+
+  .prose strong {
+    @apply text-white font-semibold;
+  }
+
+  .prose .highlight {
+    @apply text-white font-semibold;
+  }
+
+  .prose a {
+    @apply text-blue-400 underline italic hover:text-blue-300 transition-colors;
+  }
+
   code {
     @apply font-code text-sm bg-gray-900/50 px-1 py-0.5 rounded;
   }
@@ -143,12 +176,41 @@
     @apply m-0 px-4 py-2 border-l-4 border-blue-500/60 bg-blue-500/5 rounded-r;
   }
 
+  blockquote::before,
+  blockquote::after {
+    content: none;
+  }
+
+
+  .prose blockquote::before,
+  .prose blockquote::after {
+    content: none !important;
+  }
+
+  .prose blockquote {
+    @apply m-0 px-4 py-2 border-l-4 border-blue-500/60 bg-blue-500/5 rounded-r font-primary leading-normal italic;
+    quotes: none !important;
+  }
+
+  .prose ol {
+    @apply list-decimal my-4 space-y-2 pl-0 ml-6;
+    list-style-position: outside;
+  }
+
+  .prose ul {
+    @apply list-disc my-4 space-y-2 pl-0 ml-6;
+    list-style-position: outside;
+  }
+
+  .prose li {
+    @apply font-primary text-base text-gray-400;
+  }
+
   .mdoc-container a {
     @apply text-blue-400 underline italic hover:text-blue-300 transition-colors;
   }
 
-  blockquote,
-  .p {
+  blockquote {
     @apply font-primary leading-normal italic;
   }
 

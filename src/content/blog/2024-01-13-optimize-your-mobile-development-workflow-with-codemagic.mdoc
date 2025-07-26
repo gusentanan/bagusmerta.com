@@ -17,8 +17,8 @@ With CodeMagic, you can streamline your development workflow and ensure consiste
 Additionally, I'll show you how to integrate your workflow into Slack or Discord so that you can receive notifications every time a build is completed.
 
 CodeMagic offers a lot of features to make your CI/CD process easier, especially for mobile development. Initially, it only supported Flutter, but now you can add Android, iOS, and React Native, with many advanced configurations and APIs. It also provides a free tier, so you should give it a try.
-> while CodeMagic provides a lot of options, the free tier offers 500 minutes every month for using their M1 machine. So, use it wisely.
 
+> while CodeMagic provides a lot of options, the free tier offers 500 minutes every month for using their M1 machine. So, use it wisely.
 ### Setting up a CodeMagic account & Github repository
 The first step is to sign up for a CodeMagic account using your preferred repository host. In this blog, I'll be using Github since it's commonly used.
 After signing up, head to the CodeMagic dashboard. Click on "Add Application" to create a new app. Choose the individual plan, then paste the link of your Github repository where you want to connect it with CodeMagic. Finally, click "Finish: Add Application" to complete the process.
@@ -66,9 +66,9 @@ workflows:
 This one is really important - `triggering` is the property that makes your build run based on actions or events in your GitHub repository.
 
 There are 4 build triggers, but I'll write just 3 most important (at least for me) :
-- push: starts every time you commit code to any of the tracked branches.
-- pull_request: starts when a pull request is opened or updated to verify the resulting merge commit.
-- tag: automatically builds the tagged commit whenever you create a tag for this app. 
+- **push** : starts every time you commit code to any of the tracked branches.
+- **pull_request** : starts when a pull request is opened or updated to verify the resulting merge commit.
+- **tag** : automatically builds the tagged commit whenever you create a tag for this app. 
 ```yaml
 workflows: 
   ...
