@@ -1,47 +1,62 @@
-# Astro Starter Kit: Minimal
+# I Putu Bagus Merta Sentana - Personal Blog & Portfolio
 
-```sh
-npm create astro@latest -- --template minimal
+A modern, performance-focused personal website built with Astro, featuring a blog, project showcase, and bookmarks collection. This site demonstrates clean architecture, elegant design, and optimal developer experience.
+
+## ✨ Features
+
+- **📝 Blog System** - Technical articles with Markdoc support and syntax highlighting
+- **🚀 Project Showcase** - Portfolio of development projects with detailed case studies
+- **🔖 Bookmarks** - Curated collection of interesting articles and resources
+- **🎨 Modern Design** - Editorial-style layouts with smooth animations
+- **⚡ Performance** - Optimized images, fonts, and build output
+- **🌙 Dark Theme** - Carefully crafted dark mode with excellent readability
+- **📱 Responsive** - Mobile-first design that works on all devices
+- **🔍 SEO Optimized** - Proper meta tags, Open Graph, and structured data
+
+## 🛠️ Tech Stack
+
+- **Framework**: [Astro](https://astro.build) - Static site generator with island architecture
+- **Styling**: [Tailwind CSS](https://tailwindcss.com) - Utility-first CSS framework
+- **Content**: [Markdoc](https://markdoc.dev) - Powerful markdown authoring framework
+- **Syntax Highlighting**: [Shiki](https://shiki.matsu.io) - Beautiful code highlighting
+- **Icons**: [Iconify](https://iconify.design) - Comprehensive icon collection
+- **Deployment**: Static hosting optimized build
+- **Package Manager**: [pnpm](https://pnpm.io) - Fast, disk space efficient
+
+## 📁 Project Structure
+
 ```
-
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/minimal)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/minimal)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/minimal/devcontainer.json)
-
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
-
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
 /
-├── public/
+├── public/                  # Static assets
+│   ├── fonts/              # Custom font files
+│   ├── images/             # Site images and icons
+│   └── meta/               # SEO and social media images
 ├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
+│   ├── components/         # Reusable UI components
+│   │   ├── features/       # Feature-specific components
+│   │   │   ├── blog/       # Blog-related components
+│   │   │   ├── bookmark/   # Bookmark components
+│   │   │   └── project/    # Project showcase components
+│   │   ├── layout/         # Layout components
+│   │   │   ├── navigation/ # Navigation system
+│   │   │   ├── Header.astro
+│   │   │   └── Footer.astro
+│   │   └── ui/             # Generic UI components
+│   ├── content/            # Content collections
+│   │   ├── blog/           # Blog posts (.mdoc files)
+│   │   ├── bookmark/       # Bookmarked articles
+│   │   ├── project/        # Project case studies
+│   │   └── config.ts       # Content collection schemas
+│   ├── layouts/            # Page layouts
+│   ├── pages/              # File-based routing
+│   │   ├── blog/           # Blog pages and dynamic routes
+│   │   ├── bookmarks/      # Bookmark pages
+│   │   └── projects/       # Project pages
+│   ├── styles/             # Global styles
+│   └── utils/              # Utility functions
+├── markdoc.config.mjs      # Markdoc configuration
+├── tailwind.config.mjs     # Tailwind CSS configuration
+└── astro.config.mjs        # Astro configuration
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
-
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
-
-Any static assets, like images, can be placed in the `public/` directory.
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+**Built with ❤️ using Astro and modern web technologies**
