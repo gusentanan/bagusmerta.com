@@ -43,17 +43,6 @@
       U+FEFF, U+FFFD;
   }
   @font-face {
-    font-family: "PlayfairBold";
-    font-style: normal;
-    font-weight: 100 900;
-    font-display: swap;
-    src: url("../fonts/PlayfairBold.woff2") format("woff2");
-    unicode-range:
-      U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC,
-      U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215,
-      U+FEFF, U+FFFD;
-  }
-  @font-face {
     font-family: "Garamond";
     font-style: normal;
     font-weight: 100 900;
@@ -106,24 +95,61 @@
   }
 
   code {
-    @apply font-code text-sm;
+    @apply font-code text-sm bg-gray-900/50 px-1 py-0.5 rounded;
+  }
+
+  /* Code blocks */
+  pre {
+    @apply my-6 p-6 rounded-lg bg-[#282c34] border border-gray-800/50 overflow-x-auto;
+    font-family: 'JetBrains Mono', 'Fira Code', 'SF Mono', Consolas, 'Liberation Mono', Menlo, monospace;
+    font-size: 0.875rem;
+    line-height: 1.6;
+    white-space: pre;
+    scrollbar-width: thin;
+    scrollbar-color: #4a5568 #282c34;
+  }
+
+  /* Custom scrollbar for webkit browsers */
+  pre::-webkit-scrollbar {
+    height: 8px;
+  }
+
+  pre::-webkit-scrollbar-track {
+    background: #282c34;
+    border-radius: 4px;
+  }
+
+  pre::-webkit-scrollbar-thumb {
+    background: #4a5568;
+    border-radius: 4px;
+  }
+
+  pre::-webkit-scrollbar-thumb:hover {
+    background: #5a6578;
+  }
+
+  pre code {
+    @apply bg-transparent p-0 text-sm;
+    font-family: inherit;
+  }
+
+  /* Inline code in prose */
+  .prose code:not(pre code) {
+    @apply bg-gray-900/60 text-gray-200 px-1.5 py-0.5 rounded font-code text-sm;
+    font-weight: 500;
   }
 
   blockquote {
-    @apply m-0 px-2 border-l-4 border-blue-500;
+    @apply m-0 px-4 py-2 border-l-4 border-blue-500/60 bg-blue-500/5 rounded-r;
   }
 
   .mdoc-container a {
-    @apply text-blue-500 underline italic;
+    @apply text-blue-400 underline italic hover:text-blue-300 transition-colors;
   }
 
   blockquote,
   .p {
     @apply font-primary leading-normal italic;
-  }
-
-  pre {
-    @apply my-4 p-6 rounded-lg;
   }
 
   img {
@@ -211,3 +237,30 @@ button::before {
     linear-gradient(rgba(255, 255, 255, 0.1) 0.1px, transparent 1px);
   background-size: 20px 20px; /* Adjust grid size */
 }
+
+/* Blog banner animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.8s ease-out forwards;
+}
+
+.animate-fade-in-up-delay {
+  opacity: 0;
+  animation: fadeInUp 0.8s ease-out 0.3s forwards;
+}
+
+.animate-fade-in-up-delay-2 {
+  opacity: 0;
+  animation: fadeInUp 0.8s ease-out 0.6s forwards;
+}
+

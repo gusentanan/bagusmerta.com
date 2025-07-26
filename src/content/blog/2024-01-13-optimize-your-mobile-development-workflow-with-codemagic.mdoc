@@ -46,10 +46,10 @@ Also, it's good to understand the basics before moving on to more advanced confi
 First you need to define your workflow ID (with '-' to separate each word) and also the name and maximum build duration of your app.
 ```yaml
 workflows:
-  android-workflow-id:                    # ✅ your workflow ID
+  android-workflow-id:                    # your workflow ID
     name: "Android ToDo's App Workflow" 
-    max_build_duration: 120               # ✅ max duration of your build
-    instance_type: mac_mini_m1            # ✅ remote machine to run your workflow
+    max_build_duration: 120               # max duration of your build
+    instance_type: mac_mini_m1            # remote machine to run your workflow
 ```
 
 Next, we have the `environment` property, which is commonly used to specify your project's settings for building.
@@ -58,7 +58,7 @@ For example, you can specify the versions of Flutter or Java used in your projec
 workflows:
   android-workflow-id:
     ...
-        environment:                     # ✅ env scope for your build
+        environment:  # env scope for your build
             flutter: 3.0.5
             java: 17
 ```
@@ -74,9 +74,9 @@ workflows:
   ...
     triggering:
           events:
-            - push                      # ✅ trigger on push events
+            - push  # trigger on push events
           branch_patterns:
-            - pattern: "*"              # ✅ * indicates any branch pattern (main, dev etc)
+            - pattern: "*" # * indicates any branch pattern (main, dev etc)
               include: true
               source: true
 ```
@@ -100,7 +100,7 @@ workflows:
     - name: Build Debug App with Flutter
       script: |
         flutter build apk --debug
-    - name: Show Build apk Folder      # ✅ tips. add this command to see the content of your artifact
+    - name: Show Build apk Folder  # tips. add this command to see the content of your artifact
       script: |
         ls build/app/outputs/flutter-apk
 ```
@@ -113,11 +113,11 @@ workflows:
       ...
       ...
     artifacts:                       
-      - build/app/outputs/flutter-apk/*.apk    # ✅ specify path to store your artifact 
+      - build/app/outputs/flutter-apk/*.apk  # specify path to store your artifact 
     publishing:
       email:
         recipients:
-          - example@gmail.com                  # ✅ email recipient in case you want to see the reports
+          - example@gmail.com  # email recipient in case you want to see the reports
 ```
 
 This is the full code of your `codemagic.yaml` to start the workflow.
@@ -129,7 +129,7 @@ workflows:
     instance_type: mac_mini_m1
     environment:
       flutter: stable
-    cache:                                     # ✅ tips. add cache mechanism to fasten your build process
+    cache: # tips. add cache mechanism to fasten your build process
       cache_paths:
         - ~/.pub-cache
     triggering:
@@ -183,14 +183,14 @@ workflows:
   ...
     environment:
       groups:
-        - discord_credentials                   # ✅ variable group that stores discord webhook
+        - discord_credentials # variable group that stores discord webhook
     ...
   
     publishing:
       ...
 
       scripts:
-        - name: Discord notification            # ✅ use the webhook URL at the end of the scripts
+        - name: Discord notification # use the webhook URL at the end of the scripts
           script: |
             set -ex
 

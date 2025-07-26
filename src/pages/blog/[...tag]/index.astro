@@ -30,15 +30,12 @@ const posts = await getBlogPostByTag(tag);
       <section>
         <div class='layout py-32'>
           <div class="flex flex-col justify-center items-center">
-            <h2 class='font-display text-5xl md:text-5xl'>
-              My
-              <GradientHeaderText>
-                Blog
-              </GradientHeaderText>
+            <h2 class='font-display text-5xl md:text-5xl text-gradient-primary leading-tight pb-2'>
+              My Blog
             </h2>
             
-            <GradientSubText className="px-12 md:px-32 py-2 md:py-6 text-center">
-              A collection of blog that includes my thoughtful reflections on programming, personal development, and my thoughts.
+            <GradientSubText className="text-center">
+              A collection of blog, related to programming and random thoughts.
             </GradientSubText>
             
             <TagFilter tags={allTags} selectedTag={tag} baseUrl="blog" />
