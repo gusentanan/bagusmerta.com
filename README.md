@@ -1,6 +1,6 @@
 # Personal Blog & Portfolio
 
-A modern, performance-focused personal website built with Astro, featuring a blog, project showcase, and bookmarks collection. This site demonstrates clean architecture, elegant design, and optimal developer experience.
+A personal website built with Astro, featuring a blog, project showcase, and bookmarks collection. This site demonstrates clean architecture, elegant design, and optimal developer experience.
 
 ## ✨ Features
 
@@ -8,7 +8,6 @@ A modern, performance-focused personal website built with Astro, featuring a blo
 - **🚀 Project Showcase** - Portfolio of development projects with detailed case studies
 - **🔖 Bookmarks** - Curated collection of interesting articles and resources
 - **🎨 Modern Design** - Editorial-style layouts with smooth animations
-- **⚡ Performance** - Optimized images, fonts, and build output
 - **🌙 Dark Theme** - Carefully crafted dark mode with excellent readability
 - **📱 Responsive** - Mobile-first design that works on all devices
 - **🔍 SEO Optimized** - Proper meta tags, Open Graph, and structured data
