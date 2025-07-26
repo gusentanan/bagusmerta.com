@@ -1,4 +1,4 @@
-# I Putu Bagus Merta Sentana - Personal Blog & Portfolio
+# Personal Blog & Portfolio
 
 A modern, performance-focused personal website built with Astro, featuring a blog, project showcase, and bookmarks collection. This site demonstrates clean architecture, elegant design, and optimal developer experience.
 
