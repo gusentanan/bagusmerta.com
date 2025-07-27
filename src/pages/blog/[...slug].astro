@@ -17,12 +17,16 @@ export async function getStaticPaths() {
 
 const { entry } = Astro.props;
 const { Content } = await entry.render();
+
+// Extract the banner filename for OpenGraph (use public path for social media crawlers)
+const bannerFilename = entry.data.banner.src.split('/').pop().split('.')[0] + '.jpg';
+const ogBanner = `/blog-banners/${bannerFilename}`;
 ---
 
 <BaseLayout
   title={`${entry.data.title} | I Putu Bagus Merta Sentana`}
   description={entry.data.description}
-  banner={entry.data.banner.src}
+  banner={ogBanner}
   isBlog={true}
 >
   <main>
