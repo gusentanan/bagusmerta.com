@@ -35,7 +35,9 @@ export const getBookmarkTags = async () => {
 export const getBookmarkByTag = async (tag) => {
 	const posts = await getBookMarkCollection()
 	const lowercaseTag = tag.toLowerCase()
-	return posts.filter((post) => {
+	const filteredPosts = posts.filter((post) => {
 		return post.data.tags.some((postTag) => postTag.toLowerCase() === lowercaseTag)
 	})
+	filteredPosts.sort((a, b) => b.data.id - a.data.id)
+	return filteredPosts
 }

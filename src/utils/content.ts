@@ -28,6 +28,7 @@ export const getBlogCollection = async (): Promise<BlogEntries> => {
 
 export const getBookMarkCollection = async (): Promise<BookmarkEntries> => {
   const bookmarkEntries = await getCollection("bookmark");
+  bookmarkEntries.sort((a, b) => b.data.id - a.data.id);
   return bookmarkEntries;
 };
 
