@@ -4,7 +4,14 @@
       "Bash(git add:*)",
       "Bash(pnpm run:*)",
       "Bash(rm:*)",
-      "Bash(pnpm install:*)"
+      "Bash(pnpm install:*)",
+      "WebFetch(domain:80000hours.org)",
+      "WebFetch(domain:giansegato.com)",
+      "WebFetch(domain:playbook.samaltman.com)",
+      "WebFetch(domain:augmentingcognition.com)",
+      "WebFetch(domain:a16z.com)",
+      "WebFetch(domain:lynettebye.com)",
+      "WebFetch(domain:www.lesswrong.com)"
     ],
     "deny": []
   }
