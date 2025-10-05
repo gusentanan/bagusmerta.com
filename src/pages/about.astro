@@ -143,26 +143,26 @@ const skillsAndTools = {
               <h4 class="text-sm font-medium text-gray-300 mb-4">{category}</h4>
               <div class="space-y-3">
                 {skills.map((skill) => (
-                  <div class="text-sm text-gray-400 transition-colors duration-200">
+                  <div class="text-sm text-gray-400">
                     {skill.isCombo ? (
                       <span>
-                        <HoverImagePopup client:load imageSrc={skill.items[0].memeImage} imageAlt={`${skill.items[0].name} meme`}>
+                        <HoverImagePopup client:load imageSrc={skill.items[0].memeImage} imageAlt={`${skill.items[0].name} meme`} className="text-white border-b border-white">
                           {skill.items[0].name}
                         </HoverImagePopup>
                         {" & "}
-                        <HoverImagePopup client:load imageSrc={skill.items[1].memeImage} imageAlt={`${skill.items[1].name} meme`}>
+                        <HoverImagePopup client:load imageSrc={skill.items[1].memeImage} imageAlt={`${skill.items[1].name} meme`} className="text-white border-b border-white">
                           {skill.items[1].name}
                         </HoverImagePopup>
                       </span>
                     ) : skill.isPartialHover ? (
                       <span>
-                        <HoverImagePopup client:load imageSrc={skill.memeImage} imageAlt={`${skill.hoverablePart} meme`}>
+                        <HoverImagePopup client:load imageSrc={skill.memeImage} imageAlt={`${skill.hoverablePart} meme`} className="text-white border-b border-white">
                           {skill.hoverablePart}
                         </HoverImagePopup>
                         {skill.name.replace(skill.hoverablePart, '')}
                       </span>
                     ) : skill.hoverable ? (
-                      <HoverImagePopup client:load imageSrc={skill.memeImage} imageAlt={`${skill.name} meme`}>
+                      <HoverImagePopup client:load imageSrc={skill.memeImage} imageAlt={`${skill.name} meme`} className="text-white border-b border-white">
                         {skill.name}
                       </HoverImagePopup>
                     ) : (

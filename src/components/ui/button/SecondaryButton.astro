@@ -7,6 +7,7 @@ export interface Props {
 const { href, text } = Astro.props;
 ---
 
-<a href={href} class="ml-2 mt-2 text-md text-gray-400 hover:text-secondary cursor-pointer">
+<a href={href} class="ml-2 mt-2 text-md text-gray-400 hover:text-white cursor-pointer relative inline-block group transition-colors duration-300">
     {text}
+    <span class="absolute left-0 bottom-0 w-0 h-[2px] bg-white transition-all duration-300 ease-out group-hover:w-full"></span>
 </a>
