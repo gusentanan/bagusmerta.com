@@ -5,6 +5,7 @@ import { Image } from "astro:assets";
 import { getCollection } from "astro:content";
 import { formatDate } from "utils/time";
 import Comments from "@components/ui/Comments.astro";
+import { ImageEnhancer } from "@components/ui/ImageEnhancer";
 
 export async function getStaticPaths() {
   const blogEntries = await getCollection('blog');
@@ -90,9 +91,11 @@ const ogBanner = `/blog-banners/${bannerFilename}`;
       <div class='pt-0 pb-20 px-4 md:px-28'>
 
         <article class='mt-4 animate-fade-in-up-delay-2'>
-          <div class='prose prose-invert prose-lg max-w-none'>
-            <Content />
-          </div>
+          <ImageEnhancer client:load>
+            <div class='prose prose-invert prose-lg max-w-none'>
+              <Content />
+            </div>
+          </ImageEnhancer>
         </article>
         <div class='animate-fade-in-up-delay-2'>
           <Comments />

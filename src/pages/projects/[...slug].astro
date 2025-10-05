@@ -4,6 +4,7 @@ import { Image } from "astro:assets";
 import { getCollection } from "astro:content";
 import { Icon } from "astro-icon/components"
 import { formatDate } from "utils/time";
+import { ImageEnhancer } from "@components/ui/ImageEnhancer";
 
 export async function getStaticPaths() {
   const projectEntries = await getCollection('project');
@@ -52,9 +53,11 @@ const { Content } = await entry.render();
             
   
           <article class='mt-4'>
-            <div class='prose prose-invert prose-lg max-w-none'>
-              <Content />
-            </div>
+            <ImageEnhancer client:load>
+              <div class='prose prose-invert prose-lg max-w-none'>
+                <Content />
+              </div>
+            </ImageEnhancer>
           </article>
   
         </div>
