@@ -4,16 +4,19 @@ import { cn } from "utils/ui";
 export const navbarWrapper = cn(
   "fixed inset-x-0 bottom-0 z-10",
   "transition-transform duration-300 ease-in-out",
+  "overflow-hidden",
 );
 
 export const navbarInner = cn(
   "isolate flex items-center justify-center py-4 text-sm",
+  "w-full overflow-hidden",
 );
 
 export const navbarRoutesWrapper = cn(
   "flex h-9 items-stretch justify-center space-x-2 px-4 max-sm:px-2",
   "shadow-md backdrop-blur-sm",
   "rounded-full border border-zinc-500/25 transition-colors",
+  "max-w-full overflow-hidden",
 );
 
 export const navbarRouteItem = cn(
@@ -26,4 +29,5 @@ export const navbarRouteItem = cn(
 
 export const navbarBlurOverlay = cn(
   "absolute inset-0 h-full w-full",
+  "overflow-hidden",
 );
