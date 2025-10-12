@@ -6,7 +6,7 @@ interface ScrollState {
   isVisible: boolean;
 }
 
-export function useScrollDirection(threshold: number = 10) {
+export function useScrollDirection(threshold: number = 5) {
   const [scrollState, setScrollState] = useState<ScrollState>({
     scrollY: 0,
     scrollDirection: null,
@@ -14,8 +14,9 @@ export function useScrollDirection(threshold: number = 10) {
   });
 
   useEffect(() => {
-    let timeoutId: NodeJS.Timeout;
+    let rafId: number;
     let lastScrollY = window.scrollY;
+    let ticking = false;
 
     const updateScrollDirection = () => {
       const scrollY = window.scrollY;
@@ -24,27 +25,34 @@ export function useScrollDirection(threshold: number = 10) {
 
       // Only update if scroll difference is above threshold
       if (scrollDiff >= threshold) {
-        setScrollState(prev => ({
+        const isVisible = direction === 'up' || scrollY < 50;
+
+        setScrollState({
           scrollY,
           scrollDirection: direction,
           // Show navbar when scrolling up or at top of page
-          isVisible: direction === 'up' || scrollY < 50,
-        }));
+          isVisible,
+        });
         lastScrollY = scrollY;
       }
+      ticking = false;
     };
 
     const handleScroll = () => {
-      // Debounce scroll events
-      clearTimeout(timeoutId);
-      timeoutId = setTimeout(updateScrollDirection, 50);
+      // Use requestAnimationFrame for smooth 60fps updates
+      if (!ticking) {
+        rafId = requestAnimationFrame(updateScrollDirection);
+        ticking = true;
+      }
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
-    
+
     return () => {
       window.removeEventListener('scroll', handleScroll);
-      clearTimeout(timeoutId);
+      if (rafId) {
+        cancelAnimationFrame(rafId);
+      }
     };
   }, [threshold]);
 

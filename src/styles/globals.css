@@ -55,8 +55,12 @@
   }
 
   html {
-    scroll-behavior: smooth;
     scroll-padding-top: 80px;
+  }
+
+  /* Apply smooth scroll only to anchor link navigation */
+  html:has(a[href^="#"]:active) {
+    scroll-behavior: smooth;
   }
 
   @media (prefers-reduced-motion: reduce) {
