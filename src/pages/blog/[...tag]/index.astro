@@ -4,7 +4,6 @@ import TagFilter from "@components/ui/TagFilter.astro";
 import BaseLayout from "@layouts/BaseLayout.astro";
 import { getBlogPostByTag, getBlogTags } from "utils/posts";
 import { getTitle } from "utils/title";
-import Background from "@components/layout/Background.astro";
 import GradientSubText from "@components/ui/text/GradientSubText.astro";
 
 
@@ -24,7 +23,6 @@ const posts = await getBlogPostByTag(tag);
 ---
 
 <BaseLayout title={getTitle('Blog')}>
-  <Background>
     <main>
       <section>
         <div class='layout py-32'>
@@ -46,5 +44,4 @@ const posts = await getBlogPostByTag(tag);
         </div>
       </section>
     </main>
-  </Background>
 </BaseLayout>

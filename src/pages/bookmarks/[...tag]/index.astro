@@ -4,7 +4,6 @@ import BaseLayout from "@layouts/BaseLayout.astro";
 import { getTitle } from "utils/title";
 import { getBookmarkByTag, getBookmarkTags } from "utils/posts";
 import TagFilter from "@components/ui/TagFilter.astro";
-import Background from "@components/layout/Background.astro";
 import GradientSubText from "@components/ui/text/GradientSubText.astro";
 
 
@@ -24,7 +23,6 @@ const posts = await getBookmarkByTag(tag);
 ---
 
 <BaseLayout title={getTitle('Bookmarks')}>
-    <Background>
         <main>
             <div class='layout py-32'>
               
@@ -49,6 +47,5 @@ const posts = await getBookmarkByTag(tag);
                 </div>
             </div>
         </main>
-    </Background>
 </BaseLayout>
 

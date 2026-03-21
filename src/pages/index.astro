@@ -6,7 +6,6 @@ import { getTitle } from "utils/title";
 import { Image } from "astro:assets";
 import PrimaryButton from "@components/ui/button/PrimaryButton.astro";
 import SecondaryButton from "@components/ui/button/SecondaryButton.astro";
-import Background from "@components/layout/Background.astro";
 import GradientSubText from "@components/ui/text/GradientSubText.astro";
 import { getProjectPathName } from "utils/url";
 
@@ -99,20 +98,57 @@ const topBookmarkGroups = selectedTags.map(tag => ({
     </section>
     
     <section class='py-20'>
-      <article class='layout'>
 
-        <!-- Unified section title -->
-        <div class='flex flex-col items-center text-center mb-16'>
+      <!-- Section title -->
+      <article class='layout'>
+        <div class='flex flex-col items-center text-center mb-8 md:mb-16'>
           <h2 class='font-display text-3xl md:text-5xl text-black leading-tight'>
             Projects & Bookmarks
           </h2>
         </div>
+      </article>
 
-        <div class='flex flex-col lg:grid lg:grid-cols-[1fr_auto] gap-10 lg:gap-16 items-start'>
+      <!-- Mobile: horizontal scroll — direct child of section, NOT inside layout -->
+      <!-- NOTE: display:flex is NOT in inline style so md:hidden can override it -->
+      <div
+        id="projects-scroll"
+        class='flex flex-row md:hidden'
+        style="overflow-x: scroll; -webkit-overflow-scrolling: touch; gap: 16px; padding-bottom: 16px; scrollbar-width: none; scroll-snap-type: x mandatory;"
+      >
+        {allProject.slice(0, 4).map((project, i) => (
+          <a
+            href={getProjectPathName(project)}
+            class='group flex flex-col gap-3'
+            style={`width: 82vw; flex-shrink: 0; scroll-snap-align: start;${i === 0 ? ' padding-left: 4.2vw;' : ''}`}
+          >
+            <div style="overflow: hidden; border-radius: 16px; height: 200px;">
+              <Image
+                src={project.data.image}
+                alt={project.data.title}
+                width={600}
+                height={200}
+                class='w-full h-full object-cover transition-all duration-300'
+              />
+            </div>
+            <p class='m-0 text-base text-black leading-snug font-medium'>{project.data.description}</p>
+          </a>
+        ))}
+        <div style="width: 4.2vw; flex-shrink: 0;"></div>
+      </div>
 
-          <!-- Projects area -->
+      <!-- Shared layout: projects button (mobile) + desktop grid + bookmarks (always) -->
+      <article class='layout'>
+        <div class='flex flex-col lg:grid lg:grid-cols-[1fr_auto] gap-10 lg:gap-16 items-start mt-6 md:mt-0'>
+
+          <!-- Projects column -->
           <div class='flex flex-col gap-8'>
-            <div class='grid grid-cols-1 md:grid-cols-[1fr_2fr] gap-8 items-start'>
+            <!-- Mobile: see more button only -->
+            <div class='md:hidden flex justify-start'>
+              <SecondaryButton href="/projects" text="see more →" />
+            </div>
+
+            <!-- Desktop: featured + stacked grid -->
+            <div class='hidden md:grid grid-cols-[1fr_2fr] gap-8 items-start'>
               <!-- Left: small stacked list -->
               <div class='flex flex-col gap-6'>
                 {allProject.slice(1, 4).map(project => (
@@ -155,12 +191,14 @@ const topBookmarkGroups = selectedTags.map(tag => ({
                 </a>
               ))}
             </div>
-            <div class='flex justify-start'>
+
+            <!-- Desktop: see more -->
+            <div class='hidden md:flex justify-start'>
               <SecondaryButton href="/projects" text="see more →" />
             </div>
           </div>
 
-          <!-- Bookmarks sidebar -->
+          <!-- Bookmarks — always visible (sidebar on desktop, stacked on mobile) -->
           <div class='w-full lg:w-56 flex flex-col gap-10'>
             {topBookmarkGroups.map(({ tag, items }) => (
               <div class='flex flex-col'>
@@ -225,7 +263,7 @@ const topBookmarkGroups = selectedTags.map(tag => ({
         
         <div class="mt-12 flex flex-col gap-8">
           {allNicewords.map(nicewords => (
-            <div class="text-lg italic text-left text-black relative pl-16">
+            <div class="text-sm md:text-lg italic text-left text-black relative pl-16">
               <svg width="40" height="40" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" class="absolute left-0 top-0 opacity-60">
                 <path d="M42,60 C30,70 20,85 20,105 C20,125 35,140 55,140 C75,140 90,125 90,105 C90,85 75,70 55,70 C55,70 60,60 75,50 C60,45 50,50 42,60 Z" fill="#1a1a1a"/>
                 <path d="M112,60 C100,70 90,85 90,105 C90,125 105,140 125,140 C145,140 160,125 160,105 C160,85 145,70 125,70 C125,70 130,60 145,50 C130,45 120,50 112,60 Z" fill="#1a1a1a"/>
@@ -271,4 +309,10 @@ const topBookmarkGroups = selectedTags.map(tag => ({
     </section>
 
   </main>
+<style>
+  #projects-scroll::-webkit-scrollbar {
+    display: none;
+  }
+</style>
+
 </BaseLayout>
