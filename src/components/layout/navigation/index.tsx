@@ -1,54 +1,23 @@
-import { cn } from "utils/ui";
-import { NavItem } from "./NavItem";
-import { routes } from "./routes";
-import * as styles from "./styles";
-import { navbarRouteItem } from "./styles";
-import { useScrollDirection } from "./useScrollDirection";
-
 export function Navbar() {
-  const { isVisible } = useScrollDirection();
-
   return (
-    <div className={cn(styles.navbarWrapper, "max-sm:hidden", {
-      'translate-y-full': !isVisible,
-      'translate-y-0': isVisible,
-    })}>
-      {Array(10)
-        .fill(1)
-        .map((v, i) => {
-          const blurDef = `blur(${v + i}px)`;
-          const maskDef = `linear-gradient(to bottom, rgba(0,0,0,0) ${i * 10}%, rgba(0,0,0,1) ${(v + i) * 10}%)`;
-          return (
-            <div
-              className={styles.navbarBlurOverlay}
-              key={i}
-              style={{
-                backdropFilter: blurDef,
-                WebkitBackdropFilter: blurDef,
-                maskImage: maskDef,
-                WebkitMaskImage: maskDef,
-              }}
-            />
-          );
-        })}
-      <nav className={styles.navbarInner}>
-        <ul className={styles.navbarRoutesWrapper}>
-          <div className="max-sm:hidden">
-            <a className={cn(navbarRouteItem)} href="/">Home</a>
-          </div>
-          
-          <div className="max-sm:hidden my-2 w-px rounded-full bg-zinc-500/25" />
+    <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-center gap-6 sm:gap-10 px-4 sm:px-10 py-4 bg-[hsl(60,29%,95%)]">
+      <a
+        href="/blog"
+        className="text-sm font-medium text-foreground hover:opacity-60 transition-opacity"
+      >
+        Blog
+      </a>
 
-          {routes.slice(1).map((route, i) => (
-            <li
-              className="max-sm:hidden"
-              key={i}
-            >
-              <NavItem {...route} />
-            </li>
-          ))}
-        </ul>
-      </nav>
-    </div>
+      <a href="/" className="w-12 h-12 bg-black flex items-center justify-center flex-shrink-0">
+        <span className="text-white text-xl font-bold leading-none">B</span>
+      </a>
+
+      <a
+        href="/projects"
+        className="text-sm font-medium text-foreground hover:opacity-60 transition-opacity"
+      >
+        Projects
+      </a>
+    </nav>
   );
 }
