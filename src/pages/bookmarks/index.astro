@@ -4,7 +4,6 @@ import TagFilter from "@components/ui/TagFilter.astro";
 import BaseLayout from "@layouts/BaseLayout.astro";
 import { getBookMarkCollection } from "utils/content";
 import { getTitle } from "utils/title";
-import Background from "@components/layout/Background.astro";
 import GradientSubText from "@components/ui/text/GradientSubText.astro";
 
 const allBookmark = await getBookMarkCollection();
@@ -15,11 +14,10 @@ const currentTag = 'All';
 ---
 
 <BaseLayout title={getTitle('Bookmarks')}>
-    <Background>
         <main>
             <div class='layout py-32'>
                 <div class="flex flex-col justify-center items-center">
-                    <h2 class='font-display text-5xl md:text-5xl text-gradient-primary'>
+                    <h2 class='font-display text-3xl md:text-5xl text-gradient-primary'>
                         Bookmark List
                     </h2>
 
@@ -39,7 +37,5 @@ const currentTag = 'All';
                 </div>
             </div>
         </main>
-    </Background>
-
 </BaseLayout>
 

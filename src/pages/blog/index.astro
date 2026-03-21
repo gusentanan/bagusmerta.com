@@ -4,7 +4,6 @@ import TagFilter from "@components/ui/TagFilter.astro";
 import BaseLayout from "@layouts/BaseLayout.astro";
 import { getBlogCollection } from "utils/content";
 import { getTitle } from "utils/title";
-import Background from "@components/layout/Background.astro";
 import GradientSubText from "@components/ui/text/GradientSubText.astro";
 
 
@@ -16,27 +15,25 @@ const currentTag = 'All';
 ---
 
 <BaseLayout title={getTitle('Blog')}>
-  <Background>
     <main>
       <section>
-        <div class='layout py-32'>
+        <div class='layout pt-32 pb-8'>
           <div class="flex flex-col justify-center items-center">
-            <h2 class='font-display text-5xl md:text-5xl text-gradient-primary leading-tight pb-2'>
+            <h2 class='font-display text-3xl md:text-5xl text-gradient-primary leading-tight pb-2'>
               My Blog
-            </h2>      
+            </h2>
 
             <GradientSubText className="text-center">
               A collection of blog, related to programming and random thoughts.
             </GradientSubText>
-            
+
             <TagFilter tags={allTags} selectedTag={currentTag} baseUrl="blog" />
           </div>
-      
-          <ul class='mt-8 grid gap-4 sm:grid-cols-2 xl:grid-cols-2'>
-            {allBlogPosts.map((blog) => <BlogEntryItem {...blog} />)}
-          </ul>
         </div>
+
+        <ul class='mt-0 pb-32 grid gap-4 sm:grid-cols-2 xl:grid-cols-2 px-4 sm:px-0 sm:w-11/12 sm:max-w-[60rem] sm:mx-auto'>
+          {allBlogPosts.map((blog) => <BlogEntryItem {...blog} />)}
+        </ul>
       </section>
     </main>
-  </Background>
 </BaseLayout>

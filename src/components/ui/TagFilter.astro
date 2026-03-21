@@ -6,7 +6,7 @@ const { tags, selectedTag, baseUrl } = Astro.props;
   <a 
     href={`/${baseUrl}`}
     class:list={[
-      'mt-0 mb-2 h-8 px-3 w-max flex gap-2 items-center rounded-full text-sm md:text-md',
+      'mt-0 mb-2 h-6 md:h-8 px-2 md:px-3 w-max flex gap-2 items-center rounded-full text-xs md:text-sm',
       selectedTag == 'All' ? 'bg-black text-white border border-gray-800' :  'bg-black text-white hover:border hover:border-gray-800'
     ]}
   >
@@ -16,7 +16,7 @@ const { tags, selectedTag, baseUrl } = Astro.props;
     <a 
       href={`/${baseUrl}/${tag}`}
       class:list={[
-        'mt-0 mb-2 h-8 px-3 w-max flex gap-2 items-center rounded-full text-sm md:text-md',
+        'mt-0 mb-2 h-6 md:h-8 px-2 md:px-3 w-max flex gap-2 items-center rounded-full text-xs md:text-sm',
         selectedTag === tag ? 'bg-black text-white border border-gray-800' : 'bg-black text-white hover:border hover:border-gray-800'
       ]}
     >
