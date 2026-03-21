@@ -5,7 +5,6 @@ import { getProjectCollection } from "utils/content";
 import { getTitle } from "utils/title";
 import Background from "@components/layout/Background.astro";
 import GradientSubText from "@components/ui/text/GradientSubText.astro";
-import GradientHeaderText from "@components/ui/text/GradientHeaderText.astro";
 
 const allProject = await getProjectCollection();
 ---
@@ -23,9 +22,9 @@ const allProject = await getProjectCollection();
             Things I've created in my free time.
           </GradientSubText>
         </div>
-        <ul class='mt-16 grid gap-4 sm:grid-cols-2 xl:grid-cols-2'>
+        <div class='mt-16 grid gap-8 sm:grid-cols-2 xl:grid-cols-2'>
           {allProject.map((projects) => <ProjectEntryItem {...projects} />)}
-        </ul>
+        </div>
       </div>
     </main>
   </Background>

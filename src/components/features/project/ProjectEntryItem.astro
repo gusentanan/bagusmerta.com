@@ -1,37 +1,35 @@
 ---
-import Card from "@components/ui/Card.astro";
 import type { ProjectEntry } from "utils/content";
 import { Image } from "astro:assets";
 import { getProjectPathName } from "utils/url";
-import TechIcons from "@components/ui/TechIcons.astro";
 
 export type Props = ProjectEntry;
 
 const props = Astro.props;
-
 ---
 
-<Card>
-  <a href={getProjectPathName(props)} class:list={[
-    'flex h-full flex-col items-start rounded-lg p-2 focus:outline-none focus-visible:ring focus-visible:ring-primary-300 hover:shadow-lg',
-  ]}>
-    <h4 class="text-2xl"> {props.data.title}</h4>
-    <p class='my-4 text-sm text-gray-300'>
-      {props.data.description}
-    </p>
-    <TechIcons {...props}/>
-    <div class="relative mt-4">
-      <div class="absolute inset-0 bg-gray-800/20 rounded-sm blur-sm"></div>
-      <Image 
-        src={props.data.image}
-        decoding='async'
-        loading='lazy'
-        alt='project image'
-        class="relative h-full w-full rounded-sm opacity-0 transition-opacity duration-300"
-        onload="this.style.opacity = 1"
-      />
-    </div> 
-  </a>
-</Card>
+<a href={getProjectPathName(props)} class="group flex flex-col gap-3">
+  <div class="overflow-hidden rounded-2xl h-[220px]">
+    <Image
+      src={props.data.image}
+      alt={props.data.title}
+      width={800}
+      height={220}
+      decoding="async"
+      loading="lazy"
+      class="w-full h-full object-cover rounded-2xl transition-all duration-300 group-hover:scale-105 opacity-0"
+      onload="this.style.opacity = 1"
+    />
+  </div>
+  <div class="flex flex-col gap-2">
+    {props.data.tags?.length > 0 && (
+      <span class="text-xs font-semibold uppercase tracking-widest border border-black px-2 py-1 w-max">
+        {props.data.tags[0]}
+      </span>
+    )}
+    <h2 class="font-display text-2xl text-black m-0">{props.data.description}</h2>
+    <p class="text-gray-700 text-sm m-0 line-clamp-3">{props.data.title}</p>
+  </div>
+</a>
 
 

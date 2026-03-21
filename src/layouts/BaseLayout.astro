@@ -13,7 +13,6 @@ import { ViewTransitions } from 'astro:transitions'
 
 import Header from "@components/layout/Header.astro";
 import Footer from "@components/layout/Footer.astro";
-import { MobileMenu } from "@components/layout/navigation/MobileMenu";
 
 let { title, description, banner, isBlog } = Astro.props;
 
@@ -85,7 +84,6 @@ const resolvedImageWithDomain = new URL(
   </head>
   <body>
     <Header />
-    <MobileMenu client:only="react" />
     <slot />
     <Footer />
     <script is:inline>

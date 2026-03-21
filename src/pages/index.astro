@@ -1,25 +1,37 @@
 ---
 import BlogEntryItem from "@components/features/blog/BlogEntryItem.astro";
-import ProjectEntryItem from "@components/features/project/ProjectEntryItem.astro";
 import BaseLayout from "@layouts/BaseLayout.astro";
-import { getBlogCollection, getNicewordsCollection, getProjectCollection } from "utils/content";
+import { getBlogCollection, getNicewordsCollection, getProjectCollection, getBookMarkCollection } from "utils/content";
 import { getTitle } from "utils/title";
 import { Image } from "astro:assets";
 import PrimaryButton from "@components/ui/button/PrimaryButton.astro";
 import SecondaryButton from "@components/ui/button/SecondaryButton.astro";
 import Background from "@components/layout/Background.astro";
 import GradientSubText from "@components/ui/text/GradientSubText.astro";
-import GradientHeaderText from "@components/ui/text/GradientHeaderText.astro";
-import type { Code } from "astro:components";
+import { getProjectPathName } from "utils/url";
 
 const allBlogPosts = await getBlogCollection();
-const allProject = await getProjectCollection();
+const allProject = (await getProjectCollection()).filter(p => p.slug !== 'react-projects');
 const allNicewords = await getNicewordsCollection();
+const allBookmarks = await getBookMarkCollection();
+
+const selectedTags = ['tips', 'software-engineering', 'design-system'];
+const tagLabels: Record<string, string> = {
+  'tips': 'Tips',
+  'software-engineering': 'Software Engineering',
+  'design-system': 'Design System',
+};
+
+const topBookmarkGroups = selectedTags.map(tag => ({
+  tag: tagLabels[tag],
+  slug: tag,
+  items: allBookmarks.filter(b => b.data.tags?.includes(tag)).slice(0, 3),
+}));
 ---
 
 <BaseLayout title={getTitle('Home')}>
   <main>
-    <Background>
+   
       <section class='relative isolate min-h-main -mt-20 mb-20 flex flex-col justify-center'>
         <article class='layout'>
           <div class="flex flex-col items-center justify-center min-h-screen">
@@ -28,7 +40,7 @@ const allNicewords = await getNicewordsCollection();
               <div>
                 <div class="flex justify-center items-center">
                   <h2 class='text-2xl md:text-4xl 2xl:text-4xl'>  
-                    Hi, I'm Bagus,
+                    Hi, I'm Bagus
                   </h2>
                   <div class="relative w-[60px] h-[60px] ml-4 flex-shrink-0 transition-transform duration-300 ease-in-out hover:scale-150 hover:rotate-6">
                     <div class="absolute inset-0 bg-gray-800/20 rounded-lg blur-sm"></div>
@@ -58,7 +70,7 @@ const allNicewords = await getNicewordsCollection();
         </article>
       </section>
 
-    </Background>
+   
     
 
     <section class='relative isolate py-20' id='intro'>
@@ -88,20 +100,117 @@ const allNicewords = await getNicewordsCollection();
     
     <section class='py-20'>
       <article class='layout'>
-        <div class="flex flex-row items-center justify-between">
-          <h2 class='text-2xl md:text-2xl'>
-            Personal projects
+
+        <!-- Unified section title -->
+        <div class='flex flex-col items-center text-center mb-16'>
+          <h2 class='font-display text-3xl md:text-5xl text-black leading-tight'>
+            Projects & Bookmarks
           </h2>
-          <SecondaryButton 
-              href="/projects"
-              text="see more →"
-            />
         </div>
-        
-        <ul class='mt-8 grid gap-4 sm:grid-cols-2 xl:grid-cols-2'>
-          {[allProject.slice(0, 2).map(project => <ProjectEntryItem {...project} />)]}
-        </ul>
-             
+
+        <div class='flex flex-col lg:grid lg:grid-cols-[1fr_auto] gap-10 lg:gap-16 items-start'>
+
+          <!-- Projects area -->
+          <div class='flex flex-col gap-8'>
+            <div class='grid grid-cols-1 md:grid-cols-[1fr_2fr] gap-8 items-start'>
+              <!-- Left: small stacked list -->
+              <div class='flex flex-col gap-6'>
+                {allProject.slice(1, 4).map(project => (
+                  <a href={getProjectPathName(project)} class='group flex flex-col gap-2'>
+                    <div class='overflow-hidden rounded-2xl'>
+                      <Image
+                        src={project.data.image}
+                        alt={project.data.title}
+                        width={400}
+                        height={200}
+                        class='w-full object-cover rounded-2xl transition-all duration-300 group-hover:scale-105'
+                      />
+                    </div>
+                    <p class='m-0 text-sm text-black leading-snug'>{project.data.description}</p>
+                  </a>
+                ))}
+              </div>
+
+              <!-- Right: featured large project -->
+              {allProject.slice(0, 1).map(project => (
+                <a href={getProjectPathName(project)} class='group flex flex-col gap-3'>
+                  <div class='overflow-hidden rounded-2xl h-[260px]'>
+                    <Image
+                      src={project.data.image}
+                      alt={project.data.title}
+                      width={800}
+                      height={260}
+                      class='w-full h-full object-cover rounded-2xl transition-all duration-300 group-hover:scale-105'
+                    />
+                  </div>
+                  <div class='flex flex-col gap-2'>
+                    {project.data.tags?.length > 0 && (
+                      <span class='text-xs font-semibold uppercase tracking-widest border border-black px-2 py-1 w-max'>
+                        {project.data.tags[0]}
+                      </span>
+                    )}
+                    <h2 class='font-display text-2xl md:text-3xl text-black m-0'>{project.data.description}</h2>
+                    <p class='text-gray-700 text-sm m-0 line-clamp-4'>{project.data.title}</p>
+                  </div>
+                </a>
+              ))}
+            </div>
+            <div class='flex justify-start'>
+              <SecondaryButton href="/projects" text="see more →" />
+            </div>
+          </div>
+
+          <!-- Bookmarks sidebar -->
+          <div class='w-full lg:w-56 flex flex-col gap-10'>
+            {topBookmarkGroups.map(({ tag, items }) => (
+              <div class='flex flex-col'>
+                <h3 class='font-display text-xl italic font-bold text-black pb-3 border-b border-gray-300 block'>{tag}</h3>
+                {items.map(bookmark => (
+                  <a
+                    href={bookmark.data.link}
+                    target='_blank'
+                    rel='noopener noreferrer'
+                    class='group flex items-start justify-between gap-2 py-1.5 hover:opacity-70 transition-opacity'
+                  >
+                    <span class='text-sm text-black leading-snug'>{bookmark.data.title}</span>
+                    <span class='text-gray-400 flex-shrink-0'>›</span>
+                  </a>
+                ))}
+              </div>
+            ))}
+            <div class='flex justify-start'>
+              <SecondaryButton href="/bookmarks" text="see more →" />
+            </div>
+          </div>
+
+        </div>
+      </article>
+    </section>
+
+    <section class="py-12">
+      <article class="layout">
+        <div class="bg-black rounded-2xl px-6 py-8 md:px-8 md:py-10 flex flex-col md:flex-row items-start md:items-center gap-6 md:gap-20">
+          <!-- Left: icon + title -->
+          <div class="flex items-center gap-4 md:min-w-[220px]">
+            <div class="w-10 h-10 rounded-xl border border-white/20 flex items-center justify-center flex-shrink-0">
+              <span class="text-white text-lg">?</span>
+            </div>
+            <h2 class="font-display text-white text-2xl italic m-0">What I'm up to now</h2>
+          </div>
+
+          <!-- Right: bullet list -->
+          <ul class="flex flex-col gap-4 list-disc list-outside pl-4">
+            <li class="text-white text-sm leading-relaxed">
+              I'm a mobile software engineer at <a href="https://shop.wineadore.com" target="_blank" rel="noopener noreferrer" class="underline hover:opacity-70 transition-opacity">WineAdore</a>, building the mobile experience for wine lovers
+            </li>
+            <li class="text-white text-sm leading-relaxed">
+              Currently learning Japanese 🇯🇵 and shifting more focus to the human side of software — communication, clarity, and judgment — since AI can handle most of the coding heavy lifting
+            </li>
+            <li class="text-white text-sm leading-relaxed">
+              On a bulk 💪 — eating more, lifting more, and working toward a better body composition with consistent light exercises
+            </li>
+          </ul>
+        </div>
       </article>
     </section>
 
@@ -116,13 +225,13 @@ const allNicewords = await getNicewordsCollection();
         
         <div class="mt-12 flex flex-col gap-8">
           {allNicewords.map(nicewords => (
-            <div class="text-lg italic text-left text-gray-300 relative pl-16">
+            <div class="text-lg italic text-left text-black relative pl-16">
               <svg width="40" height="40" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" class="absolute left-0 top-0 opacity-60">
-                <path d="M42,60 C30,70 20,85 20,105 C20,125 35,140 55,140 C75,140 90,125 90,105 C90,85 75,70 55,70 C55,70 60,60 75,50 C60,45 50,50 42,60 Z" fill="#71717a"/>
-                <path d="M112,60 C100,70 90,85 90,105 C90,125 105,140 125,140 C145,140 160,125 160,105 C160,85 145,70 125,70 C125,70 130,60 145,50 C130,45 120,50 112,60 Z" fill="#71717a"/>
+                <path d="M42,60 C30,70 20,85 20,105 C20,125 35,140 55,140 C75,140 90,125 90,105 C90,85 75,70 55,70 C55,70 60,60 75,50 C60,45 50,50 42,60 Z" fill="#1a1a1a"/>
+                <path d="M112,60 C100,70 90,85 90,105 C90,125 105,140 125,140 C145,140 160,125 160,105 C160,85 145,70 125,70 C125,70 130,60 145,50 C130,45 120,50 112,60 Z" fill="#1a1a1a"/>
               </svg>
               {nicewords.data.words}
-              <footer class="mt-4 text-sm text-gray-400 not-italic">
+              <footer class="mt-4 text-sm text-gray-600 not-italic">
                 — {nicewords.data.name}, {nicewords.data.workplace}
               </footer>
             </div>
@@ -141,8 +250,8 @@ const allNicewords = await getNicewordsCollection();
           <GradientSubText className="text-l md:text-xl 2xl:text-xl">
             I'm always open to new opportunities and collaborations. If you have any questions or need assistance with a project.
           </GradientSubText>
-          
-          <PrimaryButton 
+
+          <PrimaryButton
             href="mailto:merta.bagus24@gmail.com"
             text="Email me"
             glowing={true}
@@ -150,6 +259,16 @@ const allNicewords = await getNicewordsCollection();
         </div>
       </article>
     </section>
-    
+
+    <section class='relative w-full overflow-hidden h-[480px]'>
+      <img
+        src='/images/ascii-art.jpg'
+        alt='ASCII art'
+        class='w-full h-full object-cover'
+      />
+      <!-- White gradient top -->
+      <div class='absolute inset-x-0 top-0 h-64 bg-gradient-to-b from-[#f6f6ef] to-transparent'></div>
+    </section>
+
   </main>
 </BaseLayout>

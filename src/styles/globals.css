@@ -4,20 +4,20 @@
 
 @layer base {
   :root {
-    --background: 0 0% 0%;
-    --foreground: 210 40% 98%;
-    --popover: 0 0% 0%;
-    --popover-foreground: 210 40% 98%;
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-    --secondary: 217 91% 59%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 217.2 32.6% 17.5%;
+    --background: 60 29% 95%;
+    --foreground: 0 0% 7%;
+    --popover: 60 29% 92%;
+    --popover-foreground: 0 0% 7%;
+    --primary: 0 0% 7%;
+    --primary-foreground: 60 29% 95%;
+    --secondary: 24 100% 50%;
+    --destructive: 0 62.8% 40%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 60 10% 80%;
     --radius: 0.5rem;
-    --card: rgba(255, 255, 255, 0.05);
-    --card-hover: rgba(255, 255, 255, 0.1);
-    --card-hover-border: rgba(255, 255, 255, 0.26);
+    --card: rgba(0, 0, 0, 0.04);
+    --card-hover: rgba(0, 0, 0, 0.08);
+    --card-hover-border: rgba(0, 0, 0, 0.15);
   }
 
   @font-face {
@@ -97,40 +97,40 @@
   }
 
   p {
-    @apply font-primary text-base font-normal mt-4 mb-4 text-gray-400;
+    @apply font-primary text-base font-normal mt-4 mb-4 text-gray-800;
   }
 
   .prose h1 {
-    @apply text-3xl md:text-4xl font-semibold text-white mb-8 mt-12;
+    @apply text-3xl md:text-4xl font-semibold text-black mb-8 mt-12;
   }
 
   .prose h2 {
-    @apply text-2xl md:text-3xl font-semibold text-white mb-6 mt-10;
+    @apply text-2xl md:text-3xl font-semibold text-black mb-6 mt-10;
   }
 
   .prose h3 {
-    @apply text-xl md:text-2xl font-medium text-white mb-4 mt-8 block;
+    @apply text-xl md:text-2xl font-medium text-black mb-4 mt-8 block;
   }
 
   .prose h4 {
-    @apply text-lg md:text-xl font-medium text-gray-200 mb-3 mt-6;
+    @apply text-lg md:text-xl font-medium text-gray-800 mb-3 mt-6;
   }
 
   .prose p {
-    @apply text-sm md:text-base leading-relaxed text-gray-400 mb-6 mt-0;
+    @apply text-sm md:text-base leading-relaxed text-gray-800 mb-6 mt-0;
     line-height: 1.7;
   }
 
   .prose strong {
-    @apply text-white font-semibold;
+    @apply text-black font-semibold;
   }
 
   .prose .highlight {
-    @apply text-white font-semibold;
+    @apply text-black font-semibold;
   }
 
   .prose a {
-    @apply text-blue-400 underline italic hover:text-blue-300 transition-colors;
+    @apply text-blue-600 underline italic hover:text-blue-500 transition-colors;
   }
 
   code {
@@ -209,7 +209,7 @@
   }
 
   .prose li {
-    @apply font-primary text-base text-gray-400;
+    @apply font-primary text-base text-gray-800;
   }
 
   .mdoc-container a {
@@ -247,7 +247,7 @@
   }
 
   .layout {
-    max-width: 48rem;
+    max-width: 60rem;
     @apply mx-auto w-11/12 px-0 sm:px-0;
   }
 
@@ -265,11 +265,11 @@
   }
 
   .text-gradient-primary {
-    @apply bg-clip-text text-transparent bg-gradient-to-b from-neutral-50 to-neutral-400 bg-opacity-50;
+    @apply text-black;
   }
 
   .text-gradient-secondary {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-neutral-300/[35%] via-neutral-300/90 to-neutral-300/[35%];
+    @apply text-black;
   }
 }
 
@@ -296,9 +296,9 @@ button::before {
   padding: 1px;
   background: linear-gradient(
     to bottom right,
-    #171717 0%,
-    #525252 62%,
-    #171717 100%
+    #d4d0c8 0%,
+    #a09a8a 62%,
+    #d4d0c8 100%
   );
   -webkit-mask:
     linear-gradient(#fff 0 0) content-box,
@@ -312,8 +312,8 @@ button::before {
 
 .bg-grid-white {
   background-image:
-    linear-gradient(90deg, rgba(255, 255, 255, 0.1) 0.1px, transparent 1px),
-    linear-gradient(rgba(255, 255, 255, 0.1) 0.1px, transparent 1px);
+    linear-gradient(90deg, rgba(0, 0, 0, 0.07) 0.1px, transparent 1px),
+    linear-gradient(rgba(0, 0, 0, 0.07) 0.1px, transparent 1px);
   background-size: 20px 20px; /* Adjust grid size */
 }
 
@@ -341,5 +341,9 @@ button::before {
 .animate-fade-in-up-delay-2 {
   opacity: 0;
   animation: fadeInUp 0.8s ease-out 0.6s forwards;
+}
+
+.prose img {
+  border-radius: 0.75rem;
 }
 

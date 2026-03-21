@@ -3,7 +3,6 @@ import Card from "@components/ui/Card.astro";
 import type { BlogEntry } from "utils/content";
 import { formatDate } from "utils/time";
 import { getBlogPathName } from "utils/url";
-import { Icon } from "astro-icon/components"
 import { Image } from "astro:assets";
 
 export type Props = BlogEntry;
@@ -12,40 +11,25 @@ const props = Astro.props;
 ---
 
 <Card>
-  <a class='block h-full rounded-lg focus:outline-none focus-visible:ring focus-visible:ring-primary-300 hover:shadow-lg' href={getBlogPathName(props)}>
-    <div class="relative">
-      <div class="absolute inset-0 bg-gray-800/20 rounded-sm blur-sm"></div>
-      <Image 
+  <a class='block h-full rounded-lg focus:outline-none focus-visible:ring focus-visible:ring-primary-300 group' href={getBlogPathName(props)}>
+    <div class="overflow-hidden rounded-2xl h-[220px]">
+      <Image
         src={props.data.banner}
         decoding='async'
         loading='lazy'
         alt='blog banner'
-        class="relative h-full w-full rounded-sm opacity-0 transition-opacity duration-300"
+        class="h-full w-full object-cover rounded-2xl opacity-0 transition-all duration-300 group-hover:scale-105"
         onload="this.style.opacity = 1"
       />
-      <div class="absolute top-2 left-2 z-10">
-        <div class="flex gap-2">
-          {props.data.tags.map((type) => (
-            <p class='mt-0 mb-0 h-8 px-3 w-max flex gap-2 items-center rounded-full bg-background text-white text-sm md:text-md'>
-              # {type}
-            </p>
-          ))}
-        </div>
-      </div>
     </div>
-    <div class='p-2'>
-      <div class='py-2 flex items-center justify-start gap-2 text-sm font-normal text-gray-400'>
-        <div class='flex items-center gap-1'>
-          <Icon name='ri:alarm-line'/>
-          <h5>{props.data.readCount}</h5>
-        </div>
-        <div class='flex items-center gap-1'>
-          <Icon name='ri:calendar-2-fill'/>
-          <h5>{formatDate(props.data.date)}</h5>
+    <div class='pt-2 flex flex-col items-start'>
+      <div class='py-2'>
+        <div class='flex items-center gap-0 bg-black text-white px-2 py-1 text-sm'>
+          <h5>{props.data.readCount} - {formatDate(props.data.date)}</h5>
         </div>
       </div>
-      <h4 class='text-white'>{props.data.title}</h4>
-      <p class='pt-6 m-0 text-sm text-gray-400'>{props.data.description}</p>
+      <h4 class='text-black relative inline-block after:absolute after:left-0 after:bottom-0 after:h-[1.5px] after:w-0 after:bg-black after:transition-all after:duration-300 group-hover:after:w-full'>{props.data.title}</h4>
+      <p class='mt-2 mb-0 text-sm text-gray-700'>{props.data.description}</p>
     </div>
   </a>
 </Card>

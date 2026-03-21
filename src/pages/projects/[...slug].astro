@@ -2,7 +2,6 @@
 import BaseLayout from "@layouts/BaseLayout.astro";
 import { Image } from "astro:assets";
 import { getCollection } from "astro:content";
-import { Icon } from "astro-icon/components"
 import { formatDate } from "utils/time";
 import { ImageEnhancer } from "@components/ui/ImageEnhancer";
 
@@ -23,45 +22,54 @@ const { Content } = await entry.render();
   title={`${entry.data.title} | I Putu Bagus Merta Sentana`}
   description={entry.data.description}
   banner={entry.data.image.src}
-  >
-  <main>
-    <section class='blog-layout'>
-        <div class='py-20 px-4 md:px-28'>
-          <div class="py-8 flex flex-col justify-center items-center">
-              <div class="relative mt-10 mb-4">
-            <div class="absolute inset-0 bg-gray-800/20 rounded-lg blur-sm"></div>
-            <Image
-              class='relative h-full w-full rounded-lg opacity-0 transition-opacity duration-300'
-              src={entry.data.image} 
-              width={1200}
-              height={(1200 * 2) / 5}
-              alt='Image Banner projects' 
-              decoding='async'
-              loading='lazy'
-              onload="this.style.opacity = 1"
-            />
-          </div>
-            </div>
-            <h1 class='font-display text-4xl text-start py-2'>{entry.data.title}</h1>
-            <h6 class='text-xl text-start transition-colors bg-gradient-to-r from-neutral-300/[35%] via-neutral-300/90 to-neutral-300/[35%] bg-clip-text text-transparent'>{entry.data.description}</h6>
-            {entry.data.link && (
-              <div class="flex items-center space-x-2 py-2">
-                <Icon class="text-2xl text-gray-400" name="ri:link" />
-                <a href={entry.data.link} class="text-l text-blue-500 hover:underline" target="_blank">Repository</a>
-              </div>
-            )}
-            
-  
-          <article class='mt-4'>
-            <ImageEnhancer client:load>
-              <div class='prose prose-invert prose-lg max-w-none'>
-                <Content />
-              </div>
-            </ImageEnhancer>
-          </article>
-  
+>
+  <main class="max-w-4xl mx-auto px-6 md:px-8 pb-20">
+    <!-- Breadcrumb -->
+    <nav class="flex items-center gap-2 text-sm text-foreground/50 pt-8 pb-6">
+      <a href="/projects" class="hover:text-foreground transition-colors">All Projects</a>
+      <span>&rsaquo;</span>
+      <span class="capitalize">{entry.data.tags[0]}</span>
+    </nav>
+
+    <!-- Title -->
+    <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground leading-tight tracking-tight mb-4">
+      {entry.data.title}
+    </h1>
+
+    <!-- Meta -->
+    <p class="text-sm text-foreground/50 mb-8">
+      {formatDate(entry.data.createdDate)}
+      {entry.data.link && (
+        <>
+          <span class="mx-2">&middot;</span>
+          <a href={entry.data.link} target="_blank" rel="noopener noreferrer" class="font-semibold text-foreground hover:underline">
+            Repository ↗
+          </a>
+        </>
+      )}
+    </p>
+
+    <!-- Banner Image -->
+    <div class="w-full mb-10 rounded-xl overflow-hidden">
+      <Image
+        class="w-full h-auto object-cover opacity-0 transition-opacity duration-700 ease-out"
+        src={entry.data.image}
+        width={1200}
+        height={630}
+        alt="Project banner image"
+        decoding="async"
+        loading="eager"
+        onload="this.style.opacity = 1"
+      />
+    </div>
+
+    <!-- Content -->
+    <article class="animate-fade-in-up-delay-2">
+      <ImageEnhancer client:load>
+        <div class="prose prose-lg max-w-none">
+          <Content />
         </div>
-      
-    </section>
+      </ImageEnhancer>
+    </article>
   </main>
 </BaseLayout>
