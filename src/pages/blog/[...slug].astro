@@ -1,27 +1,36 @@
 ---
-import LatestPosts from "@components/features/blog/LatestPosts.astro";
 import BaseLayout from "@layouts/BaseLayout.astro";
-import { Image } from "astro:assets";
-import { getCollection } from "astro:content";
-import { formatDate } from "utils/time";
+import LatestPosts from "@components/features/blog/LatestPosts.astro";
 import Comments from "@components/ui/Comments.astro";
 import { ImageEnhancer } from "@components/ui/ImageEnhancer";
+import { Image } from "astro:assets";
+import { getCollection } from "astro:content";
 
 export async function getStaticPaths() {
   const blogEntries = await getCollection('blog');
-  const paths = blogEntries.map((entry) => ({
+  return blogEntries.map((entry) => ({
     params: { slug: entry.slug },
     props: { entry },
   }));
-  return paths;
 }
 
 const { entry } = Astro.props;
-const { Content } = await entry.render();
+const { Content, headings } = await entry.render();
 
-// Extract the banner filename for OpenGraph (use public path for social media crawlers)
 const bannerFilename = entry.data.banner.src.split('/').pop().split('.')[0] + '.jpg';
 const ogBanner = `/blog-banners/${bannerFilename}`;
+
+const readMinutes = parseInt(entry.data.readCount.match(/\d+/)?.[0] ?? '5');
+const approxWords = (readMinutes * 200).toLocaleString();
+
+const shortDate = (date: Date) => {
+  const day = date.getDate();
+  const month = date.toLocaleString('en-US', { month: 'short' });
+  const year = date.getFullYear();
+  return `${day} ${month} ${year}`;
+};
+
+const tocHeadings = headings.filter(h => h.depth === 2 || h.depth === 3);
 ---
 
 <BaseLayout
@@ -30,54 +39,268 @@ const ogBanner = `/blog-banners/${bannerFilename}`;
   banner={ogBanner}
   isBlog={true}
 >
-  <main class="max-w-4xl mx-auto px-6 md:px-8 pb-20">
-    <!-- Breadcrumb -->
-    <nav class="flex items-center gap-2 text-sm text-foreground/50 pt-8 pb-6">
-      <a href="/blog" class="hover:text-foreground transition-colors">All Posts</a>
-      <span>&rsaquo;</span>
-      <span class="capitalize">{entry.data.tags[0]}</span>
-    </nav>
+  <main class="pb-24">
 
-    <!-- Title -->
-    <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground leading-tight tracking-tight mb-4">
-      {entry.data.title}
-    </h1>
+    <!-- Centered header -->
+    <section class="text-center pt-28 pb-10 px-6">
+      <div class="flex items-center justify-center gap-3 mb-6">
+        {entry.data.tags[0] && (
+          <span class="border border-black/20 text-[11px] font-primary uppercase tracking-widest px-2.5 py-1 text-black/60">
+            {entry.data.tags[0]}
+          </span>
+        )}
+        <span class="text-sm font-primary text-black/40">
+          {shortDate(entry.data.date)} · {entry.data.readCount}
+        </span>
+      </div>
 
-    <!-- Meta -->
-    <p class="text-sm text-foreground/50 mb-8">
-      {formatDate(entry.data.date)}
-      <span class="mx-2">&middot;</span>
-      by <span class="font-semibold text-foreground">Bagus Merta</span>
-    </p>
+      <h1 class="font-display text-5xl md:text-6xl lg:text-7xl text-black leading-none mb-6 tracking-tight">
+        {entry.data.title}
+      </h1>
 
-    <!-- Banner Image -->
-    <div class="w-full mb-10 rounded-xl overflow-hidden">
-      <Image
-        class="w-full h-auto object-cover opacity-0 transition-opacity duration-700 ease-out"
-        src={entry.data.banner}
-        width={1200}
-        height={630}
-        alt="Blog banner image"
-        decoding="async"
-        loading="eager"
-        onload="this.style.opacity = 1"
-      />
-    </div>
+      <p class="text-lg text-gray-500 max-w-xl mx-auto leading-relaxed mb-8">
+        {entry.data.description}
+      </p>
 
-    <!-- Content -->
-    <article class="animate-fade-in-up-delay-2">
-      <ImageEnhancer client:load>
-        <div class="prose prose-lg max-w-none">
-          <Content />
+      <!-- Author -->
+      <div class="inline-flex items-center gap-3">
+        <div class="w-8 h-8 rounded-full bg-black flex items-center justify-center flex-shrink-0">
+          <span class="text-white text-sm font-primary font-semibold leading-none">B</span>
         </div>
-      </ImageEnhancer>
-    </article>
+        <span class="font-primary text-sm text-black">Putu Bagus Merta</span>
+        <span class="text-[11px] font-primary uppercase tracking-widest text-black/40 border border-black/15 px-2 py-0.5">Author</span>
+      </div>
+    </section>
 
-    <div class="animate-fade-in-up-delay-2">
-      <Comments />
+    <!-- Cover image -->
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 mb-2">
+      <div class="relative overflow-hidden rounded-2xl">
+        <Image
+          src={entry.data.banner}
+          width={1200}
+          height={630}
+          alt="Blog banner"
+          decoding="async"
+          loading="eager"
+          class="w-full h-auto object-cover opacity-0 transition-opacity duration-700"
+          onload="this.style.opacity = 1"
+        />
+        <div class="absolute bottom-4 left-5">
+          <span class="text-[11px] font-primary uppercase tracking-widest text-white/50">COVER</span>
+        </div>
+      </div>
     </div>
-    <div class="animate-fade-in-up-delay-2">
-      <LatestPosts id={entry.data.id} />
+
+    <!-- Three-column body -->
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 mt-12">
+      <div class="grid grid-cols-1 lg:grid-cols-[200px_1fr_52px] gap-8 lg:gap-6 items-start">
+
+        <!-- Left sidebar: TOC + reading time -->
+        <aside class="hidden lg:flex flex-col gap-10 sticky top-24 self-start">
+
+          <div>
+            <p class="text-[10px] font-primary uppercase tracking-widest text-black/35 mb-3">ON THIS PAGE</p>
+            <nav class="flex flex-col">
+              <a
+                href="#intro"
+                data-toc="intro"
+                class="toc-link text-sm font-primary text-black border-l-2 border-black pl-3 py-1 leading-snug transition-colors"
+              >
+                Intro
+              </a>
+              {tocHeadings.map(h => (
+                <a
+                  href={`#${h.slug}`}
+                  data-toc={h.slug}
+                  class="toc-link text-sm font-primary text-black/45 hover:text-black border-l-2 border-transparent hover:border-black/25 pl-3 py-1 leading-snug transition-colors"
+                >
+                  {h.text.replace(/ —$/, '')}
+                </a>
+              ))}
+              <a
+                href="#comments"
+                data-toc="comments"
+                class="toc-link text-sm font-primary text-black/45 hover:text-black border-l-2 border-transparent hover:border-black/25 pl-3 py-1 leading-snug transition-colors"
+              >
+                Comments
+              </a>
+            </nav>
+          </div>
+
+          <div>
+            <p class="text-[10px] font-primary uppercase tracking-widest text-black/35 mb-2">READING TIME</p>
+            <div class="flex items-baseline gap-1">
+              <span class="font-display text-5xl text-black leading-none">{readMinutes}</span>
+              <span class="text-sm font-primary text-black/50 ml-1">min</span>
+            </div>
+            <p class="text-[11px] font-primary text-black/30 mt-1">~{approxWords} words</p>
+          </div>
+
+        </aside>
+
+        <!-- Center: article prose -->
+        <article class="blog-prose min-w-0">
+          <div id="intro" class="prose prose-lg max-w-none">
+            <ImageEnhancer client:load>
+              <Content />
+            </ImageEnhancer>
+          </div>
+
+          <div id="comments" class="mt-16 pt-8 border-t border-black/10">
+            <Comments />
+          </div>
+
+          <div class="mt-12">
+            <LatestPosts id={entry.data.id} />
+          </div>
+        </article>
+
+        <!-- Right sidebar: share -->
+        <aside class="hidden lg:flex flex-col items-center gap-5 sticky top-24 self-start pt-1">
+          <span
+            class="text-[10px] font-primary uppercase tracking-widest text-black/30"
+            style="writing-mode: vertical-rl; transform: rotate(180deg); letter-spacing: 0.18em;"
+          >
+            SHARE
+          </span>
+
+          <!-- Copy link -->
+          <div
+            id="copy-btn"
+            title="Copy link"
+            role="button"
+            tabindex="0"
+            class="w-8 h-8 flex items-center justify-center text-black/35 hover:text-black transition-colors cursor-pointer"
+          >
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <rect x="9" y="9" width="13" height="13" rx="2"/>
+              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+            </svg>
+          </div>
+
+          <!-- Bookmark -->
+          <div
+            id="bookmark-btn"
+            title="Bookmark"
+            role="button"
+            tabindex="0"
+            class="w-8 h-8 flex items-center justify-center text-black/35 hover:text-black transition-colors cursor-pointer"
+          >
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z"/>
+            </svg>
+          </div>
+
+          <!-- Scroll progress -->
+          <div class="mt-2 w-px h-20 bg-black/10 relative overflow-hidden rounded-full">
+            <div
+              id="scroll-progress"
+              class="absolute top-0 left-0 w-full bg-black/60 rounded-full"
+              style="height: 0%; transition: height 0.1s linear;"
+            ></div>
+          </div>
+        </aside>
+
+      </div>
     </div>
+
   </main>
 </BaseLayout>
+
+<style>
+  /* Drop cap on first paragraph */
+  .blog-prose .prose > p:first-of-type::first-letter {
+    font-family: 'Garamond', Georgia, serif;
+    font-size: 4.2rem;
+    font-weight: 400;
+    float: left;
+    line-height: 0.82;
+    margin-right: 0.06em;
+    padding-top: 0.08em;
+    color: black;
+  }
+
+  /* Serif headings inside blog prose */
+  .blog-prose .prose h2,
+  .blog-prose .prose h3 {
+    font-family: 'Garamond', Georgia, serif;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+  }
+
+  /* Blockquote - neutral left border instead of blue */
+  .blog-prose .prose blockquote {
+    border-left-color: rgba(0,0,0,0.2);
+    background: transparent;
+    border-radius: 0;
+    font-style: italic;
+    color: #374151;
+  }
+
+  /* Active TOC link */
+  .toc-link.active {
+    color: black;
+    border-left-color: black;
+  }
+</style>
+
+<script>
+  /* ── Scroll progress ── */
+  const progressBar = document.getElementById('scroll-progress');
+  function updateProgress() {
+    const el = document.documentElement;
+    const pct = (el.scrollTop / (el.scrollHeight - el.clientHeight)) * 100;
+    if (progressBar) progressBar.style.height = `${Math.min(pct, 100)}%`;
+  }
+  window.addEventListener('scroll', updateProgress, { passive: true });
+
+  /* ── TOC active state via IntersectionObserver ── */
+  const tocLinks = document.querySelectorAll('.toc-link');
+  const headingEls = document.querySelectorAll('article h2[id], article h3[id]');
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          tocLinks.forEach(l => l.classList.remove('active'));
+          const active = document.querySelector(`.toc-link[data-toc="${entry.target.id}"]`);
+          active?.classList.add('active');
+        }
+      });
+    },
+    { rootMargin: '-20% 0px -70% 0px' }
+  );
+
+  headingEls.forEach(el => observer.observe(el));
+
+  /* ── Copy link ── */
+  document.getElementById('copy-btn')?.addEventListener('click', () => {
+    navigator.clipboard.writeText(window.location.href).then(() => {
+      const btn = document.getElementById('copy-btn');
+      if (btn) {
+        btn.style.color = 'black';
+        setTimeout(() => { btn.style.color = ''; }, 1500);
+      }
+    });
+  });
+
+  /* ── Bookmark (persist in localStorage) ── */
+  const bookmarkBtn = document.getElementById('bookmark-btn');
+  const bookmarkKey = `bookmark:${window.location.pathname}`;
+  const isBookmarked = localStorage.getItem(bookmarkKey);
+
+  if (isBookmarked && bookmarkBtn) {
+    bookmarkBtn.querySelector('svg')?.setAttribute('fill', 'black');
+  }
+
+  bookmarkBtn?.addEventListener('click', () => {
+    const svg = bookmarkBtn.querySelector('svg');
+    if (localStorage.getItem(bookmarkKey)) {
+      localStorage.removeItem(bookmarkKey);
+      svg?.setAttribute('fill', 'none');
+    } else {
+      localStorage.setItem(bookmarkKey, '1');
+      svg?.setAttribute('fill', 'black');
+    }
+  });
+</script>

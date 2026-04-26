@@ -1,26 +1,28 @@
 ---
-import type { BlogEntry } from "utils/content";
-import { getBlogPathName } from "utils/url";
+import type { ProjectEntry } from "utils/content";
 import { Image } from "astro:assets";
+import { getProjectPathName } from "utils/url";
 
-export type Props = BlogEntry;
+export type Props = ProjectEntry;
 
 const props = Astro.props;
-const year = props.data.date.getFullYear();
+const year = props.data.createdDate.getFullYear();
 const tags = props.data.tags.slice(0, 2).map(t => t.toUpperCase()).join(' · ');
 ---
 
 <a
+  href={getProjectPathName(props)}
   class='group flex flex-col gap-0 focus:outline-none focus-visible:ring focus-visible:ring-primary-300'
-  href={getBlogPathName(props)}
 >
-  <div class="overflow-hidden rounded-2xl h-[240px] md:h-[280px]">
+  <div class="overflow-hidden rounded-2xl w-full aspect-[4/3]">
     <Image
-      src={props.data.banner}
+      src={props.data.image}
+      alt={props.data.title}
+      width={800}
+      height={600}
       decoding='async'
       loading='lazy'
-      alt={props.data.title}
-      class="h-full w-full object-cover opacity-0 transition-all duration-500 group-hover:scale-105"
+      class="w-full h-full object-cover opacity-0 transition-all duration-500 group-hover:scale-105"
       onload="this.style.opacity = 1"
     />
   </div>
@@ -37,6 +39,5 @@ const tags = props.data.tags.slice(0, 2).map(t => t.toUpperCase()).join(' · ');
       {props.data.title}
     </h3>
     <p class='text-sm text-gray-600 m-0 leading-relaxed line-clamp-2'>{props.data.description}</p>
-    <p class='text-[11px] font-primary uppercase tracking-widest text-black/40 mt-1'>{props.data.readCount}</p>
   </div>
 </a>

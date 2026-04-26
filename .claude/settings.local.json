@@ -11,7 +11,8 @@
       "WebFetch(domain:augmentingcognition.com)",
       "WebFetch(domain:a16z.com)",
       "WebFetch(domain:lynettebye.com)",
-      "WebFetch(domain:www.lesswrong.com)"
+      "WebFetch(domain:www.lesswrong.com)",
+      "Bash(pnpm dev:*)"
     ],
     "deny": []
   }

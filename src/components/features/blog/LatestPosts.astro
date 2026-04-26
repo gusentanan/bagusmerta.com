@@ -7,7 +7,7 @@ const { id  } = Astro.props;
 ---
 <div class='mt-10'>
   <h2 class="font-display text-3xl">Latest content</h2>
-  <ul class='mt-4 grid gap-4 sm:grid-cols-2 xl:grid-cols-2'>
+  <div class='mt-4 grid gap-8 sm:grid-cols-2 xl:grid-cols-2'>
     {
       blogEntries
         .filter(blogPostEntry => blogPostEntry.data.id !== id)
@@ -15,6 +15,6 @@ const { id  } = Astro.props;
           <BlogEntryItem {...blogPostEntry} />
         ))
     }
-  </ul>
+  </div>
 </div>
 

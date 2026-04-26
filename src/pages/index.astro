@@ -1,70 +1,98 @@
 ---
-import BlogEntryItem from "@components/features/blog/BlogEntryItem.astro";
+import ProjectCard from "@components/features/project/ProjectCard.astro";
 import BaseLayout from "@layouts/BaseLayout.astro";
-import { getBlogCollection, getNicewordsCollection, getProjectCollection, getBookMarkCollection } from "utils/content";
+import { getBlogCollection, getNicewordsCollection, getProjectCollection } from "utils/content";
 import { getTitle } from "utils/title";
 import { Image } from "astro:assets";
-import PrimaryButton from "@components/ui/button/PrimaryButton.astro";
-import SecondaryButton from "@components/ui/button/SecondaryButton.astro";
-import GradientSubText from "@components/ui/text/GradientSubText.astro";
-import { getProjectPathName } from "utils/url";
+import { getBlogPathName } from "utils/url";
 
 const allBlogPosts = await getBlogCollection();
 const allProject = (await getProjectCollection()).filter(p => p.slug !== 'react-projects');
 const allNicewords = await getNicewordsCollection();
-const allBookmarks = await getBookMarkCollection();
 
-const selectedTags = ['tips', 'software-engineering', 'design-system'];
-const tagLabels: Record<string, string> = {
-  'tips': 'Tips',
-  'software-engineering': 'Software Engineering',
-  'design-system': 'Design System',
+const shortDate = (date: Date) => {
+  const day = date.getDate();
+  const month = date.toLocaleString('en-US', { month: 'short' });
+  const year = date.getFullYear();
+  return `${day} ${month} ${year}`;
 };
-
-const topBookmarkGroups = selectedTags.map(tag => ({
-  tag: tagLabels[tag],
-  slug: tag,
-  items: allBookmarks.filter(b => b.data.tags?.includes(tag)).slice(0, 3),
-}));
 ---
 
 <BaseLayout title={getTitle('Home')}>
   <main>
    
-      <section class='relative isolate min-h-main -mt-20 mb-20 flex flex-col justify-center'>
-        <article class='layout'>
-          <div class="flex flex-col items-center justify-center min-h-screen">
-         
-            <div class="flex flex-col md:flex-row items-start">
-              <div>
-                <div class="flex justify-center items-center">
-                  <h2 class='text-2xl md:text-4xl 2xl:text-4xl'>  
-                    Hi, I'm Bagus
-                  </h2>
-                  <div class="relative w-[60px] h-[60px] ml-4 flex-shrink-0 transition-transform duration-300 ease-in-out hover:scale-150 hover:rotate-6">
-                    <div class="absolute inset-0 bg-gray-800/20 rounded-lg blur-sm"></div>
-                    <Image
-                      class='relative h-full w-full rounded-lg object-cover opacity-0 transition-opacity duration-300'
-                      src='/images/avatar.jpg'
-                      alt='Photo of me, hopefully can impress your boss'
-                      decoding='async'
-                      loading='lazy'
-                      width={60}
-                      height={60}
-                      onload="this.style.opacity = 1"
-                    />
-                  </div>
-                </div>
-                <h1 class='font-display text-4xl text-center md:text-6xl 2xl:text-5xl text-gradient-primary leading-tight pb-2'>  
-                  Software Engineer.
-                </h1>
+      <section class='relative isolate min-h-main -mt-20 flex items-center'>
+        <article class='layout py-24'>
+
+          <!-- Status Badge -->
+          <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-gray-300 text-sm font-primary mb-10">
+            <span class="relative flex h-2.5 w-2.5 flex-shrink-0">
+              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-50"></span>
+              <span class="relative inline-flex h-2.5 w-2.5 rounded-full bg-green-500"></span>
+            </span>
+            <span class="text-gray-500">Available · Q3 2026 · Bali · GMT+8</span>
+          </div>
+
+          <!-- Two-column layout -->
+          <div class="grid grid-cols-1 md:grid-cols-[1fr_auto] gap-12 md:gap-16 items-center">
+
+            <!-- Left: Text content -->
+            <div>
+              <div class="font-handwriting text-2xl md:text-3xl text-black/60 mb-3">Hi, I'm Bagus —</div>
+              <h1 class="font-display text-5xl md:text-6xl lg:text-7xl leading-[1.05] text-black m-0">
+                Product engineer<br />
+                who ships <em class="italic font-thin">thoughtful</em><br />
+                software.
+              </h1>
+
+              <div class="font-primary text-base text-gray-600 mt-6 max-w-lg leading-relaxed">
+                I care about the product first, the stack second. For the last six years I've built mobile and web apps end-to-end. I write about the craft on the side.
+              </div>
+
+              <!-- CTA Buttons -->
+              <div class="flex items-center gap-3 mt-8 flex-wrap">
+                <a
+                  href="/projects"
+                  class="inline-flex items-center gap-2 bg-black text-white font-primary text-sm font-medium px-6 py-3 rounded-full hover:bg-black/80 transition-colors"
+                >
+                  See selected work →
+                </a>
+                <a
+                  href="/blog"
+                  class="inline-flex items-center font-primary text-sm px-6 py-3 rounded-full border border-black/20 hover:border-black/50 transition-colors text-black"
+                >
+                  Read the blog
+                </a>
+              </div>
+
+              <!-- Social Links -->
+              <div class="flex items-center gap-x-4 gap-y-1 mt-5 text-sm font-primary text-black/40 flex-wrap">
+                <span>Find me:</span>
+                <a href="https://twitter.com/@bagusmertasntn" target="_blank" rel="noopener noreferrer" class="underline underline-offset-2 decoration-black/20 hover:text-black hover:decoration-black/50 transition-colors">Twitter</a>
+                <a href="https://github.com/gusentanan" target="_blank" rel="noopener noreferrer" class="underline underline-offset-2 decoration-black/20 hover:text-black hover:decoration-black/50 transition-colors">GitHub</a>
+                <a href="https://linkedin.com/in/bagusmerta" target="_blank" rel="noopener noreferrer" class="underline underline-offset-2 decoration-black/20 hover:text-black hover:decoration-black/50 transition-colors">LinkedIn</a>
+                <a href="mailto:merta.bagus24@gmail.com" class="underline underline-offset-2 decoration-black/20 hover:text-black hover:decoration-black/50 transition-colors">Email</a>
               </div>
             </div>
 
-            <GradientSubText className="flex justify-center items-center text-center md:text-lg mt-4">
-             Creating product that deliver exceptional user interfaces and user experiences 
-            </GradientSubText>
-  
+            <!-- Right: Portrait card (hidden on mobile) -->
+            <div class="hidden md:block w-64 lg:w-72 xl:w-80 flex-shrink-0">
+              <div class="relative rounded-2xl overflow-hidden" style="aspect-ratio: 3/4;">
+                <Image
+                  src="/images/avatar.jpg"
+                  alt="Bagus Merta"
+                  width={400}
+                  height={533}
+                  class="w-full h-full object-cover"
+                  loading="eager"
+                />
+                <div class="absolute inset-0 bg-gradient-to-b from-[#b8965a]/40 to-[#3d2810]/70 mix-blend-multiply"></div>
+                <div class="absolute bottom-4 left-4 text-[10px] tracking-[0.2em] text-[#d4c4a0] font-primary">
+                  PHOTO · PORTRAIT
+                </div>
+              </div>
+            </div>
+
           </div>
         </article>
       </section>
@@ -73,227 +101,231 @@ const topBookmarkGroups = selectedTags.map(tag => ({
     
 
     <section class='relative isolate py-20' id='intro'>
-      <article class='layout flex flex-col-reverse items-center md:flex-row md:justify-start gap-8'>
-        <div class='md:mt-8 h-full w-full'>
-            <h2 class='font-display text-3xl md:text-5xl text-gradient-primary'>
-              Blog and Short Articles
+      <article class='layout'>
+        <!-- Section header -->
+        <div class='flex items-end justify-between mb-4'>
+          <div>
+            <p class='text-xs font-primary uppercase tracking-widest text-black/40 mb-3'>01 · Selected Work</p>
+            <h2 class='font-display text-4xl md:text-5xl text-black m-0 leading-none'>
+              Things I'm proud of.
             </h2>
-            <GradientSubText className="text-base md:text-lg mt-4">
-              A collection of my writings and reflections on programming and personal growth.
-            </GradientSubText>
+          </div>
+          <a
+            href="/projects"
+            class='text-[11px] font-primary font-semibold uppercase tracking-widest text-black hover:opacity-50 transition-opacity whitespace-nowrap pb-1'
+          >
+            <span class='hidden sm:inline'>ALL PROJECTS </span>→
+          </a>
+        </div>
 
-            <PrimaryButton
-              href="/blog"
-              text="See more articles →"
-            />
+        <!-- Divider -->
+        <hr class='border-black/10 mt-6 mb-10' />
 
-        </div>  
-        <div class='h-full w-full sm:w-96 lg:w-full'>
-          <ul class='relative h-full'>
-            {[allBlogPosts.slice(0, 1).map(blog => <BlogEntryItem {...blog} />)]}
-          </ul>
+        <!-- Project cards grid -->
+        <div class='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10'>
+          {allProject.slice(0, 3).map(project => <ProjectCard {...project} />)}
         </div>
       </article>
-      
     </section>
     
     <section class='py-20'>
-
-      <!-- Section title -->
       <article class='layout'>
-        <div class='flex flex-col items-center text-center mb-8 md:mb-16'>
-          <h2 class='font-display text-3xl md:text-5xl text-black leading-tight'>
-            Projects & Bookmarks
-          </h2>
-        </div>
-      </article>
 
-      <!-- Mobile: horizontal scroll — direct child of section, NOT inside layout -->
-      <!-- NOTE: display:flex is NOT in inline style so md:hidden can override it -->
-      <div
-        id="projects-scroll"
-        class='flex flex-row md:hidden'
-        style="overflow-x: scroll; -webkit-overflow-scrolling: touch; gap: 16px; padding-bottom: 16px; scrollbar-width: none; scroll-snap-type: x mandatory;"
-      >
-        {allProject.slice(0, 4).map((project, i) => (
+        <!-- Section header -->
+        <div class='flex items-end justify-between mb-4'>
+          <div>
+            <p class='text-xs font-primary uppercase tracking-widest text-black/40 mb-3'>02 · Writing</p>
+            <h2 class='font-display text-4xl md:text-5xl text-black m-0 leading-none'>
+              Notes on the craft.
+            </h2>
+          </div>
           <a
-            href={getProjectPathName(project)}
-            class='group flex flex-col gap-3'
-            style={`width: 82vw; flex-shrink: 0; scroll-snap-align: start;${i === 0 ? ' padding-left: 4.2vw;' : ''}`}
+            href="/blog"
+            class='text-[11px] font-primary font-semibold uppercase tracking-widest text-black hover:opacity-50 transition-opacity whitespace-nowrap pb-1'
           >
-            <div style="overflow: hidden; border-radius: 16px; height: 200px;">
-              <Image
-                src={project.data.image}
-                alt={project.data.title}
-                width={600}
-                height={200}
-                class='w-full h-full object-cover transition-all duration-300'
-              />
-            </div>
-            <p class='m-0 text-base text-black leading-snug font-medium'>{project.data.description}</p>
+            <span class='hidden sm:inline'>ALL POSTS </span>→
           </a>
-        ))}
-        <div style="width: 4.2vw; flex-shrink: 0;"></div>
-      </div>
+        </div>
 
-      <!-- Shared layout: projects button (mobile) + desktop grid + bookmarks (always) -->
-      <article class='layout'>
-        <div class='flex flex-col lg:grid lg:grid-cols-[1fr_auto] gap-10 lg:gap-16 items-start mt-6 md:mt-0'>
+        <!-- Divider -->
+        <hr class='border-black/10 mt-6 mb-10' />
 
-          <!-- Projects column -->
-          <div class='flex flex-col gap-8'>
-            <!-- Mobile: see more button only -->
-            <div class='md:hidden flex justify-start'>
-              <SecondaryButton href="/projects" text="see more →" />
-            </div>
+        <!-- Featured + sidebar layout -->
+        <div class='flex flex-col lg:grid lg:grid-cols-[1fr_360px] gap-10 lg:gap-14 items-start'>
 
-            <!-- Desktop: featured + stacked grid -->
-            <div class='hidden md:grid grid-cols-[1fr_2fr] gap-8 items-start'>
-              <!-- Left: small stacked list -->
-              <div class='flex flex-col gap-6'>
-                {allProject.slice(1, 4).map(project => (
-                  <a href={getProjectPathName(project)} class='group flex flex-col gap-2'>
-                    <div class='overflow-hidden rounded-2xl'>
-                      <Image
-                        src={project.data.image}
-                        alt={project.data.title}
-                        width={400}
-                        height={200}
-                        class='w-full object-cover rounded-2xl transition-all duration-300 group-hover:scale-105'
-                      />
-                    </div>
-                    <p class='m-0 text-sm text-black leading-snug'>{project.data.description}</p>
-                  </a>
-                ))}
+          <!-- Left: Featured post -->
+          {allBlogPosts.slice(0, 1).map(post => (
+            <a href={getBlogPathName(post)} class='group flex flex-col gap-4 w-full'>
+              <div class='overflow-hidden rounded-2xl w-full aspect-[16/10]'>
+                <Image
+                  src={post.data.banner}
+                  alt={post.data.title}
+                  width={800}
+                  height={500}
+                  decoding='async'
+                  loading='lazy'
+                  class='w-full h-full object-cover opacity-0 transition-all duration-500 group-hover:scale-105'
+                  onload='this.style.opacity = 1'
+                />
               </div>
-
-              <!-- Right: featured large project -->
-              {allProject.slice(0, 1).map(project => (
-                <a href={getProjectPathName(project)} class='group flex flex-col gap-3'>
-                  <div class='overflow-hidden rounded-2xl h-[260px]'>
-                    <Image
-                      src={project.data.image}
-                      alt={project.data.title}
-                      width={800}
-                      height={260}
-                      class='w-full h-full object-cover rounded-2xl transition-all duration-300 group-hover:scale-105'
-                    />
-                  </div>
-                  <div class='flex flex-col gap-2'>
-                    {project.data.tags?.length > 0 && (
-                      <span class='text-xs font-semibold uppercase tracking-widest border border-black px-2 py-1 w-max'>
-                        {project.data.tags[0]}
-                      </span>
-                    )}
-                    <h2 class='font-display text-2xl md:text-3xl text-black m-0'>{project.data.description}</h2>
-                    <p class='text-gray-700 text-sm m-0 line-clamp-4'>{project.data.title}</p>
-                  </div>
-                </a>
-              ))}
-            </div>
-
-            <!-- Desktop: see more -->
-            <div class='hidden md:flex justify-start'>
-              <SecondaryButton href="/projects" text="see more →" />
-            </div>
-          </div>
-
-          <!-- Bookmarks — always visible (sidebar on desktop, stacked on mobile) -->
-          <div class='w-full lg:w-56 flex flex-col gap-10'>
-            {topBookmarkGroups.map(({ tag, items }) => (
-              <div class='flex flex-col'>
-                <h3 class='font-display text-xl italic font-bold text-black pb-3 border-b border-gray-300 block'>{tag}</h3>
-                {items.map(bookmark => (
-                  <a
-                    href={bookmark.data.link}
-                    target='_blank'
-                    rel='noopener noreferrer'
-                    class='group flex items-start justify-between gap-2 py-1.5 hover:opacity-70 transition-opacity'
-                  >
-                    <span class='text-sm text-black leading-snug'>{bookmark.data.title}</span>
-                    <span class='text-gray-400 flex-shrink-0'>›</span>
-                  </a>
-                ))}
+              <div class='flex flex-col gap-2'>
+                <div class='flex items-center gap-3'>
+                  <span class='bg-black text-white text-[11px] font-primary font-semibold uppercase tracking-widest px-2 py-1'>FEATURED</span>
+                  <span class='text-sm font-primary text-black/40'>{post.data.readCount} · {shortDate(post.data.date)}</span>
+                </div>
+                <h3 class='font-display text-3xl md:text-4xl text-black m-0 leading-tight group-hover:opacity-60 transition-opacity'>
+                  {post.data.title}
+                </h3>
+                <p class='text-sm text-gray-600 m-0 leading-relaxed'>{post.data.description}</p>
               </div>
+            </a>
+          ))}
+
+          <!-- Right: sidebar list -->
+          <div class='w-full flex flex-col'>
+            {allBlogPosts.slice(1, 4).map(post => (
+              <a
+                href={getBlogPathName(post)}
+                class='group flex items-start gap-4 py-6 border-b border-black/10 last:border-b-0 first:pt-0'
+              >
+                <div class='overflow-hidden rounded-xl flex-shrink-0 w-[88px] h-[68px]'>
+                  <Image
+                    src={post.data.banner}
+                    alt={post.data.title}
+                    width={200}
+                    height={160}
+                    decoding='async'
+                    loading='lazy'
+                    class='w-full h-full object-cover opacity-0 transition-all duration-300 group-hover:scale-105'
+                    onload='this.style.opacity = 1'
+                  />
+                </div>
+                <div class='flex flex-col gap-1'>
+                  <p class='text-[11px] font-primary uppercase tracking-widest text-black/40 m-0'>
+                    {post.data.tags[0]} · {post.data.readCount} · {shortDate(post.data.date)}
+                  </p>
+                  <h4 class='font-display text-xl text-black m-0 leading-snug group-hover:opacity-60 transition-opacity'>
+                    {post.data.title}
+                  </h4>
+                </div>
+              </a>
             ))}
-            <div class='flex justify-start'>
-              <SecondaryButton href="/bookmarks" text="see more →" />
-            </div>
           </div>
 
         </div>
       </article>
     </section>
 
-    <section class="py-12">
-      <article class="layout">
-        <div class="bg-black rounded-2xl px-6 py-8 md:px-8 md:py-10 flex flex-col md:flex-row items-start md:items-center gap-6 md:gap-20">
-          <!-- Left: icon + title -->
-          <div class="flex items-center gap-4 md:min-w-[220px]">
-            <div class="w-10 h-10 rounded-xl border border-white/20 flex items-center justify-center flex-shrink-0">
-              <span class="text-white text-lg">?</span>
-            </div>
-            <h2 class="font-display text-white text-2xl italic m-0">What I'm up to now</h2>
+    <!-- 03 · Now -->
+    <section class='py-20'>
+      <article class='layout'>
+        <div class='flex items-end justify-between mb-4'>
+          <div>
+            <p class='text-xs font-primary uppercase tracking-widest text-black/40 mb-3'>03 · Now</p>
+            <h2 class='font-display text-4xl md:text-5xl text-black m-0 leading-none'>
+              What I'm doing.
+            </h2>
           </div>
+        </div>
+        <hr class='border-black/10 mt-6 mb-10' />
 
-          <!-- Right: bullet list -->
-          <ul class="flex flex-col gap-4 list-disc list-outside pl-4">
-            <li class="text-white text-sm leading-relaxed">
-              I'm a mobile software engineer at <a href="https://shop.wineadore.com" target="_blank" rel="noopener noreferrer" class="underline hover:opacity-70 transition-opacity">WineAdore</a>, building the mobile experience for wine lovers
-            </li>
-            <li class="text-white text-sm leading-relaxed">
-              Currently learning Japanese 🇯🇵 and shifting more focus to the human side of software — communication, clarity, and judgment — since AI can handle most of the coding heavy lifting
-            </li>
-            <li class="text-white text-sm leading-relaxed">
-              On a bulk 💪 — eating more, lifting more, and working toward a better body composition with consistent light exercises
-            </li>
-          </ul>
+        <div class='grid grid-cols-1 sm:grid-cols-3 gap-8 md:gap-14'>
+          <div class='flex flex-col gap-3'>
+            <p class='text-[10px] font-primary uppercase tracking-widest text-black/35 m-0'>WORK</p>
+            <p class='text-sm text-gray-600 leading-relaxed m-0'>
+              Mobile engineer at <a href="https://shop.wineadore.com" target="_blank" rel="noopener noreferrer" class="text-black underline decoration-black/20 underline-offset-2 hover:decoration-black transition-colors">WineAdore</a> — building the mobile experience for wine lovers.
+            </p>
+          </div>
+          <div class='flex flex-col gap-3'>
+            <p class='text-[10px] font-primary uppercase tracking-widest text-black/35 m-0'>LEARNING</p>
+            <p class='text-sm text-gray-600 leading-relaxed m-0'>
+              Japanese 🇯🇵 and the human side of software — communication, clarity, and judgment over pure technical skill.
+            </p>
+          </div>
+          <div class='flex flex-col gap-3'>
+            <p class='text-[10px] font-primary uppercase tracking-widest text-black/35 m-0'>LIFE</p>
+            <p class='text-sm text-gray-600 leading-relaxed m-0'>
+              On a bulk 💪 — eating more, lifting consistently, and taking body composition seriously for the first time.
+            </p>
+          </div>
         </div>
       </article>
     </section>
 
-    <section class="py-20 mb-20">
-      <article class="layout">
-        <p class='font-display text-4xl md:text-5xl 2xl:text-4xl text-gradient-primary'>
-          Some kind words
-        </p>
-        <GradientSubText className="text-l md:text-l 2xl:text-xl">
-          Some feedback from the people I've had the privilege of working with.
-        </GradientSubText>
-        
-        <div class="mt-12 flex flex-col gap-8">
+    <!-- 04 · Kind words -->
+    <section class='py-20'>
+      <article class='layout'>
+        <div class='flex items-end justify-between mb-4'>
+          <div>
+            <p class='text-xs font-primary uppercase tracking-widest text-black/40 mb-3'>04 · Kind Words</p>
+            <h2 class='font-display text-4xl md:text-5xl text-black m-0 leading-none'>
+              People I've worked with.
+            </h2>
+          </div>
+        </div>
+        <hr class='border-black/10 mt-6 mb-0' />
+
+        <div class='grid grid-cols-1 md:grid-cols-2 gap-px bg-black/8'>
           {allNicewords.map(nicewords => (
-            <div class="text-sm md:text-lg italic text-left text-black relative pl-16">
-              <svg width="40" height="40" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" class="absolute left-0 top-0 opacity-60">
-                <path d="M42,60 C30,70 20,85 20,105 C20,125 35,140 55,140 C75,140 90,125 90,105 C90,85 75,70 55,70 C55,70 60,60 75,50 C60,45 50,50 42,60 Z" fill="#1a1a1a"/>
-                <path d="M112,60 C100,70 90,85 90,105 C90,125 105,140 125,140 C145,140 160,125 160,105 C160,85 145,70 125,70 C125,70 130,60 145,50 C130,45 120,50 112,60 Z" fill="#1a1a1a"/>
-              </svg>
-              {nicewords.data.words}
-              <footer class="mt-4 text-sm text-gray-600 not-italic">
-                — {nicewords.data.name}, {nicewords.data.workplace}
-              </footer>
+            <div class='bg-[hsl(60,29%,95%)] px-0 py-10 md:px-8 flex flex-col gap-5'>
+              <p class='font-display text-xl md:text-2xl text-black italic leading-snug m-0'>
+                {nicewords.data.words}
+              </p>
+              <div class='flex items-center gap-3 mt-auto pt-2 border-t border-black/8'>
+                <div class='w-8 h-8 rounded-full bg-black/10 flex-shrink-0 overflow-hidden'>
+                  <img
+                    src={nicewords.data.image}
+                    alt={nicewords.data.name}
+                    class='w-full h-full object-cover'
+                    loading='lazy'
+                  />
+                </div>
+                <div>
+                  <p class='text-sm font-primary font-medium text-black m-0 leading-tight'>{nicewords.data.name}</p>
+                  <p class='text-[11px] font-primary text-black/40 m-0'>{nicewords.data.workplace}</p>
+                </div>
+              </div>
             </div>
           ))}
         </div>
-      </article>  
+      </article>
     </section>
 
-    <section class='relative isolate py-20 mb-20'>
+    <!-- 05 · Contact -->
+    <section class='py-20 mb-16'>
       <article class='layout'>
-        <div class="flex flex-col justify-center items-center text-center gap-2 ">
-          <h1 class='font-display text-3xl md:text-4xl 2xl:text-4xl text-gradient-primary'>
-            Interested in what you see?
-          </h1>
+        <div class='flex flex-col md:flex-row md:items-end justify-between gap-10 md:gap-16'>
 
-          <GradientSubText className="text-l md:text-xl 2xl:text-xl">
-            I'm always open to new opportunities and collaborations. If you have any questions or need assistance with a project.
-          </GradientSubText>
+          <!-- Left: heading -->
+          <div class='flex-1'>
+            <p class='text-xs font-primary uppercase tracking-widest text-black/40 mb-3'>05 · Contact</p>
+            <h2 class='font-display text-4xl md:text-5xl lg:text-6xl text-black m-0 leading-tight'>
+              Open to interesting<br/>work and conversations.
+            </h2>
+            <p class='text-sm text-gray-500 mt-4 max-w-sm leading-relaxed m-0'>
+              Freelance, consulting, or just a good conversation about software and craft — I'm usually up for it.
+            </p>
+          </div>
 
-          <PrimaryButton
-            href="mailto:merta.bagus24@gmail.com"
-            text="Email me"
-            glowing={true}
-          />
+          <!-- Right: contact links -->
+          <div class='flex flex-col gap-0 min-w-[240px]'>
+            {[
+              { label: 'Email', href: 'mailto:merta.bagus24@gmail.com' },
+              { label: 'LinkedIn', href: 'https://linkedin.com/in/bagusmerta' },
+              { label: 'GitHub',   href: 'https://github.com/gusentanan' },
+            ].map(link => (
+              <a
+                href={link.href}
+                target={link.href.startsWith('mailto') ? undefined : '_blank'}
+                rel={link.href.startsWith('mailto') ? undefined : 'noopener noreferrer'}
+                class='group flex items-center justify-between py-3.5 border-b border-black/10 hover:border-black/40 transition-colors'
+              >
+                <span class='text-sm font-primary text-black'>{link.label}</span>
+                <span class='text-black/25 group-hover:text-black group-hover:translate-x-0.5 transition-all'>→</span>
+              </a>
+            ))}
+          </div>
+
         </div>
       </article>
     </section>
@@ -309,10 +341,5 @@ const topBookmarkGroups = selectedTags.map(tag => ({
     </section>
 
   </main>
-<style>
-  #projects-scroll::-webkit-scrollbar {
-    display: none;
-  }
-</style>
 
 </BaseLayout>

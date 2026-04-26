@@ -18,6 +18,7 @@ export default {
 				primary: ['AlbertSans', ...fontFamily.sans],
 				display: ['Garamond', ...fontFamily.serif],
 				code: ['DMMono', ...fontFamily.sans],
+				handwriting: ['Caveat', 'cursive'],
 			  },
 			  borderRadius: {
 				lg: 'var(--radius)',

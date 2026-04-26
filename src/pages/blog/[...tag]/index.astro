@@ -1,47 +1,190 @@
 ---
-import BlogEntryItem from "@components/features/blog/BlogEntryItem.astro";
-import TagFilter from "@components/ui/TagFilter.astro";
 import BaseLayout from "@layouts/BaseLayout.astro";
+import { getBlogCollection } from "utils/content";
 import { getBlogPostByTag, getBlogTags } from "utils/posts";
 import { getTitle } from "utils/title";
-import GradientSubText from "@components/ui/text/GradientSubText.astro";
-
+import { Image } from "astro:assets";
+import { getBlogPathName } from "utils/url";
 
 const allTags = await getBlogTags();
 
 export async function getStaticPaths() {
-	const tags = await getBlogTags()
-
-	return tags.map((tag) => ({
-		params: { tag },
-		props: { tag }
-	}))
+  const tags = await getBlogTags();
+  return tags.map((tag) => ({ params: { tag }, props: { tag } }));
 }
 
 const { tag } = Astro.props;
 const posts = await getBlogPostByTag(tag);
+const allBlogPosts = await getBlogCollection();
+const totalPosts = allBlogPosts.length;
+const sinceYear = Math.min(...allBlogPosts.map(p => p.data.date.getFullYear()));
+
+const tagCounts = allBlogPosts.reduce((acc, post) => {
+  post.data.tags.forEach(t => { acc[t] = (acc[t] || 0) + 1; });
+  return acc;
+}, {} as Record<string, number>);
+
+const shortDate = (date: Date) => {
+  const day = date.getDate();
+  const month = date.toLocaleString('en-US', { month: 'short' });
+  const year = date.getFullYear();
+  return `${day} ${month} ${year}`;
+};
 ---
 
 <BaseLayout title={getTitle('Blog')}>
-    <main>
-      <section>
-        <div class='layout py-32'>
-          <div class="flex flex-col justify-center items-center">
-            <h2 class='font-display text-5xl md:text-5xl text-gradient-primary leading-tight pb-2'>
-              My Blog
-            </h2>
-            
-            <GradientSubText className="text-center">
-              A collection of blog, related to programming and random thoughts.
-            </GradientSubText>
-            
-            <TagFilter tags={allTags} selectedTag={tag} baseUrl="blog" />
+  <main>
+
+    <!-- Hero header -->
+    <section class='pt-10 pb-10 text-center'>
+      <article class='layout'>
+        <p class='text-xs font-primary uppercase tracking-widest text-black/40 mb-4'>
+          Writing · {totalPosts} posts since {sinceYear}
+        </p>
+        <h1 class='font-display text-5xl md:text-7xl text-black m-0 leading-none mb-6'>
+          Notes, in public.
+        </h1>
+        <p class='text-base text-gray-500 max-w-md mx-auto leading-relaxed mb-8'>
+          Programming things, life things, and the occasional rant.
+        </p>
+
+        <!-- Search + Subscribe -->
+        <div class='flex items-center gap-3 max-w-lg mx-auto'>
+          <div class='flex-1 relative'>
+            <span class='absolute left-3.5 top-1/2 -translate-y-1/2 text-black/30 pointer-events-none'>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+              </svg>
+            </span>
+            <input
+              id="search-input"
+              type="text"
+              placeholder="Search posts..."
+              class='w-full pl-9 pr-4 py-2.5 rounded-full border border-black/15 bg-transparent font-primary text-sm focus:outline-none focus:border-black/40 transition-colors'
+            />
           </div>
-      
-          <ul class='mt-4 grid gap-4 sm:grid-cols-2 xl:grid-cols-2'>
-            {posts.map((blog) => <BlogEntryItem {...blog} />)}
-          </ul>
+          <a
+            href="mailto:merta.bagus24@gmail.com"
+            class='bg-black text-white font-primary text-sm font-medium px-5 py-2.5 rounded-full hover:bg-black/80 transition-colors whitespace-nowrap'
+          >
+            Subscribe
+          </a>
         </div>
-      </section>
-    </main>
+      </article>
+    </section>
+
+    <!-- Tag filter bar -->
+    <section>
+      <article class='layout border-b border-black/10'>
+        <div class='flex items-center justify-between'>
+          <div class='flex items-center'>
+            <a
+              href="/blog"
+              class='font-primary text-sm pb-3 pr-6 text-black/50 hover:text-black transition-colors border-b-2 border-transparent -mb-px'
+            >
+              All <span class='text-black/30 ml-0.5'>{totalPosts}</span>
+            </a>
+            {allTags.map(t => (
+              <a
+                href={`/blog/${t}`}
+                class={`font-primary text-sm pb-3 pr-6 border-b-2 -mb-px capitalize transition-colors ${
+                  t === tag
+                    ? 'font-semibold text-black border-black'
+                    : 'text-black/50 hover:text-black border-transparent'
+                }`}
+              >
+                {t} <span class={t === tag ? 'text-black/40 font-normal ml-0.5' : 'text-black/30 ml-0.5'}>{tagCounts[t]}</span>
+              </a>
+            ))}
+          </div>
+          <span id="post-count" class='text-sm font-primary text-black/40 pb-3'>{posts.length} posts</span>
+        </div>
+      </article>
+    </section>
+
+    <!-- Posts grid -->
+    <section class='py-12 pb-28'>
+      <article class='layout'>
+        <div id='posts-grid' class='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10'>
+          {posts.map(post => (
+            <a
+              href={getBlogPathName(post)}
+              class='group flex flex-col gap-0 post-card'
+              data-title={post.data.title.toLowerCase()}
+            >
+              <div class='overflow-hidden rounded-2xl aspect-[4/3]'>
+                <Image
+                  src={post.data.banner}
+                  alt={post.data.title}
+                  width={600}
+                  height={450}
+                  decoding='async'
+                  loading='lazy'
+                  class='w-full h-full object-cover opacity-0 transition-all duration-500 group-hover:scale-105'
+                  onload='this.style.opacity = 1'
+                />
+              </div>
+              <div class='pt-4 flex flex-col gap-2'>
+                <div class='flex items-center gap-2'>
+                  {post.data.tags[0] && (
+                    <span class='text-[11px] font-primary font-semibold uppercase tracking-widest border border-black/20 px-2 py-1 text-black/70'>
+                      {post.data.tags[0]}
+                    </span>
+                  )}
+                  <span class='text-sm font-primary text-black/40'>{post.data.readCount}</span>
+                </div>
+                <h3 class='font-display text-2xl text-black m-0 leading-tight group-hover:opacity-60 transition-opacity'>
+                  {post.data.title}
+                </h3>
+                <p class='text-sm text-gray-600 m-0 leading-relaxed line-clamp-2'>
+                  {post.data.description}
+                </p>
+                <p class='text-[11px] font-primary text-black/40 mt-1'>{shortDate(post.data.date)}</p>
+              </div>
+            </a>
+          ))}
+        </div>
+
+        {posts.length === 0 && (
+          <div class='text-center py-20'>
+            <p class='font-display text-2xl text-black/30'>No posts in this category.</p>
+          </div>
+        )}
+
+        <div id='no-results' class='hidden text-center py-20'>
+          <p class='font-display text-2xl text-black/30'>No posts found.</p>
+        </div>
+      </article>
+    </section>
+
+  </main>
 </BaseLayout>
+
+<script>
+  function initTagSearch() {
+    const input = document.getElementById('search-input') as HTMLInputElement | null;
+    const grid = document.getElementById('posts-grid');
+    const noResults = document.getElementById('no-results');
+    const postCount = document.getElementById('post-count');
+
+    if (!input) return;
+
+    input.addEventListener('input', () => {
+      const query = input.value.toLowerCase().trim();
+      const cards = grid?.querySelectorAll<HTMLElement>('.post-card') ?? ([] as HTMLElement[]);
+      let visible = 0;
+
+      cards.forEach(card => {
+        const title = card.dataset.title ?? '';
+        const match = !query || title.includes(query);
+        card.style.display = match ? '' : 'none';
+        if (match) visible++;
+      });
+
+      if (noResults) noResults.classList.toggle('hidden', visible > 0 || !query);
+      if (postCount) postCount.textContent = query ? `${visible} posts` : `${cards.length} posts`;
+    });
+  }
+
+  document.addEventListener('astro:page-load', initTagSearch);
+</script>

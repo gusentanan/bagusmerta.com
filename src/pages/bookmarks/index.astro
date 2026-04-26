@@ -1,41 +1,335 @@
 ---
-import BookmarkEntryItem from "@components/features/bookmark/BookmarkEntryItem.astro";
-import TagFilter from "@components/ui/TagFilter.astro";
 import BaseLayout from "@layouts/BaseLayout.astro";
 import { getBookMarkCollection } from "utils/content";
 import { getTitle } from "utils/title";
-import GradientSubText from "@components/ui/text/GradientSubText.astro";
 
-const allBookmark = await getBookMarkCollection();
-// Get all unique tags
-const allTags = [...new Set(allBookmark.flatMap(post => post.data.tags))];
+const allBookmarks = await getBookMarkCollection();
+const total = allBookmarks.length;
 
-const currentTag = 'All';
+const getDomain = (url: string) => {
+  try { return new URL(url).hostname.replace('www.', ''); } catch { return ''; }
+};
+
+const allTags = [...new Set(allBookmarks.flatMap(b => b.data.tags))].sort();
+const tagCounts = allBookmarks.reduce((acc, b) => {
+  b.data.tags.forEach(t => { acc[t] = (acc[t] || 0) + 1; });
+  return acc;
+}, {} as Record<string, number>);
+
+const categoryLabels: Record<string, string> = {
+  'software-engineering': 'Engineering',
+  'tips': 'Tips',
+  'design-system': 'Design',
+};
+
+const avatarColors: Record<string, string> = {
+  A:'bg-green-500', B:'bg-gray-800', C:'bg-emerald-500', D:'bg-blue-500',
+  E:'bg-purple-500', F:'bg-blue-400', G:'bg-orange-500', H:'bg-gray-500',
+  I:'bg-indigo-500', J:'bg-yellow-500', K:'bg-pink-500', L:'bg-blue-600',
+  M:'bg-purple-600', N:'bg-teal-500', O:'bg-orange-400', P:'bg-orange-500',
+  Q:'bg-red-400', R:'bg-red-500', S:'bg-cyan-500', T:'bg-orange-600',
+  U:'bg-violet-500', V:'bg-slate-500', W:'bg-green-600', X:'bg-red-600',
+  Y:'bg-yellow-600', Z:'bg-pink-600',
+};
+
+const getAvatarColor = (title: string) => {
+  const letter = title.charAt(0).toUpperCase();
+  return avatarColors[letter] ?? 'bg-gray-400';
+};
+
+const typeLabels: Record<string, string> = {
+  read: 'READ', tool: 'TOOL', book: 'BOOK', site: 'SITE',
+};
 ---
 
 <BaseLayout title={getTitle('Bookmarks')}>
-        <main>
-            <div class='layout py-32'>
-                <div class="flex flex-col justify-center items-center">
-                    <h2 class='font-display text-3xl md:text-5xl text-gradient-primary'>
-                        Bookmark List
-                    </h2>
+  <main class="pb-28">
 
-                    <GradientSubText className="text-center">
-                       A curated collection of insightful articles and blog posts I've enjoyed reading.
-                    </GradientSubText>
-        
-                    <TagFilter tags={allTags} selectedTag={currentTag} baseUrl="bookmarks" />
-                </div>
-                
-                <div class="mt-8 flex justify-center">
-                    <ul class='mt-4 flex flex-col gap-4'>
-                        {
-                            allBookmark.map((item) => <BookmarkEntryItem {...item} />)
-                        }
-                    </ul>
-                </div>
+    <!-- Header -->
+    <section class="pt-10 pb-10 text-center px-4">
+      <p class="text-xs font-primary uppercase tracking-widest text-black/40 mb-4">
+        {total} Bookmarks · Curated
+      </p>
+      <h1 class="font-display text-5xl md:text-6xl lg:text-7xl text-black m-0 leading-none mb-6">
+        Stuff I keep coming back to.
+      </h1>
+      <p class="text-base text-gray-500 max-w-lg mx-auto leading-relaxed mb-8">
+        Articles, tools, books, and sites I find myself recommending.<br/>Search to find one fast.
+      </p>
+
+      <!-- Search bar -->
+      <div class="relative max-w-lg mx-auto">
+        <span class="absolute left-4 top-1/2 -translate-y-1/2 text-black/30 pointer-events-none">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+          </svg>
+        </span>
+        <input
+          id="search-input"
+          type="text"
+          placeholder="Search bookmarks (try: 'css', 'essay', 'tool')…"
+          class="w-full pl-10 pr-20 py-3 rounded-full border border-black/15 bg-transparent font-primary text-sm focus:outline-none focus:border-black/40 transition-colors"
+        />
+        <span id="hit-count" class="absolute right-4 top-1/2 -translate-y-1/2 text-xs font-primary text-black/40">
+          {total} hits
+        </span>
+      </div>
+    </section>
+
+    <!-- Two-column layout -->
+    <div class="max-w-5xl mx-auto px-4 sm:px-6">
+      <div class="grid grid-cols-1 lg:grid-cols-[240px_1fr] gap-10 lg:gap-12 items-start">
+
+        <!-- Left sidebar -->
+        <aside class="lg:sticky lg:top-24 self-start flex flex-col gap-8">
+
+          <!-- Categories -->
+          <div>
+            <p class="text-[10px] font-primary uppercase tracking-widest text-black/35 mb-3">CATEGORIES</p>
+            <div class="flex flex-col gap-0.5">
+              <button
+                data-cat="all"
+                class="cat-btn active w-full flex items-center justify-between px-3 py-2.5 rounded-lg bg-black text-white text-sm font-primary transition-colors text-left border border-black"
+              >
+                <span>All</span>
+                <span class="text-white/50 text-xs">{total}</span>
+              </button>
+              {allTags.map(tag => (
+                <button
+                  data-cat={tag}
+                  class="cat-btn w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-sm font-primary text-black/60 hover:text-black hover:bg-black/5 transition-colors text-left border border-black/15 hover:border-black/30"
+                >
+                  <span>{categoryLabels[tag] ?? tag}</span>
+                  <span class="text-black/30 text-xs">{tagCounts[tag]}</span>
+                </button>
+              ))}
             </div>
-        </main>
+          </div>
+
+          <!-- Quick filter -->
+          <div>
+            <p class="text-[10px] font-primary uppercase tracking-widest text-black/35 mb-3">QUICK FILTER</p>
+            <div class="flex items-center gap-2 flex-wrap">
+              {(['read','tool','book','site'] as const).map(t => (
+                <button
+                  data-type={t}
+                  class="type-btn font-primary text-xs font-semibold uppercase tracking-widest border border-black/20 px-2.5 py-1 text-black/50 hover:text-black hover:border-black/50 transition-colors"
+                >
+                  {typeLabels[t]}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <!-- Meta -->
+          <div class="text-[11px] font-primary text-black/35 leading-relaxed">
+            <p class="m-0">Updated periodically</p>
+            <p class="m-0">Curated by hand</p>
+          </div>
+
+        </aside>
+
+        <!-- Right: bookmark list -->
+        <div>
+
+          <!-- List header -->
+          <div class="flex items-baseline justify-between mb-6 pb-4 border-b border-black/10">
+            <div class="flex items-baseline gap-2">
+              <span id="list-heading" class="font-display text-3xl text-black">All</span>
+              <span id="list-count" class="text-sm font-primary text-black/40">{total}</span>
+            </div>
+            <div class="flex items-center gap-3 text-xs font-primary text-black/40">
+              <button id="sort-newest" class="sort-btn hover:text-black transition-colors underline underline-offset-2">Newest ↓</button>
+              <span>·</span>
+              <button id="sort-az" class="sort-btn hover:text-black transition-colors">A–Z</button>
+            </div>
+          </div>
+
+          <!-- Bookmark rows -->
+          <div id="bookmark-list" class="flex flex-col">
+            {allBookmarks.map(bookmark => {
+              const letter = bookmark.data.title.charAt(0).toUpperCase();
+              const color = getAvatarColor(bookmark.data.title);
+              const domain = getDomain(bookmark.data.link);
+              const type = bookmark.data.type ?? 'read';
+              return (
+                <a
+                  href={bookmark.data.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="bookmark-row group flex items-start gap-4 py-4 border-b border-black/8 hover:bg-black/[0.02] -mx-3 px-3 rounded-lg transition-colors"
+                  data-tags={bookmark.data.tags.join(',')}
+                  data-type={type}
+                  data-title={bookmark.data.title.toLowerCase()}
+                  data-desc={bookmark.data.description.toLowerCase()}
+                  data-id={bookmark.data.id}
+                >
+                  <!-- Avatar -->
+                  <div class={`w-8 h-8 rounded-full flex-shrink-0 flex items-center justify-center text-white text-sm font-primary font-semibold leading-none ${color}`}>
+                    {letter}
+                  </div>
+
+                  <!-- Content -->
+                  <div class="flex-1 min-w-0">
+                    <div class="flex items-baseline gap-2 flex-wrap">
+                      <span class="font-primary font-medium text-black text-sm group-hover:underline underline-offset-2">
+                        {bookmark.data.title}
+                      </span>
+                      {domain && (
+                        <span class="text-[11px] font-primary text-black/35">{domain}</span>
+                      )}
+                    </div>
+                    <p class="text-xs text-gray-500 m-0 mt-0.5 leading-relaxed line-clamp-1">
+                      {bookmark.data.description}
+                    </p>
+                  </div>
+
+                  <!-- Type + year -->
+                  <div class="flex items-center gap-3 flex-shrink-0">
+                    <span class="text-[11px] font-primary font-semibold uppercase tracking-widest text-black/40 border border-black/15 px-2 py-0.5">
+                      {typeLabels[type]}
+                    </span>
+                    {bookmark.data.year && (
+                      <span class="text-xs font-primary text-black/30 w-8 text-right">{bookmark.data.year}</span>
+                    )}
+                  </div>
+                </a>
+              );
+            })}
+          </div>
+
+          <!-- Empty state -->
+          <div id="no-results" class="hidden text-center py-16">
+            <p class="font-display text-2xl text-black/30">Nothing found.</p>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </main>
 </BaseLayout>
 
+<style>
+  .border-black\/8 { border-color: rgba(0,0,0,0.08); }
+
+  .cat-btn.active {
+    background-color: black;
+    color: white;
+    border-color: black;
+  }
+  .cat-btn.active span { color: rgba(255,255,255,0.5); }
+
+  .type-btn.active {
+    background-color: black;
+    color: white;
+    border-color: black;
+  }
+
+  .sort-btn.active {
+    color: black;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+</style>
+
+<script>
+  function initBookmarks() {
+    const searchInput = document.getElementById('search-input') as HTMLInputElement | null;
+    const hitCount = document.getElementById('hit-count');
+    const listCount = document.getElementById('list-count');
+    const listHeading = document.getElementById('list-heading');
+    const noResults = document.getElementById('no-results');
+    const rows = document.querySelectorAll<HTMLElement>('.bookmark-row');
+
+    if (!searchInput) return;
+
+    let activeCategory = 'all';
+    let activeTypes = new Set<string>();
+    let sortMode: 'newest' | 'az' = 'newest';
+
+    function applyFilters() {
+      const query = searchInput!.value.toLowerCase().trim();
+      let visible = 0;
+
+      rows.forEach(row => {
+        const tags = row.dataset.tags?.split(',') ?? [];
+        const type = row.dataset.type ?? '';
+        const title = row.dataset.title ?? '';
+        const desc = row.dataset.desc ?? '';
+
+        const catMatch = activeCategory === 'all' || tags.includes(activeCategory);
+        const typeMatch = activeTypes.size === 0 || activeTypes.has(type);
+        const searchMatch = !query || title.includes(query) || desc.includes(query);
+
+        const show = catMatch && typeMatch && searchMatch;
+        row.style.display = show ? '' : 'none';
+        if (show) visible++;
+      });
+
+      if (hitCount) hitCount.textContent = `${visible} hits`;
+      if (listCount) listCount.textContent = String(visible);
+      if (noResults) noResults.classList.toggle('hidden', visible > 0);
+    }
+
+    function applySort() {
+      const list = document.getElementById('bookmark-list');
+      if (!list) return;
+      const items = [...list.querySelectorAll<HTMLElement>('.bookmark-row')];
+
+      items.sort((a, b) => {
+        if (sortMode === 'az') {
+          return (a.dataset.title ?? '').localeCompare(b.dataset.title ?? '');
+        }
+        return parseInt(b.dataset.id ?? '0') - parseInt(a.dataset.id ?? '0');
+      });
+      items.forEach(el => list.appendChild(el));
+    }
+
+    // Category buttons
+    document.querySelectorAll<HTMLButtonElement>('.cat-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        activeCategory = btn.dataset.cat ?? 'all';
+        document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const label = btn.querySelector('span:first-child')?.textContent ?? 'All';
+        if (listHeading) listHeading.textContent = label;
+        applyFilters();
+      });
+    });
+
+    // Type pills
+    document.querySelectorAll<HTMLButtonElement>('.type-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const t = btn.dataset.type ?? '';
+        if (activeTypes.has(t)) {
+          activeTypes.delete(t);
+          btn.classList.remove('active');
+        } else {
+          activeTypes.add(t);
+          btn.classList.add('active');
+        }
+        applyFilters();
+      });
+    });
+
+    searchInput.addEventListener('input', applyFilters);
+
+    document.getElementById('sort-newest')?.addEventListener('click', () => {
+      sortMode = 'newest';
+      document.getElementById('sort-newest')?.classList.add('active');
+      document.getElementById('sort-az')?.classList.remove('active');
+      applySort();
+    });
+    document.getElementById('sort-az')?.addEventListener('click', () => {
+      sortMode = 'az';
+      document.getElementById('sort-az')?.classList.add('active');
+      document.getElementById('sort-newest')?.classList.remove('active');
+      applySort();
+    });
+
+    document.getElementById('sort-newest')?.classList.add('active');
+  }
+
+  document.addEventListener('astro:page-load', initBookmarks);
+</script>

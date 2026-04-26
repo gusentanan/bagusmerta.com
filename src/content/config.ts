@@ -12,7 +12,11 @@ const projectCollection = defineCollection({
 		  }),
 		link: z.string(),
 		tags: z.array(z.string()),
-		createdDate: z.string().transform((string) => new Date(string))
+		createdDate: z.string().transform((string) => new Date(string)),
+		status: z.enum(['live', 'sunset', 'archived']).optional().default('archived'),
+		meta: z.string().optional(),
+		role: z.string().optional(),
+		category: z.array(z.string()).optional().default([]),
 	})
 });
 
@@ -38,6 +42,8 @@ const bookmarkCollection = defineCollection({
 		description: z.string(),
 		link: z.string(),
 		tags: z.array(z.string()),
+		type: z.enum(['read', 'tool', 'book', 'site']).optional().default('read'),
+		year: z.number().optional(),
 	})
 });
 

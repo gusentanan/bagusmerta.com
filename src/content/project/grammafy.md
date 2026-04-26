@@ -1,11 +1,15 @@
 ---
 draft: false
 title: "Grammafy"
-description: "Grammar correction chat app using Generative AI"
+description: "Grammar correction chat app powered by Gemini. Real-time corrections, conversational UI, deployed to Play Store."
 image: "./images/grammafy/grammafy.png"
 link: "https://github.com/gusentanan/grammafy.git"
-tags: [flutter, github]
+tags: [flutter, genai]
 createdDate: "2025-02-01"
+status: "live"
+meta: "Solo · Design + build"
+role: "Solo · Design + Build"
+category: [mobile, ai/ml]
 ---
 
 ### Short Explanation

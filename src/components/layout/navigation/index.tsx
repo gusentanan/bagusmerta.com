@@ -27,24 +27,44 @@ export function Navbar() {
   return (
     <>
       {/* ── Desktop nav ── */}
-      <nav className="fixed top-0 left-0 right-0 z-50 h-20 px-4 sm:px-10 bg-[hsl(60,29%,95%)]">
-        {/* Desktop: Blog | B | Projects */}
-        <div className="hidden sm:flex h-full items-center justify-center gap-10">
-          <a href="/blog" className="text-sm font-medium text-foreground hover:opacity-60 transition-opacity">
-            Blog
-          </a>
-          <a href="/" className="w-12 h-12 bg-black flex items-center justify-center flex-shrink-0">
-            <span className="text-white text-xl font-bold leading-none">B</span>
-          </a>
-          <a href="/projects" className="text-sm font-medium text-foreground hover:opacity-60 transition-opacity">
-            Projects
-          </a>
+      <nav className="fixed top-0 left-0 right-0 z-50 h-20 px-8 bg-[hsl(60,29%,95%)]">
+        {/* Desktop: Home | Projects | [B] | Blog | Bookmarks + ⌘K */}
+        <div className="hidden sm:flex h-full items-center">
+          {/* Left flex spacer */}
+          <div className="flex-1" />
+
+          {/* Centered links */}
+          <div className="flex items-center gap-8">
+            <a href="/" className="text-sm font-medium text-black hover:opacity-60 transition-opacity">
+              Home
+            </a>
+            <a href="/projects" className="text-sm font-medium text-black hover:opacity-60 transition-opacity">
+              Projects
+            </a>
+            <a href="/" className="w-10 h-10 bg-black rounded-lg flex items-center justify-center flex-shrink-0">
+              <span className="text-white text-lg font-bold leading-none font-display">B</span>
+            </a>
+            <a href="/blog" className="text-sm font-medium text-black hover:opacity-60 transition-opacity">
+              Blog
+            </a>
+            <a href="/bookmarks" className="text-sm font-medium text-black hover:opacity-60 transition-opacity">
+              Bookmarks
+            </a>
+          </div>
+
+          {/* Right: ⌘K hint */}
+          <div className="flex-1 flex justify-end">
+            <div className="flex items-center gap-0.5 text-xs text-black/40 border border-black/15 rounded px-2 py-1 font-primary">
+              <span>⌘</span>
+              <span>K</span>
+            </div>
+          </div>
         </div>
 
         {/* Mobile: centered B only */}
         <div className="flex sm:hidden h-full items-center justify-center">
-          <a href="/" className="w-12 h-12 bg-black flex items-center justify-center flex-shrink-0">
-            <span className="text-white text-xl font-bold leading-none">B</span>
+          <a href="/" className="w-10 h-10 bg-black rounded-lg flex items-center justify-center flex-shrink-0">
+            <span className="text-white text-lg font-bold leading-none font-display">B</span>
           </a>
         </div>
       </nav>

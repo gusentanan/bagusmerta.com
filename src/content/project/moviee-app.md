@@ -1,11 +1,15 @@
 ---
 draft: false
 title: "Moviee"
-description: "Movie Browsing platform built using modern Kotlin, emphasizing  Clean Architecture"
+description: "Movie browsing platform built with modern Kotlin, emphasizing clean architecture. A teaching repo turned into a real app."
 image: "./images/moviee/Moviee.jpg"
 link: "https://github.com/gusentanan/moviee"
-tags: [kotlin, github, android]
+tags: [kotlin, "clean arch"]
 createdDate: "2023-02-12"
+status: "live"
+meta: "Solo · Open source"
+role: "Solo · Open source"
+category: [mobile, "open source"]
 ---
 
 ### Short explanation

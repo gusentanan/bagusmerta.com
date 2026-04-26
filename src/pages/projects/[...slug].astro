@@ -2,20 +2,28 @@
 import BaseLayout from "@layouts/BaseLayout.astro";
 import { Image } from "astro:assets";
 import { getCollection } from "astro:content";
-import { formatDate } from "utils/time";
 import { ImageEnhancer } from "@components/ui/ImageEnhancer";
 
 export async function getStaticPaths() {
   const projectEntries = await getCollection('project');
-  const paths = projectEntries.map((entry) => ({
+  return projectEntries.map((entry) => ({
     params: { slug: entry.slug },
     props: { entry },
   }));
-  return paths;
 }
 
 const { entry } = Astro.props;
-const { Content } = await entry.render();
+const { Content, headings } = await entry.render();
+
+const tocHeadings = headings.filter(h => h.depth <= 3);
+const stat = entry.data.meta?.split(' · ').pop();
+
+const statusConfig: Record<string, { dot: string; label: string }> = {
+  live:     { dot: 'bg-green-400',  label: 'Live' },
+  sunset:   { dot: 'bg-amber-400',  label: 'Sunset' },
+  archived: { dot: 'bg-gray-400',   label: 'Archived' },
+};
+const s = statusConfig[entry.data.status ?? 'archived'];
 ---
 
 <BaseLayout
@@ -23,53 +31,230 @@ const { Content } = await entry.render();
   description={entry.data.description}
   banner={entry.data.image.src}
 >
-  <main class="max-w-4xl mx-auto px-6 md:px-8 pb-20">
-    <!-- Breadcrumb -->
-    <nav class="flex items-center gap-2 text-sm text-foreground/50 pt-8 pb-6">
-      <a href="/projects" class="hover:text-foreground transition-colors">All Projects</a>
-      <span>&rsaquo;</span>
-      <span class="capitalize">{entry.data.tags[0]}</span>
-    </nav>
+  <main class="pb-28">
 
-    <!-- Title -->
-    <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground leading-tight tracking-tight mb-4">
-      {entry.data.title}
-    </h1>
+    <!-- Unified header + image + metadata wrapper (same padding context = aligned edges) -->
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 pt-16 pb-12">
 
-    <!-- Meta -->
-    <p class="text-sm text-foreground/50 mb-8">
-      {formatDate(entry.data.createdDate)}
-      {entry.data.link && (
-        <>
-          <span class="mx-2">&middot;</span>
-          <a href={entry.data.link} target="_blank" rel="noopener noreferrer" class="font-semibold text-foreground hover:underline">
-            Repository ↗
-          </a>
-        </>
-      )}
-    </p>
+      <nav class="flex items-center gap-2 text-sm font-primary text-black/40 mb-6">
+        <a href="/projects" class="hover:text-black transition-colors">Projects</a>
+        <span>/</span>
+        <span class="text-black font-medium">{entry.data.title}</span>
+      </nav>
 
-    <!-- Banner Image -->
-    <div class="w-full mb-10 rounded-xl overflow-hidden">
-      <Image
-        class="w-full h-auto object-cover opacity-0 transition-opacity duration-700 ease-out"
-        src={entry.data.image}
-        width={1200}
-        height={630}
-        alt="Project banner image"
-        decoding="async"
-        loading="eager"
-        onload="this.style.opacity = 1"
-      />
+      <h1 class="font-display text-5xl md:text-6xl lg:text-7xl text-black m-0 leading-none mb-4">
+        {entry.data.title}
+      </h1>
+      <p class="text-base text-gray-500 max-w-xl leading-relaxed m-0 mb-8">
+        {entry.data.description}
+      </p>
+
+      <!-- Cover image — no extra padding, already inside the wrapper -->
+      <div class="relative overflow-hidden rounded-2xl">
+        <Image
+          src={entry.data.image}
+          width={1200}
+          height={630}
+          alt={entry.data.title}
+          decoding="async"
+          loading="eager"
+          class="w-full h-auto object-cover opacity-0 transition-opacity duration-700"
+          onload="this.style.opacity = 1"
+        />
+        <div class="absolute bottom-4 left-5">
+          <span class="text-[11px] font-primary uppercase tracking-widest text-white/50">
+            COVER → {entry.data.title.toUpperCase()}
+          </span>
+        </div>
+      </div>
+
+      <!-- 4-column metadata row -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-6 border-t border-black/10 pt-6 mt-8">
+        <div>
+          <p class="text-[10px] font-primary uppercase tracking-widest text-black/35 mb-1">YEAR</p>
+          <p class="text-sm font-primary text-black m-0">{entry.data.createdDate.getFullYear()}</p>
+        </div>
+        <div>
+          <p class="text-[10px] font-primary uppercase tracking-widest text-black/35 mb-1">ROLE</p>
+          <p class="text-sm font-primary text-black m-0">{entry.data.role ?? '—'}</p>
+        </div>
+        <div>
+          <p class="text-[10px] font-primary uppercase tracking-widest text-black/35 mb-1">STACK</p>
+          <p class="text-sm font-primary text-black m-0">{entry.data.tags.map(t => t.charAt(0).toUpperCase() + t.slice(1)).join(' · ')}</p>
+        </div>
+        <div>
+          <p class="text-[10px] font-primary uppercase tracking-widest text-black/35 mb-1">STATUS</p>
+          <p class="text-sm font-primary text-black m-0 flex items-center gap-1.5">
+            <span class={`w-1.5 h-1.5 rounded-full flex-shrink-0 ${s.dot}`}></span>
+            {s.label}{stat ? ` · ${stat}` : ''}
+          </p>
+        </div>
+      </div>
+
     </div>
 
-    <!-- Content -->
-    <article class="animate-fade-in-up-delay-2">
-      <ImageEnhancer client:load>
-        <div class="prose prose-lg max-w-none">
-          <Content />
-        </div>
-      </ImageEnhancer>
-    </article>
+    <!-- Three-column body — wider container for comfortable reading -->
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <div class="grid grid-cols-1 lg:grid-cols-[160px_1fr_220px] gap-10 lg:gap-8 items-start">
+
+        <!-- Left: TOC -->
+        <aside class="hidden lg:block sticky top-24 self-start">
+          <p class="text-[10px] font-primary uppercase tracking-widest text-black/35 mb-3">ON THIS PAGE</p>
+          <nav class="flex flex-col">
+            {tocHeadings.map((h, i) => (
+              <a
+                href={`#${h.slug}`}
+                data-toc={h.slug}
+                class={`toc-link text-sm font-primary border-l-2 pl-3 py-1 leading-snug transition-colors ${
+                  h.depth === 2
+                    ? 'text-black/50 hover:text-black border-transparent hover:border-black/25'
+                    : 'text-black/35 hover:text-black/70 border-transparent pl-5 text-xs'
+                }`}
+              >
+                {h.depth === 2 && (
+                  <span class="text-black/30 mr-1">{String(i + 1).padStart(2, '0')} ·</span>
+                )}
+                {h.text.replace(/ —$/, '')}
+              </a>
+            ))}
+          </nav>
+        </aside>
+
+        <!-- Center: prose content -->
+        <article class="project-prose min-w-0">
+          <div class="prose prose-lg max-w-none">
+            <ImageEnhancer client:load>
+              <Content />
+            </ImageEnhancer>
+          </div>
+        </article>
+
+        <!-- Right: actions + stack + share -->
+        <aside class="hidden lg:flex flex-col gap-8 self-start pt-1">
+
+          <!-- Action buttons -->
+          <div class="flex flex-col gap-2">
+            <a
+              href={entry.data.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="flex items-center justify-between bg-black text-white font-primary text-sm font-medium px-4 py-3 rounded-xl hover:bg-black/80 transition-colors"
+            >
+              <span>Live demo</span>
+              <span class="text-white/60">↗</span>
+            </a>
+            <a
+              href={entry.data.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="flex items-center justify-between border border-black/15 text-black font-primary text-sm px-4 py-3 rounded-xl hover:border-black/40 transition-colors"
+            >
+              <span>View repo</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" class="text-black/40">
+                <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/>
+              </svg>
+            </a>
+          </div>
+
+          <!-- Stack -->
+          <div>
+            <p class="text-[10px] font-primary uppercase tracking-widest text-black/35 mb-3">STACK</p>
+            <div class="flex flex-col gap-1">
+              {entry.data.tags.map(tag => (
+                <div class="flex items-center justify-between py-1 border-b border-black/8 last:border-b-0">
+                  <span class="text-sm font-primary font-medium text-black capitalize">{tag}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <!-- Share -->
+          <div>
+            <p class="text-[10px] font-primary uppercase tracking-widest text-black/35 mb-3">SHARE</p>
+            <div class="flex items-center gap-2">
+              <a
+                href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(entry.data.title)}&url=${encodeURIComponent(`https://bagusmerta.com/projects/${entry.slug}`)}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="flex-1 text-center border border-black/15 text-black font-primary text-xs font-medium px-3 py-2 rounded-lg hover:border-black/40 transition-colors"
+              >
+                Twitter
+              </a>
+              <div
+                id="copy-btn"
+                role="button"
+                tabindex="0"
+                class="flex-1 text-center border border-black/15 text-black font-primary text-xs font-medium px-3 py-2 rounded-lg hover:border-black/40 transition-colors cursor-pointer select-none"
+              >
+                Copy
+              </div>
+            </div>
+          </div>
+
+        </aside>
+
+      </div>
+    </div>
+
   </main>
 </BaseLayout>
+
+<style>
+  /* Serif headings in project prose */
+  .project-prose .prose h2,
+  .project-prose .prose h3 {
+    font-family: 'Garamond', Georgia, serif;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+  }
+
+  /* Neutral blockquote */
+  .project-prose .prose blockquote {
+    border-left-color: rgba(0, 0, 0, 0.2);
+    background: transparent;
+    border-radius: 0;
+    font-style: italic;
+    color: #374151;
+  }
+
+  /* Active TOC link */
+  .toc-link.active {
+    color: black;
+    border-left-color: black;
+  }
+
+  .border-black\/8 {
+    border-color: rgba(0, 0, 0, 0.08);
+  }
+</style>
+
+<script>
+  /* ── TOC active state ── */
+  const tocLinks = document.querySelectorAll('.toc-link');
+  const headingEls = document.querySelectorAll('article h2[id], article h3[id]');
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          tocLinks.forEach(l => l.classList.remove('active'));
+          document.querySelector(`.toc-link[data-toc="${entry.target.id}"]`)?.classList.add('active');
+        }
+      });
+    },
+    { rootMargin: '-20% 0px -70% 0px' }
+  );
+  headingEls.forEach(el => observer.observe(el));
+
+  /* ── Copy link ── */
+  const copyBtn = document.getElementById('copy-btn');
+  copyBtn?.addEventListener('click', () => {
+    navigator.clipboard.writeText(window.location.href).then(() => {
+      if (copyBtn) {
+        const original = copyBtn.textContent;
+        copyBtn.textContent = 'Copied!';
+        setTimeout(() => { copyBtn.textContent = original; }, 1500);
+      }
+    });
+  });
+</script>

@@ -1,12 +1,15 @@
 ---
-
 draft: false
 title: "Inspix Technologies"
-description: "Helped companies and government in face-mask regulation during Covid period."
+description: "Helped governments and companies regulate face-mask compliance during the Covid period using computer vision."
 image: "./images/inspix/inspix.jpg"
 link: "https://github.com/Inspix-Technologies"
-tags: ['react']
+tags: [react, cv]
 createdDate: "2021-08-16"
+status: "sunset"
+meta: "Product manager · Front end engineer · 4 deployments"
+role: "Product manager"
+category: [web, "client work"]
 ---
 Back in 2021, I participated in a hackathon, won first place, and received incubation from a local incubator. Our startup was Inspix Technologies. Our product was an AI system that could detect face-mask usage and identify people not wearing masks or wearing them improperly.  
 

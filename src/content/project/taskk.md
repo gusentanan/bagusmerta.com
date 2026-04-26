@@ -1,12 +1,15 @@
 ---
-
 draft: false
 title: "Taskk"
-description: "To do's app with various features"
+description: "To-do app for Android with task prioritization, categories, due dates, and notifications."
 image: "./images/taskk/Taskk.jpg"
 link: "https://github.com/gusentanan/taskk.git"
-tags: [kotlin, github, android]
+tags: [kotlin, android]
 createdDate: "2023-04-14"
+status: "archived"
+meta: "Solo · Open source"
+role: "Solo · Open source"
+category: [mobile, "open source"]
 ---
 
 ### Short explanation

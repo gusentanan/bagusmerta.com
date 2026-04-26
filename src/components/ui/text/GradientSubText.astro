@@ -1,9 +1,0 @@
----
-interface Props {
-  className?: string;
-}
-const { className = "" } = Astro.props;
----
-<p class={`text-black ${className}`}>
-  <slot />
-</p>
