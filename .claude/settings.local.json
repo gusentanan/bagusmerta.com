@@ -12,7 +12,8 @@
       "WebFetch(domain:a16z.com)",
       "WebFetch(domain:lynettebye.com)",
       "WebFetch(domain:www.lesswrong.com)",
-      "Bash(pnpm dev:*)"
+      "Bash(pnpm dev:*)",
+      "Read(//Users/bagusmerta/.claude/token-optimizer/**)"
     ],
     "deny": []
   }

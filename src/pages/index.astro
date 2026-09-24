@@ -1,345 +1,72 @@
 ---
-import ProjectCard from "@components/features/project/ProjectCard.astro";
 import BaseLayout from "@layouts/BaseLayout.astro";
-import { getBlogCollection, getNicewordsCollection, getProjectCollection } from "utils/content";
+import { Icon } from "astro-icon/components";
 import { getTitle } from "utils/title";
-import { Image } from "astro:assets";
-import { getBlogPathName } from "utils/url";
 
-const allBlogPosts = await getBlogCollection();
-const allProject = (await getProjectCollection()).filter(p => p.slug !== 'react-projects');
-const allNicewords = await getNicewordsCollection();
-
-const shortDate = (date: Date) => {
-  const day = date.getDate();
-  const month = date.toLocaleString('en-US', { month: 'short' });
-  const year = date.getFullYear();
-  return `${day} ${month} ${year}`;
-};
+const links = [
+  { label: "about", href: "/about" },
+  { label: "selected work", href: "/projects" },
+  { label: "writing", href: "/blog" },
+  { label: "bookmarks", href: "/bookmarks" },
+];
 ---
 
-<BaseLayout title={getTitle('Home')}>
-  <main>
-   
-      <section class='relative isolate min-h-main -mt-20 flex items-center'>
-        <article class='layout py-24'>
+<BaseLayout
+  title={getTitle("Home")}
+  description="Bagus Merta is a product engineer in Bali building thoughtful mobile and web software."
+>
+  <main class="min-h-screen bg-[#080808]">
+    <section class="reading-shell py-12 md:py-20">
+      <h1 class="mb-6 text-xl font-semibold tracking-[-0.02em] text-ink md:text-2xl">
+        Bagus Merta. 良い
+      </h1>
 
-          <!-- Status Badge -->
-          <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-gray-300 text-sm font-primary mb-10">
-            <span class="relative flex h-2.5 w-2.5 flex-shrink-0">
-              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-50"></span>
-              <span class="relative inline-flex h-2.5 w-2.5 rounded-full bg-green-500"></span>
-            </span>
-            <span class="text-gray-500">Available · Q3 2026 · Bali · GMT+8</span>
-          </div>
+      <div class="max-w-[40rem] space-y-4 text-[15px] leading-7 text-[#d2d0c9] md:text-base">
+        <p class="m-0 text-inherit">
+          Product engineer.
+        </p>
+        <p class="m-0 text-inherit">
+          Currently a mobile engineer at
+          <a href="https://wineadore.com" target="_blank" rel="noopener noreferrer" class="quiet-link">Wine Adore</a>,
+          building the mobile experience for wine lovers.
+        </p>
+      </div>
 
-          <!-- Two-column layout -->
-          <div class="grid grid-cols-1 md:grid-cols-[1fr_auto] gap-12 md:gap-16 items-center">
-
-            <!-- Left: Text content -->
-            <div>
-              <div class="font-handwriting text-2xl md:text-3xl text-black/60 mb-3">Hi, I'm Bagus —</div>
-              <h1 class="font-display text-5xl md:text-6xl lg:text-7xl leading-[1.05] text-black m-0">
-                Product engineer<br />
-                who ships <em class="italic font-thin">thoughtful</em><br />
-                software.
-              </h1>
-
-              <div class="font-primary text-base text-gray-600 mt-6 max-w-lg leading-relaxed">
-                I care about the product first, the stack second. For the last six years I've built mobile and web apps end-to-end. I write about the craft on the side.
-              </div>
-
-              <!-- CTA Buttons -->
-              <div class="flex items-center gap-3 mt-8 flex-wrap">
-                <a
-                  href="/projects"
-                  class="inline-flex items-center gap-2 bg-black text-white font-primary text-sm font-medium px-6 py-3 rounded-full hover:bg-black/80 transition-colors"
-                >
-                  See selected work →
-                </a>
-                <a
-                  href="/blog"
-                  class="inline-flex items-center font-primary text-sm px-6 py-3 rounded-full border border-black/20 hover:border-black/50 transition-colors text-black"
-                >
-                  Read the blog
-                </a>
-              </div>
-
-              <!-- Social Links -->
-              <div class="flex items-center gap-x-4 gap-y-1 mt-5 text-sm font-primary text-black/40 flex-wrap">
-                <span>Find me:</span>
-                <a href="https://twitter.com/@bagusmertasntn" target="_blank" rel="noopener noreferrer" class="underline underline-offset-2 decoration-black/20 hover:text-black hover:decoration-black/50 transition-colors">Twitter</a>
-                <a href="https://github.com/gusentanan" target="_blank" rel="noopener noreferrer" class="underline underline-offset-2 decoration-black/20 hover:text-black hover:decoration-black/50 transition-colors">GitHub</a>
-                <a href="https://linkedin.com/in/bagusmerta" target="_blank" rel="noopener noreferrer" class="underline underline-offset-2 decoration-black/20 hover:text-black hover:decoration-black/50 transition-colors">LinkedIn</a>
-                <a href="mailto:merta.bagus24@gmail.com" class="underline underline-offset-2 decoration-black/20 hover:text-black hover:decoration-black/50 transition-colors">Email</a>
-              </div>
-            </div>
-
-            <!-- Right: Portrait card (hidden on mobile) -->
-            <div class="hidden md:block w-64 lg:w-72 xl:w-80 flex-shrink-0">
-              <div class="relative rounded-2xl overflow-hidden" style="aspect-ratio: 3/4;">
-                <Image
-                  src="/images/avatar.jpg"
-                  alt="Bagus Merta"
-                  width={400}
-                  height={533}
-                  class="w-full h-full object-cover"
-                  loading="eager"
-                />
-                <div class="absolute inset-0 bg-gradient-to-b from-[#b8965a]/40 to-[#3d2810]/70 mix-blend-multiply"></div>
-                <div class="absolute bottom-4 left-4 text-[10px] tracking-[0.2em] text-[#d4c4a0] font-primary">
-                  PHOTO · PORTRAIT
-                </div>
-              </div>
-            </div>
-
-          </div>
-        </article>
-      </section>
-
-   
-    
-
-    <section class='relative isolate py-20' id='intro'>
-      <article class='layout'>
-        <!-- Section header -->
-        <div class='flex items-end justify-between mb-4'>
-          <div>
-            <p class='text-xs font-primary uppercase tracking-widest text-black/40 mb-3'>01 · Selected Work</p>
-            <h2 class='font-display text-4xl md:text-5xl text-black m-0 leading-none'>
-              Things I'm proud of.
-            </h2>
-          </div>
-          <a
-            href="/projects"
-            class='text-[11px] font-primary font-semibold uppercase tracking-widest text-black hover:opacity-50 transition-opacity whitespace-nowrap pb-1'
-          >
-            <span class='hidden sm:inline'>ALL PROJECTS </span>→
+      <div class="relative mt-9">
+        <img
+          src="/images/new-web-assets/home.jpg"
+          alt="A lakeside landscape at dusk"
+          width="1400"
+          height="592"
+          loading="eager"
+          class="aspect-[2/1] w-full object-cover object-center"
+        />
+        <div class="pointer-events-none absolute inset-0 bg-black/10"></div>
+        <div class="absolute right-4 top-4 flex items-center gap-4 text-[28px] text-white/70 md:right-5 md:top-5">
+          <a class="pointer-events-auto transition-colors hover:text-white" href="https://github.com/gusentanan" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+            <Icon name="ri:github-line" aria-hidden="true" />
+          </a>
+          <a class="pointer-events-auto transition-colors hover:text-white" href="https://linkedin.com/in/bagusmerta" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+            <Icon name="ri:linkedin-line" aria-hidden="true" />
+          </a>
+          <a class="pointer-events-auto transition-colors hover:text-white" href="mailto:merta.bagus24@gmail.com" aria-label="Email">
+            <Icon name="ri:mail-line" aria-hidden="true" />
           </a>
         </div>
+      </div>
 
-        <!-- Divider -->
-        <hr class='border-black/10 mt-6 mb-10' />
-
-        <!-- Project cards grid -->
-        <div class='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10'>
-          {allProject.slice(0, 3).map(project => <ProjectCard {...project} />)}
-        </div>
-      </article>
-    </section>
-    
-    <section class='py-20'>
-      <article class='layout'>
-
-        <!-- Section header -->
-        <div class='flex items-end justify-between mb-4'>
-          <div>
-            <p class='text-xs font-primary uppercase tracking-widest text-black/40 mb-3'>02 · Writing</p>
-            <h2 class='font-display text-4xl md:text-5xl text-black m-0 leading-none'>
-              Notes on the craft.
-            </h2>
-          </div>
-          <a
-            href="/blog"
-            class='text-[11px] font-primary font-semibold uppercase tracking-widest text-black hover:opacity-50 transition-opacity whitespace-nowrap pb-1'
-          >
-            <span class='hidden sm:inline'>ALL POSTS </span>→
-          </a>
-        </div>
-
-        <!-- Divider -->
-        <hr class='border-black/10 mt-6 mb-10' />
-
-        <!-- Featured + sidebar layout -->
-        <div class='flex flex-col lg:grid lg:grid-cols-[1fr_360px] gap-10 lg:gap-14 items-start'>
-
-          <!-- Left: Featured post -->
-          {allBlogPosts.slice(0, 1).map(post => (
-            <a href={getBlogPathName(post)} class='group flex flex-col gap-4 w-full'>
-              <div class='overflow-hidden rounded-2xl w-full aspect-[16/10]'>
-                <Image
-                  src={post.data.banner}
-                  alt={post.data.title}
-                  width={800}
-                  height={500}
-                  decoding='async'
-                  loading='lazy'
-                  class='w-full h-full object-cover opacity-0 transition-all duration-500 group-hover:scale-105'
-                  onload='this.style.opacity = 1'
-                />
-              </div>
-              <div class='flex flex-col gap-2'>
-                <div class='flex items-center gap-3'>
-                  <span class='bg-black text-white text-[11px] font-primary font-semibold uppercase tracking-widest px-2 py-1'>FEATURED</span>
-                  <span class='text-sm font-primary text-black/40'>{post.data.readCount} · {shortDate(post.data.date)}</span>
-                </div>
-                <h3 class='font-display text-3xl md:text-4xl text-black m-0 leading-tight group-hover:opacity-60 transition-opacity'>
-                  {post.data.title}
-                </h3>
-                <p class='text-sm text-gray-600 m-0 leading-relaxed'>{post.data.description}</p>
-              </div>
-            </a>
+      <nav class="mt-10" aria-label="Explore Bagus Merta">
+        <ul class="flex flex-col gap-4">
+          {links.map(link => (
+            <li><a class="index-link" href={link.href}>{link.label}</a></li>
           ))}
+        </ul>
+      </nav>
 
-          <!-- Right: sidebar list -->
-          <div class='w-full flex flex-col'>
-            {allBlogPosts.slice(1, 4).map(post => (
-              <a
-                href={getBlogPathName(post)}
-                class='group flex items-start gap-4 py-6 border-b border-black/10 last:border-b-0 first:pt-0'
-              >
-                <div class='overflow-hidden rounded-xl flex-shrink-0 w-[88px] h-[68px]'>
-                  <Image
-                    src={post.data.banner}
-                    alt={post.data.title}
-                    width={200}
-                    height={160}
-                    decoding='async'
-                    loading='lazy'
-                    class='w-full h-full object-cover opacity-0 transition-all duration-300 group-hover:scale-105'
-                    onload='this.style.opacity = 1'
-                  />
-                </div>
-                <div class='flex flex-col gap-1'>
-                  <p class='text-[11px] font-primary uppercase tracking-widest text-black/40 m-0'>
-                    {post.data.tags[0]} · {post.data.readCount} · {shortDate(post.data.date)}
-                  </p>
-                  <h4 class='font-display text-xl text-black m-0 leading-snug group-hover:opacity-60 transition-opacity'>
-                    {post.data.title}
-                  </h4>
-                </div>
-              </a>
-            ))}
-          </div>
-
-        </div>
-      </article>
+      <div class="mt-16 flex items-center justify-between border-t border-line pt-5 font-code text-[10px] uppercase tracking-[0.12em] text-faint">
+        <span>Bali, Indonesia · GMT+8</span>
+        <a href="mailto:merta.bagus24@gmail.com" class="transition-colors hover:text-ink">Say hello ↗</a>
+      </div>
     </section>
-
-    <!-- 03 · Now -->
-    <section class='py-20'>
-      <article class='layout'>
-        <div class='flex items-end justify-between mb-4'>
-          <div>
-            <p class='text-xs font-primary uppercase tracking-widest text-black/40 mb-3'>03 · Now</p>
-            <h2 class='font-display text-4xl md:text-5xl text-black m-0 leading-none'>
-              What I'm doing.
-            </h2>
-          </div>
-        </div>
-        <hr class='border-black/10 mt-6 mb-10' />
-
-        <div class='grid grid-cols-1 sm:grid-cols-3 gap-8 md:gap-14'>
-          <div class='flex flex-col gap-3'>
-            <p class='text-[10px] font-primary uppercase tracking-widest text-black/35 m-0'>WORK</p>
-            <p class='text-sm text-gray-600 leading-relaxed m-0'>
-              Mobile engineer at <a href="https://shop.wineadore.com" target="_blank" rel="noopener noreferrer" class="text-black underline decoration-black/20 underline-offset-2 hover:decoration-black transition-colors">WineAdore</a> — building the mobile experience for wine lovers.
-            </p>
-          </div>
-          <div class='flex flex-col gap-3'>
-            <p class='text-[10px] font-primary uppercase tracking-widest text-black/35 m-0'>LEARNING</p>
-            <p class='text-sm text-gray-600 leading-relaxed m-0'>
-              Japanese 🇯🇵 and the human side of software — communication, clarity, and judgment over pure technical skill.
-            </p>
-          </div>
-          <div class='flex flex-col gap-3'>
-            <p class='text-[10px] font-primary uppercase tracking-widest text-black/35 m-0'>LIFE</p>
-            <p class='text-sm text-gray-600 leading-relaxed m-0'>
-              On a bulk 💪 — eating more, lifting consistently, and taking body composition seriously for the first time.
-            </p>
-          </div>
-        </div>
-      </article>
-    </section>
-
-    <!-- 04 · Kind words -->
-    <section class='py-20'>
-      <article class='layout'>
-        <div class='flex items-end justify-between mb-4'>
-          <div>
-            <p class='text-xs font-primary uppercase tracking-widest text-black/40 mb-3'>04 · Kind Words</p>
-            <h2 class='font-display text-4xl md:text-5xl text-black m-0 leading-none'>
-              People I've worked with.
-            </h2>
-          </div>
-        </div>
-        <hr class='border-black/10 mt-6 mb-0' />
-
-        <div class='grid grid-cols-1 md:grid-cols-2 gap-px bg-black/8'>
-          {allNicewords.map(nicewords => (
-            <div class='bg-[hsl(60,29%,95%)] px-0 py-10 md:px-8 flex flex-col gap-5'>
-              <p class='font-display text-xl md:text-2xl text-black italic leading-snug m-0'>
-                {nicewords.data.words}
-              </p>
-              <div class='flex items-center gap-3 mt-auto pt-2 border-t border-black/8'>
-                <div class='w-8 h-8 rounded-full bg-black/10 flex-shrink-0 overflow-hidden'>
-                  <img
-                    src={nicewords.data.image}
-                    alt={nicewords.data.name}
-                    class='w-full h-full object-cover'
-                    loading='lazy'
-                  />
-                </div>
-                <div>
-                  <p class='text-sm font-primary font-medium text-black m-0 leading-tight'>{nicewords.data.name}</p>
-                  <p class='text-[11px] font-primary text-black/40 m-0'>{nicewords.data.workplace}</p>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </article>
-    </section>
-
-    <!-- 05 · Contact -->
-    <section class='py-20 mb-16'>
-      <article class='layout'>
-        <div class='flex flex-col md:flex-row md:items-end justify-between gap-10 md:gap-16'>
-
-          <!-- Left: heading -->
-          <div class='flex-1'>
-            <p class='text-xs font-primary uppercase tracking-widest text-black/40 mb-3'>05 · Contact</p>
-            <h2 class='font-display text-4xl md:text-5xl lg:text-6xl text-black m-0 leading-tight'>
-              Open to interesting<br/>work and conversations.
-            </h2>
-            <p class='text-sm text-gray-500 mt-4 max-w-sm leading-relaxed m-0'>
-              Freelance, consulting, or just a good conversation about software and craft — I'm usually up for it.
-            </p>
-          </div>
-
-          <!-- Right: contact links -->
-          <div class='flex flex-col gap-0 min-w-[240px]'>
-            {[
-              { label: 'Email', href: 'mailto:merta.bagus24@gmail.com' },
-              { label: 'LinkedIn', href: 'https://linkedin.com/in/bagusmerta' },
-              { label: 'GitHub',   href: 'https://github.com/gusentanan' },
-            ].map(link => (
-              <a
-                href={link.href}
-                target={link.href.startsWith('mailto') ? undefined : '_blank'}
-                rel={link.href.startsWith('mailto') ? undefined : 'noopener noreferrer'}
-                class='group flex items-center justify-between py-3.5 border-b border-black/10 hover:border-black/40 transition-colors'
-              >
-                <span class='text-sm font-primary text-black'>{link.label}</span>
-                <span class='text-black/25 group-hover:text-black group-hover:translate-x-0.5 transition-all'>→</span>
-              </a>
-            ))}
-          </div>
-
-        </div>
-      </article>
-    </section>
-
-    <section class='relative w-full overflow-hidden h-[480px]'>
-      <img
-        src='/images/ascii-art.jpg'
-        alt='ASCII art'
-        class='w-full h-full object-cover'
-      />
-      <!-- White gradient top -->
-      <div class='absolute inset-x-0 top-0 h-64 bg-gradient-to-b from-[#f6f6ef] to-transparent'></div>
-    </section>
-
   </main>
-
 </BaseLayout>

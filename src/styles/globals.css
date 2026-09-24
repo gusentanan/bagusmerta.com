@@ -4,20 +4,12 @@
 
 @layer base {
   :root {
-    --background: 60 29% 95%;
-    --foreground: 0 0% 7%;
-    --popover: 60 29% 92%;
-    --popover-foreground: 0 0% 7%;
-    --primary: 0 0% 7%;
-    --primary-foreground: 60 29% 95%;
-    --secondary: 24 100% 50%;
-    --destructive: 0 62.8% 40%;
-    --destructive-foreground: 0 0% 100%;
-    --border: 60 10% 80%;
-    --radius: 0.5rem;
-    --card: rgba(0, 0, 0, 0.04);
-    --card-hover: rgba(0, 0, 0, 0.08);
-    --card-hover-border: rgba(0, 0, 0, 0.15);
+    --background: 0 0% 3%;
+    --foreground: 42 24% 93%;
+    --primary: 42 24% 93%;
+    --primary-foreground: 0 0% 3%;
+    --border: 0 0% 16%;
+    --radius: 0.25rem;
   }
 
   @font-face {
@@ -25,333 +17,213 @@
     font-style: normal;
     font-weight: 100 900;
     font-display: swap;
-    src: url("../fonts/AlbertSans.woff2") format("woff2");
-    unicode-range:
-      U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC,
-      U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215,
-      U+FEFF, U+FFFD;
+    src: url("/fonts/AlbertSans.woff2") format("woff2");
   }
+
   @font-face {
     font-family: "DMMono";
     font-style: normal;
     font-weight: 100 900;
     font-display: swap;
-    src: url("../fonts/DMMono.woff2") format("woff2");
-    unicode-range:
-      U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC,
-      U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215,
-      U+FEFF, U+FFFD;
+    src: url("/fonts/DMMono.woff2") format("woff2");
   }
+
   @font-face {
     font-family: "Garamond";
     font-style: normal;
     font-weight: 100 900;
     font-display: swap;
     src: url("/fonts/Garamond.woff2") format("woff2");
-    unicode-range:
-      U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC,
-      U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215,
-      U+FEFF, U+FFFD;
   }
+
   @font-face {
     font-family: "Garamond";
     font-style: italic;
     font-weight: 100 900;
     font-display: swap;
     src: url("/fonts/Garamond.woff2") format("woff2");
-    unicode-range:
-      U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC,
-      U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215,
-      U+FEFF, U+FFFD;
+  }
+
+  * {
+    box-sizing: border-box;
   }
 
   html {
-    scroll-padding-top: 80px;
-    overflow-x: clip;
     width: 100%;
+    overflow-x: clip;
+    scroll-padding-top: 6rem;
+    background: #080808;
   }
 
-  /* Apply smooth scroll only to anchor link navigation */
-  html:has(a[href^="#"]:active) {
-    scroll-behavior: smooth;
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    html {
-      scroll-behavior: auto;
-    }
-  }
-
-  .cursor-newtab {
-    cursor:
-      url("/images/new-tab.png") 10 10,
-      pointer;
-  }
-
-  h1,
-  .h1 {
-    @apply font-primary text-2xl font-normal md:text-4xl;
-  }
-
-  h2,
-  .h2 {
-    @apply font-primary text-xl font-normal md:text-3xl;
-  }
-
-  h3 {
-    @apply font-primary text-lg md:text-2xl inline-block;
-  }
-
-  h4,
-  .h4 {
-    @apply font-primary text-base font-normal md:text-lg;
-  }
-
-  p {
-    @apply font-primary text-base font-normal mt-4 mb-4 text-gray-800;
-  }
-
-  .prose h1 {
-    @apply text-3xl md:text-4xl font-semibold text-black mb-8 mt-12;
-  }
-
-  .prose h2 {
-    @apply text-2xl md:text-3xl font-semibold text-black mb-6 mt-10;
-  }
-
-  .prose h3 {
-    @apply text-xl md:text-2xl font-medium text-black mb-4 mt-8 block;
-  }
-
-  .prose h4 {
-    @apply text-lg md:text-xl font-medium text-gray-800 mb-3 mt-6;
-  }
-
-  .prose p {
-    @apply text-sm md:text-base leading-relaxed text-gray-800 mb-6 mt-0;
-    line-height: 1.7;
-  }
-
-  .prose strong {
-    @apply text-black font-semibold;
-  }
-
-  .prose .highlight {
-    @apply text-black font-semibold;
-  }
-
-  .prose a {
-    @apply text-blue-600 underline italic hover:text-blue-500 transition-colors;
-  }
-
-  code {
-    @apply font-code text-sm bg-gray-900/50 px-1 py-0.5 rounded;
-  }
-
-  /* Code blocks */
-  pre {
-    @apply my-6 p-6 rounded-lg bg-[#282c34] border border-gray-800/50 overflow-x-auto;
-    font-family: 'JetBrains Mono', 'Fira Code', 'SF Mono', Consolas, 'Liberation Mono', Menlo, monospace;
-    font-size: 0.875rem;
+  body {
+    min-height: 100vh;
+    width: 100%;
+    margin: 0;
+    background: #080808;
+    color: #f1efe8;
+    font-family: "AlbertSans", ui-sans-serif, system-ui, sans-serif;
+    font-size: 1rem;
     line-height: 1.6;
-    white-space: pre;
-    scrollbar-width: thin;
-    scrollbar-color: #4a5568 #282c34;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
   }
 
-  /* Custom scrollbar for webkit browsers */
-  pre::-webkit-scrollbar {
-    height: 8px;
+  ::selection {
+    background: #f1efe8;
+    color: #080808;
   }
 
-  pre::-webkit-scrollbar-track {
-    background: #282c34;
-    border-radius: 4px;
+  a {
+    color: inherit;
+    text-decoration: none;
   }
 
-  pre::-webkit-scrollbar-thumb {
-    background: #4a5568;
-    border-radius: 4px;
-  }
-
-  pre::-webkit-scrollbar-thumb:hover {
-    background: #5a6578;
-  }
-
-  pre code {
-    @apply bg-transparent p-0 text-sm;
-    font-family: inherit;
-  }
-
-  /* Inline code in prose */
-  .prose code:not(pre code) {
-    @apply bg-gray-900/60 text-gray-200 px-1.5 py-0.5 rounded font-code text-sm;
-    font-weight: 500;
-  }
-
-  blockquote {
-    @apply m-0 px-4 py-2 border-l-4 border-blue-500/60 bg-blue-500/5 rounded-r;
-  }
-
-  blockquote::before,
-  blockquote::after {
-    content: none;
-  }
-
-
-  .prose blockquote::before,
-  .prose blockquote::after {
-    content: none !important;
-  }
-
-  .prose blockquote {
-    @apply m-0 px-4 py-2 border-l-4 border-blue-500/60 bg-blue-500/5 rounded-r font-primary leading-normal italic;
-    quotes: none !important;
-  }
-
-  .prose blockquote p:last-child {
-    margin-bottom: 0;
-  }
-
-  .prose ol {
-    @apply list-decimal my-4 space-y-2 pl-0 ml-6;
-    list-style-position: outside;
-  }
-
-  .prose ul {
-    @apply list-disc my-4 space-y-2 pl-0 ml-6;
-    list-style-position: outside;
-  }
-
-  .prose li {
-    @apply font-primary text-base text-gray-800;
-  }
-
-  .mdoc-container a {
-    @apply text-blue-400 underline italic hover:text-blue-300 transition-colors;
-  }
-
-  blockquote {
-    @apply font-primary leading-normal italic;
+  button,
+  input {
+    font: inherit;
   }
 
   img {
-    border-radius: 4px;
+    border-radius: 0.2rem;
   }
 
-  /* workaround for image inside mdx */
-  img[alt="blog-content"] {
-    padding: 1em 0;
+  h1, h2, h3, h4, p {
+    margin-top: 0;
   }
 
-  body,
-  .body {
-    @apply bg-background text-foreground font-primary text-sm md:text-base;
-    min-height: 100vh;
-    width: 100%;
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      scroll-behavior: auto !important;
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
   }
-
-  main {
-    overflow-x: clip;
-    width: 100%;
-  }
-
-  section {
-    overflow-x: clip;
-    width: 100%;
-  }
-
-  .layout {
-    max-width: 60rem;
-    @apply mx-auto w-11/12 px-0 sm:px-0;
-  }
-
-  .blog-layout {
-    max-width: 52rem;
-    @apply mx-auto w-11/12;
-  }
-
-  .min-h-main {
-    @apply min-h-[calc(100vh-82px)];
-  }
-
-  .accent-highlight {
-    @apply bg-primary-300/50;
-  }
-
 }
 
-button.btn-legacy {
-  all: unset;
-  position: relative;
+@layer components {
+  .site-shell {
+    width: min(100% - 2rem, 52rem);
+    margin-inline: auto;
+  }
 
-  font-family: sans-serif;
+  .reading-shell {
+    width: min(100% - 2rem, 42rem);
+    margin-inline: auto;
+  }
+
+  .wide-shell {
+    width: min(100% - 2rem, 64rem);
+    margin-inline: auto;
+  }
+
+  .reference-shell {
+    width: min(100%, 48rem);
+    margin-inline: auto;
+    padding-inline: 1.5rem;
+  }
+
+  .article-shell {
+    width: min(100%, 56rem);
+    margin-inline: auto;
+    padding-inline: 1.5rem;
+  }
+
+  .page-kicker {
+    font-family: "DMMono", ui-monospace, monospace;
+    color: #6e6d69;
+    font-size: 0.68rem;
+    letter-spacing: 0.11em;
+    text-transform: uppercase;
+  }
+
+  .quiet-link {
+    color: #aaa8a2;
+    text-decoration: underline;
+    text-decoration-color: rgba(255, 255, 255, 0.25);
+    text-underline-offset: 0.2em;
+    transition: color 150ms ease, text-decoration-color 150ms ease;
+  }
+
+  .quiet-link:hover {
+    color: #f1efe8;
+    text-decoration-color: rgba(255, 255, 255, 0.75);
+  }
+
+  .index-link {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: #8d8b86;
+    font-size: 0.86rem;
+    transition: color 180ms ease;
+  }
+
+  .index-link::before {
+    content: "";
+    width: 0;
+    height: 1px;
+    background: currentColor;
+    transition: width 220ms ease;
+  }
+
+  .index-link:hover,
+  .index-link:focus-visible {
+    color: #f1efe8;
+  }
+
+  .index-link:hover::before,
+  .index-link:focus-visible::before {
+    width: 1.5rem;
+  }
+
+  .content-row {
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+    transition: border-color 160ms ease;
+  }
+
+  .content-row:hover {
+    border-color: rgba(255, 255, 255, 0.42);
+  }
+}
+
+@layer utilities {
+  .layout { @apply site-shell; }
+  .blog-layout { @apply reading-shell; }
+  .border-black\/8 { border-color: rgba(255,255,255,.08); }
+}
+
+.prose {
+  color: #b9b7b1;
+  font-family: "AlbertSans", ui-sans-serif, system-ui, sans-serif;
   font-size: 1rem;
-
-  padding: 0.5rem 2rem;
-  backdrop-filter: blur(2px);
-  border-radius: 50px;
+  max-width: 100ch;
 }
 
-button.btn-legacy::before {
-  content: "";
-  position: absolute;
-  z-index: -1;
-  inset: 0px;
-
-  border-radius: inherit;
-  /* this is the border width */
-  padding: 1px;
-  background: linear-gradient(
-    to bottom right,
-    #d4d0c8 0%,
-    #a09a8a 62%,
-    #d4d0c8 100%
-  );
-  -webkit-mask:
-    linear-gradient(#fff 0 0) content-box,
-    linear-gradient(#fff 0 0);
-  mask:
-    linear-gradient(#fff 0 0) content-box,
-    linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
+.prose h1,
+.prose h2,
+.prose h3,
+.prose h4 {
+  color: #f1efe8;
+  font-family: "AlbertSans", ui-sans-serif, system-ui, sans-serif;
+  font-weight: 600;
+  letter-spacing: -0.01em;
 }
 
-.bg-grid-white {
-  background-image:
-    linear-gradient(90deg, rgba(0, 0, 0, 0.07) 0.1px, transparent 1px),
-    linear-gradient(rgba(0, 0, 0, 0.07) 0.1px, transparent 1px);
-  background-size: 20px 20px; /* Adjust grid size */
-}
-
-/* Blog banner animations */
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.animate-fade-in-up {
-  animation: fadeInUp 0.8s ease-out forwards;
-}
-
-.animate-fade-in-up-delay {
-  opacity: 0;
-  animation: fadeInUp 0.8s ease-out 0.3s forwards;
-}
-
-.animate-fade-in-up-delay-2 {
-  opacity: 0;
-  animation: fadeInUp 0.8s ease-out 0.6s forwards;
-}
-
-.prose img {
-  border-radius: 0.75rem;
-}
-
+.prose h1 { margin-top: 2rem; margin-bottom: 1rem; font-size: 2rem; }
+.prose h2 { margin-top: 1.75rem; margin-bottom: .75rem; font-size: 1.5rem; }
+.prose h3 { margin-top: 1.5rem; margin-bottom: .75rem; font-size: 1.25rem; }
+.prose h4 { margin-top: 1.5rem; margin-bottom: .75rem; font-size: 1rem; }
+.prose p { margin-bottom: 1.5rem; color: #d0cdc7; line-height: 2; }
+.prose ul, .prose ol { margin: 1.25rem 0; padding-left: 1.25rem; }
+.prose li { margin-bottom: .5rem; color: #d0cdc7; line-height: 2; }
+.prose strong { color: #f1efe8; }
+.prose a { color: #f1efe8; text-decoration: underline; text-decoration-color: rgba(255,255,255,.3); text-underline-offset: .2em; }
+.prose a:hover { text-decoration-color: rgba(255,255,255,.8); }
+.prose blockquote { margin-inline: 0; border-left: 1px solid rgba(255,255,255,.35); padding: .15rem 0 .15rem 1.25rem; color: #d0cec7; font-style: italic; }
+.prose blockquote::before, .prose blockquote::after { content: none !important; }
+.prose code:not(pre code) { border: 1px solid rgba(255,255,255,.12); border-radius: .2rem; background: rgba(255,255,255,.06); color: #e5e2da; padding: .1rem .35rem; font-family: "DMMono", monospace; font-size: .85em; }
+.prose pre { margin-block: 1.75rem; overflow-x: auto; border: 1px solid rgba(255,255,255,.1); border-radius: .25rem; background: #111; padding: 1.25rem; }
+.prose pre code { font-family: "DMMono", monospace; font-size: .82rem; }
+.prose img { width: 100%; margin-block: 2rem; border-radius: .2rem; }
+.prose hr { border-color: rgba(255,255,255,.12); }

@@ -26,6 +26,10 @@ export default {
 				sm: 'calc(var(--radius) - 4px)',
 			  },
 			  colors: {
+				ink: '#f1efe8',
+				muted: '#aaa8a2',
+				faint: '#6e6d69',
+				line: 'rgba(255, 255, 255, 0.12)',
 				background: 'hsl(var(--background))',
         		foreground: 'hsl(var(--foreground))',
 				primary: {

@@ -1,0 +1,86 @@
+---
+import BaseLayout from "@layouts/BaseLayout.astro";
+import BackLink from "@components/ui/BackLink.astro";
+import { getNicewordsCollection } from "utils/content";
+import { getTitle } from "utils/title";
+
+const niceWords = await getNicewordsCollection();
+---
+
+<BaseLayout title={getTitle("About")} description="About Bagus Merta, a product engineer based in Bali.">
+  <main class="reference-shell min-h-screen pb-6 pt-16 md:pb-10 md:pt-10">
+    <BackLink />
+
+    <div class="relative mb-8 aspect-video overflow-hidden">
+      <img src="/images/new-web-assets/about-backdrop.jpg" alt="A team working together at sunset" class="h-full w-full object-cover" />
+      <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent p-5 md:p-6">
+        <div class="flex items-center gap-4">
+          <img src="/images/new-web-assets/avatar.jpg" alt="Bagus Merta" class="h-16 w-16 rounded-full object-cover md:h-20 md:w-20" />
+          <div>
+            <h1 class="mb-1 text-xl font-bold text-ink">Bagus Merta</h1>
+            <p class="m-0 text-xs lowercase text-white/80 md:text-sm">product engineer | mobile engineer</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="space-y-8">
+      <section class="pb-4">
+        <h2 class="mb-4 inline-block text-sm font-medium lowercase tracking-wide text-ink">experience</h2>
+        <div class="space-y-6">
+          <div class="pl-4">
+            <h3 class="m-0 text-base font-medium lowercase text-ink">senior mobile engineer @ wineadore</h3>
+            <p class="mb-2 mt-1 text-xs text-[#777f77]">present</p>
+            <p class="m-0 text-sm lowercase leading-relaxed text-[#777f77]">building the mobile experience for wine lovers.</p>
+          </div>
+        
+          <div class="pl-4">
+            <h3 class="m-0 text-base font-medium lowercase text-ink">mobile engineer @ archipelago technologies</h3>
+            <p class="mb-2 mt-1 text-xs text-[#777f77]">2023</p>
+            <p class="m-0 text-sm lowercase leading-relaxed text-[#777f77]">first big boy job.</p>
+          </div>
+
+          <div class="pl-4">
+            <h3 class="m-0 text-base font-medium lowercase text-ink">android developer @ avatar solution</h3>
+            <p class="mb-2 mt-1 text-xs text-[#777f77]">2022</p>
+            <p class="m-0 text-sm lowercase leading-relaxed text-[#777f77]">part-time, contract—anything to keep food on the table.</p>
+          </div>
+        </div>
+      </section>
+
+       <div class="space-y-8">
+      <section class="pb-4">
+        <h2 class="mb-4 inline-block text-sm font-medium lowercase tracking-wide text-ink">education</h2>
+        <div class="space-y-6">
+          <div class="pl-4">
+            <p class="m-0 text-sm lowercase leading-relaxed text-[#777f77]">cs @ udayana university</p>
+         
+          </div>
+        
+        </div>
+      </section>
+
+       <div class="space-y-8">
+      <section class="pb-4">
+        <h2 class="mb-4 inline-block text-sm font-medium lowercase tracking-wide text-ink">language</h2>
+        <div class="space-y-6">
+          <div class="pl-4">
+            <p class="m-0 text-sm lowercase leading-relaxed text-[#777f77]">english, indonesian, balinese, japanese (a bit)</p>
+         
+          </div>
+        
+        </div>
+      </section>
+
+
+      <section class="pb-4">
+        <h2 class="mb-4 inline-block text-sm font-medium lowercase tracking-wide text-ink">elsewhere</h2>
+        <p class="m-0 pl-4 text-sm lowercase text-[#777f77]">
+          <a class="quiet-link" href="https://github.com/gusentanan" target="_blank" rel="noopener noreferrer">github</a>,
+          <a class="quiet-link" href="https://linkedin.com/in/bagusmerta" target="_blank" rel="noopener noreferrer">linkedin</a>,
+          <a class="quiet-link" href="mailto:merta.bagus24@gmail.com">email</a>
+        </p>
+      </section>
+    </div>
+  </main>
+</BaseLayout>
