@@ -1,1 +1,0 @@
-fix(layout): remove mobile horizontal padding on content pages

@@ -9,18 +9,17 @@ interface Props {
 import "../styles/globals.css";
 
 import { SEO } from "astro-seo";
-import { ViewTransitions } from 'astro:transitions'
+import { ViewTransitions } from "astro:transitions";
 
 let { title, description, banner, isBlog } = Astro.props;
 
 title = title || "Bagus Merta";
-description = description || "Explore the portfolio and blog of Bagus Merta, featuring a collection of my projects and curated reading bookmarks";
+description =
+  description ||
+  "Explore the portfolio and blog of Bagus Merta, featuring a collection of my projects and curated reading bookmarks";
 banner = banner || "meta/opengraph.jpg";
 
-const resolvedImageWithDomain = new URL(
-	banner,
-	Astro.site,
-).toString();
+const resolvedImageWithDomain = new URL(banner, Astro.site).toString();
 ---
 
 <html lang="en">
@@ -29,66 +28,59 @@ const resolvedImageWithDomain = new URL(
     <link rel="icon" type="image/svg+xml" href="/favicon.png" />
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
-    <script defer src="https://cloud.umami.is/script.js" data-website-id="68cd4146-f928-4406-88f9-d0679c53e8b8"></script>
+    <script
+      defer
+      src="https://cloud.umami.is/script.js"
+      data-website-id="68cd4146-f928-4406-88f9-d0679c53e8b8"></script>
 
     <title>{title}</title>
 
     <ViewTransitions />
-
 
     <SEO
       title={title}
       description={description}
       openGraph={{
         basic: {
-        type: isBlog ? "article" : "website",
-        url: Astro.url.toString(),
-        title,
-        image: resolvedImageWithDomain
+          type: isBlog ? "article" : "website",
+          url: Astro.url.toString(),
+          title,
+          image: resolvedImageWithDomain,
         },
         image: {
           url: resolvedImageWithDomain,
-          alt: title
+          alt: title,
         },
         ...(isBlog && {
           article: {
-            authors: ["I Putu Bagus Merta Sentana"]
-          }
-        })
+            authors: ["I Putu Bagus Merta Sentana"],
+          },
+        }),
       }}
       twitter={{
         creator: "@bagusmertasntn",
         site: "@bagusmertasntn",
-        card: "summary_large_image"
+        card: "summary_large_image",
       }}
       extend={{
         meta: [
           {
-              name: "twitter:image",
-              content: resolvedImageWithDomain,
+            name: "twitter:image",
+            content: resolvedImageWithDomain,
           },
-          { name: "twitter:title", content: title } ,
+          { name: "twitter:title", content: title },
           { name: "twitter:description", content: description },
           { name: "twitter:site", content: "@bagusmertasntn" },
           { name: "twitter:card", content: "summary_large_image" },
           { property: "og:image:width", content: "1200" },
           { property: "og:image:height", content: "630" },
           { property: "og:site_name", content: "Bagus Merta" },
-          { property: "og:locale", content: "en_US" }
-        ]
+          { property: "og:locale", content: "en_US" },
+        ],
       }}
     />
   </head>
   <body>
     <slot />
-    <script is:inline>
-      // Set the height of the screen to a CSS variable due to viewport height bug on mobile devices
-      const setScreenHeight = () => {
-        document.documentElement.style.setProperty(
-          "--screen-height",
-          `${window.innerHeight}px`
-        );
-      };
-    </script>
   </body>
 </html>
