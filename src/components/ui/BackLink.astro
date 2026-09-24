@@ -7,6 +7,68 @@ interface Props {
 const { href = "/", label = "back" } = Astro.props;
 ---
 
-<a href={href} class="fixed left-6 top-6 z-50 text-sm text-[#777f77] transition-colors hover:text-ink md:left-8 md:top-8">
-  ← {label}
-</a>
+<div class="back-app-bar" data-back-app-bar>
+  <a
+    href={href}
+    class="text-sm text-[#777f77] transition-colors hover:text-ink"
+  >
+    ← {label}
+  </a>
+</div>
+
+<script>
+  const updateBackAppBars = () => {
+    document.querySelectorAll("[data-back-app-bar]").forEach((bar) => {
+      bar.classList.toggle("is-scrolled", window.scrollY > 12);
+    });
+  };
+
+  updateBackAppBars();
+  document.addEventListener("scroll", updateBackAppBars, { passive: true });
+  document.addEventListener("astro:after-swap", updateBackAppBars);
+</script>
+
+<style>
+  .back-app-bar {
+    position: fixed;
+    inset: 0 0 auto;
+    z-index: 50;
+    height: 4rem;
+    border-bottom: 1px solid transparent;
+    transition:
+      background-color 180ms ease,
+      border-color 180ms ease,
+      box-shadow 180ms ease,
+      backdrop-filter 180ms ease;
+  }
+
+  .back-app-bar a {
+    position: absolute;
+    top: 50%;
+    left: 1.5rem;
+    transform: translateY(-50%);
+  }
+
+  @media (max-width: 767px) {
+    .back-app-bar.is-scrolled {
+      border-bottom-color: rgba(255, 255, 255, 0.08);
+      background: rgba(8, 8, 8, 0.68);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+      -webkit-backdrop-filter: blur(18px) saturate(140%);
+      backdrop-filter: blur(18px) saturate(140%);
+    }
+  }
+
+  @media (min-width: 768px) {
+    .back-app-bar {
+      inset: 2rem auto auto 2rem;
+      width: auto;
+      height: auto;
+    }
+
+    .back-app-bar a {
+      position: static;
+      transform: none;
+    }
+  }
+</style>

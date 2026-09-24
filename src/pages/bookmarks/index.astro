@@ -6,30 +6,57 @@ import { getTitle } from "utils/title";
 
 const bookmarks = await getBookMarkCollection();
 const domain = (url: string) => {
-  try { return new URL(url).hostname.replace("www.", ""); } catch { return ""; }
+  try {
+    return new URL(url).hostname.replace("www.", "");
+  } catch {
+    return "";
+  }
 };
 ---
 
-<BaseLayout title={getTitle("Bookmarks")} description="Articles, tools, books, and sites saved by Bagus Merta.">
+<BaseLayout
+  title={getTitle("Bookmarks")}
+  description="Articles, tools, books, and sites saved by Bagus Merta."
+>
   <main class="min-h-screen bg-[#080808]">
     <BackLink />
     <div class="reference-shell pb-24 pt-24">
       <div class="relative mb-16 aspect-video w-full overflow-hidden">
-        <img src="/images/new-web-assets/bookmarks.jpg" alt="An outdoor cafe at night" width="1600" height="1096" loading="eager" class="h-full w-full object-cover" />
+        <img
+          src="/images/new-web-assets/bookmarks.jpg"
+          alt="An outdoor cafe at night"
+          width="1600"
+          height="1096"
+          loading="eager"
+          class="h-full w-full object-cover"
+        />
       </div>
 
       <ul class="m-0 space-y-8 p-0">
-        {bookmarks.map(bookmark => (
-          <li class="list-none">
-            <a class="group block" href={bookmark.data.link} target="_blank" rel="noopener noreferrer">
-              <div>
-                <h2 class="m-0 text-base font-medium lowercase text-ink transition-colors group-hover:text-white">{bookmark.data.title}</h2>
-              </div>
-              <p class="mb-0 mt-1 text-sm lowercase leading-relaxed text-[#777f77]">{bookmark.data.description}</p>
-              <p class="mb-0 mt-1 text-xs lowercase text-[#555b55]">{domain(bookmark.data.link)}</p>
-            </a>
-          </li>
-        ))}
+        {
+          bookmarks.map((bookmark) => (
+            <li class="list-none">
+              <a
+                class="group block"
+                href={bookmark.data.link}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <div>
+                  <h2 class="m-0 text-base font-medium lowercase text-ink transition-colors group-hover:text-white">
+                    {bookmark.data.title}
+                  </h2>
+                </div>
+                <p class="two-line-clamp mb-0 mt-1 text-sm lowercase leading-relaxed text-[#777f77]">
+                  {bookmark.data.description}
+                </p>
+                <p class="mb-0 mt-1 text-xs lowercase text-[#555b55]">
+                  {domain(bookmark.data.link)}
+                </p>
+              </a>
+            </li>
+          ))
+        }
       </ul>
     </div>
   </main>

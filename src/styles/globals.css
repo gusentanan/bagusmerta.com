@@ -270,3 +270,10 @@
 .prose hr {
   border-color: rgba(255, 255, 255, 0.12);
 }
+
+.two-line-clamp {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
