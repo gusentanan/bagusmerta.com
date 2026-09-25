@@ -21,7 +21,7 @@ const projects = await getProjectCollection();
           <li class="list-none">
             <a class="group grid grid-cols-[minmax(0,1fr)_auto] items-start gap-x-8 sm:gap-x-12" href={getProjectPathName(project)}>
               <div class="min-w-0">
-                <h2 class="m-0 text-base font-medium lowercase text-ink transition-colors group-hover:text-white">{project.data.title}</h2>
+                <h2 class="m-0 text-base font-bold lowercase text-ink transition-colors group-hover:text-white">{project.data.title}</h2>
                 <p class="mb-0 mt-1 text-sm lowercase leading-relaxed text-[#777f77]">{project.data.description}</p>
               </div>
               <span class="pt-0.5 text-right text-xs text-[#777f77]">{project.data.createdDate.getFullYear()}</span>

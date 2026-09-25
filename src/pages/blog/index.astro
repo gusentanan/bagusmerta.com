@@ -22,7 +22,7 @@ const isoDate = (date: Date) => date.toISOString().slice(0, 10);
           <li class="list-none">
             <a class="group block" href={getBlogPathName(post)}>
               <div class="flex items-baseline justify-between gap-4">
-                <h2 class="m-0 text-base font-medium lowercase text-ink transition-colors group-hover:text-white">{post.data.title}</h2>
+                <h2 class="m-0 text-base font-bold lowercase text-ink transition-colors group-hover:text-white">{post.data.title}</h2>
                 <span class="shrink-0 text-xs text-[#777f77]">{isoDate(post.data.date)}</span>
               </div>
               <p class="mb-0 mt-1 text-sm lowercase leading-relaxed text-[#777f77]">{post.data.description}</p>
