@@ -4,7 +4,7 @@ import react from "@astrojs/react";
 import tailwind from "@astrojs/tailwind";
 
 export default defineConfig({
-  site: 'https://bagusmerta.com',
+  site: 'https://bagusmerta.net',
   output: "static",
   image: {
     service: passthroughImageService(),
@@ -16,4 +16,3 @@ export default defineConfig({
     })
   ],
 });
-
