@@ -28,6 +28,44 @@ const resolvedImageWithDomain = new URL(banner, Astro.site).toString();
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
+    <script is:inline>
+      document.documentElement.dataset.imageReveal = "enabled";
+
+      if (!window.__imageRevealInitialized) {
+        window.__imageRevealInitialized = true;
+
+        const settleImage = (image) => {
+          if (!image.complete) {
+            image.dataset.imageState = "loading";
+            return;
+          }
+
+          if (!image.naturalWidth) {
+            image.dataset.imageState = "error";
+            return;
+          }
+
+          image.decode().then(
+            () => { image.dataset.imageState = "ready"; },
+            () => { image.dataset.imageState = image.naturalWidth ? "ready" : "error"; },
+          );
+        };
+
+        const scanImages = () => {
+          document.documentElement.dataset.imageReveal = "enabled";
+          document.querySelectorAll("img").forEach(settleImage);
+        };
+
+        document.addEventListener("load", (event) => {
+          if (event.target instanceof HTMLImageElement) settleImage(event.target);
+        }, true);
+        document.addEventListener("error", (event) => {
+          if (event.target instanceof HTMLImageElement) event.target.dataset.imageState = "error";
+        }, true);
+        document.addEventListener("DOMContentLoaded", scanImages);
+        document.addEventListener("astro:after-swap", scanImages);
+      }
+    </script>
     <script
       defer
       src="https://cloud.umami.is/script.js"

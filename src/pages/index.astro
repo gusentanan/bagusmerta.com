@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "@layouts/BaseLayout.astro";
+import CompanyPreviewCard from "@components/ui/CompanyPreviewCard.astro";
 import { Icon } from "astro-icon/components";
 import { getTitle } from "utils/title";
 
@@ -9,6 +10,18 @@ const links = [
   { label: "writing", href: "/blog" },
   { label: "bookmarks", href: "/bookmarks" },
 ];
+
+const wineAdore = {
+  name: "Wine Adore",
+  role: "senior mobile engineer",
+  period: "present",
+  description: "Building the mobile experience for wine lovers.",
+  website: {
+    href: "https://wineadore.com",
+    label: "wineadore.com",
+    icon: "/images/company-icons/wineadore.webp",
+  },
+};
 ---
 
 <BaseLayout
@@ -22,12 +35,14 @@ const links = [
       </h1>
 
       <div class="max-w-[40rem] space-y-4 text-[15px] leading-7 text-[#d2d0c9] md:text-base">
-        <p class="m-0 text-inherit">
-          I was born and raised in Bali, Indonesia. I love the combination of beauty, creativity, and UX in software </p>
-        <p class="m-0 text-inherit">
+        <p class="m-0 text-inherit">I get things done</p>
+        <p class="relative m-0 text-inherit">
           Currently a senior mobile engineer at
-          <a href="https://wineadore.com" target="_blank" rel="noopener noreferrer" class="quiet-link">Wine Adore</a>,
+          <a href={wineAdore.website.href} target="_blank" rel="noopener noreferrer" class="quiet-link company-trigger" aria-describedby="wine-preview">Wine Adore</a>,
           building the mobile experience for wine lovers.
+          <span id="wine-preview" role="tooltip" class="company-preview pointer-events-none absolute bottom-[calc(100%+0.75rem)] right-0 z-30 block w-full max-w-[21rem]">
+            <CompanyPreviewCard company={wineAdore} />
+          </span>
         </p>
       </div>
 
@@ -41,14 +56,15 @@ const links = [
           class="aspect-[2/1] w-full object-cover object-center"
         />
         <div class="pointer-events-none absolute inset-0 bg-black/10"></div>
-        <div class="absolute right-4 top-4 flex items-center gap-4 text-[28px] text-white/70 md:right-5 md:top-5">
-          <a class="pointer-events-auto transition-colors hover:text-white" href="https://github.com/gusentanan" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+        <div class="home-banner-glass pointer-events-none absolute right-0 top-0 h-[45%] w-[60%]"></div>
+        <div class="absolute right-3 top-3 flex items-center gap-1 text-[26px] md:right-4 md:top-4">
+          <a class="flex h-10 w-10 items-center justify-center rounded-full text-white/90 transition-[color,transform] hover:-translate-y-0.5 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white" href="https://github.com/gusentanan" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
             <Icon name="ri:github-line" aria-hidden="true" />
           </a>
-          <a class="pointer-events-auto transition-colors hover:text-white" href="https://linkedin.com/in/bagusmerta" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+          <a class="flex h-10 w-10 items-center justify-center rounded-full text-white/90 transition-[color,transform] hover:-translate-y-0.5 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white" href="https://linkedin.com/in/bagusmerta" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
             <Icon name="ri:linkedin-line" aria-hidden="true" />
           </a>
-          <a class="pointer-events-auto transition-colors hover:text-white" href="mailto:merta.bagus24@gmail.com" aria-label="Email">
+          <a class="flex h-10 w-10 items-center justify-center rounded-full text-white/90 transition-[color,transform] hover:-translate-y-0.5 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white" href="mailto:merta.bagus24@gmail.com" aria-label="Email">
             <Icon name="ri:mail-line" aria-hidden="true" />
           </a>
         </div>
@@ -62,10 +78,16 @@ const links = [
         </ul>
       </nav>
 
-      <div class="mt-16 flex items-center justify-between border-t border-line pt-5 font-code text-[10px] uppercase tracking-[0.12em] text-faint">
-        <span>Bali, Indonesia · GMT+8</span>
-        <a href="mailto:merta.bagus24@gmail.com" class="transition-colors hover:text-ink">Say hello ↗</a>
-      </div>
     </section>
   </main>
 </BaseLayout>
+
+<style>
+  .home-banner-glass {
+    background: radial-gradient(ellipse 100% 100% at top right, rgba(8, 11, 9, 0.58), rgba(8, 11, 9, 0.18) 50%, transparent);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    -webkit-mask-image: radial-gradient(ellipse 100% 100% at top right, black 12%, transparent);
+    mask-image: radial-gradient(ellipse 100% 100% at top right, black 12%, transparent);
+  }
+</style>

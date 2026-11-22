@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "@layouts/BaseLayout.astro";
 import BackLink from "@components/ui/BackLink.astro";
+import CollectionBanner from "@components/ui/CollectionBanner.astro";
 import { getBlogCollection } from "utils/content";
 import { getBlogPathName } from "utils/url";
 import { getTitle } from "utils/title";
@@ -13,9 +14,11 @@ const isoDate = (date: Date) => date.toISOString().slice(0, 10);
   <main class="min-h-screen bg-[#080808]">
     <BackLink />
     <div class="reference-shell pb-24 pt-24">
-      <div class="relative mb-16 aspect-video w-full overflow-hidden">
-        <img src="/images/new-web-assets/blog.jpg" alt="A city street at night" width="1600" height="1184" loading="eager" class="h-full w-full object-cover" />
-      </div>
+      <CollectionBanner
+        title="Blog"
+        description="Notes on software and life."
+        image={{ src: "/images/new-web-assets/blog.jpg", alt: "A city street at night", width: 1600, height: 1184 }}
+      />
 
       <ul class="content-list m-0 space-y-8 p-0">
         {posts.map(post => (

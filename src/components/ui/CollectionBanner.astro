@@ -1,0 +1,43 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  image: {
+    src: string;
+    alt: string;
+    width: number;
+    height: number;
+  };
+}
+
+const { title, description, image } = Astro.props;
+---
+
+<div class="relative mb-16 aspect-video w-full overflow-hidden rounded-[0.2rem]">
+  <img
+    src={image.src}
+    alt={image.alt}
+    width={image.width}
+    height={image.height}
+    loading="eager"
+    class="h-full w-full object-cover"
+  />
+  <div class="banner-glass absolute inset-x-0 bottom-0 flex items-baseline gap-3 px-5 pb-4 pt-10 text-white md:px-7 md:pb-6 md:pt-14">
+    <h1 class="relative z-10 m-0 shrink-0 text-lg font-semibold lowercase leading-tight tracking-[-0.02em] text-white md:text-2xl">{title}</h1>
+    <p class="relative z-10 m-0 min-w-0 truncate text-xs leading-snug text-white md:text-sm">{description}</p>
+  </div>
+</div>
+
+<style>
+  .banner-glass::before {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, transparent, rgba(8, 11, 9, 0.18) 35%, rgba(8, 11, 9, 0.58));
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    -webkit-mask-image: linear-gradient(to bottom, transparent, black 78%);
+    mask-image: linear-gradient(to bottom, transparent, black 78%);
+    content: "";
+    pointer-events: none;
+  }
+</style>

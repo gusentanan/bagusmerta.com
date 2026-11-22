@@ -1,0 +1,59 @@
+---
+interface Website {
+  href: string;
+  label: string;
+  icon: string;
+}
+
+interface Company {
+  name: string;
+  role: string;
+  period: string;
+  description: string;
+  website: Website | null;
+}
+
+interface Props {
+  company: Company;
+}
+
+const { company } = Astro.props;
+---
+
+<span class="block overflow-hidden rounded-lg border border-white/15 bg-[#171816]/95 text-left font-normal normal-case shadow-[0_18px_45px_rgba(0,0,0,0.55)] backdrop-blur-sm">
+  <span class="flex items-center justify-between gap-3 px-4 pt-4">
+    <span class="flex min-w-0 items-center gap-2 text-sm font-semibold text-ink">
+      {
+        company.website ? (
+          <img src={company.website.icon} alt="" width="28" height="28" class="h-7 w-7 shrink-0 rounded-full object-cover" />
+        ) : (
+          <span class="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-white/20 bg-[#282a26] font-code text-xs text-ink" aria-hidden="true">A</span>
+        )
+      }
+      <span class="truncate">{company.name}</span>
+    </span>
+    <span class="shrink-0 font-code text-[10px] uppercase tracking-wide text-faint">{company.period}</span>
+  </span>
+  <span class="block px-4 pt-4 text-sm font-semibold leading-snug text-ink">{company.role}</span>
+  <span class="block px-4 pb-4 pt-1 text-xs leading-relaxed text-muted">{company.description}</span>
+  <span class="flex items-center justify-between border-t border-white/10 px-4 py-2 font-code text-[10px] text-muted">
+    <span>{company.website?.label ?? "site unavailable"}</span>
+    {company.website && <span aria-hidden="true">↗</span>}
+  </span>
+</span>
+
+<style is:global>
+  .company-preview {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(0.375rem);
+    transition: opacity 180ms ease, transform 180ms ease, visibility 180ms;
+  }
+
+  .company-trigger:hover ~ .company-preview,
+  .company-trigger:focus ~ .company-preview {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+</style>

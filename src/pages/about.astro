@@ -1,10 +1,43 @@
 ---
 import BaseLayout from "@layouts/BaseLayout.astro";
 import BackLink from "@components/ui/BackLink.astro";
+import CompanyPreviewCard from "@components/ui/CompanyPreviewCard.astro";
 import { getNicewordsCollection } from "utils/content";
 import { getTitle } from "utils/title";
 
 const niceWords = await getNicewordsCollection();
+const experiences = [
+  {
+    name: "Wine Adore",
+    role: "senior mobile engineer",
+    period: "present",
+    description: "building the mobile experience for wine lovers.",
+    website: {
+      href: "https://wineadore.com",
+      label: "wineadore.com",
+      icon: "/images/company-icons/wineadore.webp",
+    },
+  },
+  {
+    name: "Archipelago Technologies",
+    role: "mobile engineer",
+    period: "2023",
+    description: "first big boy job.",
+    website: null,
+  },
+  {
+    name: "Avatar Solution",
+    role: "android developer",
+    period: "2022",
+    description: "part-time, contract—anything to keep food on the table.",
+    website: {
+      href: "https://www.avatar.co.id/",
+      label: "avatar.co.id",
+      icon: "/images/company-icons/avatar.webp",
+    },
+  },
+] as const;
+const companyTriggerClass = "company-trigger border-0 bg-transparent p-0 text-ink underline decoration-white/30 underline-offset-4 transition-colors hover:text-white hover:decoration-white/80 focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-2 focus-visible:outline-white";
 ---
 
 <BaseLayout title={getTitle("About")} description="About Bagus Merta, a product engineer based in Bali.">
@@ -28,23 +61,23 @@ const niceWords = await getNicewordsCollection();
       <section class="pb-4">
         <h2 class="mb-4 inline-block text-sm font-bold lowercase tracking-wide text-ink">experience</h2>
         <div class="space-y-6">
-          <div class="pl-4">
-            <h3 class="m-0 text-base font-bold lowercase text-ink">senior mobile engineer @ wineadore</h3>
-            <p class="mb-2 mt-1 text-xs text-[#777f77]">present</p>
-            <p class="m-0 text-sm lowercase leading-relaxed text-[#777f77]">building the mobile experience for wine lovers.</p>
-          </div>
-        
-          <div class="pl-4">
-            <h3 class="m-0 text-base font-bold lowercase text-ink">mobile engineer @ archipelago technologies</h3>
-            <p class="mb-2 mt-1 text-xs text-[#777f77]">2023</p>
-            <p class="m-0 text-sm lowercase leading-relaxed text-[#777f77]">first big boy job.</p>
-          </div>
-
-          <div class="pl-4">
-            <h3 class="m-0 text-base font-bold lowercase text-ink">android developer @ avatar solution</h3>
-            <p class="mb-2 mt-1 text-xs text-[#777f77]">2022</p>
-            <p class="m-0 text-sm lowercase leading-relaxed text-[#777f77]">part-time, contract—anything to keep food on the table.</p>
-          </div>
+          {experiences.map((experience, index) => (
+            <div class="relative pl-4">
+              <h3 class="m-0 text-base font-bold lowercase text-ink">
+                {experience.role} @{" "}
+                {experience.website ? (
+                  <a href={experience.website.href} target="_blank" rel="noopener noreferrer" class={companyTriggerClass} aria-describedby={`company-preview-${index}`}>{experience.name}</a>
+                ) : (
+                  <button type="button" class={companyTriggerClass} aria-describedby={`company-preview-${index}`}>{experience.name}</button>
+                )}
+                <span id={`company-preview-${index}`} role="tooltip" class="company-preview pointer-events-none absolute bottom-[calc(100%+0.75rem)] left-0 z-30 block w-full max-w-[21rem]">
+                  <CompanyPreviewCard company={experience} />
+                </span>
+              </h3>
+              <p class="mb-2 mt-1 text-xs text-[#777f77]">{experience.period}</p>
+              <p class="m-0 text-sm lowercase leading-relaxed text-[#777f77]">{experience.description}</p>
+            </div>
+          ))}
         </div>
       </section>
 

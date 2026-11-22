@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "@layouts/BaseLayout.astro";
 import BackLink from "@components/ui/BackLink.astro";
+import CollectionBanner from "@components/ui/CollectionBanner.astro";
 import { getProjectCollection } from "utils/content";
 import { getProjectPathName } from "utils/url";
 import { getTitle } from "utils/title";
@@ -12,14 +13,19 @@ const projects = await getProjectCollection();
   <main class="min-h-screen bg-[#080808]">
     <BackLink />
     <div class="reference-shell pb-24 pt-24">
-      <div class="relative mb-16 aspect-video w-full overflow-hidden">
-        <img src="/images/new-web-assets/projects.jpg" alt="A product workspace" width="1600" height="1198" loading="eager" class="h-full w-full object-cover" />
-      </div>
+      <CollectionBanner
+        title="Projects"
+        description="Selected product work."
+        image={{ src: "/images/new-web-assets/projects.jpg", alt: "A product workspace", width: 1600, height: 1198 }}
+      />
 
       <ul class="content-list m-0 space-y-8 p-0">
         {projects.map(project => (
           <li class="list-none">
-            <a class="content-list-link group grid grid-cols-[minmax(0,1fr)_auto] items-start gap-x-8 sm:gap-x-12" href={getProjectPathName(project)}>
+            <a class="project-list-link content-list-link group grid grid-cols-[3.5rem_minmax(0,1fr)_auto] items-start gap-x-4 sm:gap-x-5" href={getProjectPathName(project)}>
+              <span class="project-sticker" aria-hidden="true">
+                <img src={`/images/project-stickers/${project.slug}.webp`} width="128" height="128" alt="" loading="lazy" decoding="async" class="h-full w-full object-cover" />
+              </span>
               <div class="min-w-0">
                 <h2 class="content-list-title m-0 text-base font-bold lowercase text-ink">{project.data.title}</h2>
                 <p class="content-list-description mb-0 mt-1 text-sm lowercase leading-relaxed text-[#777f77]">{project.data.description}</p>
@@ -32,3 +38,35 @@ const projects = await getProjectCollection();
     </div>
   </main>
 </BaseLayout>
+
+<style>
+  .project-sticker {
+    display: block;
+    align-self: center;
+    width: 3.5rem;
+    height: 3.5rem;
+    padding: 0.125rem;
+    overflow: hidden;
+    border: 1px solid #f7f5ef;
+    border-radius: 1rem;
+    background: #f2eee4;
+    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.42), 0 1px 2px rgba(0, 0, 0, 0.28);
+    transform: rotate(-6deg);
+    transition: transform 300ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 300ms ease;
+  }
+
+  .project-sticker :global(img) {
+    display: block;
+    border-radius: 0.75rem;
+  }
+
+  .project-list-link::before {
+    display: none;
+  }
+
+  .content-list-link:hover .project-sticker,
+  .content-list-link:focus-visible .project-sticker {
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.5), 0 1px 3px rgba(0, 0, 0, 0.3);
+    transform: translateY(-3px) rotate(3deg) scale(1.07);
+  }
+</style>
