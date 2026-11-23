@@ -4,6 +4,7 @@ title: "Moviee"
 description: "Movie browsing platform built with modern Kotlin, emphasizing clean architecture. A teaching repo turned into a real app."
 image: "./images/moviee/Moviee.jpg"
 link: "https://github.com/gusentanan/moviee"
+linkLabel: "Source code"
 tags: [kotlin, "clean arch"]
 createdDate: "2023-02-12"
 status: "live"
@@ -12,17 +13,17 @@ role: "Solo · Open source"
 category: [mobile, "open source"]
 ---
 
-### Short explanation
+## Short explanation
 
 **Moviee** is a movie browsing platform that features various movie categories, a search function, and the ability to save favorite movies. Detailed movie pages provide comprehensive information about each film, including the plot, cast, reviews, release date, and the option to watch the trailer!
 
-### Goals
+## Goals
 
 The goal of this project is primarily self-learning. After completing a bootcamp on Android development, I learned a lot, but what interested me the most was how to architect a codebase using **MVVM** and clean architecture. However, at that time, I didn’t fully understand the benefits of implementing these patterns in real-world projects. So, I decided to create one—the **Moviee** app.
 
 Overall, I wanted to understand the practical benefits of these design patterns without any external pressure, deadlines, or constraints. This allows for continuous development and helps me see how these approaches help me as a developer.
 
-### Tech Stack
+## Tech Stack
 
 I'm using **Kotlin** for Android development, with the help of various dependencies to enable the app's functionality. You can see the full dependencies used in this app from my Github Repository.
 
@@ -40,16 +41,17 @@ The architecture of this app complies with the following three principles:
     
     Clean Architecture strictly emphasizes a clear separation of concerns through distinct architectural layers: **Presentation/UI Layer**, **Domain Layer**, and **Data Layer**. This separation facilitates writing tests without dependencies on external frameworks or UI components, significantly enhancing testability.
 
+<figure>
 <img
-    alt="project-image"
+    alt="Moviee app module dependency diagram"
     loading="lazy"
-    width="800"
-    height="426"
+    width="888"
+    height="565"
     decoding="async"
     src="https://raw.githubusercontent.com/gusentanan/moviee/refs/heads/main/arts/moviee-arch.png"
   />
-
-> Image above show the dependencies between module
+<figcaption>Dependencies between the Moviee app modules.</figcaption>
+</figure>
 
 The `:app` module directly depends on `:core`, `:common-ui`, and `:feature`, meaning it cannot function if any of them are missing. It also indirectly depends on `:utility` if required.  
 
@@ -59,7 +61,7 @@ The `:core` module indirectly depends on `:utility`, whereas `:utility` and `:co
 
 
 
-### Features
+## Features
 This app offers several features.
 
 1. `Explore Movies` : Browse through various categories and genres to discover movies that interest you.
@@ -72,91 +74,88 @@ This app offers several features.
 
 5. `Watch Trailers` : View trailers to get a glimpse of the movies before watching.
 
-<br>
-
-<div className="grid grid-cols-2 items-start gap-4">
+<figure>
+<div class="article-gallery article-gallery--two">
   <img
-    alt="project-image"
+    alt="Moviee home screen"
     loading="lazy"
-    width="800"
-    height="426"
+    width="1080"
+    height="2408"
     decoding="async"
     src="https://raw.githubusercontent.com/gusentanan/moviee/refs/heads/main/arts/main.jpg"
   />
   <img
-    alt="project-image"
+    alt="Moviee list of movies"
     loading="lazy"
-    width="800"
-    height="426"
+    width="1080"
+    height="2408"
     decoding="async"
     src="https://raw.githubusercontent.com/gusentanan/moviee/refs/heads/main/arts/allmovie.jpg"
   />
 </div>
+<figcaption>Browse movie categories such as Top Rated and Trending.</figcaption>
+</figure>
 
-
->  Showcases various categories such as Top Rated and Trending movies.
-
-<div className="grid grid-cols-2 items-start gap-4">
+<figure>
+<div class="article-gallery article-gallery--two">
   <img
-    alt="project-image"
+    alt="Moviee movie detail screen"
     loading="lazy"
-    width="800"
-    height="426"
+    width="1080"
+    height="2408"
     decoding="async"
     src="https://raw.githubusercontent.com/gusentanan/moviee/refs/heads/main/arts/detail-1.jpg"
   />
   <img
-    alt="project-image"
+    alt="Moviee movie cast and details"
     loading="lazy"
-    width="800"
-    height="426"
+    width="1080"
+    height="2408"
     decoding="async"
     src="https://raw.githubusercontent.com/gusentanan/moviee/refs/heads/main/arts/detail-2.jpg"
   />
   <img
-    alt="project-image"
+    alt="Moviee trailer screen"
     loading="lazy"
-    width="800"
-    height="426"
+    width="1080"
+    height="2408"
     decoding="async"
     src="https://raw.githubusercontent.com/gusentanan/moviee/refs/heads/main/arts/trailer.jpg"
   />
   <img
-    alt="project-image"
+    alt="Moviee favorites screen"
     loading="lazy"
-    width="800"
-    height="426"
+    width="1080"
+    height="2408"
     decoding="async"
     src="https://raw.githubusercontent.com/gusentanan/moviee/refs/heads/main/arts/favoritee.jpg"
   />
 </div>
+<figcaption>Movie details, trailers, and favorites.</figcaption>
+</figure>
 
-
-
-> Provides in-depth information about the movie, including cast, release details, budget, trailers, and recommendations. You can also add movies to your favorites list from here
-
-<div className="grid grid-cols-2 items-start gap-4">
+<figure>
+<div class="article-gallery article-gallery--two">
   <img
-    alt="project-image"
+    alt="Moviee search screen"
     loading="lazy"
-    width="800"
-    height="426"
+    width="1080"
+    height="2408"
     decoding="async"
     src="https://raw.githubusercontent.com/gusentanan/moviee/refs/heads/main/arts/search-1.jpg"
   />
   <img
-    alt="project-image"
+    alt="Moviee search results"
     loading="lazy"
-    width="800"
-    height="426"
+    width="1080"
+    height="2408"
     decoding="async"
     src="https://raw.githubusercontent.com/gusentanan/moviee/refs/heads/main/arts/search-2.jpg"
   />
 </div>
+<figcaption>Search for a movie and review the matching results.</figcaption>
+</figure>
 
 
-> Utilize the search function to find movies that you like 
-
-
-### Lesson Learned
+## Lesson Learned
 I thoroughly enjoyed and learned a lot while developing this app. One thing I realized when trying to implement clean architecture is that it’s challenging to get it right in the first iteration. However, over time, as I added more features, it became much easier. This architecture ensures that each module and layer has its own responsibility and is loosely coupled from other modules. As a result, making changes to an existing feature or adding new ones is seamless, and the development velocity significantly improves.

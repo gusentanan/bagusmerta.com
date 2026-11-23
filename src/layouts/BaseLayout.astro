@@ -119,6 +119,6 @@ const resolvedImageWithDomain = new URL(banner, Astro.site).toString();
     />
   </head>
   <body>
-    <slot />
+    <div id="site-content"><slot /></div>
   </body>
 </html>

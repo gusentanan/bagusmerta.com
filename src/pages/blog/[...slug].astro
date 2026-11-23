@@ -1,7 +1,7 @@
 ---
 import BaseLayout from "@layouts/BaseLayout.astro";
 import BackLink from "@components/ui/BackLink.astro";
-import { ImageEnhancer } from "@components/ui/ImageEnhancer";
+import ArticleContent from "@components/ui/ArticleContent.astro";
 import { getCollection } from "astro:content";
 
 export async function getStaticPaths() {
@@ -20,8 +20,9 @@ const isoDate = entry.data.date.toISOString().slice(0, 10);
   <main class="reading-shell min-h-screen pb-6 pt-16 md:pb-10 md:pt-10">
     <BackLink href="/blog" />
 
-    <header class="mb-12">
+    <header class="mb-10">
       <h1 class="mb-4 text-3xl font-bold leading-tight tracking-[-0.02em] text-ink md:text-4xl">{entry.data.title}</h1>
+      <p class="mb-4 text-base leading-7 text-muted">{entry.data.description}</p>
       <div class="flex items-center gap-4 text-sm text-[#777f77]">
         <time datetime={isoDate}>{isoDate}</time>
         <span>•</span>
@@ -29,8 +30,6 @@ const isoDate = entry.data.date.toISOString().slice(0, 10);
       </div>
     </header>
 
-    <article class="prose max-w-none">
-      <ImageEnhancer client:load><Content /></ImageEnhancer>
-    </article>
+    <ArticleContent><Content /></ArticleContent>
   </main>
 </BaseLayout>

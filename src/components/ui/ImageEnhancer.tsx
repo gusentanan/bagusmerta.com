@@ -17,28 +17,36 @@ export function ImageEnhancer({ children }: ImageEnhancerProps) {
   useEffect(() => {
     if (!containerRef.current) return;
 
-    // Find all images within the container
     const images = containerRef.current.querySelectorAll('img');
 
-    const handleImageClick = (event: Event) => {
-      const img = event.currentTarget as HTMLImageElement;
+    const openImage = (img: HTMLImageElement) => {
       setLightboxImage({
         src: img.src,
-        alt: img.alt || 'Project image'
+        alt: img.alt
       });
     };
 
-    // Add click handlers and cursor style to all images
+    const handleImageClick = (event: Event) => openImage(event.currentTarget as HTMLImageElement);
+    const handleImageKeyDown = (event: KeyboardEvent) => {
+      if (event.key !== 'Enter' && event.key !== ' ') return;
+      event.preventDefault();
+      openImage(event.currentTarget as HTMLImageElement);
+    };
+
     images.forEach((img) => {
+      if (!img.alt.trim()) return;
       img.style.cursor = 'pointer';
-      img.setAttribute('title', 'Click to view fullscreen');
+      img.tabIndex = 0;
+      img.setAttribute('role', 'button');
+      img.setAttribute('aria-label', `Open image: ${img.alt}`);
       img.addEventListener('click', handleImageClick);
+      img.addEventListener('keydown', handleImageKeyDown);
     });
 
-    // Cleanup
     return () => {
       images.forEach((img) => {
         img.removeEventListener('click', handleImageClick);
+        img.removeEventListener('keydown', handleImageKeyDown);
       });
     };
   }, [children]);

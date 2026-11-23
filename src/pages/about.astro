@@ -66,13 +66,13 @@ const companyTriggerClass = "company-trigger border-0 bg-transparent p-0 text-in
               <h3 class="m-0 text-base font-bold lowercase text-ink">
                 {experience.role} @{" "}
                 {experience.website ? (
-                  <a href={experience.website.href} target="_blank" rel="noopener noreferrer" class={companyTriggerClass} aria-describedby={`company-preview-${index}`}>{experience.name}</a>
-                ) : (
-                  <button type="button" class={companyTriggerClass} aria-describedby={`company-preview-${index}`}>{experience.name}</button>
-                )}
-                <span id={`company-preview-${index}`} role="tooltip" class="company-preview pointer-events-none absolute bottom-[calc(100%+0.75rem)] left-0 z-30 block w-full max-w-[21rem]">
-                  <CompanyPreviewCard company={experience} />
-                </span>
+                  <>
+                    <a href={experience.website.href} target="_blank" rel="noopener noreferrer" class={companyTriggerClass} aria-describedby={`company-preview-${index}`}>{experience.name}</a>
+                    <span id={`company-preview-${index}`} role="tooltip" class="company-preview pointer-events-none absolute bottom-[calc(100%+0.75rem)] left-0 z-30 block w-full max-w-[21rem]">
+                      <CompanyPreviewCard company={experience} />
+                    </span>
+                  </>
+                ) : experience.name}
               </h3>
               <p class="mb-2 mt-1 text-xs text-[#777f77]">{experience.period}</p>
               <p class="m-0 text-sm lowercase leading-relaxed text-[#777f77]">{experience.description}</p>

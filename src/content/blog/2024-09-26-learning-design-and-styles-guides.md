@@ -139,7 +139,7 @@ For the button component, I decided to create two separate variations, with the 
 <SecondaryButton href="" text="Secondary" />
 ```
 Here’s how they look.
-![blog-content](./images/blog-7/img-content/button.jpg)
+![Button styles from the design system](./images/blog-7/img-content/button.jpg)
 
 Another example is the card component. I decided to create separate components for different types of cards since they serve different purposes. However, they all follow the same design principles we agreed upon. Below is my blog card, which emphasizes the importance of visual hierarchy.
 
@@ -169,7 +169,7 @@ const props = Astro.props;
 As you can see, I used our --card value and its hover state, ensuring that each card is displayed consistently.
 
 Here's how it looks.
-![blog-content](./images/blog-7/img-content/blog-card.png)
+![Blog card component design](./images/blog-7/img-content/blog-card.png)
 
 ## Conclusion
 That’s it! Now I have a solid foundation for my website. In the future, if we make changes or add new features, we’ll follow these style guides to ensure everything stays consistent with the theme.

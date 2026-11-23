@@ -4,6 +4,7 @@ title: "Grammafy"
 description: "Grammar correction chat app powered by Gemini. Real-time corrections, conversational UI, deployed to Play Store."
 image: "./images/grammafy/grammafy.png"
 link: "https://github.com/gusentanan/grammafy.git"
+linkLabel: "Source code"
 tags: [flutter, genai]
 createdDate: "2025-02-01"
 status: "live"
@@ -12,52 +13,53 @@ role: "Solo · Design + Build"
 category: [mobile, ai/ml]
 ---
 
-### Short Explanation
+## Short Explanation
 
 Grammafy is a Flutter mobile application that provides instant grammar correction using Google Gemini AI. The app eliminates the need to copy-paste text to external AI services by offering one-tap grammar correction with intelligent tone selection. Built with clean architecture principles, it features a chat-like interface where users can input text, select correction styles (Formal, Neutral, or Friendly), and instantly receive corrected grammar with the ability to copy results to clipboard.
 
-### Goals
+## Goals
 
 This app was born from my personal frustration of constantly using ChatGPT to correct grammar in my messages when working with international colleagues. The repetitive process of copy-pasting text and sifting through AI responses was inefficient. I wanted a dedicated, privacy-first solution that could correct grammar instantly without leaving the app or compromising user data.
 
-<div className="grid grid-cols-2 items-start gap-4">
+<figure>
+<div class="article-gallery article-gallery--two">
   <img
-    alt="project-image"
+    alt="Grammafy input screen with tone choices"
     loading="lazy"
-    width="800"
-    height="426"
+    width="1080"
+    height="2342"
     decoding="async"
     src="https://raw.githubusercontent.com/gusentanan/grammafy/refs/heads/main/assets/images/initial.JPEG"
   />
   <img
-    alt="project-image"
+    alt="Grammafy neutral grammar correction"
     loading="lazy"
-    width="800"
-    height="426"
+    width="1080"
+    height="2335"
     decoding="async"
     src="https://raw.githubusercontent.com/gusentanan/grammafy/refs/heads/main/assets/images/neutral.JPEG"
   />
   <img
-    alt="project-image"
+    alt="Grammafy formal grammar correction"
     loading="lazy"
-    width="800"
-    height="426"
+    width="1080"
+    height="2325"
     decoding="async"
     src="https://raw.githubusercontent.com/gusentanan/grammafy/refs/heads/main/assets/images/formal.JPEG"
   />
   <img
-    alt="project-image"
+    alt="Grammafy friendly grammar correction"
     loading="lazy"
-    width="800"
-    height="426"
+    width="1080"
+    height="2333"
     decoding="async"
     src="https://raw.githubusercontent.com/gusentanan/grammafy/refs/heads/main/assets/images/friendly.JPEG"
   />
 </div>
+<figcaption>From the input screen to neutral, formal, and friendly corrections.</figcaption>
+</figure>
 
-<br>
-
-### Technical Details
+## Technical Details
 
 Grammafy is built using Dart and the Flutter framework, enabling cross-platform development for both Android and iOS devices. The application follows Clean Architecture principles with clear separation between Domain, Data, and Presentation layers, making the codebase more maintainable and testable.
 
@@ -65,7 +67,7 @@ For state management, the app uses BLoC/Cubit with flutter_bloc, providing a rea
 
 The project includes a comprehensive test suite covering unit, widget, and integration tests to ensure reliability and code quality across all layers of the application.
 
-### Key Features
+## Key Features
 
 The app features intelligent tone selection, allowing users to choose from three correction styles:
 - **Formal** - Business-appropriate corrections for professional communication
@@ -76,7 +78,7 @@ Users enjoy a chat-like experience with conversation-style UI and typing animati
 
 Privacy is a core focus with a privacy-first design that ensures no data logging and uses the user's own API credentials. The app also allows users to refresh responses and generate new corrections with different tones, providing flexibility in communication style.
 
-### Technical Lessons Learned
+## Technical Lessons Learned
 
 Building Grammafy provided valuable insights into Flutter development and software architecture patterns. Implementing Clean Architecture with Flutter taught me the importance of proper separation of concerns, where the three-layer approach (Domain → Data → Presentation) made the codebase significantly more testable and maintainable. Using dependency injection with get_it and injectable created a loosely coupled system where business logic remained independent of framework-specific details.
 

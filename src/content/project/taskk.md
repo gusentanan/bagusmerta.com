@@ -4,6 +4,7 @@ title: "Taskk"
 description: "To-do app for Android with task prioritization, categories, due dates, and notifications."
 image: "./images/taskk/Taskk.jpg"
 link: "https://github.com/gusentanan/taskk.git"
+linkLabel: "Source code"
 tags: [kotlin, android]
 createdDate: "2023-04-14"
 status: "archived"
@@ -12,58 +13,59 @@ role: "Solo · Open source"
 category: [mobile, "open source"]
 ---
 
-### Short explanation
+## Short explanation
 
 Taskk is a simple to-do app for Android that covers the essentials: Create, Read, Update, and Delete. It also includes task prioritization (easy, medium, hard) to help you focus on what’s most doable first. You can categorize tasks (like study, work, gym, etc.), add notes for extra context or reminders, and set due dates with notifications to keep you on track.
 
-### Goals
+## Goals
 
 I did this project out of frustration with using Notion on my Android device (no shade to Notion—it’s great). My phone just couldn’t handle it smoothly. So, I decided to build my own. I used Kotlin and Jetpack Compose, partly because I was eager to try out the new declarative UI approach in native Android. I originally learned Android development using the imperative XML-based method, which honestly felt pretty exhausting.
 
-### Tech Stack
+## Tech Stack
 
 Taskk is an Android application built using Kotlin. I chose Kotlin because it's the native programming language for Android apps, which means better performance and compatibility on Android devices.
 
-### Features
+## Features
 
 All in one to-do features
 
-<div className="grid grid-cols-3 items-start gap-4">
+<figure>
+<div class="article-gallery article-gallery--three">
   <img
-    alt="project-image"
+    alt="Taskk home screen with a task list"
     loading="lazy"
-    width="800"
-    height="426"
+    width="1080"
+    height="2408"
     decoding="async"
     src="https://raw.githubusercontent.com/gusentanan/taskk/refs/heads/main/arts/Home.jpg"
   />
   <img
-    alt="project-image"
+    alt="Taskk task detail screen"
     loading="lazy"
-    width="800"
-    height="426"
+    width="1080"
+    height="2408"
     decoding="async"
     src="https://raw.githubusercontent.com/gusentanan/taskk/main/arts/Detail.jpg"
   />
     <img
-    alt="project-image"
+    alt="Taskk settings screen"
     loading="lazy"
-    width="800"
-    height="426"
+    width="1080"
+    height="2408"
     decoding="async"
     src="https://raw.githubusercontent.com/gusentanan/taskk/main/arts/Setting.jpg"
   />
 </div>
+<figcaption>Task list, task details, and settings in the Android app.</figcaption>
+</figure>
 
-<br>
-
-### Lesson Learned
+## Lesson Learned
 
 I learned a lot while building this app. Aside from switching from XML to Compose for building UI components, there wasn’t much that was entirely new to me—lol. But building UI with Compose is definitely faster than the old way, and there’s less context switching since it’s all written in Kotlin.
 
 For me, there is a few takeaways that we need to follow when building in jetpack compose UI
 
-#### 1. Always provide modifiers
+### 1. Always provide modifiers
 Its basically how we provide a number of interfaces and implementations to attach logic and behaviour to the layouts.
 By following this approach, you can maximize the reusability of a UI component and also each component gains flexibility in how it function,
 which mean the parent telling the child how the UI is laid out.
@@ -93,7 +95,7 @@ as you can see the code snippet above, by providing modifiers its allow the parr
 `IconLabelButton` to apply layout, styling, gesture modifiers (padding, background, clickable) without modifying the real composeable.
 That way, we can easily nest, compose and reuse the component for different context.
 
-#### 2. Discipline in using Slotting pattern
+### 2. Discipline in using Slotting pattern
 
 its detailed explained in [**Slot API Pattern**](https://developer.android.com/jetpack/compose/layouts/material#content-slots). Its implements the idea of a component having a single responsibility.
 
@@ -120,7 +122,7 @@ In the example above, the slot pattern works by exposing header and content as p
 
 This approach makes the component highly reusable. You can reuse the same card layout structure for many different use cases just by passing different composables into the slots.
 
-#### But Don’t Overdo It
+### But Don’t Overdo It
 
 While the slot pattern is flexible, adding too many slots to a single component can make it hard to read, maintain, which usually lead to too many open-ended inputs that can cause the component’s behavior unclear.
 

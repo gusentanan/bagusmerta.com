@@ -4,6 +4,7 @@ title: "Inspix Technologies"
 description: "Helped governments and companies regulate face-mask compliance during the Covid period using computer vision."
 image: "./images/inspix/inspix.jpg"
 link: "https://github.com/Inspix-Technologies"
+linkLabel: "GitHub profile"
 tags: [react, cv]
 createdDate: "2021-08-16"
 status: "sunset"
@@ -19,17 +20,17 @@ We successfully implemented it in several companies and a government university 
 
 ## Goals
 Our goal at that time was to provide a solution for businesses and the government to continue operating normally without violating face mask regulations.
-![blog-content](./images/inspix/inspix-3.jpg)
-![blog-content](./images/inspix/inspix-2.png)
-> Inspaire, Our Minimum Viable Product (MVP) 
+![Inspix face-mask detection interface](./images/inspix/inspix-3.jpg)
+![Inspix face-mask detection result](./images/inspix/inspix-2.png)
+<p class="article-caption">Inspaire, our minimum viable product.</p>
 
 ## Spotlight
 We were lucky to be spotlighted by the Ministry of Production Indonesia at that time, which brought significant visibility and attention to our project. It was a great recognition of all our efforts.
-![blog-content](./images/inspix/inspix-1.jpg)
-> Our team with Ministry of Production Indonesia in our office
+![Inspix team meeting with ministry representatives](./images/inspix/inspix-1.jpg)
+<p class="article-caption">Our team with ministry representatives in our office.</p>
 ## Lesson Learned
-![blog-content](./images/inspix/inspix-4.jpg)
-> Im the one at the top left, wearing a glass and white shirt hehe 
+![Inspix team photograph](./images/inspix/inspix-4.jpg)
+<p class="article-caption">The Inspix team. I am at the top left in white.</p>
 
 This is the first time in my life being involved in real-case projects—developing our product, finding market fit, and learning a lot of things along the way, including aspects not directly related to coding.
 

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useLayoutEffect } from 'react';
 import Modal from 'react-modal';
 
 interface ImageLightboxProps {
@@ -10,11 +10,6 @@ interface ImageLightboxProps {
   onClose: () => void;
 }
 
-// Set app element for accessibility
-if (typeof window !== 'undefined') {
-  Modal.setAppElement('body');
-}
-
 export function ImageLightbox({
   isOpen,
   imageSrc,
@@ -22,6 +17,14 @@ export function ImageLightbox({
   onClose
 }: ImageLightboxProps) {
   const [zoom, setZoom] = useState(1);
+  const [appElementReady, setAppElementReady] = useState(false);
+
+  useLayoutEffect(() => {
+    const siteContent = document.getElementById('site-content');
+    if (!siteContent) return;
+    Modal.setAppElement(siteContent);
+    setAppElementReady(true);
+  }, []);
 
   // Reset zoom when modal opens
   useEffect(() => {
@@ -59,6 +62,8 @@ export function ImageLightbox({
   const resetZoom = () => {
     setZoom(1);
   };
+
+  if (!appElementReady) return null;
 
   return (
     <Modal
@@ -146,7 +151,7 @@ export function ImageLightbox({
         <img
           src={imageSrc}
           alt={imageAlt}
-          className="max-w-full max-h-full object-contain transition-transform duration-200 cursor-move"
+          className="max-w-full max-h-full object-contain transition-transform duration-200"
           style={{
             transform: `scale(${zoom})`,
           }}
@@ -157,7 +162,7 @@ export function ImageLightbox({
       {/* Keyboard Shortcuts Hint */}
       <div className="fixed bottom-4 left-1/2 transform -translate-x-1/2 bg-black/50 text-white px-4 py-2 rounded-lg backdrop-blur-sm text-sm">
         <span className="hidden md:inline">ESC to close • +/- to zoom</span>
-        <span className="md:hidden">Tap to close</span>
+        <span className="md:hidden">Tap outside to close</span>
       </div>
     </Modal>
   );

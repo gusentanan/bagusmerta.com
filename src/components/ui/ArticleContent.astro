@@ -1,0 +1,59 @@
+---
+import { ImageEnhancer } from "./ImageEnhancer";
+---
+
+<article class="prose max-w-none" data-article-content>
+  <ImageEnhancer client:load><slot /></ImageEnhancer>
+</article>
+
+<script>
+  const refreshCodeScrollCues = () => {
+    document.querySelectorAll<HTMLElement>("[data-article-content] .code-block").forEach((block) => {
+      const pre = block.querySelector("pre");
+      if (pre) block.classList.toggle("can-scroll", pre.scrollLeft + pre.clientWidth < pre.scrollWidth - 1);
+    });
+  };
+
+  const enhanceCodeBlocks = () => {
+    document.querySelectorAll<HTMLPreElement>("[data-article-content] pre.astro-code").forEach((pre) => {
+      if (pre.parentElement?.classList.contains("code-block")) return;
+
+      const block = document.createElement("div");
+      block.className = "code-block";
+      pre.before(block);
+      block.append(pre);
+
+      const button = document.createElement("button");
+      button.type = "button";
+      button.className = "code-copy";
+      button.textContent = "Copy";
+      button.setAttribute("aria-label", "Copy code");
+      button.setAttribute("aria-live", "polite");
+      button.addEventListener("click", async () => {
+        try {
+          await navigator.clipboard.writeText(pre.innerText);
+          button.textContent = "Copied";
+          button.setAttribute("aria-label", "Code copied");
+        } catch {
+          button.textContent = "Copy failed";
+          button.setAttribute("aria-label", "Could not copy code");
+        }
+        window.setTimeout(() => {
+          button.textContent = "Copy";
+          button.setAttribute("aria-label", "Copy code");
+        }, 2000);
+      });
+      block.append(button);
+      pre.addEventListener("scroll", refreshCodeScrollCues, { passive: true });
+    });
+    refreshCodeScrollCues();
+  };
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", enhanceCodeBlocks);
+  } else {
+    enhanceCodeBlocks();
+  }
+  document.addEventListener("astro:after-swap", enhanceCodeBlocks);
+  window.addEventListener("resize", refreshCodeScrollCues);
+</script>

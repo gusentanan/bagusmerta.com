@@ -104,7 +104,7 @@ Now that everything is set up, try making changes to your Flutter project, espec
 ```
 Then, let the pre-commit linter work. It will give a green label if our commit is successful, as shown in the picture below. If not, the linter
 will show you the code that needs to be changed based on the rules set in the `analysis_options.yaml` file. After that, we need to re-commit our changes.
-![blog-content](./images/blog-4/img-content/result.png)
+![Terminal output from the Flutter pre-commit linter](./images/blog-4/img-content/result.png)
 
 ### Conclusion
 Setting up pre-commit hooks can be a real game-changer for your team. 

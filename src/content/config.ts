@@ -11,6 +11,7 @@ const projectCollection = defineCollection({
 			message: "Cover image must be at least 100 pixels wide!"
 		  }),
 		link: z.string(),
+		linkLabel: z.string(),
 		tags: z.array(z.string()),
 		createdDate: z.string().transform((string) => new Date(string)),
 		status: z.enum(['live', 'sunset', 'archived']).optional().default('archived'),

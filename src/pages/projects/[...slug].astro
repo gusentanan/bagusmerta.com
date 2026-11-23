@@ -3,7 +3,7 @@ import BaseLayout from "@layouts/BaseLayout.astro";
 import BackLink from "@components/ui/BackLink.astro";
 import { Image } from "astro:assets";
 import { getCollection } from "astro:content";
-import { ImageEnhancer } from "@components/ui/ImageEnhancer";
+import ArticleContent from "@components/ui/ArticleContent.astro";
 
 export async function getStaticPaths() {
   const entries = await getCollection("project");
@@ -27,11 +27,11 @@ const status = entry.data.status.charAt(0).toUpperCase() + entry.data.status.sli
       </div>
     </header>
 
-    <article class="prose max-w-none">
+    <ArticleContent>
       <p>{entry.data.description}</p>
       <Image src={entry.data.image} width={1200} height={630} alt={entry.data.title} loading="eager" class="w-full" />
-      <p><a href={entry.data.link} target="_blank" rel="noopener noreferrer">view project ↗</a></p>
-      <ImageEnhancer client:load><Content /></ImageEnhancer>
-    </article>
+      <p><a href={entry.data.link} target="_blank" rel="noopener noreferrer">{entry.data.linkLabel} ↗</a></p>
+      <Content />
+    </ArticleContent>
   </main>
 </BaseLayout>

@@ -27,15 +27,15 @@ There are two options to enable the workflow, using a .yaml file and using the w
 
 This is basically what your dashboard looks like after completing the repository addition.
 
-![blog-content](./images/blog-3/img-content/setup-yaml.jpg)
+![Codemagic YAML setup screen](./images/blog-3/img-content/setup-yaml.jpg)
 
 Before we dive into creating your `codemagic.yaml` to initiate the workflow, we need to manually add the webhook URL of our CodeMagic app to our GitHub repository. Go to your application dashboard, and copy the webhook URL for your CodeMagic application.
 
-![blog-content](./images/blog-3/img-content/codemagic-webhook.jpg)
+![Codemagic webhook configuration](./images/blog-3/img-content/codemagic-webhook.jpg)
 
 And then go to your GitHub repository > Settings > Webhooks and paste the CodeMagic webhook URL into your repository.
 
-![blog-content](./images/blog-3/img-content/github-webhooks.jpg)
+![GitHub repository webhook settings](./images/blog-3/img-content/github-webhooks.jpg)
 
 And voila! your CodeMagic and Github are connected now.
 
@@ -165,7 +165,7 @@ To kick off your CodeMagic workflow, you have two options. You can either use th
 
 If everything goes smoothly, you'll be able to see the artifact in the build overview of your app.
 
-![blog-content](./images/blog-3/img-content/build-overview.jpg)
+![Codemagic build overview](./images/blog-3/img-content/build-overview.jpg)
 
 > You can also debug your build process using SSH or VNC access. This can be very helpful if you need to troubleshoot any issues on your remote machine.
 
@@ -175,7 +175,7 @@ First, you need to obtain your Discord webhooks from your channel where you want
 
 You can access your variables in your workflow code using the `$` symbol in front of them (like `$DISCORD_WEBHOOK_URL`). Also, you need to specify the variable group that you created inside the `environment` property.
 
-![blog-content](./images/blog-3/img-content/dc-webhooks.jpg)
+![Discord webhook settings](./images/blog-3/img-content/dc-webhooks.jpg)
 
 To connect with Discord, you can include this command within the publishing section.
 ```yaml
@@ -219,7 +219,7 @@ workflows:
 
 Make changes and try pushing them to your remote repository. If the build is successful, you'll receive a notification.
 
-![blog-content](./images/blog-3/img-content/dc-notify.jpg)
+![Discord notification from Codemagic](./images/blog-3/img-content/dc-notify.jpg)
 
 ### Conclusion
 This tool comes with many benefits for your development – it speeds up development and resolves your build problems. It can also automate your testing, deployment, or publishing your app to PlayStore or AppStore, among many other features.
