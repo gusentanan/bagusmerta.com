@@ -1,39 +1,36 @@
 ---
 id: 6
 title: "Well, you're just a man"
-description: "Reminder for myself, maybe for you too"
+description: "A reminder for myself, and maybe for you too."
 date: 2024-06-11
 slug: "well-youre-just-a-man"
 banner: "./images/blog-6/well-youre-just-a-man.jpg"
-readCount: "3 min read"
+readCount: "1 min read"
 tags: [ "life" ]
 ---
 
-Marcus Aurelius was the last of the Five Good Emperors who ruled the Roman Empire during a period known as the Pax Romana, or Roman Peace.
+Marcus Aurelius was the last of the Five Good Emperors, who ruled Rome during the Pax Romana, the long Roman peace.
 
-I've been a fan of Stoicism for years. Recently, I've been listening to the audiobook of Marcus Aurelius' Meditations. (Imagine listening to the diary of one of the most successful rulers in this modern age 🤣)
+I've been into Stoicism for years. Lately I've been listening to the audiobook of his Meditations. It's strange to think that I'm listening to the private journal of a Roman emperor on my phone, almost two thousand years later.
 
-Lately, life has been playing tricks on me, making me question the meaning of it all.
+Life has been playing tricks on me recently, and I've been questioning what it's all for.
 
-Then I remembered a story about Marcus Aurelius.
+Then I remembered a story people often tell about him. It's probably a legend. Historians link the custom to Roman triumphs in general, not to Marcus Aurelius in particular. I still like it.
 
-He was always respected by Roman citizens, with many even kneeling before him.
+The Romans respected him, and many knelt before him.
 
-And behind him, there was a slave who always stayed close.
+Behind him stood a slave with only one job. Whenever he felt on top of the world, whenever the crowds cheered and knelt, the slave would lean in and whisper.
 
-This slave only had one job — to remind him, whenever he felt on top of the world, whenever citizens worshipped him and knelt before him.
+[You're just a man.](https://www.youtube.com/watch?v=SLP2RwDhOfg)
 
-The slave would whisper.
+### It humbles me
 
-[You're just a man](https://www.youtube.com/watch?v=SLP2RwDhOfg)
+When I achieve something big, I sometimes start to feel better than other people.
 
-### It humbles me.
+Then life reminds me that anything can be taken away in an instant.
 
-Often, when I achieve something significant, I feel like I'm the best or better than others.
+### The wheel keeps turning
 
-Then life reminds me that anything can be taken away as quickly as you can flip your hand.
-
-### Life always rotates.
-There are times when we are up and times when we are down. We can't control the flow of the wind
+Sometimes you're up, and sometimes you're down. You can't control which way the wind blows.
 
 Yeah, you're just a man.

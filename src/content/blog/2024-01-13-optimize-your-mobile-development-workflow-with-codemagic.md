@@ -1,126 +1,121 @@
 ---
 id: 3
-title: "Optimize Your Mobile Development Workflow with CodeMagic's"
-description: "CI/CD tool for your mobile development"
+title: "Optimize your mobile development workflow with Codemagic"
+description: "Set up Codemagic CI/CD for a Flutter app, with build notifications in Discord."
 date: 2024-01-13
 slug: "optimize-your-mobile-development-workflow-with-codemagic"
 banner: "./images/blog-3/optimize-your-mobile-development-workflow-with-codemagic.jpg"
-readCount: "15 min read"
+readCount: "7 min read"
 tags: [ "tech" ]
 ---
 
-Building mobile apps is super exciting, but it can also can be a challenge. Have you ever experienced the frustration of building a mobile app on your machine, only to face roadblocks when collaborating with team members? 
-In this blog, I'll introduce a solution which automating your mobile app builds with CodeMagic.
+Building a mobile app on your own machine works fine until someone else on the team tries to build it. Different Flutter versions, different Java versions, and different machine setups lead to builds that work for one person and break for another. A CI/CD service fixes this by building the app the same way every time, on a clean machine.
 
-With CodeMagic, you can streamline your development workflow and ensure consistent and reliable builds, regardless of your team's diverse environments. By automating the build process, you can avoid compatibility issues and focus on developing features that matter. 
+In this post I'll set up Codemagic to build a Flutter Android app on every push, then send a Discord notification when each build finishes.
 
-Additionally, I'll show you how to integrate your workflow into Slack or Discord so that you can receive notifications every time a build is completed.
+Codemagic started as a Flutter-only service. It now also supports native Android, native iOS, and React Native, with plenty of advanced configuration. It has a free tier, so it's easy to try.
 
-CodeMagic offers a lot of features to make your CI/CD process easier, especially for mobile development. Initially, it only supported Flutter, but now you can add Android, iOS, and React Native, with many advanced configurations and APIs. It also provides a free tier, so you should give it a try.
+> When I wrote this, the free tier gave you 500 build minutes per month on Codemagic's M1 Mac machines. Use them wisely.
 
-> while CodeMagic provides a lot of options, the free tier offers 500 minutes every month for using their M1 machine. So, use it wisely.
-### Setting up a CodeMagic account & Github repository
-The first step is to sign up for a CodeMagic account using your preferred repository host. In this blog, I'll be using Github since it's commonly used.
-After signing up, head to the CodeMagic dashboard. Click on "Add Application" to create a new app. Choose the individual plan, then paste the link of your Github repository where you want to connect it with CodeMagic. Finally, click "Finish: Add Application" to complete the process.
+### Setting up a Codemagic account and GitHub repository
+Sign up for Codemagic with the service that hosts your repository. I'm using GitHub in this post.
 
-There are two options to enable the workflow, using a .yaml file and using the workflow editor on the CodeMagic dashboard. I personally prefer using the yaml approach because it helps me learn scripting as well. 
+After signing up, open the Codemagic dashboard and click "Add application". Choose the individual plan, paste the link to the GitHub repository you want to connect, and click "Finish: Add application".
 
-This is basically what your dashboard looks like after completing the repository addition.
+There are two ways to configure a workflow. You can write a `codemagic.yaml` file, or use the workflow editor in the dashboard. I prefer the YAML file. It lives in the repository next to the code, and writing it taught me some scripting.
+
+Here's what the dashboard looks like after you add the repository.
 
 ![Codemagic YAML setup screen](./images/blog-3/img-content/setup-yaml.jpg)
 
-Before we dive into creating your `codemagic.yaml` to initiate the workflow, we need to manually add the webhook URL of our CodeMagic app to our GitHub repository. Go to your application dashboard, and copy the webhook URL for your CodeMagic application.
+Before writing `codemagic.yaml`, connect Codemagic to your repository with a webhook, so that pushes on GitHub can trigger builds. Open your application in the Codemagic dashboard and copy its webhook URL.
 
 ![Codemagic webhook configuration](./images/blog-3/img-content/codemagic-webhook.jpg)
 
-And then go to your GitHub repository > Settings > Webhooks and paste the CodeMagic webhook URL into your repository.
+Then go to your GitHub repository, open Settings > Webhooks, and add the Codemagic webhook URL.
 
 ![GitHub repository webhook settings](./images/blog-3/img-content/github-webhooks.jpg)
 
-And voila! your CodeMagic and Github are connected now.
+Codemagic and GitHub are now connected.
 
 ### Creating your `codemagic.yaml`
-Alright, let's start the coding session.  To really get how things work, we'll begin with the simplest setup.
-Also, it's good to understand the basics before moving on to more advanced configurations.
+We'll start with the simplest setup that works and add to it step by step.
 
-First you need to define your workflow ID (with '-' to separate each word) and also the name and maximum build duration of your app.
+First, define a workflow ID, a display name, the maximum build duration in minutes, and the machine to run on. Use hyphens to separate words in the ID.
 ```yaml
 workflows:
   android-workflow-id:                    # your workflow ID
-    name: "Android ToDo's App Workflow" 
-    max_build_duration: 120               # max duration of your build
+    name: "Android ToDo's App Workflow"
+    max_build_duration: 120               # max duration of your build, in minutes
     instance_type: mac_mini_m1            # remote machine to run your workflow
 ```
 
-Next, we have the `environment` property, which is commonly used to specify your project's settings for building.
-For example, you can specify the versions of Flutter or Java used in your project.
+Next is `environment`, where you set the tool versions your project needs, such as Flutter and Java.
 ```yaml
 workflows:
   android-workflow-id:
     ...
-        environment:  # env scope for your build
-            flutter: 3.0.5
-            java: 17
+    environment:          # tool versions for the build
+      flutter: stable     # or pin a version, like 3.0.5
+      java: 17
 ```
 
-This one is really important - `triggering` is the property that makes your build run based on actions or events in your GitHub repository.
-
-There are 4 build triggers, but I'll write just 3 most important (at least for me) :
-- **push** : starts every time you commit code to any of the tracked branches.
-- **pull_request** : starts when a pull request is opened or updated to verify the resulting merge commit.
-- **tag** : automatically builds the tagged commit whenever you create a tag for this app. 
-```yaml
-workflows: 
-  ...
-    triggering:
-          events:
-            - push  # trigger on push events
-          branch_patterns:
-            - pattern: "*" # * indicates any branch pattern (main, dev etc)
-              include: true
-              source: true
-```
-> When setting up triggers for pull requests, you can choose whether each branch pattern matches the source or target branch of the pull request.
-
-you can read more about the `triggering` property on their docs 
-
-Next up is the `scripts` property, where you put the scripts needed to run your build. Make sure the order of your scripts is correct because they are executed from top to bottom.
-
-Also, it's helpful to have a basic understanding of how to use Linux commands. This knowledge will allow you to make the most of its features, especially for debugging purposes.
+`triggering` decides which events in your GitHub repository start a build. Codemagic has four trigger events. These are the three I use most.
+- `push` starts a build every time you push commits to a tracked branch.
+- `pull_request` starts a build when a pull request is opened or updated, to check the resulting merge commit.
+- `tag` builds the tagged commit whenever you create a tag.
 ```yaml
 workflows:
-  ...
+  android-workflow-id:
+    ...
+    triggering:
+      events:
+        - push              # trigger on push events
+      branch_patterns:
+        - pattern: "*"      # match every branch (main, dev, and so on)
+          include: true
+          source: true
+```
+> For pull request triggers, `source` decides whether the pattern matches the pull request's source branch or its target branch.
+
+You can read more about `triggering` in the Codemagic docs linked at the end of this post.
+
+Next is `scripts`, the commands that build your app. They run from top to bottom, so order matters.
+
+Knowing basic Linux shell commands helps a lot here, especially when you need to debug a failed build.
+```yaml
+workflows:
+  android-workflow-id:
+    ...
     scripts:
-    - name: Set up local.properties     
-      script: |
-        echo "flutter.sdk=$HOME/programs/flutter" > "$CM_BUILD_DIR/android/local.properties"
-    - name: Get Flutter packages
-      script: |
-        flutter packages pub get
-    - name: Build Debug App with Flutter
-      script: |
-        flutter build apk --debug
-    - name: Show Build apk Folder  # tips. add this command to see the content of your artifact
-      script: |
-        ls build/app/outputs/flutter-apk
+      - name: Set up local.properties
+        script: |
+          echo "flutter.sdk=$HOME/programs/flutter" > "$CM_BUILD_DIR/android/local.properties"
+      - name: Get Flutter packages
+        script: |
+          flutter packages pub get
+      - name: Build Debug App with Flutter
+        script: |
+          flutter build apk --debug
+      - name: Show Build apk Folder  # lists the build output, handy for debugging
+        script: |
+          ls build/app/outputs/flutter-apk
 ```
 
-Lastly, we can specify the `artifact`, which stores our build results, and the publishing property, which contains options for where you want to publish your artifact.
+Finally, `artifacts` lists the build outputs to keep, and `publishing` decides where to send them.
 ```yaml
-workflows: 
-  ...
-    scripts:
-      ...
-      ...
-    artifacts:                       
-      - build/app/outputs/flutter-apk/*.apk  # specify path to store your artifact 
+workflows:
+  android-workflow-id:
+    ...
+    artifacts:
+      - build/app/outputs/flutter-apk/*.apk  # path to the files to keep
     publishing:
       email:
         recipients:
-          - example@gmail.com  # email recipient in case you want to see the reports
+          - example@gmail.com  # who gets the build report
 ```
 
-This is the full code of your `codemagic.yaml` to start the workflow.
+Here's the full `codemagic.yaml`. I also added `cache`, which keeps your pub packages between builds so they don't download every time.
 ```yaml
 workflows:
   android-workflow-id:
@@ -129,7 +124,8 @@ workflows:
     instance_type: mac_mini_m1
     environment:
       flutter: stable
-    cache: # tips. add cache mechanism to fasten your build process
+      java: 17
+    cache:
       cache_paths:
         - ~/.pub-cache
     triggering:
@@ -161,44 +157,42 @@ workflows:
 ```
 
 ### Start the builds
-To kick off your CodeMagic workflow, you have two options. You can either use the CodeMagic dashboard to manually start your build, or you can set up triggering events based on your codemagic.yaml file. For instance, you might want to start the build every time you push new changes to your repository.
+You can start a build in two ways. Start it by hand from the Codemagic dashboard, or let the `triggering` rules in `codemagic.yaml` start it for you. With the config above, every push starts a build.
 
-If everything goes smoothly, you'll be able to see the artifact in the build overview of your app.
+If the build succeeds, you'll see the artifact in your app's build overview.
 
 ![Codemagic build overview](./images/blog-3/img-content/build-overview.jpg)
 
-> You can also debug your build process using SSH or VNC access. This can be very helpful if you need to troubleshoot any issues on your remote machine.
+> You can also connect to the build machine over SSH or VNC, which helps a lot when you need to debug a failing build.
 
-### Integration with Discord 
-Lets start diving into the fun part.
-First, you need to obtain your Discord webhooks from your channel where you want to receive notifications. Then, add the webhook URL to the environment section in your CodeMagic app.
+### Integration with Discord
+Now the fun part. First, create a webhook in the Discord channel where you want notifications. Then add the webhook URL as an environment variable in your Codemagic app, inside a variable group.
 
-You can access your variables in your workflow code using the `$` symbol in front of them (like `$DISCORD_WEBHOOK_URL`). Also, you need to specify the variable group that you created inside the `environment` property.
+In your scripts, read the variable with a `$` in front of its name, like `$DISCORD_WEBHOOK_URL`. You also need to list the variable group under `environment` so the workflow can read it.
 
 ![Discord webhook settings](./images/blog-3/img-content/dc-webhooks.jpg)
 
-To connect with Discord, you can include this command within the publishing section.
+Then add this script to the `publishing` section.
 ```yaml
 workflows:
-  ...
+  android-workflow-id:
+    ...
     environment:
       groups:
-        - discord_credentials # variable group that stores discord webhook
+        - discord_credentials # variable group that stores the Discord webhook
     ...
-  
     publishing:
       ...
-
       scripts:
-        - name: Discord notification # use the webhook URL at the end of the scripts
+        - name: Discord notification
           script: |
             set -ex
 
-            # Extract the App Link from CM_ARTIFACT_LINKS
+            # Extract the app link from CM_ARTIFACT_LINKS
             APP_LINK=$(echo "$CM_ARTIFACT_LINKS" | jq -r '.[] | select(.name == "app-debug.apk") | .url')
 
-            # Get the first 7 digits of the commit number
-            COMMIT=$(echo "${CM_COMMIT}" | sed 's/^\(........\).*/\1/;q')
+            # Get the first 7 characters of the commit hash
+            COMMIT=$(echo "$CM_COMMIT" | cut -c1-7)
 
             # Get the commit message
             COMMIT_MESSAGE=$(git log --format=%B -n 1 $CM_COMMIT)
@@ -213,18 +207,15 @@ workflows:
                 \"content\": 
                 \"**Commit:**   \`$COMMIT\`\\n**Commit message:** $COMMIT_MESSAGE\\n\\n**Branch:** $CM_BRANCH\\n
                 **Author:** $AUTHOR\\n\\n**Artifacts:**\\n\\n**App Links:** $APP_LINK\\n\\n\"}" \
-              $DISCORD_WEBHOOK_URL            
+              $DISCORD_WEBHOOK_URL
 ```
 
-
-Make changes and try pushing them to your remote repository. If the build is successful, you'll receive a notification.
+Push a change to your repository. When the build succeeds, you'll get a notification like this.
 
 ![Discord notification from Codemagic](./images/blog-3/img-content/dc-notify.jpg)
 
 ### Conclusion
-This tool comes with many benefits for your development – it speeds up development and resolves your build problems. It can also automate your testing, deployment, or publishing your app to PlayStore or AppStore, among many other features.
-
-Well, that's all for this blog. Pretty cool, right? Give it a try, and your future self and teammates will thank you.
+You now have a workflow that builds your app on every push, on a machine that's the same for everyone on the team, and posts the result to Discord. Codemagic can also run your tests and publish builds to the Play Store and App Store. Those are good next steps.
 
 References.
-[Codemagic Official Docs](https://docs.codemagic.io/yaml-quick-start/building-a-flutter-app/)
+[Codemagic official docs](https://docs.codemagic.io/yaml-quick-start/building-a-flutter-app/)

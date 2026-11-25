@@ -1,81 +1,81 @@
 ---
 id: 5
-title: "Better way to write Commit Messages"
-description: "Git conventional commit messages"
+title: "A better way to write commit messages"
+description: "Writing commit messages with Conventional Commits."
 date: 2024-05-30
 slug: "better-way-to-write-git-commit-messages"
 banner: "./images/blog-5/better-way-to-write-commit-messages.jpg"
-readCount: "5 min read"
+readCount: "3 min read"
 tags: [ "tech" ]
 ---
 
-When working with a team, or even if you expect others to read your code, it's important to ensure that what you deliver is easy to understand. Often, when working alone on our repository, we might commit messages that seem appropriate at the moment. And that's fine. However, imagine needing to revisit a specific commit to find the exact cause of a bug or other important issues. If your commit message is clear, you won't need to spend so much time searching for it, right?
+Imagine you're hunting for the commit that introduced a bug, and the log looks like this.
 
-This way of communicating through commit messages helps convey the intention behind the code changes. Everyone has their own style of writing commit messages; there's no one-size-fits-all solution. However, understanding what makes a good commit message can make you a better developer in the future.
-
-### Conventional Commit 
-The solution is to follow Conventional Commits. Conventional Commits provide a set of rules or guidelines to help us write semantic messages better.
-Based on Conventional Commits, your message should be structured as follows:
-
-```bash
-<type>[optional-scope]: <description>
-
-# `type` is the type of change you made in your commit.
-# `optional-scope` is the scope that your changes affect.
-# `description` describes what was done.
+```text
+fix
+update
+wip
+fix again
 ```
 
+None of these messages help. You have to open each commit and read the diff to find out what changed. A clear message tells you right away. That matters when you come back to your own code months later, and even more when other people read your history.
 
-If you have more to say:
+Everyone writes commit messages in their own style, and there's no single right one. But a shared format makes history easier to read for the whole team. The one I use is Conventional Commits.
 
-```bash
-<type>[optional-scope]: <description>
-[optional-body]
-[optional-footer]
+### Conventional Commits
+Conventional Commits is a short set of rules for structuring commit messages. A message looks like this.
+
+```text
+<type>[optional scope]: <description>
+```
+
+- `type` is the kind of change, like a new feature or a bug fix.
+- `scope` is the part of the code the change affects.
+- `description` is a short summary of what changed.
+
+If you have more to say, add a body and a footer. Separate each part with a blank line.
+
+```text
+<type>[optional scope]: <description>
+
+[optional body]
+
+[optional footer(s)]
 ```
 
 For example:
 
-```markdown
+```text
 feat(shop): add product card
 ```
 
 A longer example:
 
-```markdown
-feat(payment): notify user upon successful purchase
-Implement functionality to send a push notification to users when a product is successfully purchased. 
+```text
+feat(payment): notify user after a successful purchase
+
+Send a push notification to the user when a product purchase succeeds.
+
 Refs: #123
 ```
 
 ### Types
-There are various types to differentiate the changes you make in your code:
-```markdown
-- feat → Changes related to adding or removing a feature.
+The spec itself only defines `feat` and `fix`. The other types below are common conventions that many teams use.
 
-- fix → Bug fixes (state the issue that you solved).
+- `feat` adds a new feature.
+- `fix` fixes a bug. Say which bug in the description.
+- `docs` changes documentation only, like the README.
+- `style` changes formatting without changing logic, like whitespace or import order.
+- `refactor` changes the structure of the code without changing its behavior.
+- `test` adds or updates tests.
+- `chore` covers maintenance, like installing or updating dependencies.
+- `ci` changes CI configuration or scripts.
+- `revert` reverts an earlier commit.
 
-- docs → Documentation updates (e.g., README.md).
+You can add your own types too. For example, a `codemagic` type for an empty commit that triggers a deployment, like `codemagic: trigger deployment`. Swap in whatever CI tool you use, and make sure the whole team agrees on the custom types.
 
-- style → Code style updates that don't change logic (e.g., optimizing imports, fixing whitespace).
+### Writing the description
+The description matters most. Say what the commit does, in the imperative mood and present tense. Write "add product card", not "added product card". I also start the description with a lowercase letter and leave off the final period. The spec doesn't require either, but most teams follow both.
 
-- chore → Dependency management (e.g., installing or updating dependencies).
-
-- refactor → Code changes that don't alter the external behavior but improve the internal structure.
-
-- ci → Changes to CI configuration or scripts.
-
-- test → Adding or updating tests.
-
-- revert → Reverting a previous commit.
-
-# Codemagic is an example of a CI/CD tool; you could replace it with your preferred tool.
-- codemagic → Blank commit to trigger deployment (e.g., `codemagic: trigger deployment`).
-```
-
-### Closing
-What's important here is how you write the description. 
-Make sure you fully explain what is being done. Use imperative and present tense. Also, don't use capitals at the beginning of the sentence and don't add a full stop (.) at the end.
-
-References. 
-[Conventional Commit Message](https://www.conventionalcommits.org/en/v1.0.0/)
+References.
+[Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/)

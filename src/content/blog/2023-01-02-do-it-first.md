@@ -1,58 +1,36 @@
 ---
 id: 1
-title: "Do it First"
-description: "I gained something after watching a podcast featuring Chris and Goggins."
+title: "Do it first"
+description: "What I took from David Goggins on Chris Williamson's podcast. Start before you feel ready."
 date: 2023-10-07
 slug: "do-it-first"
 banner: "./images/blog-1/do-it-first.jpg"
-readCount: "1 min read"
+readCount: "2 min read"
 tags: [ "life" ]
 ---
-So I randomly stumbled upon this new podcast with Chris William and David Goggins.
-And guess what? It's like I've got this instant insight into his whole deal. 
+I came across a podcast episode where Chris Williamson interviews David Goggins. One idea from it stuck with me. Don't wait until you feel like doing something. Do it first, and the feeling catches up.
 
-To simplify, 
-If there’s something that you’d like to do or some condition you’d like to be true, let it happen.
+Your brain is slow to agree to hard things. It wants motivation, a plan, and the right mood before it lets you start. Goggins's answer is to stop asking it. Tell your body to move before your brain has finished arguing.
 
-Believe it’s going to happen.
+It sounds too simple, but it works.
 
-Write it down.
+Want to write a book? Sit in front of a blank page for an hour every day. Eventually the words show up.
 
-Now, start chatting it up with yourself.
+Want to start running? Put your shoes on and step outside. The run usually follows.
 
-I’ve got this.
+Want to write code? Open your editor. Often that's enough to get going.
 
-You can do it.
+Each first step is so small that your brain doesn't bother to fight it. Once you're moving, keeping going is much easier than starting.
 
-The big thing here is taking action. The brain can be a bit of a slowpoke, so just get moving, literally. 
-Tell your body to go before your brain's even figured it out.
+### It sounds a bit crazy
 
-Want to write a book? Easy, stare at a blank page for an hour each day until words start popping out.
+The same goes for what you tell yourself. Decide what you want. Write it down. Then tell yourself "I've got this" before you have any proof that you do.
 
-If you'd like to run stare at your shoes for a few minutes until you start running.
+That sounds a bit crazy. But most people who've done something hard believed they could do it before the evidence showed up. You act first, and the confidence comes from having acted.
 
-If you'd like to write code, just open your favorite Editor (IDE) for a few moment.
+Alex Hormozi put it well.
 
-### That's Insane 🤣
-Sure, there are limits to what you know, but sometimes you've gotta trick that brain of yours into action. 
-Take a cue from David Goggins, put yourself out there, and let the rest catch up.
-
-Sometimes the things we tell ourselves or believe can sound a bit crazy. 
-But if you think about it, pretty much everyone who's achieved something cool has embraced a bit of madness along the way.
-
-### The point is the same
-
-And you know what? It goes for a simple life too. Fly under the radar, lay low for a while, lay low forever and enjoy 
-the simplicity of existence.
-
-To close this post, I would like to share a quote by Alex Hormozi.
-> The harder you work the more you realize what you used to think was hardwork,
-> is not even close to what you're capable of.
-
-That's it for this post. I hope it can be some kind of useful to anyone who reads it.
-Feel free to always reach me out.
-
-—I'd love to receive your thoughts on this piece!
+> The harder you work, the more you realize that what you used to think was hard work is not even close to what you're capable of.
 
 References.
-[Chris William and David Goggins Podcast](https://youtu.be/ngvOyccUzzY?si=KA-JWfYPwZ0m9SS_)
+[Chris Williamson and David Goggins podcast](https://youtu.be/ngvOyccUzzY?si=KA-JWfYPwZ0m9SS_)
